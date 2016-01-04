@@ -124,6 +124,10 @@
   <ItemGroup>
     <Content Include="App_Data\db_alluran_gamma.xml" />
     <Content Include="App_Data\db_alluran_raw.xml" />
+    <Content Include="App_Data\db_dolkensp_2.0.xml" />
+    <Content Include="App_Data\db_dolkensp_2.1.xml" />
+    <Content Include="App_Data\db_Jooston.txt" />
+    <Content Include="App_Data\db_Jooston.xml" />
     <Content Include="App_Data\db_P107REK.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -160,10 +164,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\HoloTable\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\HoloTable\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -15,14 +15,16 @@ namespace HoloXPLOR.Controllers
     {
         public ActionResult Index()
         {
-            String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/db_alluran_gamma.xml"));
+            // return View();
+
+            String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/db_dolkensp_2.0.xml"));
 
             Player inTest = inXML.FromXML<Player>();
 
             Type t = typeof(Player);
 
             XmlSerializer xs = new XmlSerializer(typeof(Player));
-            XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/db_alluran_new.xml"), Encoding.UTF8);
+            XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/db_dolkensp_2.0_new.xml"), Encoding.UTF8);
 
             // xw.Settings = new XmlWriterSettings
             // {

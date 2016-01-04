@@ -51,12 +51,15 @@ namespace HoloXPLOR.Data
         [DefaultValue("")]
         public String Class { get; set; }
 
-        [XmlElement(ElementName = "inventory")]
-        public Inventory Inventory { get; set; }
-        [XmlElement(ElementName = "ports")]
-        public PortCollection Ports { get; set; }
-        [XmlElement(ElementName = "pipes")]
-        public PipeCollection Pipes { get; set; }
+        [XmlArray(ElementName = "inventory")]
+        [XmlArrayItem(ElementName = "item")]
+        public XmlCollection<InventoryItem> Inventory { get; set; }
+        [XmlArray(ElementName = "ports")]
+        [XmlArrayItem(ElementName = "port")]
+        public XmlCollection<Port> Ports { get; set; }
+        [XmlArray(ElementName = "pipes")]
+        [XmlArrayItem(ElementName = "pipe")]
+        public XmlCollection<Pipe> Pipes { get; set; }
     }
 
     [XmlRoot(ElementName = "item")]
@@ -67,13 +70,6 @@ namespace HoloXPLOR.Data
         /// </summary>
         [XmlAttribute(AttributeName = "__EID__id")]
         public Guid ID { get; set; }
-    }
-
-    [XmlRoot(ElementName = "inventory")]
-    public class Inventory : XmlCollection<InventoryItem>
-    {
-        [XmlElement(ElementName = "item")]
-        public override InventoryItem[] __Collection { get; set; }
     }
 
     [XmlRoot(ElementName = "port")]
@@ -92,8 +88,9 @@ namespace HoloXPLOR.Data
         [XmlAttribute(AttributeName = "__EID__itemId")]
         public Guid ItemID { get; set; }
 
-        [XmlElement(ElementName = "pipes")]
-        public ConnectionCollection Pipes { get; set; }
+        [XmlArray(ElementName = "pipes")]
+        [XmlArrayItem(ElementName = "connection")]
+        public XmlCollection<Connection> Pipes { get; set; }
     }
 
     [XmlRoot(ElementName = "connection")]
@@ -107,42 +104,17 @@ namespace HoloXPLOR.Data
         [DefaultValue("")]
         public String Pipe { get; set; }
 
-        [XmlElement(ElementName = "PrioGroup")]
-        public PrioCollection PrioGroup { get; set; }
+        [XmlArray(ElementName = "PrioGroup")]
+        [XmlArrayItem(ElementName = "Prio")]
+        public XmlCollection<Prio> PrioGroup { get; set; }
     }
 
-    public class PrioCollection : XmlCollection<Prio>
-    {
-        [XmlElement(ElementName = "Prio")]
-        public override Prio[] __Collection { get; set; }
-    }
-
+    [XmlRoot(ElementName = "Prio")]
     public class Prio
     {
         [XmlAttribute(AttributeName = "Value")]
         [DefaultValue("")]
         public String Value { get; set; }
-    }
-
-    [XmlRoot(ElementName = "pipes")]
-    public class ConnectionCollection : XmlCollection<Connection>
-    {
-        [XmlElement(ElementName = "connection")]
-        public override Connection[] __Collection { get; set; }
-    }
-
-    [XmlRoot(ElementName = "ports")]
-    public class PortCollection : XmlCollection<Port>
-    {
-        [XmlElement(ElementName = "port")]
-        public override Port[] __Collection { get; set; }
-    }
-
-    [XmlRoot(ElementName = "pipes")]
-    public class PipeCollection : XmlCollection<Pipe>
-    {
-        [XmlElement(ElementName = "pipe")]
-        public override Pipe[] __Collection { get; set; }
     }
 
     [XmlRoot(ElementName = "pipe")]
@@ -172,35 +144,76 @@ namespace HoloXPLOR.Data
         [DefaultValue("")]
         public String Owner { get; set; }
 
-        [XmlElement(ElementName = "rooms")]
-        public RoomCollection Rooms { get; set; }
+        [XmlArray(ElementName = "rooms")]
+        [XmlArrayItem(ElementName = "room")]
+        public XmlCollection<Room> Rooms { get; set; }
     }
 
-    public abstract class XmlCollection<T>
+    public class XmlCollection<T> : ICollection<T>
     {
         [XmlAttribute(AttributeName = "count")]
         [DefaultValue(0)]
         public Int32 Count
         {
-            get { return this.__Collection == null ? 0 : this.__Collection.Length; }
+            get { return this.__Collection == null ? 0 : this.__Collection.Count; }
             set { /* required for xml serialization */ }
         }
 
         [XmlIgnore]
-        public abstract T[] __Collection { get; set; }
+        public List<T> __Collection { get; set; }
         [XmlIgnore]
         public T this[Int32 index]
         {
             get { return this.__Collection[index]; }
             set { this.__Collection[index] = value; }
         }
-    }
 
-    [XmlRoot(ElementName = "rooms")]
-    public class RoomCollection : XmlCollection<Room>
-    {
-        [XmlElement(ElementName = "room")]
-        public override Room[] __Collection { get; set; }
+        public void Add(T item)
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            this.__Collection.Add(item);
+        }
+
+        public void Clear()
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            this.__Collection.Clear();
+        }
+
+        public Boolean Contains(T item)
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            return this.__Collection.Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            this.__Collection.CopyTo(array, arrayIndex);
+        }
+
+        public Boolean IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public Boolean Remove(T item)
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            return this.__Collection.Remove(item);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            return this.__Collection.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            this.__Collection = this.__Collection ?? new List<T>();
+            return this.__Collection.GetEnumerator();
+        }
     }
 
     [XmlRoot(ElementName = "room")]
@@ -214,15 +227,9 @@ namespace HoloXPLOR.Data
         [DefaultValue("")]
         public String Category { get; set; }
 
-        [XmlElement(ElementName = "features")]
-        public FeatureCollection Features { get; set; }
-    }
-
-    [XmlRoot(ElementName = "features")]
-    public class FeatureCollection : XmlCollection<Feature>
-    {
-        [XmlElement(ElementName = "feature")]
-        public override Feature[] __Collection { get; set; }
+        [XmlArray(ElementName = "features")]
+        [XmlArrayItem(ElementName = "feature")]
+        public XmlCollection<Feature> Features { get; set; }
     }
 
     [XmlRoot(ElementName = "feature")]
@@ -325,6 +332,14 @@ namespace HoloXPLOR.Data
         [XmlAttribute(AttributeName = "loadout")]
         [DefaultValue("")]
         public String Loadout { get; set; }
+        
+        [XmlAttribute(AttributeName = "hangarVehicleId")]
+        [DefaultValue(0)]
+        public Int32 HangarVehicleID { get; set; }
+
+        [XmlAttribute(AttributeName = "currVehicleOwner")]
+        [DefaultValue(0)]
+        public Int32 VehicleOwner { get; set; }
 
         [XmlAttribute(AttributeName = "Version")]
         [DefaultValue(0)]

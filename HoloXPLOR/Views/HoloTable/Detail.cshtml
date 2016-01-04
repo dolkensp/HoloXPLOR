@@ -1,0 +1,22 @@
+﻿@model HoloXPLOR.Data.Player
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<dl>
+    @foreach (var ship in Model.Ships)
+    {
+        <dt>@ship.Class</dt>
+        <dd>
+            <ul>
+                @foreach (var hardpoint in ship.Ports.__Collection)
+                {
+                    <li>@hardpoint.PortName</li>
+                }
+            </ul>
+        </dd>
+    }
+</dl>
