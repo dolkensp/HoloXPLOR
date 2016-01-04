@@ -1,4 +1,5 @@
 ﻿using HoloXPLOR.Data;
+using HoloXPLOR.Data.XML.Spaceships;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,40 +16,59 @@ namespace HoloXPLOR.Controllers
     {
         public ActionResult Index()
         {
-            // return View();
+            String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Weapons/AEGS/AEGS_BallisticRepeater_S5.xml"));
 
-            String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/db_dolkensp_2.0.xml"));
+            Item inTest = inXML.FromXML<Item>();
 
-            Player inTest = inXML.FromXML<Player>();
+            Type t = typeof(Item);
 
-            Type t = typeof(Player);
-
-            XmlSerializer xs = new XmlSerializer(typeof(Player));
-            XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/db_dolkensp_2.0_new.xml"), Encoding.UTF8);
-
-            // xw.Settings = new XmlWriterSettings
-            // {
-            //     Indent = true,
-            //     IndentChars = " ",
-            //     OmitXmlDeclaration = true,
-            //     ConformanceLevel = ConformanceLevel.Fragment
-            // };
+            XmlSerializer xs = new XmlSerializer(typeof(Item));
+            XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/weapon.xml"), Encoding.UTF8);
+            
             xw.Indentation = 1;
             xw.IndentChar = ' ';
             xw.Formatting = Formatting.Indented;
-
+            
             xw.WriteWhitespace("");
             xs.Serialize(xw, inTest);
             xw.Close();
-
+            
             String outXML = inTest.ToXML(); // .Remove(0, 39).Trim();
-
+            
             return new ContentResult
             {
                 Content = outXML,
                 ContentEncoding = Encoding.UTF8,
                 ContentType = "text/xml"
             };
+
+            // return View();
+
+            // String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/db_dolkensp_2.0.xml"));
+            // 
+            // Player inTest = inXML.FromXML<Player>();
+            // 
+            // Type t = typeof(Player);
+            // 
+            // XmlSerializer xs = new XmlSerializer(typeof(Player));
+            // XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/db_dolkensp_2.0_new.xml"), Encoding.UTF8);
+            // 
+            // xw.Indentation = 1;
+            // xw.IndentChar = ' ';
+            // xw.Formatting = Formatting.Indented;
+            // 
+            // xw.WriteWhitespace("");
+            // xs.Serialize(xw, inTest);
+            // xw.Close();
+            // 
+            // String outXML = inTest.ToXML(); // .Remove(0, 39).Trim();
+            // 
+            // return new ContentResult
+            // {
+            //     Content = outXML,
+            //     ContentEncoding = Encoding.UTF8,
+            //     ContentType = "text/xml"
+            // };
         }
 
         public ActionResult About()

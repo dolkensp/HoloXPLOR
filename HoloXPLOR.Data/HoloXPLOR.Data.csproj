@@ -39,9 +39,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Serialization.cs" />
+    <Compile Include="XML\Inventory\Ship.cs" />
+    <Compile Include="XML\Inventory\DoorLink.cs" />
+    <Compile Include="XML\Inventory\ShipLink.cs" />
+    <Compile Include="XML\Inventory\ItemLink.cs" />
+    <Compile Include="XML\Inventory\Feature.cs" />
+    <Compile Include="XML\Inventory\FeatureCollection.cs" />
+    <Compile Include="XML\Inventory\Room.cs" />
+    <Compile Include="XML\Inventory\RoomCollection.cs" />
+    <Compile Include="XML\Inventory\InventoryItem.cs" />
+    <Compile Include="XML\Inventory\Inventory.cs" />
+    <Compile Include="XML\Inventory\Connection.cs" />
+    <Compile Include="XML\Inventory\ConnectionCollection.cs" />
+    <Compile Include="XML\Inventory\Hangar.cs" />
+    <Compile Include="XML\Inventory\Pipe.cs" />
+    <Compile Include="XML\Inventory\PipeCollection.cs" />
+    <Compile Include="XML\Inventory\PortCollection.cs" />
+    <Compile Include="XML\Inventory\Prio.cs" />
+    <Compile Include="XML\Inventory\PrioCollection.cs" />
+    <Compile Include="XML\Inventory\Port.cs" />
+    <Compile Include="XML\Inventory\Player.cs" />
+    <Compile Include="XML\Inventory\Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XML\Spaceships\Pipe.cs" />
+    <Compile Include="XML\Spaceships\PortCollection.cs" />
+    <Compile Include="XML\Spaceships\_Cooler.cs" />
+    <Compile Include="XML\Spaceships\_Cargo.cs" />
+    <Compile Include="XML\Spaceships\_Armor.cs" />
+    <Compile Include="XML\Spaceships\_AmmoBox.cs" />
+    <Compile Include="XML\Spaceships\_Weapon.cs" />
+    <Compile Include="XML\Vehicles\Implementations\Vehicle.cs" />
+    <Compile Include="XML\Spaceships\ItemLink.cs" />
+    <Compile Include="XML\Spaceships\Loadout.cs" />
+    <Compile Include="XML\Spaceships\Item.cs" />
+    <Compile Include="XML\Spaceships\ItemType.cs" />
+    <Compile Include="XML\Spaceships\Param.cs" />
+    <Compile Include="XML\Spaceships\ItemPort.cs" />
+    <Compile Include="XML\Spaceships\ParamCollection.cs" />
+    <Compile Include="XML\XmlCollection.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

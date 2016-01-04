@@ -1,4 +1,5 @@
 ﻿using HoloXPLOR.Data;
+using HoloXPLOR.Data.XML.Inventory;
 using System;
 using System.Collections.Generic;
 using System.IO;
