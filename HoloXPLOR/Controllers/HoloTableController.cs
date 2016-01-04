@@ -13,5 +13,11 @@ namespace HoloXPLOR.Controllers
         {
             return View();
         }
+
+        public ActionResult Detail(String id)
+        {
+            
+            return View();
+        }
     }
 }
