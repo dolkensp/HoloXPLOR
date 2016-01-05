@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dolkens.Framework, Version=1.0.5648.17179, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dolkens.Framework.1.0.5648.17179\lib\net45\Dolkens.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +76,11 @@
     <Compile Include="XML\Spaceships\_Armor.cs" />
     <Compile Include="XML\Spaceships\_AmmoBox.cs" />
     <Compile Include="XML\Spaceships\_Weapon.cs" />
+    <Compile Include="XML\Vehicles\Implementations\ItemPort.cs" />
+    <Compile Include="XML\Vehicles\Implementations\ItemType.cs" />
+    <Compile Include="XML\Vehicles\Implementations\Element.cs" />
+    <Compile Include="XML\Vehicles\Implementations\Modification.cs" />
+    <Compile Include="XML\Vehicles\Implementations\Part.cs" />
     <Compile Include="XML\Vehicles\Implementations\Vehicle.cs" />
     <Compile Include="XML\Spaceships\ItemLink.cs" />
     <Compile Include="XML\Spaceships\Loadout.cs" />
@@ -78,7 +91,9 @@
     <Compile Include="XML\Spaceships\ParamCollection.cs" />
     <Compile Include="XML\XmlCollection.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

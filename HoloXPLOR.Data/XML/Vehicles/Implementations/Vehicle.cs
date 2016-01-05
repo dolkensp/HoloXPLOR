@@ -42,7 +42,17 @@ namespace HoloXPLOR.Data.XML.Vehicles.Implementations
         [XmlAttribute(AttributeName = "crossSectionMultiplier")]
         public String CrossSectionMultiplier { get; set; }
 
-        // Parts
-        // Modifications
+        [XmlArray(ElementName = "Parts")]
+        [XmlArrayItem(ElementName = "Part")]
+        public Part[] Parts { get; set; }
+
+        [XmlArray(ElementName = "Modifications")]
+        [XmlArrayItem(ElementName = "Modification")]
+        public Modification[] Modifications { get; set; }
+        
+        public override String ToString()
+        {
+            return String.Format("{0}", this.DisplayName);
+        }
     }
 }

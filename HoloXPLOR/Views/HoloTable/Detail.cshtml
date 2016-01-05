@@ -1,38 +1,82 @@
-﻿@using HoloXPLOR.Data.XML.Inventory
+﻿@using Inventory = HoloXPLOR.Data.XML.Inventory
+@using Items = HoloXPLOR.Data.XML.Spaceships
+@using Vehicles = HoloXPLOR.Data.XML.Vehicles.Implementations
 
-@model Player
+@model Inventory.Player
 
 @{
     ViewBag.Title = "Detail";
-    Dictionary<Guid, Item> itemMap = Model.Items.ToDictionary(k => k.ID, v => v);
+    Dictionary<Guid, Inventory.Item> itemMap = Model.Items.ToDictionary(k => k.ID, v => v);
 }
 
-@helper RenderHardpoint(Port hardpoint, Dictionary<Guid, Item> itemMap)
+@helper RenderHardpoint(Vehicles.Vehicle vehicle, Inventory.Port port, Dictionary<Guid, Inventory.Item> itemMap)
 {
-    var item = itemMap.GetValue(hardpoint.ItemID, new Item {
+    var shipHardpoints = HoloXPLOR.Data.Scripts.Hardpoints[vehicle.Name];
+    var shipPort = shipHardpoints.GetValue(port.PortName, new Vehicles.Part());
+    shipPort.ItemPorts = shipPort.ItemPorts ?? new Vehicles.ItemPort[] {};
+    var hardpoint = shipPort.ItemPorts.FirstOrDefault();
+    
+    Inventory.Item inventoryItem = itemMap.GetValue(port.ItemID, new Inventory.Item
+    {
         Class = "Empty",
-        Ports = new PortCollection(),
-        Pipes = new PipeCollection(),
-        Inventory = new Inventory(),
+        Ports = new Inventory.PortCollection(),
+        Pipes = new Inventory.PipeCollection(),
+        Inventory = new Inventory.Inventory(),
     });
-    var displayName = String.Empty;
+
+    // var item = HoloXPLOR.Data.Scripts.Items.GetValue(port.PortName, null);
+
+    String hardpointName = String.Empty;
+    
+    String displayName = String.Empty;
+    
     
     <li>
-        @hardpoint.PortName - 
-        
-        @{
-            if (item != null)
+        @if (hardpoint != null)
+        {
+            hardpointName = hardpoint.DisplayName;
+
+            if (String.IsNullOrWhiteSpace(hardpointName))
             {
-                var weapon = HoloXPLOR.Data.Scripts.Items.GetValue(item.Class, null);
+                hardpointName = hardpoint.Name;
+            }
+
+            if (String.IsNullOrWhiteSpace(hardpointName))
+            {
+                hardpointName = port.PortName;
+            }
             
+            hardpointName = HoloXPLOR.Data.Scripts.Localization.GetValue(hardpointName, hardpointName);
+
+            @: @hardpointName (@hardpoint.MinSize - @hardpoint.MaxSize)
+        } else {
+            @: @HoloXPLOR.Data.Scripts.Localization.GetValue(port.PortName, port.PortName)
+        }
+
+        -
+
+        @{
+            var itemSize = String.Empty;
+
+            if (inventoryItem != null)
+            {
+                var weapon = HoloXPLOR.Data.Scripts.Items.GetValue(inventoryItem.Class, null);
+
                 if (weapon != null)
                 {
                     displayName = weapon.Params.Items.Where(p => p.Name == "display_name").Select(p => p.Value).FirstOrDefault();
+
+                    itemSize = String.Format("({0})", weapon.Params.Items.Where(p => p.Name == "itemSize").Select(p => p.Value).FirstOrDefault());
+                    
+                    if (itemSize == "()")
+                    {
+                        itemSize = String.Empty;
+                    }
                 }
 
                 if (String.IsNullOrWhiteSpace(displayName))
                 {
-                    displayName = item.Class;
+                    displayName = inventoryItem.Class;
                 }
             }
 
@@ -40,18 +84,22 @@
             {
                 displayName = "Empty";
             }
-        }
-            
-        @displayName
 
-        @if (item != null && item.Ports.Count > 0)
-        {
-            <ul>
-                @foreach (var port in item.Ports.Items)
-                {
-                    @RenderHardpoint(port, itemMap);
-                }
-            </ul>
+            // Manual Localization
+            displayName = displayName.Replace("item_Name", "");
+            displayName = HoloXPLOR.Data.Scripts.Localization.GetValue(displayName, displayName);
+
+            @: @displayName @itemSize
+
+            if (inventoryItem != null && inventoryItem.Ports.Count > 0)
+            {
+                <ul>
+                    @foreach (var child in inventoryItem.Ports.Items.OrderBy(i => i.PortName))
+                    {
+                        @RenderHardpoint(vehicle, child, itemMap);
+                    }
+                </ul>
+            }
         }
     </li>
 }
@@ -61,14 +109,34 @@
 <dl>
     @foreach (var ship in Model.Ships)
     {
-        <dt>@ship.Class</dt>
-        <dd>
-            <ul>
-                @foreach (var port in ship.Ports.Items.OrderBy(i => i.PortName))
-                {
-                    @RenderHardpoint(port, itemMap);
-                }
-            </ul>
-        </dd>
+        var shipName = ship.Class.Split('.').Last();
+        var vehicle = HoloXPLOR.Data.Scripts.Vehicles.GetValue(shipName, null);
+        
+        // Attempt to move back to base model if variant is missing
+        if (vehicle == null)
+        {
+            var parts = shipName.Split('_');
+            shipName = String.Join("_", parts.Take(parts.Length - 1));
+            vehicle = HoloXPLOR.Data.Scripts.Vehicles.GetValue(shipName, null);
+        }
+        
+        if (vehicle != null)
+        {
+            shipName = vehicle.DisplayName;
+        
+            <dt>@shipName</dt>
+            <dd>
+                <ul>
+                    @foreach (var port in ship.Ports.Items.OrderBy(i => i.PortName))
+                    {
+                        @RenderHardpoint(vehicle, port, itemMap);
+                    }
+                </ul>
+            </dd>
+        }
+        else
+        {
+            <!-- Missing @ship.Class -->
+        }
     }
 </dl>
