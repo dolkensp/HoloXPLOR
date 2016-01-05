@@ -57,5 +57,10 @@ namespace HoloXPLOR.Data.XML.Inventory
         public PortCollection Ports { get; set; }
         [XmlElement(ElementName = "pipes")]
         public PipeCollection Pipes { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0} [{1}]", this.Class, this.ID);
+        }
     }
 }

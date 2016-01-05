@@ -1,0 +1,62 @@
+﻿@using Inventory = HoloXPLOR.Data.XML.Inventory
+@using Items = HoloXPLOR.Data.XML.Spaceships
+@using Vehicles = HoloXPLOR.Data.XML.Vehicles.Implementations
+@using HoloXPLOR.Models.HoloTable
+
+@model DetailModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+@helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
+{
+    if (items.Count > 0)
+    {
+        <li>
+            <h3>@category</h3>
+            <ul>
+                @foreach (var item in items)
+                {
+                    <li data-id="@item.Key" data-equipped="@(Model.Inventory[item.Key].BaseShip != null).ToString().ToLower()">@HoloXPLOR.Data.Scripts.Localization.GetValue(item.Value.DisplayName, item.Value.DisplayName)</li>
+                }
+            </ul>
+        </li>
+    }
+}
+
+<h2>@Model.GameData_ShipMap[Model.CurrentShipID ?? Guid.Empty].DisplayName</h2>
+
+<h2>Hardpoints</h2>
+
+<ul>
+    @foreach (var hardpoint in Model.Loadout
+        .OrderBy(h => h.Types.Select(t => t.Type).OrderBy(s => s).FirstOrDefault())
+        .ThenByDescending(h => h.MaxSize)
+        .ThenByDescending(h => h.MinSize)
+        .ThenBy(h => h.Types.Select(t => t.SubType).FirstOrDefault())
+        .ThenBy(h => h.DisplayName)
+        .ThenBy(h => h.Name))
+    {
+        var displayName = hardpoint.DisplayName;
+        if (String.IsNullOrWhiteSpace(displayName))
+        {
+            displayName = hardpoint.Name;
+        }
+        
+        <li>@displayName (@hardpoint.MinSize - @hardpoint.MaxSize)</li>
+    }
+</ul>
+
+<h2>Inventory</h2>
+
+<ul>
+    @RenderItemCategory("Armor", Model.GameData_CategoryMap[Items.CategoryEnum.Armor])
+    @RenderItemCategory("Cargo", Model.GameData_CategoryMap[Items.CategoryEnum.Storage])
+    @RenderItemCategory("Missiles", Model.GameData_CategoryMap[Items.CategoryEnum.Missile])
+    @RenderItemCategory("Power", Model.GameData_CategoryMap[Items.CategoryEnum.PowerPlant])
+    @RenderItemCategory("Propulsion", Model.GameData_CategoryMap[Items.CategoryEnum.Thruster])
+    @RenderItemCategory("Shields", Model.GameData_CategoryMap[Items.CategoryEnum.Shield])
+    @RenderItemCategory("Turrets", Model.GameData_CategoryMap[Items.CategoryEnum.Turret])
+    @RenderItemCategory("Weapons", Model.GameData_CategoryMap[Items.CategoryEnum.Weapon])
+</ul>

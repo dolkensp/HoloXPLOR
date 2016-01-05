@@ -123,6 +123,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HoloTable\DetailModel.cs" />
+    <Compile Include="Models\HoloTable\InventoryItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts.cs" />
   </ItemGroup>
@@ -130,7 +132,9 @@
     <Content Include="App_Data\db_alluran_gamma.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\db_alluran_raw.xml" />
+    <Content Include="App_Data\db_alluran_raw.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\db_dolkensp_2.0.xml" />
     <Content Include="App_Data\db_dolkensp_2.1.xml" />
     <Content Include="App_Data\db_Jooston.txt" />
@@ -348,7 +352,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\medpacks\crlf_medpack_01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\behr_rifle_ballistic_01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\behr_rifle_ballistic_02.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\behr_rifle_ballistic_03.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\behr_rifle_ballistic_03.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\behr_special_ballistic_01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\gmni_pistol_ballistic_01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\fps_weapons\weapons\klwe_pistol_energy_01.xml" />
@@ -883,7 +889,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Jump_Drives\TEMP_Jump_Drive_S4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\AEGS\AEGS_Avenger_LandingSystem.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\AEGS\AEGS_Gladius_LandingSystem.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\AEGS\AEGS_Retaliator_LandingSystem.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\AEGS\AEGS_Retaliator_LandingSystem.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\ANVL\ANVL_Gladiator_LandingSystem.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\ANVL\ANVL_Hornet_LandingSystem.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\LandingSystems\CNOU\CNOU_Mustang_LandingSystem.xml" />
@@ -1532,7 +1540,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\AEGS\AEGS_Retaliator_Turret.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\AEGS\AEGS_Retaliator_Turret_Base.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\ANVL\ANVL_Gladiator_Turret_Ball_S2_Q2.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetBall_160f_S1_Q2.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetBall_160f_S1_Q2.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetBall_S2_Q1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetCanard_S2_Q1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\CNOU\CNOU_Mustang_S1_Q2.xml" />
@@ -1588,7 +1598,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\Greycat\Greycat_Industrial_Sure_Grip_Tractor.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\JOKR\JOKR_DistortionCannon_S1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\JOKR\JOKR_Interface\Interface_JOKR_DistortionCannon_S1.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\KBAR\KBAR_BallisticCannon_S1.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\KBAR\KBAR_BallisticCannon_S1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\KBAR\KBAR_BallisticCannon_S3.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1885,7 +1897,9 @@
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Titan.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Titan.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Gladius.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1922,22 +1936,34 @@
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\CNOU_Mustang_Delta.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\CNOU_Mustang_Gamma.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\CNOU_Mustang_Omega.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\ORIG_325a.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\ORIG_325a.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\ORIG_350r.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\RSI_Constellation_Hangar_Aquila.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\RSI_Constellation_Hangar_Phoenix.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\RSI_Constellation_Hangar_Taurus.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\VNCL_Glaive.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\ORIG_300i.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\ORIG_m50.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Red_StarFighter.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\VNCL_Glaive.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\ORIG_300i.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\ORIG_m50.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Red_StarFighter.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Aurora.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Comm_Relay.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation_Dogfight.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation_Hangar.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation_Hangar.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_IR1337_Missile_Platform.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_IR1337_Weapon_Mount.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_IR1337_Weapon_Mount_Quad.xml" />
@@ -1945,7 +1971,9 @@
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TNGS_AEGS_Redeemer.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TNGS_ORIG_AX114.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\vncl_cleaver.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Scythe.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Scythe.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Stinger.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Lights\DefaultVehicleLights.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Lights\def_lights.xml" />
@@ -2128,8 +2156,12 @@
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Gladius.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Gladius_Tutorial.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Redeemer.xml" />
-    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Retaliator.xml" />
-    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Retaliator_Gunship.xml" />
+    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Retaliator.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Retaliator_Gunship.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Retaliator_NoTempThrusters.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Vanguard.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_AEGS_Vanguard_Hangar.xml" />
@@ -2137,7 +2169,9 @@
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7A.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7A_Dogfight.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7C.xml" />
-    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7CM.xml" />
+    <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7CM.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7CM_Instructor.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7CR.xml" />
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Default_Loadout_ANVL_Hornet_F7CS.xml" />
@@ -2628,11 +2662,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\HoloTable\Detail.cshtml" />
+    <Content Include="Views\HoloTable\Hangar.cshtml" />
+    <Content Include="Views\HoloTable\Detail - Copy.cshtml" />
+    <Content Include="Views\HoloTable\Ship.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

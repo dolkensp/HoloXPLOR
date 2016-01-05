@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace HoloXPLOR.Data
 {
@@ -28,6 +29,14 @@ namespace HoloXPLOR.Data
 
                     foreach (FileInfo file in weaponsDir.GetFiles("*.xml", SearchOption.AllDirectories))
                     {
+                        if (file.FullName.Contains(@"_Interface\") ||
+                            file.FullName.Contains(@"\Interface_") ||
+                            file.FullName.Contains(@"\Ammo\Ballistic_Ammo\") ||
+                            file.FullName.Contains(@"\Ammo\Countermeasures\") ||
+                            file.FullName.Contains(@"\Ammo\Laser_Bolts\") ||
+                            file.FullName.Contains(@"\Ammo\Rocket_Ammo\"))
+                            continue;
+
 #if !DEBUG || DEBUG
                         try
                         {
@@ -38,7 +47,10 @@ namespace HoloXPLOR.Data
                                 Scripts._items[item.Name] = item;
 #if !DEBUG || DEBUG
                         }
-                        catch (Exception) { }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                        }
 #endif
                     }
                 }
@@ -72,12 +84,7 @@ namespace HoloXPLOR.Data
 #endif
                             var vehicle = File.ReadAllText(file.FullName).FromXML<XML.Vehicles.Implementations.Vehicle>();
 
-                            #region Edge Case Support
-
-                            if (vehicle.Name == "ORIG_300i")
-                                vehicle.Name = "ORIG";
-
-                            #endregion
+                            vehicle = Scripts._CleanEdgeCases(vehicle);
 
                             if (vehicle != null)
                             {
@@ -150,7 +157,13 @@ namespace HoloXPLOR.Data
 
                                         var variant = variantXML.InnerXml.FromXML<XML.Vehicles.Implementations.Vehicle>();
 
-                                        variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
+                                        if (vehicle.Name.Split('_')[0] == modification.Name.Split('_')[0])
+                                            variant.Name = modification.Name;
+                                        else
+                                            variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
+
+                                        variant = Scripts._CleanEdgeCases(variant);
+
                                         variant.Modifications = null;
 
                                         Scripts._vehicles[variant.Name] = variant;
@@ -171,6 +184,71 @@ namespace HoloXPLOR.Data
                 return Scripts._vehicles;
             }
         }
+
+        private static XML.Vehicles.Implementations.Vehicle _CleanEdgeCases(XML.Vehicles.Implementations.Vehicle vehicle)
+        {
+            #region Edge Case Support
+
+            switch (vehicle.Name)
+            {
+                case "GRIN_PTV":
+                    vehicle.DisplayName = "Greycat Industries PTV";
+                    break;
+                case "RSI_Constellation":
+                    vehicle.Name = "RSI_Constellation_Andromeda";
+                    vehicle.DisplayName = "RSI Constellation Andromeda";
+                    break;
+                case "RSI_Constellation_Hangar_Aquila":
+                    vehicle.Name = "RSI_Constellation_Aquila";
+                    break;
+                case "RSI_Constellation_Hangar_Taurus":
+                    vehicle.Name = "RSI_Constellation_Taurus";
+                    break;
+                case "RSI_Constellation_Hangar_Phoenix":
+                    vehicle.Name = "RSI_Constellation_Phoenix";
+                    break;
+                case "ORIG_300i":
+                    vehicle.Name = "ORIG";
+                    break;
+                case "VNCL_Scythe":
+                    vehicle.DisplayName = "Vanduul Scythe";
+                    break;
+                case "VNCL_Glaive_Glaive_Swarm":
+                    vehicle.DisplayName = "Vanduul Glaive";
+                    vehicle.Name = "VNCL_Glaive";
+                    break;
+                case "VNCL_Glaive_Glaive_Tutorial":
+                    vehicle.DisplayName = "Vanduul Glaive";
+                    vehicle.Name = "VNCL_Glaive_Tutorial";
+                    break;
+                case "AEGS_Avenger_Titan":
+                    vehicle.DisplayName = "Aegis Avenger Titan";
+                    break;
+                case "AEGS_Avenger_Warlock":
+                    vehicle.DisplayName = "Aegis Avenger Warlock";
+                    break;
+                case "AEGS_Avenger_Stalker":
+                    vehicle.DisplayName = "Aegis Avenger Stalker";
+                    break;
+                case "AEGS_Retaliator":
+                    vehicle.DisplayName = "Aegis Retaliator";
+                    break;
+                case "AEGS_Gladius":
+                    vehicle.DisplayName = "Aegis Gladius";
+                    break;
+                case "AEGS_Gladiator":
+                    vehicle.DisplayName = "Aegis Gladiator";
+                    break;
+                case "AEGS_Redeemer":
+                    vehicle.DisplayName = "Aegis Redeemer";
+                    break;
+            }
+
+            #endregion
+
+            return vehicle;
+        }
+
 
         private static XML.Vehicles.Implementations.Part _GetPartByID(XML.Vehicles.Implementations.Part[] parts, String id)
         {

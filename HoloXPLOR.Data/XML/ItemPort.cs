@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML.Spaceships
+namespace HoloXPLOR.Data.XML
 {
     [XmlRoot(ElementName = "ItemPort")]
     public partial class ItemPort
@@ -31,5 +31,10 @@ namespace HoloXPLOR.Data.XML.Spaceships
         [XmlArray(ElementName = "Types")]
         [XmlArrayItem(ElementName = "Type")]
         public ItemType[] Types { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0}: {1}-{2}", this.DisplayName, this.MinSize, this.MaxSize);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HoloXPLOR.Data;
 using HoloXPLOR.Data.XML.Inventory;
+using HoloXPLOR.Models.HoloTable;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,20 +18,18 @@ namespace HoloXPLOR.Controllers
             return View();
         }
 
-        public ActionResult Detail(String id)
+        public ActionResult Hangar(String id)
         {
-            String filename = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
-            
-            if (System.IO.File.Exists(filename))
-            {
-                String inXML = System.IO.File.ReadAllText(filename);
+            var model = new DetailModel(id);
 
-                Player model = inXML.FromXML<Player>();
+            return View(model);
+        }
 
-                return View(model);
-            }
+        public ActionResult Ship(String id, Guid shipID)
+        {
+            var model = new DetailModel(id, shipID);
 
-            throw new FileNotFoundException("Unable to load specified xml", String.Format("{0}.xml", id));
+            return View(model);
         }
     }
 }

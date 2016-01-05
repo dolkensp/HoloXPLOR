@@ -27,5 +27,10 @@ namespace HoloXPLOR.Data.XML.Inventory
 
         [XmlElement(ElementName = "pipes")]
         public ConnectionCollection Pipes { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0} [{1}]", this.PortName, this.ItemID);
+        }
     }
 }

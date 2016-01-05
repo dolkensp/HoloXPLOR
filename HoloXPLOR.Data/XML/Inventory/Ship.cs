@@ -25,5 +25,10 @@ namespace HoloXPLOR.Data.XML.Inventory
         }
         [XmlIgnore]
         public Boolean IsTrainer { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0} [{1}]", this.Name, this.ID);
+        }
     }
 }

@@ -71,13 +71,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XML\Spaceships\Pipe.cs" />
     <Compile Include="XML\Spaceships\PortCollection.cs" />
+    <Compile Include="XML\Spaceships\_Calculated.cs" />
     <Compile Include="XML\Spaceships\_Cooler.cs" />
     <Compile Include="XML\Spaceships\_Cargo.cs" />
     <Compile Include="XML\Spaceships\_Armor.cs" />
     <Compile Include="XML\Spaceships\_AmmoBox.cs" />
     <Compile Include="XML\Spaceships\_Weapon.cs" />
-    <Compile Include="XML\Vehicles\Implementations\ItemPort.cs" />
-    <Compile Include="XML\Vehicles\Implementations\ItemType.cs" />
+    <Compile Include="XML\ItemPort.cs" />
+    <Compile Include="XML\ItemType.cs" />
     <Compile Include="XML\Vehicles\Implementations\Element.cs" />
     <Compile Include="XML\Vehicles\Implementations\Modification.cs" />
     <Compile Include="XML\Vehicles\Implementations\Part.cs" />
@@ -85,9 +86,7 @@
     <Compile Include="XML\Spaceships\ItemLink.cs" />
     <Compile Include="XML\Spaceships\Loadout.cs" />
     <Compile Include="XML\Spaceships\Item.cs" />
-    <Compile Include="XML\Spaceships\ItemType.cs" />
     <Compile Include="XML\Spaceships\Param.cs" />
-    <Compile Include="XML\Spaceships\ItemPort.cs" />
     <Compile Include="XML\Spaceships\ParamCollection.cs" />
     <Compile Include="XML\XmlCollection.cs" />
   </ItemGroup>
