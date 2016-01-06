@@ -9,72 +9,66 @@
     ViewBag.Title = "Detail";
 }
 
-<h2>@Model.GameData_ShipMap[Model.CurrentShipID ?? Guid.Empty].DisplayName</h2>
+@helper RenderHardpoints(Inventory.Item parent)
+{
+    var items = Model.View_Loadout
+            .Where(i => i.Inventory_EquippedItem == parent)
+            .OrderBy(i => i.GameData_EquippedPort.Types.Select(t => t.Type).FirstOrDefault())
+            .ThenByDescending(i => i.GameData_EquippedPort.MaxSize)
+            .ThenByDescending(i => i.GameData_EquippedPort.MinSize)
+            .ThenBy(i => i.GameData_EquippedPort.DisplayName.ToLocalized())
+            .ToList();
+             
+    if (items.Count > 0)
+    { 
+        <ul>
+            @foreach (var item in items)
+            {
+                // var hardpoint = Model.GameData_ItemMap[item.EquippedItem.ID].PortParams.Items.Where(p => p.Name == item.EquippedPort.PortName).FirstOrDefault();
+                var hardpoint = item.GameData_EquippedPort;
+                var displayName = hardpoint.DisplayName;
+                if (String.IsNullOrWhiteSpace(displayName))
+                {
+                    displayName = hardpoint.Name;
+                }
+
+                <li data-id="@((item.Inventory_Item ?? new Inventory.Item { ID = Guid.Empty }).ID)"
+                    data-class="@hardpoint.Name"
+                    data-min-size="@hardpoint.MinSize"
+                    data-max-size="@hardpoint.MaxSize"
+                    data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
+
+                    @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
+
+                    @if (item.GameData_Item != null)
+                    {
+                        displayName = item.GameData_Item.DisplayName.ToLocalized();
+                        if (String.IsNullOrWhiteSpace(displayName))
+                        {
+                            displayName = item.GameData_Item.Name.ToLocalized();
+                        }
+
+                        @: @displayName (@item.GameData_Item.ParamMap["itemSize"])
+
+                        @RenderHardpoints(item.Inventory_Item)
+                    }
+                    else
+                    {
+                        <br />
+                        @: [ Empty ]
+                    }
+                </li>
+            }
+        </ul>
+    }
+}
+
+<h2>@Model.GameData_ShipMap[Model.ShipID].DisplayName</h2>
 
 <div class="col-sm-6">
     <h3>Hardpoints</h3>
 
-    <ul>
-        @foreach (var item in Model.Ship_ItemMap.GetValue(Model.CurrentShipID ?? Guid.Empty, new List<InventoryItem> { }))
-        {
-            // var hardpoint = Model.GameData_ItemMap[item.EquippedItem.ID].PortParams.Items.Where(p => p.Name == item.EquippedPort.PortName).FirstOrDefault();
-            var hardpoint = item.GameData_EquippedPort;
-            var displayName = hardpoint.DisplayName;
-            if (String.IsNullOrWhiteSpace(displayName))
-            {
-                displayName = hardpoint.Name;
-            }
-
-            <li data-id="@((item.Inventory_Item ?? new Inventory.Item { ID = Guid.Empty }).ID)"
-                data-class="@hardpoint.Name"
-                data-min-size="@hardpoint.MinSize"
-                data-max-size="@hardpoint.MaxSize"
-                data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
-                @item.GameData_EquippedItem.DisplayName.ToLocalized() @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
-                @if (item.GameData_Item != null)
-                {
-                    <br />
-                    displayName = item.GameData_Item.DisplayName.ToLocalized();
-                    if (String.IsNullOrWhiteSpace(displayName))
-                    {
-                        displayName = item.GameData_Item.Name.ToLocalized();
-                    }
-                    
-                    @: @displayName
-                }
-                else
-                {
-                    <br />
-                    @: [ Empty ]
-                }
-            </li>
-        }
-
-        <li>SPLIT</li>
-
-        @foreach (var hardpoint in Model.Loadout
-        .OrderBy(h => h.Types.Select(t => t.Type).OrderBy(s => s).FirstOrDefault())
-        .ThenByDescending(h => h.MaxSize)
-        .ThenByDescending(h => h.MinSize)
-        .ThenBy(h => h.Types.Select(t => t.SubType).FirstOrDefault())
-        .ThenBy(h => h.DisplayName)
-        .ThenBy(h => h.Name))
-        {
-            var displayName = hardpoint.DisplayName;
-            if (String.IsNullOrWhiteSpace(displayName))
-            {
-                displayName = hardpoint.Name;
-            }
-
-            <li data-id="@Guid.Empty"
-                data-class="@hardpoint.Name"
-                data-min-size="@hardpoint.MinSize"
-                data-max-size="@hardpoint.MaxSize"
-                data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
-                @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
-            </li>
-        }
-    </ul>
+    @RenderHardpoints(null)
 </div>
 
 <div class="col-sm-6">

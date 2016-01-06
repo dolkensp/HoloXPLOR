@@ -14,7 +14,7 @@ namespace System
 {
     public static class __Proxy
     {
-        public static String ToLocalized(this String input) { return HoloXPLOR.Data.Scripts.Localization.GetValue(input, input); }
+        public static String ToLocalized(this String input) { return HoloXPLOR.Data.Scripts.Localization.GetValue(input ?? String.Empty, input); }
     }
 }
 

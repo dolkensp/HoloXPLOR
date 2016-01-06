@@ -2675,7 +2675,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\HoloTable\Hangar.cshtml" />
-    <Content Include="Views\HoloTable\Detail - Copy.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
     <Content Include="Views\HoloTable\_Items.cshtml" />
   </ItemGroup>
