@@ -28,6 +28,7 @@ namespace HoloXPLOR.Data.XML.Vehicles.Implementations
         public String ID { get; set; }
 
         [XmlAttribute(AttributeName = "dockingclass")]
+        [DefaultValue(0)]
         public Int32 DockingClass { get; set; }
 
         [XmlAttribute(AttributeName = "HudPaletteScheme")]

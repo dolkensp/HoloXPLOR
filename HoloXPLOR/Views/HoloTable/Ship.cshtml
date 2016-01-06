@@ -9,54 +9,74 @@
     ViewBag.Title = "Detail";
 }
 
-@helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
-{
-    if (items.Count > 0)
-    {
-        <li>
-            <h3>@category</h3>
-            <ul>
-                @foreach (var item in items)
-                {
-                    <li data-id="@item.Key" data-equipped="@(Model.Inventory[item.Key].BaseShip != null).ToString().ToLower()">@HoloXPLOR.Data.Scripts.Localization.GetValue(item.Value.DisplayName, item.Value.DisplayName)</li>
-                }
-            </ul>
-        </li>
-    }
-}
-
 <h2>@Model.GameData_ShipMap[Model.CurrentShipID ?? Guid.Empty].DisplayName</h2>
 
-<h2>Hardpoints</h2>
+<div class="col-sm-6">
+    <h3>Hardpoints</h3>
 
-<ul>
-    @foreach (var hardpoint in Model.Loadout
+    <ul>
+        @foreach (var item in Model.Ship_ItemMap.GetValue(Model.CurrentShipID ?? Guid.Empty, new List<InventoryItem> { }))
+        {
+            // var hardpoint = Model.GameData_ItemMap[item.EquippedItem.ID].PortParams.Items.Where(p => p.Name == item.EquippedPort.PortName).FirstOrDefault();
+            var hardpoint = item.GameData_EquippedPort;
+            var displayName = hardpoint.DisplayName;
+            if (String.IsNullOrWhiteSpace(displayName))
+            {
+                displayName = hardpoint.Name;
+            }
+
+            <li data-id="@((item.Inventory_Item ?? new Inventory.Item { ID = Guid.Empty }).ID)"
+                data-class="@hardpoint.Name"
+                data-min-size="@hardpoint.MinSize"
+                data-max-size="@hardpoint.MaxSize"
+                data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
+                @item.GameData_EquippedItem.DisplayName.ToLocalized() @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
+                @if (item.GameData_Item != null)
+                {
+                    <br />
+                    displayName = item.GameData_Item.DisplayName.ToLocalized();
+                    if (String.IsNullOrWhiteSpace(displayName))
+                    {
+                        displayName = item.GameData_Item.Name.ToLocalized();
+                    }
+                    
+                    @: @displayName
+                }
+                else
+                {
+                    <br />
+                    @: [ Empty ]
+                }
+            </li>
+        }
+
+        <li>SPLIT</li>
+
+        @foreach (var hardpoint in Model.Loadout
         .OrderBy(h => h.Types.Select(t => t.Type).OrderBy(s => s).FirstOrDefault())
         .ThenByDescending(h => h.MaxSize)
         .ThenByDescending(h => h.MinSize)
         .ThenBy(h => h.Types.Select(t => t.SubType).FirstOrDefault())
         .ThenBy(h => h.DisplayName)
         .ThenBy(h => h.Name))
-    {
-        var displayName = hardpoint.DisplayName;
-        if (String.IsNullOrWhiteSpace(displayName))
         {
-            displayName = hardpoint.Name;
+            var displayName = hardpoint.DisplayName;
+            if (String.IsNullOrWhiteSpace(displayName))
+            {
+                displayName = hardpoint.Name;
+            }
+
+            <li data-id="@Guid.Empty"
+                data-class="@hardpoint.Name"
+                data-min-size="@hardpoint.MinSize"
+                data-max-size="@hardpoint.MaxSize"
+                data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
+                @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
+            </li>
         }
-        
-        <li>@displayName (@hardpoint.MinSize - @hardpoint.MaxSize)</li>
-    }
-</ul>
+    </ul>
+</div>
 
-<h2>Inventory</h2>
-
-<ul>
-    @RenderItemCategory("Armor", Model.GameData_CategoryMap[Items.CategoryEnum.Armor])
-    @RenderItemCategory("Cargo", Model.GameData_CategoryMap[Items.CategoryEnum.Storage])
-    @RenderItemCategory("Missiles", Model.GameData_CategoryMap[Items.CategoryEnum.Missile])
-    @RenderItemCategory("Power", Model.GameData_CategoryMap[Items.CategoryEnum.PowerPlant])
-    @RenderItemCategory("Propulsion", Model.GameData_CategoryMap[Items.CategoryEnum.Thruster])
-    @RenderItemCategory("Shields", Model.GameData_CategoryMap[Items.CategoryEnum.Shield])
-    @RenderItemCategory("Turrets", Model.GameData_CategoryMap[Items.CategoryEnum.Turret])
-    @RenderItemCategory("Weapons", Model.GameData_CategoryMap[Items.CategoryEnum.Weapon])
-</ul>
+<div class="col-sm-6">
+    @{ Html.RenderPartial("_Items", Model); }
+</div>

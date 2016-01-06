@@ -10,6 +10,14 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics;
 
+namespace System
+{
+    public static class __Proxy
+    {
+        public static String ToLocalized(this String input) { return HoloXPLOR.Data.Scripts.Localization.GetValue(input, input); }
+    }
+}
+
 namespace HoloXPLOR.Data
 {
     public static class Scripts
@@ -174,7 +182,10 @@ namespace HoloXPLOR.Data
                             }
 #if !DEBUG
                         }
-                        catch (Exception) { }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                        }
 #endif
                     }
 
@@ -197,15 +208,6 @@ namespace HoloXPLOR.Data
                 case "RSI_Constellation":
                     vehicle.Name = "RSI_Constellation_Andromeda";
                     vehicle.DisplayName = "RSI Constellation Andromeda";
-                    break;
-                case "RSI_Constellation_Hangar_Aquila":
-                    vehicle.Name = "RSI_Constellation_Aquila";
-                    break;
-                case "RSI_Constellation_Hangar_Taurus":
-                    vehicle.Name = "RSI_Constellation_Taurus";
-                    break;
-                case "RSI_Constellation_Hangar_Phoenix":
-                    vehicle.Name = "RSI_Constellation_Phoenix";
                     break;
                 case "ORIG_300i":
                     vehicle.Name = "ORIG";
@@ -249,7 +251,6 @@ namespace HoloXPLOR.Data
             return vehicle;
         }
 
-
         private static XML.Vehicles.Implementations.Part _GetPartByID(XML.Vehicles.Implementations.Part[] parts, String id)
         {
             if (parts != null && parts.Length > 0)
@@ -267,46 +268,6 @@ namespace HoloXPLOR.Data
             }
 
             return null;
-        }
-
-        #endregion
-
-        #region HardPoint XML
-
-        private static Dictionary<String, Dictionary<String, XML.Vehicles.Implementations.Part>> _hardpoints;
-        public static Dictionary<String, Dictionary<String, XML.Vehicles.Implementations.Part>> Hardpoints
-        {
-            get
-            {
-                if (Scripts._hardpoints == null)
-                {
-                    Scripts._hardpoints = new Dictionary<String, Dictionary<String, XML.Vehicles.Implementations.Part>>(StringComparer.InvariantCultureIgnoreCase);
-
-                    foreach (var vehicle in Scripts.Vehicles.Values)
-                        Scripts._hardpoints[vehicle.Name] = Scripts._GetHardpoints(vehicle.Parts, null, "ItemPort");
-                }
-
-                return Scripts._hardpoints;
-            }
-        }
-
-        private static Dictionary<String, XML.Vehicles.Implementations.Part> _GetHardpoints(XML.Vehicles.Implementations.Part[] parts, Dictionary<String, XML.Vehicles.Implementations.Part> buffer = null, params String[] filters)
-        {
-            if (buffer == null)
-                buffer = new Dictionary<String, XML.Vehicles.Implementations.Part>(StringComparer.InvariantCultureIgnoreCase);
-
-            if (parts == null)
-                return buffer;
-
-            foreach (var part in parts)
-            {
-                if (filters.Contains(part.Class))
-                    buffer[part.Name] = part;
-
-                Scripts._GetHardpoints(part.Parts, buffer, filters);
-            }
-
-            return buffer;
         }
 
         #endregion
@@ -337,6 +298,44 @@ namespace HoloXPLOR.Data
                         { "KRIG_BallisticGatling_S2_Parasite", "Tigerstreik T-19P" },
                         { "GATS_BallisticGatling_S2", "Scorpion GT-215" },
                         { "CNOU_Delta_RocketPod_x18", "R-18 rocket pod" },
+
+                        { "hardpoint_engine_left_attach", "Main Thruster Left" },
+                        { "hardpoint_engine_right_attach", "Main Thruster Right" },
+                        { "hardpoint_thruster_front_left_top", "Upper Front Left Thruster" },
+                        { "hardpoint_thruster_front_right_top", "Upper Front Right Thruster" },
+                        { "hardpoint_thruster_front_left_bottom", "Lower Front Left Thruster" },
+                        { "hardpoint_thruster_front_right_bottom", "Lower Front Right Thruster" },
+
+                        { "hardpoint_engine_left", "Main Thruster Left" },
+                        { "hardpoint_engine_right", "Main Thruster Right" },
+                        { "hardpoint_thruster_retro_left", "Left Retro Thruster" },
+                        { "hardpoint_thruster_retro_right", "Right Retro Thruster" },
+                        { "hardpoint_thruster_bottomFL", "Lower Front Left Thruster" },
+                        { "hardpoint_thruster_bottomFR", "Lower Front Right Thruster" },
+                        { "hardpoint_thruster_bottomRL", "Lower Rear Left Thruster" },
+                        { "hardpoint_thruster_bottomRR", "Lower Rear Right Thruster" },
+                        { "hardpoint_thruster_topFL", "Upper Front Left Thruster" },
+                        { "hardpoint_thruster_topFR", "Upper Front Right Thruster" },
+                        { "hardpoint_thruster_topRL", "Upper Rear Left Thruster" },
+                        { "hardpoint_thruster_topRR", "Upper Rear Right Thruster" },
+
+                        // hardpoint_thruster_center_front_right
+                        
+                        { "hardpoint_thruster_engine ", "Main Thruster" },
+                        { "hardpoint_thruster_retro_bottom_left ", "Lower Left Retro Thruster" },
+                        { "hardpoint_thruster_retro_bottom_right", "Lower Right Retro Thruster" },
+                        { "hardpoint_thruster_retro_top_left ", "Upper Left Retro Thruster" },
+                        { "hardpoint_thruster_retro_top_right", "Upper Right Retro Thruster" },
+
+                        { "hardpoint_engine_attach", "Main Thruster" },
+                        { "hardpoint_thruster_left_lower_front", "Lower Front Left Thruster" },
+                        { "hardpoint_thruster_right_lower_front", "Lower Front Right Thruster" },
+                        { "hardpoint_thruster_left_lower_rear", "Lower Rear Left Thruster" },
+                        { "hardpoint_thruster_right_lower_rear", "Lower Rear Right Thruster" },
+                        { "hardpoint_thruster_left_upper_front", "Upper Front Left Thruster" },
+                        { "hardpoint_thruster_right_upper_front", "Upper Front Right Thruster" },
+                        { "hardpoint_thruster_left_upper_rear", "Upper Rear Left Thruster" },
+                        { "hardpoint_thruster_right_upper_rear", "Upper Rear Right Thruster" },
                     };
                 }
 

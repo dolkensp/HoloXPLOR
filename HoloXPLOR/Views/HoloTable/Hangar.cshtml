@@ -9,30 +9,22 @@
     ViewBag.Title = "Detail";
 }
 
-@helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
-{
-    if (items.Count > 0)
-    {
-        <li>
-            <h3>@category</h3>
-            <ul>
-                @foreach (var item in items)
-                {
-                    <li data-id="@item.Key" data-equipped="@(Model.Inventory[item.Key].BaseShip != null).ToString().ToLower()">@HoloXPLOR.Data.Scripts.Localization.GetValue(item.Value.DisplayName, item.Value.DisplayName)</li>
-                }
-            </ul>
-        </li>
-    }
-}
+<h2>Hangar</h2>
 
-<h2>Ships</h2>
+<div class="col-sm-4">
+    <h3>Ships</h3>
 
-<ul>
-    @foreach (var ship in Model.GameData_ShipMap)
-    {
-        <li data-class="@ship.Value.Name">
-            @Html.ActionLink(ship.Value.DisplayName, "Ship", new { id = Model.CurrentXML, shipID = ship.Key })
-            <!-- Insert Hardpoint Overview Here -->
-        </li>
-    }
-</ul>
+    <ul>
+        @foreach (var ship in Model.GameData_ShipMap)
+        {
+            <li data-class="@ship.Value.Name">
+                @Html.ActionLink(ship.Value.DisplayName, "Ship", new { id = Model.CurrentXML, shipID = ship.Key })
+                <!-- Insert Hardpoint Overview Here -->
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="col-sm-8">
+    @{ Html.RenderPartial("_Items", Model); }
+</div>

@@ -135,8 +135,10 @@
     <Content Include="App_Data\db_alluran_raw.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\db_dolkensp_2.0.xml" />
-    <Content Include="App_Data\db_dolkensp_2.1.xml" />
+    <Content Include="App_Data\db_dolkensp_2_0.xml" />
+    <Content Include="App_Data\db_dolkensp_2_1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\db_Jooston.txt" />
     <Content Include="App_Data\db_Jooston.xml" />
     <Content Include="App_Data\db_P107REK.xml">
@@ -229,7 +231,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Gold_Display.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_HelmetStand.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Holiday_Wreath.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Jukebox.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Jukebox.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Lamp_001.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_LiquorCabinet.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Locker_01.xml" />
@@ -400,7 +404,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Female_06.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_02.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_03.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_03.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_04.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_05.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Player\Armor\UEE_BDU\UEE_BDU_Male_06.xml" />
@@ -490,7 +496,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_300rd_35mm.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_35mm.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_360rd_40mm.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_400rd_25mm.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_400rd_25mm.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_40mm.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_450rd_35mm.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_480rd_40mm.xml" />
@@ -1701,7 +1709,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Cannon_S7.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Cannon_S8.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Cannon_S9.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Repeater_S1.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Repeater_S1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Repeater_S10.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Repeater_S11.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\TEMP\TEMP_Laser_Repeater_S12.xml" />
@@ -1959,7 +1969,9 @@
     </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Aurora.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Comm_Relay.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation_Dogfight.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Constellation_Hangar.xml">
       <SubType>Designer</SubType>
@@ -2665,6 +2677,7 @@
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Detail - Copy.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
+    <Content Include="Views\HoloTable\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

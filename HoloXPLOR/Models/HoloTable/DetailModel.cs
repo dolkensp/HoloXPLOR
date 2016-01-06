@@ -54,7 +54,7 @@ namespace HoloXPLOR.Models.HoloTable
         private Guid? _currentShipID;
         public Guid? CurrentShipID
         {
-            get { return this._currentShipID = this._currentShipID ?? this.Player.VehicleID; }
+            get { return this._currentShipID = this._currentShipID ?? Guid.Empty; } // ?? this.Player.VehicleID; }
             set { this._currentShipID = value; }
         }
 
@@ -97,21 +97,80 @@ namespace HoloXPLOR.Models.HoloTable
                          join item3 in itemShips on self.ID equals item3.Item.ID into ships
                          from ship1 in ships.DefaultIfEmpty()
                          let shipID = ((ship1 != null) && (ship1.Ship != null) ? ship1.Ship.ID : Guid.Empty)
-                         join item4 in shipPorts on shipID equals item4.Ship.ID into ports2
+                         join item4 in shipPorts on self.ID equals item4.Port.ItemID into ports2
                          from port2 in ports2.DefaultIfEmpty()
                          let port = (port1 != null ? port1.Port : null) ?? (port2 != null ? port2.Port : null)
-                         let ship = (ship1 != null ? ship1.Ship : null)
+                         let ship = (ship1 != null ? ship1.Ship : null) ?? (port2 != null ? port2.Ship : null)
                          let item = (port1 != null ? port1.Item : null)
                          let inventoryItem = new InventoryItem
                          {
-                             BaseItem = self,
-                             BaseShip = ship,
-                             EquippedItem = item,
-                             EquippedPort = port
+                             Inventory_Item = self,
+                             Inventory_Ship = ship,
+                             Inventory_EquippedItem = item,
+                             Inventory_EquippedPort = port
                          }
-                         group inventoryItem by inventoryItem.BaseItem.ID into groupedItems
-                         select groupedItems.First()).ToDictionary(k => k.BaseItem.ID, v => v);
+                         group inventoryItem by inventoryItem.Inventory_Item.ID into groupedItems
+                         select groupedItems.First()).ToDictionary(k => k.Inventory_Item.ID, v => v);
             }
+        }
+
+        private Dictionary<Guid, List<InventoryItem>> _ship_ItemMap;
+        public Dictionary<Guid, List<InventoryItem>> Ship_ItemMap
+        {
+            get
+            {
+                // TODO: Need to add raw ports into this - currently only doing item ports
+
+                return this._ship_ItemMap = this._ship_ItemMap ??
+                    (from ship in this.Player.Ships
+
+                     where ship.ID.ToString() == "00fa8108-005a-c345-0000-000000000000"
+
+                     let gameShip = this.GameData_ShipMap.GetValue(ship.ID, null)
+                     // where ship.Ports.Items != null
+
+                     from id in ship.Ports.Items.SelectMany(p => this._GetEquippedItemIDs(p.ItemID))
+
+                     let item = this.Inventory_ItemMap.GetValue(id, null)
+                     let gameItem = item == null ? null : this.GameData_ItemMap.GetValue(item.ID, null)
+                     
+                     where gameItem == null || gameItem.PortParams != null
+                     where gameItem != null || gameShip != null
+                     where gameItem != null || gameShip.Parts != null
+
+                     from port in item.Ports.Items
+
+                     let allParts = (gameShip.Parts.SelectMany(p => this.GetParts(p)).SelectMany(p => p.ItemPorts))
+                     let gamePort = gameItem != null ? (gameItem.PortParams.Items ?? new Xml.ItemPort[] { }).Where(p => p.Name == port.PortName).FirstOrDefault() :
+                                                       allParts.Where(p => p.Name == port.PortName).FirstOrDefault()
+
+                     where gamePort != null
+                     where DetailModel._validTypes.Intersect(gamePort.Types.Select(t => t.Type)).Any()
+
+                     let itemPort = new InventoryItem
+                     {
+                         Inventory_Item = this.Inventory_ItemMap.GetValue(port.ItemID, null),
+                         Inventory_EquippedPort = port,
+                         Inventory_EquippedItem = item,
+                         Inventory_Ship = ship,
+
+                         GameData_Item = this.GameData_ItemMap.GetValue(port.ItemID, null),
+                         GameData_EquippedItem = gameItem,
+                         GameData_EquippedPort = gamePort,
+                         GameData_Ship = gameShip,
+                     }
+                     group itemPort by ship.ID into shipLoadout
+                     select shipLoadout).ToDictionary(k => k.Key, v => v.ToList());
+            }
+        }
+
+        private IEnumerable<Guid> _GetEquippedItemIDs(Guid id)
+        {
+            yield return id;
+
+            if (this.Inventory_ItemMap.GetValue(id, new Inventory.Item { Ports = new Inventory.PortCollection { } }).Ports.Items != null)
+                foreach (var itemID in this.Inventory_ItemMap[id].Ports.Items.SelectMany(p => this._GetEquippedItemIDs(p.ItemID)))
+                    yield return itemID;
         }
 
         #endregion
@@ -185,7 +244,7 @@ namespace HoloXPLOR.Models.HoloTable
                     (from item in this.Inventory_ItemMap.Values
                      let part = Scripts.Items.GetValue(item.Class, null)
                      where part != null
-                     orderby Scripts.Localization.GetValue(part.DisplayName, part.DisplayName)
+                     orderby part.DisplayName.ToLocalized()
                      select new
                      {
                          Key = item.ID,
@@ -207,7 +266,7 @@ namespace HoloXPLOR.Models.HoloTable
                         (from item in this.Inventory_ItemMap.Values
                          let part = Scripts.Items.GetValue(item.Class, null)
                          where part != null
-                         orderby Scripts.Localization.GetValue(part.DisplayName, part.DisplayName)
+                         orderby part.DisplayName.ToLocalized()
                          let lookup = new
                          {
                              ID = item.ID,
@@ -287,6 +346,9 @@ namespace HoloXPLOR.Models.HoloTable
             // "LandingSystem",
             // "Audio",
             // "Interior",
+
+            "AmmoBox",
+            "Ordinance",
         };
 
         private IEnumerable<Ships.Part> GetParts(Ships.Part parent)

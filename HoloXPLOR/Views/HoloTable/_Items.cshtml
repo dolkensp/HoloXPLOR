@@ -1,0 +1,49 @@
+﻿@using Inventory = HoloXPLOR.Data.XML.Inventory
+@using Items = HoloXPLOR.Data.XML.Spaceships
+@using Vehicles = HoloXPLOR.Data.XML.Vehicles.Implementations
+@using HoloXPLOR.Models.HoloTable
+
+@model DetailModel
+
+@helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
+{
+    // Only show items for the currently selected ship
+    var list = items.Where(item => (Model.Inventory[item.Key].Inventory_Ship ?? new Inventory.Ship { ID = Model.CurrentShipID ?? Guid.Empty }).ID == Model.CurrentShipID).ToList();
+    
+    if (list.Count > 0)
+    {
+        <li>
+            <h4 data-toggle="collapse" data-target="#pnl_@category">@category</h4>
+            <ul class="collapse" id="pnl_@category">
+                @foreach (var item in list.OrderBy(i => i.Value.DisplayName.ToLocalized()))
+                {
+                    var isEquipped = (Model.Inventory[item.Key].Inventory_Ship != null);
+                    
+                    <li class="@(isEquipped ? "hidden" : String.Empty)"
+                        data-id="@item.Key"
+                        data-parentport="@((Model.Inventory[item.Key].Inventory_EquippedPort ?? new Inventory.Port { }).PortName)"
+                        data-parentid="@((Model.Inventory[item.Key].Inventory_EquippedItem ?? new Inventory.Item { }).ID)"
+                        data-shipid="@((Model.Inventory[item.Key].Inventory_Ship ?? new Inventory.Ship { }).ID)"
+                        data-equipped="@isEquipped.ToString().ToLower()"
+                        data-required-tags="@item.Value.ParamMap.GetValue("requiredPortTags", null)"
+                        data-type="@item.Value.ParamMap.GetValue("itemType", null)"
+                        data-sub-type="@item.Value.ParamMap.GetValue("itemSubType", null)"
+                        data-item-tags="@item.Value.ParamMap.GetValue("itemTags", null)">@item.Value.DisplayName.ToLocalized() (@item.Value.ParamMap.GetValue("itemSize", String.Empty))</li>
+                }
+            </ul>
+        </li>
+    }
+}
+
+<h3>Inventory</h3>
+
+<ul>
+    @RenderItemCategory("Armor", Model.GameData_CategoryMap[Items.CategoryEnum.Armor])
+    @RenderItemCategory("Cargo", Model.GameData_CategoryMap[Items.CategoryEnum.Storage])
+    @RenderItemCategory("Missiles", Model.GameData_CategoryMap[Items.CategoryEnum.Missile])
+    @RenderItemCategory("Power", Model.GameData_CategoryMap[Items.CategoryEnum.PowerPlant])
+    @RenderItemCategory("Propulsion", Model.GameData_CategoryMap[Items.CategoryEnum.Thruster])
+    @RenderItemCategory("Shields", Model.GameData_CategoryMap[Items.CategoryEnum.Shield])
+    @RenderItemCategory("Turrets", Model.GameData_CategoryMap[Items.CategoryEnum.Turret])
+    @RenderItemCategory("Weapons", Model.GameData_CategoryMap[Items.CategoryEnum.Weapon])
+</ul>
