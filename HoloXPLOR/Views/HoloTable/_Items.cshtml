@@ -16,9 +16,10 @@
             <ul class="collapse" id="pnl_@category">
                 @foreach (var item in list)
                 {
-                    var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null) && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
+                    var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null);
+                    var isEquipped_Self = isEquipped && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
                     
-                    <li class="@(isEquipped ? "hidden" : String.Empty)"
+                    <li class="@(isEquipped_Self ? "hidden" : String.Empty)"
                         data-id="@item.Key"
                         data-parentport="@((Model.View_ItemMap[item.Key].Inventory_EquippedPort ?? new Inventory.Port { }).PortName)"
                         data-parentid="@((Model.View_ItemMap[item.Key].Inventory_EquippedItem ?? new Inventory.Item { }).ID)"
