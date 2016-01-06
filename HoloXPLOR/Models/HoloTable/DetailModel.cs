@@ -67,6 +67,7 @@ namespace HoloXPLOR.Models.HoloTable
             set { this._shipID = value; }
         }
 
+        public Boolean ShowAllItems { get; set; }
         #region Constants
 
         private static HashSet<String> _validTypes = new HashSet<String>
@@ -152,7 +153,7 @@ namespace HoloXPLOR.Models.HoloTable
                          let ship = (ship1 != null ? ship1.Ship : null) ?? (port2 != null ? port2.Ship : null)
                          let item = (port1 != null ? port1.Item : null)
 
-                         where this.ShipID == Guid.Empty || ship == null || ship.ID == this.ShipID
+                         where this.ShowAllItems || this.ShipID == Guid.Empty || ship == null || ship.ID == this.ShipID
 
                          let inventoryItem = new InventoryItem
                          {

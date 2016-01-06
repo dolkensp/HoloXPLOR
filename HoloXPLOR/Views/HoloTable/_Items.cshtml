@@ -16,7 +16,7 @@
             <ul class="collapse" id="pnl_@category">
                 @foreach (var item in list)
                 {
-                    var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null);
+                    var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null) && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
                     
                     <li class="@(isEquipped ? "hidden" : String.Empty)"
                         data-id="@item.Key"
