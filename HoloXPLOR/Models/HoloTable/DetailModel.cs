@@ -48,6 +48,9 @@ namespace HoloXPLOR.Models.HoloTable
             }
         }
 
+        /// <summary>
+        /// ID of the hangar
+        /// </summary>
         private String _currentXML;
         /// <summary>
         /// The XML file that is currently selected
@@ -68,7 +71,16 @@ namespace HoloXPLOR.Models.HoloTable
         }
 
         public Boolean ShowAllItems { get; set; }
+
         #region Constants
+
+        private static HashSet<String> _invalidNames = new HashSet<String>
+        {
+            "Power Plant",
+            "Turret Slot",
+            "Shield Generator",
+            "Shield Slot",
+        };
 
         private static HashSet<String> _validTypes = new HashSet<String>
         {
@@ -117,6 +129,30 @@ namespace HoloXPLOR.Models.HoloTable
             get { return this.View_LoadoutMap.GetValue(this.ShipID, new List<InventoryItem> { }); }
         }
 
+        private Dictionary<Items.CategoryEnum, List<InventoryItem>> _view_CategoryLoadout;
+        public Dictionary<Items.CategoryEnum, List<InventoryItem>> View_CategoryLoadout
+        {
+            get
+            {
+                if (this._view_CategoryLoadout == null)
+                {
+                    var allKeys = Enum.GetValues(typeof(Items.CategoryEnum)).OfType<Items.CategoryEnum>();
+
+                    this._view_CategoryLoadout = this._view_CategoryLoadout ??
+                        (from item in this.View_Loadout
+                         let key = item.GameData_Item == null ? Items.CategoryEnum.__Empty__ : item.GameData_Item.ItemCategory
+                         group item by key into groupedItems
+                         select groupedItems).ToDictionary(k => k.Key, v => v.ToList());
+
+
+                    foreach (var missingKey in allKeys.Except(this._view_CategoryLoadout.Keys))
+                        this._view_CategoryLoadout[missingKey] = new List<InventoryItem> { };
+                }
+
+                return this._view_CategoryLoadout;
+            }
+        }
+
         private Dictionary<Guid, InventoryItem> _view_ItemMap;
         /// <summary>
         /// Lookup of all available items
@@ -162,10 +198,10 @@ namespace HoloXPLOR.Models.HoloTable
                              Inventory_EquippedItem = item,
                              Inventory_EquippedPort = port,
 
-                             // GameData_EquippedItem = this.GameData_ItemMap[item.ID],
-                             // GameData_EquippedPort = this._gameData_Hardpoints
-                             // GameData_Item = this.GameData_ItemMap[self.ID],
-                             // GameData_Ship = this.GameData_ShipMap[ship.ID],
+                             GameData_EquippedItem = item != null ? this.GameData_ItemMap.GetValue(item.ID, null) : null,
+                             GameData_EquippedPort = item != null ? this.GameData_PortMap.GetValue(item.ID, null) : null,
+                             GameData_Item = self != null ? this.GameData_ItemMap.GetValue(self.ID, null) : null,
+                             GameData_Ship = ship != null ? this.GameData_ShipMap.GetValue(ship.ID, null) : null,
                          }
                          group inventoryItem by inventoryItem.Inventory_Item.ID into groupedItems
                          select groupedItems.First()).ToDictionary(k => k.Inventory_Item.ID, v => v);
@@ -190,9 +226,7 @@ namespace HoloXPLOR.Models.HoloTable
                                      where gameShip != null
 
                                      where gameShip.Parts != null
-                                     from topPart in gameShip.Parts
-
-                                     from gamePart in this.GetParts(topPart)
+                                     from gamePart in this.GameData_PartsMap[ship.ID]
 
                                      where gamePart.ItemPorts != null
                                      from gamePort in gamePart.ItemPorts
@@ -203,7 +237,7 @@ namespace HoloXPLOR.Models.HoloTable
 
                                      let shipItem = this.Inventory_ItemMap.GetValue(shipPort.ItemID, null)
                                      let gameItem = this.GameData_ItemMap.GetValue(shipPort.ItemID, null)
-                                     
+
                                      let itemPort = new InventoryItem
                                      {
                                          // Top level has no parent item
@@ -222,24 +256,25 @@ namespace HoloXPLOR.Models.HoloTable
                                      select itemPort).ToList();
 
                     this._view_LoadoutMap = (from shipPort in shipPorts
-                                          from port in this._GetAttachedItems(shipPort)
-                                          where port.GameData_EquippedPort.Types != null
-                                          where DetailModel._validTypes.Intersect(port.GameData_EquippedPort.Types.Select(t => t.Type)).Any()
-                                          group port by port.Inventory_Ship.ID into ship
-                                          select ship).ToDictionary(k => k.Key, v => v.ToList());
+                                             from port in this._GetAttachedItems(shipPort)
+
+                                             #region Cleanup
+
+                                             let hack0 = port.GameData_EquippedPort.DisplayName = DetailModel._invalidNames.Contains(port.GameData_EquippedPort.DisplayName) ? port.GameData_EquippedPort.Name : port.GameData_EquippedPort.DisplayName
+                                             let hack1 = port.GameData_EquippedPort.Name = port.GameData_EquippedPort.Name ?? port.Inventory_EquippedPort.PortName
+                                             let hack2 = port.GameData_EquippedPort.DisplayName = String.IsNullOrWhiteSpace(port.GameData_EquippedPort.DisplayName) ? port.GameData_EquippedPort.Name.ToLocalized() : port.GameData_EquippedPort.DisplayName
+                                             let hack3 = (port.GameData_Item != null) && (port.GameData_Item.DisplayName = String.IsNullOrWhiteSpace(port.GameData_Item.DisplayName) ? port.GameData_Item.Name.ToLocalized() : port.GameData_Item.DisplayName) == String.Empty
+
+                                             #endregion
+
+                                             where port.GameData_EquippedPort.Types != null
+                                             where DetailModel._validTypes.Intersect(port.GameData_EquippedPort.Types.Select(t => t.Type)).Any()
+                                             group port by port.Inventory_Ship.ID into ship
+                                             select ship).ToDictionary(k => k.Key, v => v.ToList());
                 }
 
                 return this._view_LoadoutMap;
             }
-        }
-
-        private IEnumerable<Ships.Part> GetParts(Ships.Part parent)
-        {
-            if (parent.Parts != null)
-                foreach (var part in parent.Parts.SelectMany(p => this.GetParts(p)))
-                    yield return part;
-
-            yield return parent;
         }
 
         private IEnumerable<InventoryItem> _GetAttachedItems(InventoryItem item)
@@ -305,6 +340,14 @@ namespace HoloXPLOR.Models.HoloTable
         #endregion
 
         #region Game Data
+
+        /// <summary>
+        /// The ship that is currently selected
+        /// </summary>
+        public Ships.Vehicle GameData_Ship
+        {
+            get { return this.GameData_ShipMap.GetValue(this.ShipID, null); }
+        }
 
         private Dictionary<Guid, Ships.Vehicle> _gameData_ShipMap;
         public Dictionary<Guid, Ships.Vehicle> GameData_ShipMap
@@ -375,61 +418,82 @@ namespace HoloXPLOR.Models.HoloTable
                          }).ToDictionary(k => k.Key, v => v.Value);
 
                     foreach (var missingKey in allKeys.Except(this._gameData_CategoryMap.Keys))
-                        this._gameData_CategoryMap[missingKey] = new Dictionary<Guid,Items.Item>();
+                        this._gameData_CategoryMap[missingKey] = new Dictionary<Guid, Items.Item> { };
                 }
 
                 return this._gameData_CategoryMap;
             }
         }
 
-        //private Dictionary<Guid, List<Xml.ItemPort>> _gameData_Hardpoints;
-        //public Dictionary<Guid, List<Xml.ItemPort>> GameData_Hardpoints
-        //{
-        //    get
-        //    {
-        //        var shipPorts = (from kvp in this.GameData_ShipMap
-        //                         let ship = kvp.Value
-        //                         let id = kvp.Key
-        //                         from shipPart in ship.Parts
-        //                         from part in this.GetParts(shipPart)
-        //                         from port in part.ItemPorts
-        //                         let temp = port.Name = part.Name
-        //                         select new KeyValuePair<Guid, Xml.ItemPort>(id, port));
-        //        var itemPorts = (from kvp in this.GameData_ItemMap
-        //                         let item = kvp.Value
-        //                         let id = kvp.Key
-        //                         where item.PortParams != null
-        //                         from port in item.PortParams.Items
-        //                         select new KeyValuePair<Guid, Xml.ItemPort>(id, port));
+        public Dictionary<Guid, Xml.ItemPort> _gameData_PortMap;
+        public Dictionary<Guid, Xml.ItemPort> GameData_PortMap
+        {
+            get
+            {
+                return this._gameData_PortMap = this._gameData_PortMap ??
+                    (from item in this.Inventory_ItemMap.Values
+                     let parts = this.GameData_PartsMap.GetValue(item.ID, null)
+                     where parts != null
+                     from part in parts
+                     from port in part.ItemPorts
+                     orderby port.DisplayName.ToLocalized()
+                     orderby port.Name.ToLocalized()
+                     orderby part.Name.ToLocalized()
+                     select new
+                     {
+                         Key = item.ID,
+                         Value = port
+                     }).ToDictionary(k => k.Key, v => v.Value);
+            }
+        }
 
-        //        return this._gameData_Hardpoints = this._gameData_Hardpoints ??
-        //            (from port in shipPorts.Union(itemPorts)
-        //             orderby port.Value.DisplayName
-        //             group port by port.Key into groupedItems
-        //             select groupedItems).ToDictionary(k => k.Key, v => v.Select(s => s.Value).ToList());
-        //    }
-        //}
+        private Dictionary<Guid, List<Ships.Part>> _gameData_PartsMap;
+        public Dictionary<Guid, List<Ships.Part>> GameData_PartsMap
+        {
+            get
+            {
+                return this._gameData_PartsMap = this._gameData_PartsMap ??
+                    (from kvp in this.GameData_ShipMap
+                     let id = kvp.Key
+                     let ship = kvp.Value
+                     from part in ship.Parts.SelectMany(p => this.GetParts(p))
+                     group part by id into groupedParts
+                     select groupedParts).ToDictionary(k => k.Key, v => v.ToList());
+            }
+        }
+        private IEnumerable<Ships.Part> GetParts(Ships.Part parent)
+        {
+            if (!parent.SkipPart)
+            {
+                if (parent.Parts != null)
+                    foreach (var part in parent.Parts.SelectMany(p => this.GetParts(p)))
+                        yield return part;
+
+
+                yield return parent;
+            }
+        }
 
         #endregion
 
         #region Not Used
 
-        private Dictionary<Guid, Dictionary<Guid, Inventory.Item>> _inventory_ManufacturerMap;
-        public Dictionary<Guid, Dictionary<Guid, Inventory.Item>> zzInventory_ManufacturerMap
-        {
-            get
-            {
-                return this._inventory_ManufacturerMap = this._inventory_ManufacturerMap ??
-                    (from item in this.Player.Items
-                     group item by item.ManufacturerID into groupedItems
-                     select new
-                     {
-                         Key = groupedItems.Key,
-                         Value = groupedItems.ToDictionary(k => k.ID, v => v)
-                     }).ToDictionary(k => k.Key, v => v.Value);
-            }
-            set { this._inventory_ManufacturerMap = value; }
-        }
+        //private Dictionary<Guid, Dictionary<Guid, Inventory.Item>> _inventory_ManufacturerMap;
+        //public Dictionary<Guid, Dictionary<Guid, Inventory.Item>> zzInventory_ManufacturerMap
+        //{
+        //    get
+        //    {
+        //        return this._inventory_ManufacturerMap = this._inventory_ManufacturerMap ??
+        //            (from item in this.Player.Items
+        //             group item by item.ManufacturerID into groupedItems
+        //             select new
+        //             {
+        //                 Key = groupedItems.Key,
+        //                 Value = groupedItems.ToDictionary(k => k.ID, v => v)
+        //             }).ToDictionary(k => k.Key, v => v.Value);
+        //    }
+        //    set { this._inventory_ManufacturerMap = value; }
+        //}
 
         #endregion
     }

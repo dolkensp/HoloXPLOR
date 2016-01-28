@@ -7,28 +7,26 @@
 
 @helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
 {
-    var list = items.Where(i => Model.View_ItemMap.GetValue(i.Key, null) != null).OrderBy(i => i.Value.DisplayName.ToLocalized()).ToList();
+    var list = items.Where(i => Model.View_ItemMap.GetValue(i.Key, null) != null).OrderByDescending(i => i.Value.ItemSize).ThenBy(i => i.Value.DisplayName.ToLocalized()).ToList();
 
     if (list.Count > 0)
     {
         <li>
-            <h4 data-toggle="collapse" data-target="#pnl_@category">@category</h4>
+            <h4 data-toggle="collapse" data-target="#pnl_@category">@category (@list.Count)</h4>
             <ul class="collapse" id="pnl_@category">
                 @foreach (var item in list)
                 {
                     var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null);
                     var isEquipped_Self = isEquipped && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
-                    
-                    <li class="@(isEquipped_Self ? "hidden" : String.Empty)"
-                        data-id="@item.Key"
-                        data-parentport="@((Model.View_ItemMap[item.Key].Inventory_EquippedPort ?? new Inventory.Port { }).PortName)"
-                        data-parentid="@((Model.View_ItemMap[item.Key].Inventory_EquippedItem ?? new Inventory.Item { }).ID)"
-                        data-shipid="@((Model.View_ItemMap[item.Key].Inventory_Ship ?? new Inventory.Ship { }).ID)"
-                        data-equipped="@isEquipped.ToString().ToLower()"
-                        data-required-tags="@item.Value.ParamMap.GetValue("requiredPortTags", null)"
-                        data-type="@item.Value.ParamMap.GetValue("itemType", null)"
-                        data-sub-type="@item.Value.ParamMap.GetValue("itemSubType", null)"
-                        data-item-tags="@item.Value.ParamMap.GetValue("itemTags", null)">@item.Value.DisplayName.ToLocalized() (@item.Value.ParamMap.GetValue("itemSize", String.Empty))</li>
+                    var ship = (Model.View_ItemMap[item.Key].Inventory_Ship ?? new Inventory.Ship { });
+
+                    <li class="js-item @(isEquipped_Self ? "js-equipped" : String.Empty)" @Model.View_ItemMap[item.Key].HTML_Attributes>
+                        @item.Value.DisplayName.ToLocalized() (@item.Value.ItemSize)
+                        @if (ship.ID != Guid.Empty)
+                        {
+                            @:- @Model.GameData_ShipMap[ship.ID].DisplayName
+                        }
+                    </li>
                 }
             </ul>
         </li>
@@ -38,11 +36,14 @@
 <h3>Inventory</h3>
 
 <ul>
+    <!-- Reminder: Handle Ammo Automatically For Now -->
+    @*@RenderItemCategory("Ammo", Model.GameData_CategoryMap[Items.CategoryEnum.AmmoBox])*@
     @RenderItemCategory("Armor", Model.GameData_CategoryMap[Items.CategoryEnum.Armor])
     @RenderItemCategory("Cargo", Model.GameData_CategoryMap[Items.CategoryEnum.Storage])
     @RenderItemCategory("Missiles", Model.GameData_CategoryMap[Items.CategoryEnum.Missile])
     @RenderItemCategory("Power", Model.GameData_CategoryMap[Items.CategoryEnum.PowerPlant])
-    @RenderItemCategory("Propulsion", Model.GameData_CategoryMap[Items.CategoryEnum.Thruster])
+    @RenderItemCategory("Engines", Model.GameData_CategoryMap[Items.CategoryEnum.Engine])
+    @RenderItemCategory("Thrusters", Model.GameData_CategoryMap[Items.CategoryEnum.Thruster])
     @RenderItemCategory("Shields", Model.GameData_CategoryMap[Items.CategoryEnum.Shield])
     @RenderItemCategory("Turrets", Model.GameData_CategoryMap[Items.CategoryEnum.Turret])
     @RenderItemCategory("Weapons", Model.GameData_CategoryMap[Items.CategoryEnum.Weapon])

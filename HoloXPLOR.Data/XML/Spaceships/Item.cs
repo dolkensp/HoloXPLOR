@@ -44,6 +44,30 @@ namespace HoloXPLOR.Data.XML.Spaceships
         [XmlArrayItem(ElementName = "Pipe")]
         public Pipe[] Pipes { get; set; }
 
+        [XmlIgnore]
+        public String HTML_Attributes
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+
+                if (!String.IsNullOrWhiteSpace(this.Params["requiredPortTags", null]))
+                    sb.AppendFormat(@" data-item-required-port-tags=""{0}""", this.Params["requiredPortTags", null]);
+                if (!String.IsNullOrWhiteSpace(this.Params["itemPortTags", null]))
+                    sb.AppendFormat(@" data-item-port-tags=""{0}""", this.Params["itemPortTags", null]);
+                if (!String.IsNullOrWhiteSpace(this.Params["itemTags", null]))
+                    sb.AppendFormat(@" data-item-tags=""{0}""", this.Params["itemTags", null]);
+                if (!String.IsNullOrWhiteSpace(this.Params["itemType", null]))
+                    sb.AppendFormat(@" data-item-type=""{0}""", this.Params["itemType", null]);
+                if (!String.IsNullOrWhiteSpace(this.Params["itemSubType", null]))
+                    sb.AppendFormat(@" data-item-sub-type=""{0}""", this.Params["itemSubType", null]);
+                if (!String.IsNullOrWhiteSpace(this.Params["itemSize", null]))
+                    sb.AppendFormat(@" data-item-size=""{0}""", this.Params["itemSize", null]);
+                
+                return sb.ToString();
+            }
+        }
+
         // TODO: DamageLevels
         // TODO: Geometry
         // TODO: Add <Pipes><Pipe class/prioType><StateLevels><Warning value><Critical value><Fail value> <States><Pipe name/value><State state/ignorepool/transition><Value value> <Signature name/multiplier>

@@ -10,6 +10,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
 {
     public enum CategoryEnum
     {
+        __Empty__ = -1,
         __Unknown__ = 0,
 
         AmmoBox,
@@ -20,6 +21,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         PowerPlant,
         Shield,
         Storage,
+        Engine,
         Thruster,
         Turret,
         Weapon,
@@ -27,18 +29,19 @@ namespace HoloXPLOR.Data.XML.Spaceships
 
     public partial class Item
     {
-        private Dictionary<String, String> _paramMap;
-        [XmlIgnore]
-        public Dictionary<String, String> ParamMap
-        {
-            get { return this._paramMap = this._paramMap ?? this.Params.Items.ToDictionary(k => k.Name, v => v.Value); }
-        }
-
         private String _displayName;
         [XmlIgnore]
         public String DisplayName
         {
-            get { return this._displayName = this._displayName ?? this.ParamMap.GetValue("display_name", this.Name).Replace("item_Name", "").Replace("Item_Name", ""); }
+            get { return this._displayName = this._displayName ?? this.Params["display_name", this.Name].Replace("itemName_", "").Replace("item_Name", "").Replace("Item_Name", ""); }
+            set { this._displayName = value; }
+        }
+
+        private Int32? _itemSize;
+        public Int32? ItemSize
+        {
+            get { return this._itemSize = this._itemSize ?? this.Params["itemSize"].ToInt32(); }
+            set { this._itemSize = value; }
         }
 
         [XmlIgnore]
@@ -60,6 +63,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     case "VehicleItem:VehicleItemAmmoBox":
                         return CategoryEnum.AmmoBox;
                     case ":VehicleItemMissile":
+                    case "VehicleItem:VehicleItemMissile":
                         return CategoryEnum.Missile;
                     #endregion
                     #region Weapons
@@ -85,6 +89,9 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     #endregion
                     #region Thrusters
                     case "VehicleThruster:VehicleItemThruster":
+                        if (this.Params["itemType", null] == "MainThruster")
+                            return CategoryEnum.Engine;
+
                         return CategoryEnum.Thruster;
                     #endregion
                     #region Storage

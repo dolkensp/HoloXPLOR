@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace HoloXPLOR.Data.XML.Vehicles.Implementations
 {
-    [XmlRoot(ElementName = "Modification")]
+    [XmlRoot(ElementName = "Modifications")]
     public class Modification
     {
         [XmlAttribute(AttributeName = "name")]

@@ -9,53 +9,60 @@
     ViewBag.Title = "Detail";
 }
 
-@helper RenderHardpoints(Inventory.Item parent)
+@helper RenderHardpoints(Inventory.Item parent, String id, Items.CategoryEnum? filter = null)
 {
-    var items = Model.View_Loadout
+    List<InventoryItem> items;
+
+    if (filter != null)
+    {
+        items = Model.View_CategoryLoadout[filter.Value]
             .Where(i => i.Inventory_EquippedItem == parent)
             .OrderBy(i => i.GameData_EquippedPort.Types.Select(t => t.Type).FirstOrDefault())
             .ThenByDescending(i => i.GameData_EquippedPort.MaxSize)
             .ThenByDescending(i => i.GameData_EquippedPort.MinSize)
-            .ThenBy(i => i.GameData_EquippedPort.DisplayName.ToLocalized())
+            .ThenBy(i => i.Port_DisplayName)
             .ToList();
-             
+
+        if (items.Count > 0)
+        {
+            <h4>@filter.ToDescription()</h4>
+        }
+    }
+    else
+    {
+        items = Model.View_Loadout
+            .Where(i => i.Inventory_EquippedItem == parent)
+            .OrderBy(i => i.GameData_EquippedPort.Types.Select(t => t.Type).FirstOrDefault())
+            .ThenByDescending(i => i.GameData_EquippedPort.MaxSize)
+            .ThenByDescending(i => i.GameData_EquippedPort.MinSize)
+            .ThenBy(i => i.Port_DisplayName)
+            .ToList();
+    }
+
     if (items.Count > 0)
-    { 
-        <ul>
+    {
+        <ul id="@id" class="collapse in">
             @foreach (var item in items)
             {
                 // var hardpoint = Model.GameData_ItemMap[item.EquippedItem.ID].PortParams.Items.Where(p => p.Name == item.EquippedPort.PortName).FirstOrDefault();
                 var hardpoint = item.GameData_EquippedPort;
-                var displayName = hardpoint.DisplayName;
-                if (String.IsNullOrWhiteSpace(displayName))
-                {
-                    displayName = hardpoint.Name;
-                }
+                var childId = String.Format(parent == null ? "pnl_{0}" : "pnl_{1}", item.Inventory_EquippedPort.PortName, item.Inventory_EquippedPort.ItemID);
 
-                <li data-id="@((item.Inventory_Item ?? new Inventory.Item { ID = Guid.Empty }).ID)"
-                    data-class="@hardpoint.Name"
-                    data-min-size="@hardpoint.MinSize"
-                    data-max-size="@hardpoint.MaxSize"
-                    data-types="@String.Join(" ", hardpoint.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType)))">
+                var displaySize = String.Format(hardpoint.MinSize == hardpoint.MaxSize ? "({0})" : "({0} - {1})", hardpoint.MinSize, hardpoint.MaxSize);
 
-                    @displayName.ToLocalized() (@hardpoint.MinSize - @hardpoint.MaxSize)
+                <li @item.HTML_Attributes>
+
+                    <label data-toggle="collapse" data-target="#@childId">@item.Port_DisplayName @displaySize</label>
 
                     @if (item.GameData_Item != null)
                     {
-                        displayName = item.GameData_Item.DisplayName.ToLocalized();
-                        if (String.IsNullOrWhiteSpace(displayName))
-                        {
-                            displayName = item.GameData_Item.Name.ToLocalized();
-                        }
+                        <span @item.HTML_Attributes>@item.Item_DisplayName (@item.ItemSize)</span>
 
-                        @: @displayName (@item.GameData_Item.ParamMap["itemSize"])
-
-                        @RenderHardpoints(item.Inventory_Item)
+                        @RenderHardpoints(item.Inventory_Item, childId)
                     }
                     else
                     {
-                        <br />
-                        @: [ Empty ]
+                        <span>Empty</span>
                     }
                 </li>
             }
@@ -63,14 +70,286 @@
     }
 }
 
-<h2>@Model.GameData_ShipMap[Model.ShipID].DisplayName</h2>
+@using(Html.BeginForm("Ship", "HoloTable", new { id = Model.CurrentXML, shipID = Model.ShipID }, FormMethod.Post))
+{
+    <div class="row">
 
-<div class="col-sm-6">
-    <h3>Hardpoints</h3>
+        <div class="col-lg-6">
+            <h3>@Model.GameData_Ship.DisplayName.ToLocalized()</h3>
+        </div>
 
-    @RenderHardpoints(null)
-</div>
+        <div class="col-lg-3">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#specs" role="tab" data-toggle="tab">Specs</a></li>
+                <li><a href="#stats" role="tab" data-toggle="tab">Stats</a></li>
+            </ul>
 
-<div class="col-sm-6">
-    @{ Html.RenderPartial("_Items", Model); }
-</div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="specs">
+                    @{
+                        var crewCount = Model.GameData_PartsMap[Model.ShipID].Where(p => p.ItemPorts != null).SelectMany(p => p.ItemPorts).Where(ip => ip.Types != null).SelectMany(ip => ip.Types).Where(t => t.Type == "Seat" || t.SubType == "MannedTurret").Count();
+                        var shipMass = String.Format("{0:#,000}", Model.GameData_Ship.Parts[0].Mass);
+                        var upgradeSlots = Model.View_Loadout.Select(i => i.GameData_EquippedPort.MaxSize).Sum() - Model.View_Loadout.Where(i => i.GameData_Item != null).Select(i => i.ItemSize).Sum();
+                    
+                        <ul class="row list-unstyled holo-overview">
+                            <li class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><h3>Max Crew</h3></div>
+                                    <div class="panel-body">
+                                        <span>@crewCount</span>
+                                        <label>Person/s</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><h3>Mass (empty)</h3></div>
+                                    <div class="panel-body">
+                                        <span>@shipMass</span>
+                                        <label>kg</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><h3>Upgrade Capacity</h3></div>
+                                    <div class="panel-body">
+                                        <span>@upgradeSlots</span>
+                                        <label>Slots</label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    }
+
+                    @{
+                        var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
+                        var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
+
+                        var enginesByMaxSize = engines.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                        var enginesBySize = engines.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
+
+                        var thrustersByMaxSize = thrusters.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                        var thrustersBySize = thrusters.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3>Propulsion</h3></div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    @if (enginesByMaxSize.Count > 0)
+                                    {
+                                        var engineMaxSize = enginesByMaxSize.Max(k => k.Key);
+
+                                        <li class="row">
+                                            <label class="col-md-6">Engines</label>
+                                            <dl class="col-md-6 list-unstyled">
+                                                <dl>
+                                                    @foreach (var size in Enumerable.Range(1, engineMaxSize).Reverse())
+                                                    {
+                                                        var maxEngines = enginesByMaxSize.GetValue(size, new List<InventoryItem> { });
+                                                        var sizeEngines = enginesBySize.GetValue(size, new List<InventoryItem> { });
+
+                                                        if (maxEngines.Count + sizeEngines.Count > 0)
+                                                        {
+                                                            <dt>
+                                                                <label>TR</label>
+                                                                <span>@size</span>
+                                                            </dt>
+                                                            <dd>@sizeEngines.Count / @maxEngines.Count</dd>
+                                                        }
+                                                    }
+                                                </dl>
+                                            </dl>
+                                        </li>
+                                    }
+                                    @if (thrustersByMaxSize.Count > 0)
+                                    {
+                                        var thrusterMaxSize = thrustersByMaxSize.Max(k => k.Key);
+
+                                        <li class="row">
+                                            <label class="col-md-6">Thrusters</label>
+                                            <dl class="col-md-6">
+                                                <dl>
+                                                    @foreach (var size in Enumerable.Range(1, thrusterMaxSize).Reverse())
+                                                    {
+                                                        var maxThrusters = thrustersByMaxSize.GetValue(size, new List<InventoryItem> { });
+                                                        var sizeThrusters = thrustersBySize.GetValue(size, new List<InventoryItem> { });
+
+                                                        if (maxThrusters.Count + sizeThrusters.Count > 0)
+                                                        {
+                                                            <dt>
+                                                                <label>TR</label>
+                                                                <span>@size</span>
+                                                            </dt>
+                                                            <dd>@sizeThrusters.Count / @maxThrusters.Count</dd>
+                                                        }
+                                                    }
+                                                </dl>
+                                            </dl>
+                                        </li>
+                                    }
+                                    @if (thrustersByMaxSize.Count == 0 && enginesByMaxSize.Count == 0)
+                                    {
+                                        <li class="alert alert-danger">Propulsion Offline</li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                    @{
+                        var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
+                        var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
+                        var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
+                        var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack"));
+                    
+                        var weaponsByMaxSize = weapons.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                        var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+
+                        if (weaponsByMaxSize.Count > 0)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3>Hardpoints</h3></div>
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        @foreach (var size in weaponsByMaxSize.Keys.OrderBy(k => k))
+                                        {
+                                            <li class="row">
+                                                <label class="col-md-4">Size @size</label>
+                                                <ul class="col-md-6">
+                                                    @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                                    {
+                                                        <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
+                                                            @(item.Item_DisplayName ?? "Empty")
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+                        if (racksByMaxSize.Count > 0)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3>Missiles</h3></div>
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        @foreach (var size in racksByMaxSize.Keys.OrderBy(k => k))
+                                        {
+                                            <li class="row">
+                                                <label class="col-md-4">Size @size</label>
+                                                <ul class="col-md-6">
+                                                    @foreach (var item in racksByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                                    {
+                                                        <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
+                                                            @(item.Item_DisplayName ?? "Empty")
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+                <div class="tab-pane" id="stats">
+                    <h3>Hardpoints</h3>
+
+                    @RenderHardpoints(null, null, Items.CategoryEnum.__Empty__)
+
+                    @RenderHardpoints(null, null, Items.CategoryEnum.Armor)
+                    @RenderHardpoints(null, null, Items.CategoryEnum.Shield)
+
+                    @RenderHardpoints(null, null, Items.CategoryEnum.PowerPlant)
+
+                    @RenderHardpoints(null, null, Items.CategoryEnum.Storage)
+
+                    @RenderHardpoints(null, null, Items.CategoryEnum.__Unknown__)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#parts" role="tab" data-toggle="tab">Parts</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="parts">
+                    @{ Html.RenderPartial("_Items", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $form = $('form');
+
+            $("[data-draggable]:not(.js-equipped)").draggable({
+                revert: true
+            });
+
+            $("[data-droppable]").droppable({
+                accept: function ($item) {
+                    var $port = $(this);
+
+                    var itemSize = Number.parseInt($item.data('item-size'));
+                    var minSize = Number.parseInt($port.data('port-min-size'));
+                    var maxSize = Number.parseInt($port.data('port-max-size'));
+
+                    if (itemSize < minSize || itemSize > maxSize)
+                        return false;
+
+                    var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
+                    var portTags = ($port.data('port-tags') || '').split(' ');
+                    var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
+
+                    if ($(requiredPortTags).not(portTags).not(shipPortTags).length > 0)
+                        return false;
+
+                    var type = $item.data('item-type');
+                    var subType = $item.data('item-sub-type');
+                    subType = (subType == "") ? type : (type + ":" + subType);
+                    
+                    var accepted = $port.data('port-types').split(',');
+                    
+                    for (var i = 0, j = accepted.length; i < j; i++) {
+                        if (accepted[i] == type || accepted[i] == subType)
+                            return true;
+                    }
+
+                    return false;
+                },
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-hover",
+                drop: function (event, ui) {
+                    var $item = $(event.toElement);
+                    var $port = $(event.target);
+
+                    console.log($item, $port);
+
+                    $.ajax({
+                        url: $form.href, data: { partId: $item.data('item-id'), parentId: $port.data('parent-id') }, method: "POST", success: function (data) {
+                            // console.log(data);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -10,8 +10,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
 {
     public partial class Item
     {
-        [XmlArray(ElementName = "ammoBox")]
-        [XmlArrayItem(ElementName = "param")]
-        public Param[] AmmoBox { get; set; }
+        [XmlElement(ElementName = "ammoBox")]
+        public ParamCollection AmmoBox { get; set; }
     }
 }

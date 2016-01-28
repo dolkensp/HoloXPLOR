@@ -62,5 +62,26 @@ namespace HoloXPLOR.Data.XML.Inventory
         {
             return String.Format("{0} [{1}]", this.Class, this.ID);
         }
+
+        [XmlIgnore]
+        public String HTML_Attributes
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendFormat(@" data-draggable=""true""");
+                
+                sb.AppendFormat(@" data-item-id=""{0}""", this.ID);
+                
+                if (this.IsRental)
+                    sb.AppendFormat(@" data-item-rental=""{0}""", this.IsRental);
+                
+                if (this.ManufacturerID != Guid.Empty)
+                    sb.AppendFormat(@" data-item-manufacturer=""{0}""", this.ManufacturerID);
+
+                return sb.ToString();
+            }
+        }
     }
 }
