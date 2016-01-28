@@ -301,11 +301,13 @@
             var $form = $('form');
 
             $("[data-draggable]:not(.js-equipped)").draggable({
-                revert: true
+                helper: "clone"
             });
 
             $("[data-droppable]").droppable({
                 accept: function ($item) {
+                    this.style = "";
+
                     var $port = $(this);
 
                     var itemSize = Number.parseInt($item.data('item-size'));
@@ -344,7 +346,14 @@
                     console.log($item, $port);
 
                     $.ajax({
-                        url: $form.href, data: { partId: $item.data('item-id'), parentId: $port.data('parent-id') }, method: "POST", success: function (data) {
+                        url: $form.href,
+                        data: {
+                            partId: $item.data('item-id'),
+                            parentId: $port.data('parent-id'),
+                            portName: $port.data('port-name')
+                        },
+                        method: "POST",
+                        success: function (data) {
                             // console.log(data);
                         }
                     });

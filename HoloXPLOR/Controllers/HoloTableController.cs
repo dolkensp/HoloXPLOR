@@ -37,15 +37,24 @@ namespace HoloXPLOR.Controllers
         }
 
         [HttpPost]
-        public ActionResult Ship(String id, Guid shipID, Guid partId, Guid? parentId)
+        public ActionResult Ship(String id, Guid shipID, Guid partId, Guid? parentId, String portName)
         {
             var model = new DetailModel(id, shipID);
 
-            Inventory.Item part = model.Inventory_ItemMap.GetValue(partId, null);
-            Inventory.Item parent = null;
+            var ship = model.Player.Ships.Where(s => s.ID == shipID).FirstOrDefault();
+            
+            var newPart = model.Player.Items.Where(i => i.ID == partId).FirstOrDefault();
 
-            if (parentId.HasValue)
-                parent = model.Inventory_ItemMap.GetValue(parentId.Value, null);
+            var oldPart = model.Player.Hangar.Inventory.Items.Where(i => i.ID == partId).FirstOrDefault() ??
+                model.Player.Ships.SelectMany(s => s.Inventory.Items).Where(i => i.ID == partId).FirstOrDefault();
+            
+            var port = model.Player.Items.Where(i => i.ID == parentId).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).FirstOrDefault() ??
+                ship.Ports.Items.Where(p => p.PortName == portName).FirstOrDefault();
+
+            port.ItemID = partId;
+            oldPart.ID = newPart.ID;
+
+            model.Save();
 
             return View(model);
         }

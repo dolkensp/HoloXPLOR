@@ -9,6 +9,9 @@ using Inventory = HoloXPLOR.Data.XML.Inventory;
 using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
 using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Text;
 
 namespace HoloXPLOR.Models.HoloTable
 {
@@ -28,7 +31,35 @@ namespace HoloXPLOR.Models.HoloTable
                 this.ShipID = shipID ?? Guid.Empty;
             }
             else
+            {
                 throw new FileNotFoundException("Unable to load specified xml", String.Format("{0}.xml", id));
+            }
+        }
+
+        public void Save()
+        {
+            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+
+            if (File.Exists(filename))
+            {
+                String backupFilename = Path.ChangeExtension(filename, "bak");
+
+                if (!File.Exists(backupFilename))
+                {
+                    File.Move(filename, backupFilename);
+                }
+
+                XmlSerializer xs = new XmlSerializer(typeof(Inventory.Player));
+                XmlTextWriter xw = new XmlTextWriter(filename, Encoding.UTF8);
+
+                xw.Indentation = 1;
+                xw.IndentChar = ' ';
+                xw.Formatting = Formatting.Indented;
+
+                xw.WriteWhitespace("");
+                xs.Serialize(xw, this.Player);
+                xw.Close();
+            }
         }
 
         private Inventory.Player _player;
