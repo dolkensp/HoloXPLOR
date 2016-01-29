@@ -107,6 +107,10 @@ namespace HoloXPLOR.Data
 
                         Scripts._vehicles[vehicle.Name] = vehicle;
 
+                        if (vehicle.Name == "CNOU_Mustang")
+                            Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
+
+
                         #region Variant Support
 
                         if (vehicle.Modifications != null && vehicle.Modifications.Length > 0)
