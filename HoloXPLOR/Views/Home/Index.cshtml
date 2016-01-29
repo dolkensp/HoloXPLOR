@@ -6,15 +6,19 @@
 { }
 
 <div class="jumbotron js-upload-inventory">
-    <h1>HoloXPLOR</h1>
+    <h1>HoloXPLOR - Alpha</h1>
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <p class="lead">HoloXPLOR is your web-based alternative to the Star Citizen Holotable.</p>
             <p>To get started, drag your inventory XML file onto this page.</p>
-            <p><a href="@Url.Action("Hangar", "HoloTable", new { id = "db_dolkensp" })" class="btn btn-primary btn-lg">View Sample &raquo;</a></p>
+            <p>Original concept has been taken from <a href="https://forums.robertsspaceindustries.com/profile/101352/ZaneBien-CIG">Zane Bien</a>'s work, which he produced for his interview with CIG.</p>
+            <p>
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#upload">Upload Your XML <span class="glyphicon glyphicon-cloud-upload"></span></button>
+                <a href="@Url.Action("Hangar", "HoloTable", new { id = "db_dolkensp" })" class="btn btn-primary btn-lg">View Sample &raquo;</a>
+            </p>
         </div>
         <div class="col-md-6 hidden-sm">
-            <img src="http://pre06.deviantart.net/736b/th/pre/f/2013/075/2/2/star_citizen___roberts_space_industries_ship_ui_by_z_design-d5y7x1m.jpg" width="100%" />
+            <a href="http://z-design.deviantart.com/art/Star-Citizen-Roberts-Space-Industries-Ship-UI-359807242" class="thumbnail"><img src="http://pre06.deviantart.net/736b/th/pre/f/2013/075/2/2/star_citizen___roberts_space_industries_ship_ui_by_z_design-d5y7x1m.jpg" width="100%" /></a>
         </div>
     </div>
 </div>
@@ -24,7 +28,7 @@
         <h2>Getting started</h2>
         <p>HoloXPLOR allows you to modify your existing inventory XML files and then download the modified versions to use in Arena Commander and the Persistent Universe.</p>
         <p>All you need to do is drag your inventory XML file onto this page, and we will take care of the rest.</p>
-        <p>Eventually, I hope to style everything up, so we have something that looks a bit like <a href="http://pre06.deviantart.net/736b/th/pre/f/2013/075/2/2/star_citizen___roberts_space_industries_ship_ui_by_z_design-d5y7x1m.jpg">this</a> to work with, at least until persistence goes into the universe.</p>
+        <p>Eventually, I hope to style everything up, so we have something that looks a bit like <a href="http://zanimation.com/cataloguedemo/">this</a> to work with, at least until persistence goes into the universe.</p>
     </div>
     <div class="col-md-4">
         <h2>Finding your XML file</h2>
@@ -36,6 +40,7 @@
             <li>Open the <em>Database</em> directory</li>
             <li>Drag the <em>db_[yourhandle].xml</em> file onto this page</li>
         </ol>
+        <p>Once your file has uploaded, you will be taken to your Hangar, where you can download any modifications you have made.</p>
     </div>
     <div class="col-md-4">
         <h2>Problems? Support?</h2>
@@ -64,6 +69,14 @@
                     </div>
                     <div class="modal-body">
                         <p>Drop your XML file here.</p>
+                        <p>You can locate the inventory XML file in your Star Citizen USER directory.</p>
+                        <ol>
+                            <li>Browse to your Star Citizen installation directory</li>
+                            <li>Open the <em>Public</em> folder if you want to edit the Live hangar, or the <em>Test</em> folder for the PTU</li>
+                            <li>Open the <em>USER</em> directory</li>
+                            <li>Open the <em>Database</em> directory</li>
+                            <li>Drag the <em>db_[yourhandle].xml</em> file onto this page</li>
+                        </ol>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
