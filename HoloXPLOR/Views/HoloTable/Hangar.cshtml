@@ -9,22 +9,24 @@
     ViewBag.Title = "Detail";
 }
 
-<h2>Hangar</h2>
+<div class="row">
+    <h2>Hangar</h2>
 
-<div class="col-sm-4">
-    <h3>Ships</h3>
+    <div class="col-sm-4">
+        <h3>Ships</h3>
 
-    <ul>
-        @foreach (var ship in Model.GameData_ShipMap)
-        {
-            <li data-class="@ship.Value.Name">
-                @Html.ActionLink(ship.Value.DisplayName, "Ship", new { id = Model.CurrentXML, shipID = ship.Key })
-                <!-- Insert Hardpoint Overview Here -->
-            </li>
-        }
-    </ul>
-</div>
+        <ul>
+            @foreach (var ship in Model.GameData_ShipMap)
+            {
+                <li data-class="@ship.Value.Name">
+                    @Html.ActionLink(ship.Value.DisplayName, "Ship", new { id = Model.CurrentXML, shipID = ship.Key })
+                    <!-- Insert Hardpoint Overview Here -->
+                </li>
+            }
+        </ul>
+    </div>
 
-<div class="col-sm-8">
-    @{ Html.RenderPartial("_Items", Model); }
+    <div class="col-sm-8">
+        @{ Html.RenderPartial("_Items", Model); }
+    </div>
 </div>

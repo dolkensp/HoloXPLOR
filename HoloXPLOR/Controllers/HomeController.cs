@@ -16,59 +16,7 @@ namespace HoloXPLOR.Controllers
     {
         public ActionResult Index()
         {
-            String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Weapons/AEGS/AEGS_BallisticRepeater_S5.xml"));
-
-            Item inTest = inXML.FromXML<Item>();
-
-            Type t = typeof(Item);
-
-            XmlSerializer xs = new XmlSerializer(typeof(Item));
-            XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/weapon.xml"), Encoding.UTF8);
-            
-            xw.Indentation = 1;
-            xw.IndentChar = ' ';
-            xw.Formatting = Formatting.Indented;
-            
-            xw.WriteWhitespace("");
-            xs.Serialize(xw, inTest);
-            xw.Close();
-            
-            String outXML = inTest.ToXML(); // .Remove(0, 39).Trim();
-            
-            return new ContentResult
-            {
-                Content = outXML,
-                ContentEncoding = Encoding.UTF8,
-                ContentType = "text/xml"
-            };
-
-            // return View();
-
-            // String inXML = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/db_dolkensp_2.0.xml"));
-            // 
-            // Player inTest = inXML.FromXML<Player>();
-            // 
-            // Type t = typeof(Player);
-            // 
-            // XmlSerializer xs = new XmlSerializer(typeof(Player));
-            // XmlTextWriter xw = new XmlTextWriter(Server.MapPath(@"~/App_Data/db_dolkensp_2.0_new.xml"), Encoding.UTF8);
-            // 
-            // xw.Indentation = 1;
-            // xw.IndentChar = ' ';
-            // xw.Formatting = Formatting.Indented;
-            // 
-            // xw.WriteWhitespace("");
-            // xs.Serialize(xw, inTest);
-            // xw.Close();
-            // 
-            // String outXML = inTest.ToXML(); // .Remove(0, 39).Trim();
-            // 
-            // return new ContentResult
-            // {
-            //     Content = outXML,
-            //     ContentEncoding = Encoding.UTF8,
-            //     ContentType = "text/xml"
-            // };
+            return View();
         }
 
         public ActionResult About()

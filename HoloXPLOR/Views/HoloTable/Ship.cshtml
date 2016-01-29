@@ -9,6 +9,34 @@
     ViewBag.Title = "Detail";
 }
 
+@helper RenderItemCategory(String category, Dictionary<Guid, Items.Item> items)
+{
+    var list = items.Where(i => Model.View_ItemMap.GetValue(i.Key, null) != null).OrderByDescending(i => i.Value.ItemSize).ThenBy(i => i.Value.DisplayName.ToLocalized()).ToList();
+
+    if (list.Count > 0)
+    {
+        <li>
+            <h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Count)</h4>
+            <ul class="collapse in" id="pnl_@category.Replace(" ", "_")">
+                @foreach (var item in list)
+                {
+                    var isEquipped = (Model.View_ItemMap[item.Key].Inventory_Ship != null);
+                    var isEquipped_Self = isEquipped && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
+                    var ship = (Model.View_ItemMap[item.Key].Inventory_Ship ?? new Inventory.Ship { });
+
+                    <li class="js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @Model.View_ItemMap[item.Key].HTML_Attributes data-droppable>
+                        @item.Value.DisplayName.ToLocalized() (@item.Value.ItemSize)
+                        @if (ship.ID != Guid.Empty)
+                        {
+                            @:- @Model.GameData_ShipMap[ship.ID].DisplayName
+                        }
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+}
+
 @helper RenderHardpoints(Inventory.Item parent, String id, Items.CategoryEnum? filter = null)
 {
     List<InventoryItem> items;
@@ -50,7 +78,7 @@
 
                 var displaySize = String.Format(hardpoint.MinSize == hardpoint.MaxSize ? "({0})" : "({0} - {1})", hardpoint.MinSize, hardpoint.MaxSize);
 
-                <li @item.HTML_Attributes>
+                <li @item.HTML_Attributes data-droppable>
 
                     <label data-toggle="collapse" data-target="#@childId">@item.Port_DisplayName @displaySize</label>
 
@@ -74,27 +102,29 @@
 {
     <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 hidden-md hidden-sm">
             <h3>@Model.GameData_Ship.DisplayName.ToLocalized()</h3>
+            <img src="http://placehold.it/800x600" alt="Hologram" width="100%" />
         </div>
 
-        <div class="col-lg-3">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#specs" role="tab" data-toggle="tab">Specs</a></li>
-                <li><a href="#stats" role="tab" data-toggle="tab">Stats</a></li>
-            </ul>
+        <div class="col-lg-6 hidden-xs">
+            <div class="col-sm-6">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#loadout" role="tab" data-toggle="tab">Loadout</a></li>
+                    <li><a href="#systems" role="tab" data-toggle="tab">Systems</a></li>
+                </ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="specs">
-                    @{
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="loadout">
+                        @{
                         var crewCount = Model.GameData_PartsMap[Model.ShipID].Where(p => p.ItemPorts != null).SelectMany(p => p.ItemPorts).Where(ip => ip.Types != null).SelectMany(ip => ip.Types).Where(t => t.Type == "Seat" || t.SubType == "MannedTurret").Count();
                         var shipMass = String.Format("{0:#,000}", Model.GameData_Ship.Parts[0].Mass);
                         var upgradeSlots = Model.View_Loadout.Select(i => i.GameData_EquippedPort.MaxSize).Sum() - Model.View_Loadout.Where(i => i.GameData_Item != null).Select(i => i.ItemSize).Sum();
-                    
+
                         <ul class="row list-unstyled holo-overview">
-                            <li class="col-lg-4">
+                            <li class="col-sm-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><h3>Max Crew</h3></div>
                                     <div class="panel-body">
@@ -103,7 +133,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-lg-4">
+                            <li class="col-sm-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><h3>Mass (empty)</h3></div>
                                     <div class="panel-body">
@@ -112,7 +142,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-lg-4">
+                            <li class="col-sm-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><h3>Upgrade Capacity</h3></div>
                                     <div class="panel-body">
@@ -122,9 +152,9 @@
                                 </div>
                             </li>
                         </ul>
-                    }
+                        }
 
-                    @{
+                        @{
                         var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
                         var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
 
@@ -198,14 +228,14 @@
                                 </ul>
                             </div>
                         </div>
-                    }
+                        }
 
-                    @{
+                        @{
                         var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
                         var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
                         var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
                         var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack"));
-                    
+
                         var weaponsByMaxSize = weapons.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
                         var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
 
@@ -258,107 +288,163 @@
                                 </div>
                             </div>
                         }
-                    }
+                        }
 
+                    </div>
+                    <div class="tab-pane" id="systems">
+                        <h3>Hardpoints</h3>
+
+                        @RenderHardpoints(null, null, Items.CategoryEnum.__Empty__)
+
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Armor)
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Shield)
+
+                        @RenderHardpoints(null, null, Items.CategoryEnum.PowerPlant)
+
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Storage)
+
+                        @RenderHardpoints(null, null, Items.CategoryEnum.__Unknown__)
+                    </div>
                 </div>
-                <div class="tab-pane" id="stats">
-                    <h3>Hardpoints</h3>
+            </div>
 
-                    @RenderHardpoints(null, null, Items.CategoryEnum.__Empty__)
+            <div class="col-sm-6">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#weapons" role="tab" data-toggle="tab">Weapons</a></li>
+                    <li><a href="#shields" role="tab" data-toggle="tab">Shields</a></li>
+                    <li><a href="#missiles" role="tab" data-toggle="tab">Missiles</a></li>
+                </ul>
 
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Armor)
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Shield)
-
-                    @RenderHardpoints(null, null, Items.CategoryEnum.PowerPlant)
-
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Storage)
-
-                    @RenderHardpoints(null, null, Items.CategoryEnum.__Unknown__)
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="weapons">
+                        @RenderItemCategory("Turrets", Model.GameData_CategoryMap[Items.CategoryEnum.Turret])
+                        @RenderItemCategory("Weapons", Model.GameData_CategoryMap[Items.CategoryEnum.Weapon])
+                    </div>
+                    <div class="tab-pane" id="shields">
+                        @RenderItemCategory("Armor", Model.GameData_CategoryMap[Items.CategoryEnum.Armor])
+                        @RenderItemCategory("Shields", Model.GameData_CategoryMap[Items.CategoryEnum.Shield])
+                    </div>
+                    <div class="tab-pane" id="missiles">
+                        @RenderItemCategory("Missile Racks", Model.GameData_CategoryMap[Items.CategoryEnum.MissileRack])
+                        @RenderItemCategory("Missiles", Model.GameData_CategoryMap[Items.CategoryEnum.Missile])
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#parts" role="tab" data-toggle="tab">Parts</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="parts">
-                    @{ Html.RenderPartial("_Items", Model); }
-                </div>
-            </div>
-        </div>
     </div>
 }
 
 @section Scripts
 {
+    @*Scripts.Render("~/bundles/aframe")*@
+
     <script type="text/javascript">
         $(document).ready(function () {
+            var debug = false;
             var $form = $('form');
 
-            $("[data-draggable]:not(.js-equipped)").draggable({
-                helper: "clone"
-            });
+            var acceptItem = function ($item) {
+                var $port = $(this);
 
-            $("[data-droppable]").droppable({
-                accept: function ($item) {
-                    this.style = "";
-
-                    var $port = $(this);
-
-                    var itemSize = Number.parseInt($item.data('item-size'));
-                    var minSize = Number.parseInt($port.data('port-min-size'));
-                    var maxSize = Number.parseInt($port.data('port-max-size'));
-
-                    if (itemSize < minSize || itemSize > maxSize)
-                        return false;
-
-                    var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
-                    var portTags = ($port.data('port-tags') || '').split(' ');
-                    var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
-
-                    if ($(requiredPortTags).not(portTags).not(shipPortTags).length > 0)
-                        return false;
-
-                    var type = $item.data('item-type');
-                    var subType = $item.data('item-sub-type');
-                    subType = (subType == "") ? type : (type + ":" + subType);
-                    
-                    var accepted = $port.data('port-types').split(',');
-                    
-                    for (var i = 0, j = accepted.length; i < j; i++) {
-                        if (accepted[i] == type || accepted[i] == subType)
-                            return true;
-                    }
-
-                    return false;
-                },
-                activeClass: "ui-state-default",
-                hoverClass: "ui-state-hover",
-                drop: function (event, ui) {
-                    var $item = $(event.toElement);
-                    var $port = $(event.target);
-
-                    console.log($item, $port);
-
-                    $.ajax({
-                        url: $form.href,
-                        data: {
-                            partId: $item.data('item-id'),
-                            parentId: $port.data('parent-id'),
-                            portName: $port.data('port-name')
-                        },
-                        method: "POST",
-                        success: function (data) {
-                            // console.log(data);
-                        }
-                    });
+                // ensure we're always checking the item vs the port
+                if (!$item.hasClass('js-available') && $port.hasClass('js-available')) {
+                    var temp = $item;
+                    $item = $port;
+                    $port = tempvar
                 }
-            });
+
+                ; itemSize = Number.parseInt($item.data('item-size'));
+                var minSize = Number.parseInt($port.data('port-min-size'));
+                var maxSize = Number.parseInt($port.data('port-max-size'));
+
+                if (itemSize < minSize || itemSize > maxSize)
+                    return debug;
+
+                var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
+                var portTags = ($port.data('port-tags') || '').split(' ');
+                var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
+
+                if ($(requiredPortTags).not(portTags).not(shipPortTags).length > 0)
+                    return debug;
+
+                var type = $item.data('item-type');
+                var subType = $item.data('item-sub-type');
+                subType = (subType == "") ? type : (type + ":" + subType);
+
+                var accepted = ($port.data('port-types') || '').split(',');
+
+                for (var i = 0, j = accepted.length; i < j; i++) {
+                    if (accepted[i] == type || accepted[i] == subType)
+                        return true;
+                }
+
+                return debug;
+            }
+
+            var bindAll = function (parent) {
+                $("[data-draggable]:not(.js-equipped):not(.js-draggable)").addClass('js-draggable').draggable({
+                    helper: "clone",
+                    appendTo: "body"
+                });
+
+                $("[data-droppable]:not(.js-droppable)").addClass('js-droppable').droppable({
+                    accept: acceptItem,
+                    activeClass: "ui-state-default",
+                    hoverClass: "ui-state-hover",
+                    drop: dropItem
+                });
+            }
+
+            var dropItem = function (event, ui) {
+
+                var $item = $(event.toElement);
+                var $port = $(event.target);
+
+                if ($item.data('item-id') != null)
+                    $item = $('[data-item-id="' + $item.data('item-id') + '"');
+
+                if ($port.data('item-id') != null)
+                    $port = $('[data-item-id="' + $port.data('item-id') + '"');
+
+                // ensure we're always checking the item vs the port
+                if (!$item.hasClass('js-available') && $port.hasClass('js-available')) {
+                    var temp = $item;
+                    $item = $port;
+                    $port = temp;
+                }
+
+                var data = {
+                    newPartID: $item.data('item-id'),
+                    parentID: $port.data('parent-id'),
+                    portName: $port.data('port-name')
+                }
+
+                $.ajax({
+                    url: $form.href,
+                    data: data,
+                    method: "POST",
+                    success: function (data) {
+                        $itemPane = $item.closest('[id]');
+                        $portPane = $port.closest('[id]');
+
+                        $page = $(data);
+
+                        console.log($itemPane[0].id, $portPane[0].id);
+                        console.log($('#' + $itemPane[0].id, $page));
+                        console.log($('#' + $portPane[0].id, $page));
+
+                        $itemPane.replaceWith($('#' + $itemPane[0].id, $page));
+                        $portPane.replaceWith($('#' + $portPane[0].id, $page));
+
+                        bindAll(document.body);
+                    }
+                });
+            }
+
+            bindAll(document.body)
         });
     </script>
 }

@@ -20,7 +20,7 @@
                     var isEquipped_Self = isEquipped && (Model.View_ItemMap[item.Key].Inventory_Ship.ID == Model.ShipID);
                     var ship = (Model.View_ItemMap[item.Key].Inventory_Ship ?? new Inventory.Ship { });
 
-                    <li class="js-item @(isEquipped_Self ? "js-equipped" : String.Empty)" @Model.View_ItemMap[item.Key].HTML_Attributes>
+                    <li class="js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @Model.View_ItemMap[item.Key].HTML_Attributes data-droppable>
                         @item.Value.DisplayName.ToLocalized() (@item.Value.ItemSize)
                         @if (ship.ID != Guid.Empty)
                         {

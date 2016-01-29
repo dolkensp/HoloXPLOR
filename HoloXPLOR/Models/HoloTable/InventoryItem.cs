@@ -55,7 +55,7 @@ namespace HoloXPLOR.Models.HoloTable
                 }
                 if (this.GameData_EquippedItem != null)
                 {
-                    sb.Append(this.GameData_Item.HTML_Attributes.Replace("data-item-", "data-parent-"));
+                    sb.Append(this.GameData_EquippedItem.HTML_Attributes.Replace("data-item-", "data-parent-"));
                 }
 
                 return new HtmlString(sb.ToString().Trim());

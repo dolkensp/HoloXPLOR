@@ -129,23 +129,7 @@
     <Compile Include="Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\db_alluran_gamma.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\db_alluran_raw.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\db_dolkensp_2_0.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\db_dolkensp_2_1.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\db_Jooston.txt" />
-    <Content Include="App_Data\db_Jooston.xml" />
-    <Content Include="App_Data\db_P107REK.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="App_Data\db_dolkensp.xml" />
     <Content Include="App_Data\Scripts\AI\AIBehavior.lua" />
     <Content Include="App_Data\Scripts\AI\aiconfig.lua" />
     <Content Include="App_Data\Scripts\AI\AIGroupBehavior.lua" />
@@ -2862,6 +2846,10 @@
     <Content Include="App_Data\Scripts\Utils\EntityUtils.lua" />
     <Content Include="App_Data\Scripts\Utils\Math.lua" />
     <Content Include="App_Data\Scripts\Utils\ZeroG.lua" />
+    <None Include="Properties\PublishProfiles\holoxplor.pubxml" />
+    <None Include="Scripts\aframe-0.1.0.js.map" />
+    <Content Include="Scripts\aframe-0.1.0.min.js" />
+    <Content Include="Scripts\aframe-0.1.0.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2901,8 +2889,8 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
