@@ -35,3 +35,14 @@ textarea {
                                     not supported by any browser */
 }
 .js-equipped { font-style: italic; color: #666; cursor: no-drop; }
+
+.ui-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.ui-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0px auto;
+}

@@ -2,10 +2,10 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="jumbotron js-upload-inventory">
     <h1>HoloXPLOR</h1>
     <p class="lead">HoloXPLOR is your web-based alternative to the Star Citizen Holotable.</p>
-    <p><a href="/HoloTable/Hangar/db_dolkensp" class="btn btn-primary btn-lg">View Sample &raquo;</a></p>
+    <p><a href="@Url.Action("Hangar", "HoloTable", new { id = "db_dolkensp" })" class="btn btn-primary btn-lg">View Sample &raquo;</a></p>
 </div>
 
 <div class="row">
@@ -29,3 +29,79 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<div id="upload" class="modal fade" role="dialog">
+    <div class="ui-table">
+        <div class="ui-table-cell">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Upload Inventory XML</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Drop your XML file here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+            @Scripts.Render("~/bundles/formstone")
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    var overlay = false;
+                    var hideOverlay = 0;
+
+                    $("html").upload({
+
+                        action: "@Url.Action("Upload", "HoloTable")",
+                        label: false, // "Upload Inventory XML",
+                        dataType: "json",
+                        maxSize: 0x200000,
+                        multiple: false,
+                        autoUpload: true,
+                        maxQueue: 1,
+
+                    }).on("filedragover.upload", function (e, file) {
+                        window.clearTimeout(hideOverlay);
+                        if ($('.modal-backdrop').length == 0) {
+                            $('#upload').modal('show');
+                        }
+                    }).on("filedragleave.upload", function (e, file) {
+                        window.clearTimeout(hideOverlay);
+                        hideOverlay = window.setTimeout(function () {
+                            $('#upload').modal('hide');
+                        }, 200);
+                    }).on("filestart.upload", function (e, file) {
+
+                        // TODO: Display Upload Overlay
+
+                    }).on("fileerror.upload", function (e, file, response) {
+
+                        // TODO: Display Error Overlay
+
+                    }).on("fileprogress.upload", function (e, file, percent) {
+
+                        // TODO: Display Upload Progress
+
+                    }).on("filecomplete.upload", function (e, file, response) {
+
+                        window.location.href = response.UrlPath;
+
+                    })
+                });
+            </script>
+        }

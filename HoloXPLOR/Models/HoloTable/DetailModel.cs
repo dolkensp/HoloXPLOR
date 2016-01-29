@@ -25,9 +25,7 @@ namespace HoloXPLOR.Models.HoloTable
 
             if (File.Exists(filename))
             {
-                String inXML = System.IO.File.ReadAllText(filename);
-
-                this.Player = inXML.FromXML<Inventory.Player>();
+                this.Player = System.IO.File.ReadAllText(filename).FromXML<Inventory.Player>();
                 this.ShipID = shipID ?? Guid.Empty;
             }
             else

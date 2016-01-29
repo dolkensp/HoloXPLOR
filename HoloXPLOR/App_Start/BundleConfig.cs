@@ -20,6 +20,10 @@ namespace HoloXPLOR
             bundles.Add(new ScriptBundle("~/bundles/aframe").Include(
                         "~/Scripts/aframe-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/formstone").Include(
+                        "~/Scripts/formstone.core-{version}.js",
+                        "~/Scripts/formstone.upload-{version}.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -29,9 +33,12 @@ namespace HoloXPLOR
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.css",
+                      "~/Content/formstone.upload.css",
                       "~/Content/site.css"));
 
 #if !DEBUG
