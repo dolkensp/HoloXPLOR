@@ -354,32 +354,49 @@
                     $port = temp;
                 }
 
-                var itemSize = Number.parseInt($item.data('item-size'));
-                var minSize = Number.parseInt($port.data('port-min-size'));
-                var maxSize = Number.parseInt($port.data('port-max-size'));
+                if (!debug)
+                { /* Check item sizes */
+                    var itemSize = Number.parseInt($item.data('item-size'));
+                    var minSize = Number.parseInt($port.data('port-min-size'));
+                    var maxSize = Number.parseInt($port.data('port-max-size'));
 
-                if (itemSize < minSize || itemSize > maxSize)
-                    return debug;
-
-                var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
-                var portTags = ($port.data('port-tags') || '').split(' ');
-                var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
-
-                if ($(requiredPortTags).not(portTags).not(shipPortTags).length > 0)
-                    return debug;
-
-                var type = $item.data('item-type');
-                var subType = $item.data('item-sub-type');
-                subType = (subType == "") ? type : (type + ":" + subType);
-
-                var accepted = ($port.data('port-types') || '').split(',');
-
-                for (var i = 0, j = accepted.length; i < j; i++) {
-                    if (accepted[i] == type || accepted[i] == subType)
-                        return true;
+                    if (itemSize < minSize || itemSize > maxSize)
+                        return false;
                 }
 
-                return debug;
+                if (!debug)
+                { /* Normally, ship-specific tags */
+                    var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
+                    var portTags = ($port.data('port-tags') || '').split(' ');
+                    var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
+
+                    if ($(requiredPortTags).not(portTags).not(shipPortTags).not(['']).length > 0)
+                        return false;
+                }
+
+                if (!debug)
+                { /* Normally, equipment-specific tags */
+                    var requiredItemTags = ($port.data('port-required-tags') || '').split(' ');
+                    var itemTags = ($item.data('item-tags') || '').split(' ');
+
+                    if ($(requiredItemTags).not(itemTags).not(['']).length > 0)
+                        return false;
+                }
+
+                { /* Item types */
+                    var type = $item.data('item-type');
+                    var subType = $item.data('item-sub-type');
+                    subType = (subType == "") ? type : (type + ":" + subType);
+
+                    var accepted = ($port.data('port-types') || '').split(',');
+
+                    for (var i = 0, j = accepted.length; i < j; i++) {
+                        if (accepted[i] == type || accepted[i] == subType)
+                            return true;
+                    }
+                }
+
+                return false;
             }
 
             var bindAll = function (parent) {
