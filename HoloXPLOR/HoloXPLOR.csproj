@@ -2900,6 +2900,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\formstone.core-0.8.37.js" />
     <Content Include="Scripts\formstone.upload-0.8.37.js" />
+    <Content Include="Scripts\holoxplor.hangar.js" />
+    <Content Include="Scripts\holoxplor.home.js" />
+    <Content Include="Scripts\holoxplor.ship.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />

@@ -33,7 +33,8 @@ namespace HoloXPLOR
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-
+            bundles.Add(new ScriptBundle("~/bundles/holoxplor").Include(
+                        "~/Scripts/holoxplor.*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

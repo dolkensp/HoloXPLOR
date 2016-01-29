@@ -2,31 +2,43 @@
     ViewBag.Title = "Home Page";
 }
 
+@using (Html.BeginForm("Upload", "HoloTable", FormMethod.Post, new { id = "form-upload" }))
+{ }
+
 <div class="jumbotron js-upload-inventory">
     <h1>HoloXPLOR</h1>
     <p class="lead">HoloXPLOR is your web-based alternative to the Star Citizen Holotable.</p>
+    <p>To get started, drag your inventory XML file onto this page.</p>
     <p><a href="@Url.Action("Hangar", "HoloTable", new { id = "db_dolkensp" })" class="btn btn-primary btn-lg">View Sample &raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>HoloXPLOR allows you to modify your existing inventory XML files and then download the modified versions to use in Arena Commander and the Persistent Universe.</p>
+        <p>All you need to do is drag your inventory XML file onto this page, and we will take care of the rest.</p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Finding your XML file</h2>
+        <p>You can locate the inventory XML file in your Star Citizen USER directory.</p>
+        <ol>
+            <li>Browse to your Star Citizen installation directory</li>
+            <li>Open the <em>Public</em> folder if you want to edit the Live hangar, or the <em>Test</em> folder for the PTU</li>
+            <li>Open the <em>USER</em> directory</li>
+            <li>Open the <em>Database</em> directory</li>
+            <li>Drag the <em>db_[yourhandle].xml</em> file onto this page</li>
+        </ol>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Problems? Support?</h2>
+        <p>This is an early Alpha, and as such, I'm sure there will be bugs. If you find a problem, or have an idea, you can submit them <a href="https://github.com/dolkensp/HangarXPLOR/issues" class="">here</a>.</p>
+        <p>If you would like to donate to support the hosting and development, you can click below.</p>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="CA3VSDP39JT4G">
+            <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+        </form>
     </div>
 </div>
 
@@ -57,51 +69,6 @@
 @section scripts
 {
 
-            @Scripts.Render("~/bundles/formstone")
+    @Scripts.Render("~/bundles/formstone")
 
-            <script type="text/javascript">
-
-                $(document).ready(function () {
-                    var overlay = false;
-                    var hideOverlay = 0;
-
-                    $("html").upload({
-
-                        action: "@Url.Action("Upload", "HoloTable")",
-                        label: false, // "Upload Inventory XML",
-                        dataType: "json",
-                        maxSize: 0x200000,
-                        multiple: false,
-                        autoUpload: true,
-                        maxQueue: 1,
-
-                    }).on("filedragover.upload", function (e, file) {
-                        window.clearTimeout(hideOverlay);
-                        if ($('.modal-backdrop').length == 0) {
-                            $('#upload').modal('show');
-                        }
-                    }).on("filedragleave.upload", function (e, file) {
-                        window.clearTimeout(hideOverlay);
-                        hideOverlay = window.setTimeout(function () {
-                            $('#upload').modal('hide');
-                        }, 200);
-                    }).on("filestart.upload", function (e, file) {
-
-                        // TODO: Display Upload Overlay
-
-                    }).on("fileerror.upload", function (e, file, response) {
-
-                        // TODO: Display Error Overlay
-
-                    }).on("fileprogress.upload", function (e, file, percent) {
-
-                        // TODO: Display Upload Progress
-
-                    }).on("filecomplete.upload", function (e, file, response) {
-
-                        window.location.href = response.UrlPath;
-
-                    })
-                });
-            </script>
-        }
+}

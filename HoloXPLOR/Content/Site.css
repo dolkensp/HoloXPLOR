@@ -46,3 +46,7 @@ textarea {
     vertical-align: middle;
     margin: 0px auto;
 }
+
+[data-toggle] {
+    cursor: pointer;
+}

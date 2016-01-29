@@ -18,13 +18,14 @@
                 </button>
                 @Html.ActionLink("HoloXPLOR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @*<div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>*@
+            @if (!String.IsNullOrWhiteSpace(ViewBag.ID))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Download", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-cloud-download"></span> Download</a></li>
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     <div class="container-fluid body-content">
@@ -38,6 +39,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/holoxplor")
+
     @RenderSection("scripts", required: false)
 
     <script>

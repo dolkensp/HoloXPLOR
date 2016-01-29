@@ -28,12 +28,16 @@ namespace HoloXPLOR.Controllers
         {
             var model = new DetailModel(id);
 
+            ViewBag.ID = id;
+
             return View(model);
         }
 
         public ActionResult Ship(String id, Guid shipID)
         {
             var model = new DetailModel(id, shipID);
+
+            ViewBag.ID = id;
 
             return View(model);
         }
@@ -136,6 +140,8 @@ namespace HoloXPLOR.Controllers
             model.Player.VehicleID = shipID;
 
             model.Save();
+
+            ViewBag.ID = id;
 
             return View(model);
         }
