@@ -154,6 +154,66 @@
                     }
 
                     @{
+                    var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
+                    var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
+                    var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
+                    var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack"));
+
+                    var weaponsByMaxSize = weapons.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                    var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+
+                    if (weaponsByMaxSize.Count > 0)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3>Hardpoints</h3></div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    @foreach (var size in weaponsByMaxSize.Keys.OrderBy(k => k))
+                                    {
+                                        <li class="row">
+                                            <label class="col-md-4">Size @size</label>
+                                            <ul class="col-md-6">
+                                                @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                                {
+                                                    <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
+                                                        @(item.Item_DisplayName ?? "Empty")
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                    if (racksByMaxSize.Count > 0)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3>Missiles</h3></div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    @foreach (var size in racksByMaxSize.Keys.OrderBy(k => k))
+                                    {
+                                        <li class="row">
+                                            <label class="col-md-4">Size @size</label>
+                                            <ul class="col-md-6">
+                                                @foreach (var item in racksByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                                {
+                                                    <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
+                                                        @(item.Item_DisplayName ?? "Empty")
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    }
+
+                    @{
                     var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
                     var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
 
@@ -229,66 +289,6 @@
                     </div>
                     }
 
-                    @{
-                    var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
-                    var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
-                    var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
-                    var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack"));
-
-                    var weaponsByMaxSize = weapons.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                    var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-
-                    if (weaponsByMaxSize.Count > 0)
-                    {
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3>Hardpoints</h3></div>
-                            <div class="panel-body">
-                                <ul class="list-unstyled">
-                                    @foreach (var size in weaponsByMaxSize.Keys.OrderBy(k => k))
-                                    {
-                                        <li class="row">
-                                            <label class="col-md-4">Size @size</label>
-                                            <ul class="col-md-6">
-                                                @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
-                                                {
-                                                    <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                        @(item.Item_DisplayName ?? "Empty")
-                                                    </li>
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    }
-
-                    if (racksByMaxSize.Count > 0)
-                    {
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3>Missiles</h3></div>
-                            <div class="panel-body">
-                                <ul class="list-unstyled">
-                                    @foreach (var size in racksByMaxSize.Keys.OrderBy(k => k))
-                                    {
-                                        <li class="row">
-                                            <label class="col-md-4">Size @size</label>
-                                            <ul class="col-md-6">
-                                                @foreach (var item in racksByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
-                                                {
-                                                    <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                        @(item.Item_DisplayName ?? "Empty")
-                                                    </li>
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    }
-                    }
-
                 </div>
                 <div class="tab-pane" id="systems">
                     <h3>Hardpoints</h3>
@@ -352,6 +352,10 @@
                     var temp = $item;
                     $item = $port;
                     $port = temp;
+                }
+
+                if (!$item.hasClass('js-available') && !$port.hasClass('js-available')) {
+                    return false;
                 }
 
                 if (!debug)
