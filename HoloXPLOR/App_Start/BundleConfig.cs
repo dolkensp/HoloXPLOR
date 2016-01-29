@@ -39,7 +39,6 @@ namespace HoloXPLOR
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.css",
-                      "~/Content/formstone.upload.css",
                       "~/Content/site.css"));
 
 #if !DEBUG
