@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var pause = {};
+
+$(document).ready(function () {
     var debug = false;
     var $form = $('#form-ship');
 
@@ -23,8 +25,10 @@
             var minSize = Number.parseInt($port.data('port-min-size'));
             var maxSize = Number.parseInt($port.data('port-max-size'));
 
-            if (itemSize < minSize || itemSize > maxSize)
+            if (itemSize < minSize || itemSize > maxSize) {
+                // console.log("Rejected Size", minSize, itemSize, maxSize);
                 return false;
+            }
         }
 
         if (!debug) { /* Normally, ship-specific tags */
@@ -32,29 +36,35 @@
             var portTags = ($port.data('port-tags') || '').split(' ');
             var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
 
-            if ($(requiredPortTags).not(portTags).not(shipPortTags).not(['']).length > 0)
+            if ($(requiredPortTags).not(portTags).not(shipPortTags).not(['']).length > 0) {
+                // console.log("Rejected Port Tags", requiredPortTags, portTags, shipPortTags);
                 return false;
+            }
         }
 
         if (!debug) { /* Normally, equipment-specific tags */
             var requiredItemTags = ($port.data('port-required-tags') || '').split(' ');
             var itemTags = ($item.data('item-tags') || '').split(' ');
 
-            if ($(requiredItemTags).not(itemTags).not(['']).length > 0)
+            if ($(requiredItemTags).not(itemTags).not(['']).length > 0) {
+                // console.log("Rejected Item Tags", requiredItemTags, itemTags);
                 return false;
+            }
         }
 
         { /* Item types */
             var type = $item.data('item-type');
             var subType = $item.data('item-sub-type');
-            subType = (subType == "") ? type : (type + ":" + subType);
+            var fullType = (subType == "") ? type : (type + ":" + subType);
 
             var accepted = ($port.data('port-types') || '').split(',');
 
             for (var i = 0, j = accepted.length; i < j; i++) {
-                if (accepted[i] == type || accepted[i] == subType)
+                if (accepted[i] == type || accepted[i] == fullType || accepted[i] == subType)
                     return true;
             }
+
+            // console.log("Rejected Type", type, subType, accepted);
         }
 
         return false;
@@ -103,17 +113,16 @@
             data: data,
             method: "POST",
             success: function (data) {
-                $itemPane = $item.closest('[id]');
-                $portPane = $port.closest('[id]');
+                var itemPane_old = $item.closest('[id]')[0];
+                var portPane_old = $port.closest('[id]')[0];
 
                 $page = $(data);
 
-                console.log($itemPane[0].id, $portPane[0].id);
-                console.log($('#' + $itemPane[0].id, $page));
-                console.log($('#' + $portPane[0].id, $page));
+                var itemPane_new = $('#' + itemPane_old.id, $page)[0];
+                var portPane_new = $('#' + portPane_old.id, $page)[0];
 
-                $itemPane.replaceWith($('#' + $itemPane[0].id, $page));
-                $portPane.replaceWith($('#' + $portPane[0].id, $page));
+                $(itemPane_old).replaceWith(itemPane_new);
+                $(portPane_old).replaceWith(portPane_new);
 
                 bindAll(document.body);
             }
