@@ -220,11 +220,18 @@ namespace HoloXPLOR.Data
             {
                 switch (item.AmmoBox["ammo_name"])
                 {
-                    case "BEHR_Flare":        item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]); break;
-                    case "TALN_Chaff":        item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]); break;
+                    case "BEHR_Flare":
+                        item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]);
+                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
+                        break;
+                    case "TALN_Chaff":
+                        item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
+                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
+                        break;
                     case "20mm_AMMO":         item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "24mm_AMMO":         item.DisplayName = String.Format("{0} 24mm Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "25mm_AMMO":         item.DisplayName = String.Format("{0} 25mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "30mm_AMMO":         item.DisplayName = String.Format("{0} 30mm Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "35mm_AMMO":         item.DisplayName = String.Format("{0} 35mm Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "40mm_AMMO":         item.DisplayName = String.Format("{0} 40mm Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "40mm_5km_AMMO":     item.DisplayName = String.Format("{0} 40mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
@@ -237,6 +244,16 @@ namespace HoloXPLOR.Data
                     case "106mm_exp_AMMO":    item.DisplayName = String.Format("{0} 106mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "Rocket_AMMO":       item.DisplayName = String.Format("{0} Delta Rockets", item.AmmoBox["max_ammo_count"]); break;
                     default: item.DisplayName = String.Format("{0} {1}", item.AmmoBox["max_ammo_count"], item.AmmoBox["ammo_name"].Replace("_", " ")); break;
+                }
+            }
+
+            if (item.PortParams != null && item.PortParams.Items != null)
+            {
+                var cmp = item.PortParams.Items.Where(p => p.Types != null).SelectMany(p => p.Types.Where(t => t.Type == "AmmoBox").Where(t => String.IsNullOrWhiteSpace(t.SubType)));
+
+                foreach (var port in cmp)
+                {
+                    port.SubType = "Ammo_CounterMeasure";
                 }
             }
 

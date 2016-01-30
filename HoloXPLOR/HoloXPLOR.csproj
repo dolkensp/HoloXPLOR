@@ -142,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\db_dolkensp.xml" />
-    <None Include="Properties\PublishProfiles\holoxplor.pubxml" />
+    <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <None Include="Scripts\aframe-0.1.0.js.map" />
     <Content Include="App_Data\Scripts\AI\AIWaves_Defs.xml" />
     <Content Include="App_Data\Scripts\AI\Archetypes\MyLandingZone\MyArchetype.xml" />
@@ -2534,8 +2534,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />

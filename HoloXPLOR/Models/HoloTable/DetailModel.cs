@@ -306,6 +306,43 @@ namespace HoloXPLOR.Models.HoloTable
             }
         }
 
+
+        private Dictionary<Items.CategoryEnum, Dictionary<Guid, InventoryItem>> _view_CategoryMap;
+        public Dictionary<Items.CategoryEnum, Dictionary<Guid, InventoryItem>> View_CategoryMap
+        {
+            get
+            {
+                if (this._view_CategoryMap == null)
+                {
+                    var allKeys = Enum.GetValues(typeof(Items.CategoryEnum)).OfType<Items.CategoryEnum>();
+
+                    this._view_CategoryMap = this._view_CategoryMap ??
+                        (from item in this.View_ItemMap.Values
+                         let part = Scripts.Items.GetValue(item.Inventory_Item.Class, null)
+                         where part != null
+                         orderby part.DisplayName.ToLocalized()
+                         let lookup = new
+                         {
+                             ID = item.Inventory_Item.ID,
+                             Part = part,
+                             Category = part.ItemCategory,
+                             InventoryItem = item
+                         }
+                         group lookup by lookup.Category into groupedItems
+                         select new
+                         {
+                             Key = groupedItems.Key,
+                             Value = groupedItems.ToDictionary(k => k.ID, v => v.InventoryItem)
+                         }).ToDictionary(k => k.Key, v => v.Value);
+
+                    foreach (var missingKey in allKeys.Except(this._view_CategoryMap.Keys))
+                        this._view_CategoryMap[missingKey] = new Dictionary<Guid, InventoryItem> { };
+                }
+
+                return this._view_CategoryMap;
+            }
+        }
+
         private IEnumerable<InventoryItem> _GetAttachedItems(InventoryItem item)
         {
             yield return item;
@@ -313,6 +350,7 @@ namespace HoloXPLOR.Models.HoloTable
             if (item.GameData_Item != null && item.GameData_Item.PortParams != null)
             {
                 var children = (from gamePort in item.GameData_Item.PortParams.Items
+                                where item.Inventory_Item.Ports.Items != null
                                 from shipPort in item.Inventory_Item.Ports.Items
                                 where shipPort.PortName == gamePort.Name
 

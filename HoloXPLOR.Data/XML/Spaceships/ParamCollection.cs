@@ -35,6 +35,11 @@ namespace HoloXPLOR.Data.XML.Spaceships
 
                 return this._paramMap.GetValue(key, @default);
             }
+            set
+            {
+                this._paramMap = this._paramMap ?? this.Items.ToDictionary(k => k.Name, v => v.Value);
+                this._paramMap[key] = value;
+            }
         }
     }
 }

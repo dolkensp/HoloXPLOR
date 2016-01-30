@@ -24,6 +24,7 @@ textarea {
 }
 
 .ui-state-default { background: #abcdef; outline: 1px solid #666; }
+.ui-state-hover { background: #67cd67; outline: 1px solid #333; }
 [data-draggable] { 
     cursor: move;
     -webkit-touch-callout: none; /* iOS Safari */

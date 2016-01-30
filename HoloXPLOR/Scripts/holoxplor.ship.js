@@ -20,6 +20,8 @@ $(document).ready(function () {
             return false;
         }
 
+        // TODO: Allow removal of items
+
         if (!debug) { /* Check item sizes */
             var itemSize = Number.parseInt($item.data('item-size'));
             var minSize = Number.parseInt($port.data('port-min-size'));
@@ -86,8 +88,8 @@ $(document).ready(function () {
 
     var dropItem = function (event, ui) {
 
-        var $item = $(event.toElement);
-        var $port = $(event.target);
+        var $item = $(this);
+        var $port = $(ui.draggable);
 
         if ($item.data('item-id') != null)
             $item = $('[data-item-id="' + $item.data('item-id') + '"');
@@ -115,14 +117,20 @@ $(document).ready(function () {
             success: function (data) {
                 var itemPane_old = $item.closest('[id]')[0];
                 var portPane_old = $port.closest('[id]')[0];
+                var specPane_old = $('#ship_specs')[0];
 
                 $page = $(data);
 
                 var itemPane_new = $('#' + itemPane_old.id, $page)[0];
                 var portPane_new = $('#' + portPane_old.id, $page)[0];
+                var specPane_new = $('#ship_specs', $page)[0];
 
                 $(itemPane_old).replaceWith(itemPane_new);
                 $(portPane_old).replaceWith(portPane_new);
+                $(specPane_old).replaceWith(specPane_new);
+
+                $(itemPane_new).addClass('active');
+                $(portPane_new).addClass('active');
 
                 bindAll(document.body);
             }
