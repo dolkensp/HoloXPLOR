@@ -101,6 +101,8 @@
 @using (Html.BeginForm("Ship", "HoloTable", new { id = Model.CurrentXML, shipID = Model.ShipID }, FormMethod.Post, new { id = "form-ship" }))
 { }
 
+<p><a href="@Url.Action("Hangar", "HoloTable", new { id = ViewBag.ID })">Back to Hangar</a></li></p>
+
 <div class="row">
 
     <div class="col-lg-6 hidden-md hidden-sm">
@@ -158,11 +160,8 @@
                     var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
                     var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
                     var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
-                    var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack"));
-
                     var weaponsByMaxSize = weapons.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                    var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-
+                    
                     if (weaponsByMaxSize.Count > 0)
                     {
                         <div class="panel panel-default">
@@ -177,7 +176,14 @@
                                                 @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
                                                 {
                                                     <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                        @(item.Item_DisplayName ?? "Empty")
+                                                        @if (item.Inventory_Item != null)
+                                                        {
+                                                            @:@item.Item_DisplayName
+                                                        }
+                                                        else
+                                                        {
+                                                            @:Empty
+                                                        }
                                                     </li>
                                                 }
                                             </ul>
@@ -187,6 +193,9 @@
                             </div>
                         </div>
                     }
+
+                    var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack") || i.GameData_EquippedPort.Types.Select(t => t.Type).Any(t => t == "WeaponMissile"));
+                    var racksByMaxSize = racks.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
 
                     if (racksByMaxSize.Count > 0)
                     {
@@ -202,7 +211,38 @@
                                                 @foreach (var item in racksByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
                                                 {
                                                     <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                        @(item.Item_DisplayName ?? "Empty")
+                                                        @if (item.Inventory_Item != null)
+                                                        {
+                                                            @:@item.Item_DisplayName (@item.ItemSize)
+
+                                                            if (item.Inventory_Item.Ports.Items != null)
+                                                            { 
+                                                                <ul>
+                                                                    @foreach (var missilePort in item.Inventory_Item.Ports.Items)
+                                                                    {
+                                                                        var missile = Model.View_Loadout
+                                                                            .Where(i => i.Inventory_EquippedItem != null)
+                                                                            .Where(i => item.Inventory_Item != null)
+                                                                            .Where(i => i.Inventory_EquippedItem.ID == item.Inventory_Item.ID)
+                                                                            .Where(i => i.GameData_EquippedPort.Name == missilePort.PortName)
+                                                                            .FirstOrDefault();
+                                                                    
+                                                                        <li @missile.HTML_Attributes title="@missile.Port_DisplayName" data-droppable="true">
+                                                                            @if (missile.Inventory_Item != null)
+                                                                            {
+                                                                                @:@missile.Item_DisplayName (@missile.ItemSize)
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @:Empty (@missile.MaxSize)
+                                                                            }
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            }
+                                                        } else {
+                                                            @:Empty
+                                                        }
                                                     </li>
                                                 }
                                             </ul>

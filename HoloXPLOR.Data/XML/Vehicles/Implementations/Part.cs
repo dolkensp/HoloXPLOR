@@ -18,7 +18,14 @@ namespace HoloXPLOR.Data.XML.Vehicles.Implementations
         public String Class { get; set; }
 
         [XmlAttribute(AttributeName = "mass")]
-        [DefaultValue(0D)]
+        [DefaultValue("")]
+        public String __Mass
+        {
+            get { return this.Mass.ToString(); }
+            set { this.Mass = value.ToDouble(0); }
+        }
+
+        [XmlIgnore]
         public Double Mass { get; set; }
 
         [XmlAttribute(AttributeName = "scopeContext")]

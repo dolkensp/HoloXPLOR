@@ -121,7 +121,7 @@ namespace HoloXPLOR.Models.HoloTable
             "MainThruster",
             "PowerPlant",
             "ManneuverThruster", // Maneuvering Thrusters
-            "TurretBase",
+            // "TurretBase",
             "Paints",
             
             // "Player",            // Player

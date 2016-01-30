@@ -53,7 +53,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
                 {
                     #region Mount Points
                     case "VehicleWeapon:MannedTurret":     // Requires More Investigation
-                    case "VehicleWeapon:TurretBase":       // Requires More Investigation
+                    // case "VehicleWeapon:TurretBase":       // Requires More Investigation
                     case "VehicleWeapon:VehicleTurret":    // Requires More Investigation
                         return CategoryEnum.Turret;
                     case "VehicleWeapon:VehicleMissileRack":

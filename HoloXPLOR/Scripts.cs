@@ -109,6 +109,10 @@ namespace HoloXPLOR.Data
 
                         if (vehicle.Name == "CNOU_Mustang")
                             Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
+                        // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
+                        //     Scripts._vehicles["AEGS_Avenger_Warlock"] = vehicle;
+                        // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
+                        //     Scripts._vehicles["AEGS_Avenger_Titan"] = vehicle;
 
 
                         #region Variant Support
@@ -326,10 +330,12 @@ namespace HoloXPLOR.Data
                     vehicle.DisplayName = "Vanduul Glaive";
                     vehicle.Name = "VNCL_Glaive_Tutorial";
                     break;
-                case "AEGS_Avenger_Titan":
+                case "AEGS_Avenger_Stalker_Titan":
+                    vehicle.Name = "AEGS_Avenger_Titan";
                     vehicle.DisplayName = "Aegis Avenger Titan";
                     break;
-                case "AEGS_Avenger_Warlock":
+                case "AEGS_Avenger_Stalker_Warlock":
+                    vehicle.Name = "AEGS_Avenger_Warlock";
                     vehicle.DisplayName = "Aegis Avenger Warlock";
                     break;
                 case "AEGS_Avenger_Stalker":
