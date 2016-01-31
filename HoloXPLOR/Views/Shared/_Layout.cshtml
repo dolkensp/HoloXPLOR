@@ -22,13 +22,17 @@
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        @if (ViewBag.Title != "Hangar")
+                        { 
+                            <li><a href="@Url.Action("Hangar", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-globe"></span> Hangar</a></li>
+                        }
                         <li><a href="@Url.Action("Download", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-cloud-download"></span> Download</a></li>
                     </ul>
                 </div>
             }
         </div>
     </div>
-    <div class="container-fluid body-content">
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>

@@ -23,8 +23,8 @@ textarea {
     max-width: 280px;
 }
 
-.ui-state-default { background: #abcdef; outline: 1px solid #666; }
-.ui-state-hover { background: #67cd67; outline: 1px solid #333; }
+.ui-state-default { background: #abcdef; }
+.ui-state-hover { background: #67cd67; }
 [data-draggable] { 
     cursor: move;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -51,3 +51,141 @@ textarea {
 [data-toggle] {
     cursor: pointer;
 }
+
+/*
+
+html { background: #133247; height: 100%; }
+
+body {
+    background: black url(../images/shipcatalogue_bg_grid.png) repeat;
+    background: rgba(0, 0, 0, 0.9) url(../images/shipcatalogue_bg_grid.png) repeat 20px top;
+    min-height: 100%;
+    color: #4bcaff;
+}
+
+.ui-container {
+    background: url(../images/shipcatalogue_bg_blackfadetop.png) repeat-x top,
+				url(../images/shipcatalogue_bg_blackfadebottom.png) repeat-x bottom,
+				url(../images/shipcatalogue_bg_blueoverlay.png) repeat left, 
+				url(../images/shipcatalogue_bg_techlines.png) repeat -1px 92px,
+				url(../images/shipcatalogue_bg_blocks.png) repeat -124px top;
+	border: solid 1px #4588e0;
+    padding: 10px;
+}
+
+.nav-tabs {
+	width: 100%;
+	height: 22px;
+    padding-left: 0px !important;
+	margin-bottom: 1px;
+    border-bottom: 0px none;
+}
+
+.nav-tabs li { z-index: 1; position: relative; }
+.nav-tabs li.active { z-index: 999; }
+.nav-tabs li a {
+    text-transform: uppercase;
+    border: 0px none !important;
+    background-color: transparent !important;
+	background: url(../images/shipcatalogue_sprite.png) no-repeat;
+	height: 22px;
+	display: block;
+	float: left;
+	position: relative;
+	padding-top: 4px;
+	
+	font-size: 10px;
+	font-weight: bold;
+	color: #5989a4 !important;
+	text-align: center;
+	
+	transition: color 0.3s;
+	-moz-transition: color 0.3s;
+	-webkit-transition: color 0.3s;
+	-o-transition: color 0.3s;
+}
+.nav-tabs a:hover { color: #fff !important; border: 0px none; text-decoration: none; }
+.nav-tabs li.active a { color: #fff !important; }
+.nav-tabs li a {
+	background-position: -294px -175px;
+	width: 136px;
+	padding-right: 2px;
+	margin-left: -50px;
+    outline: 0;
+}
+.nav-tabs li a:focus { text-decoration: none; }
+.nav-tabs li:first-child a {
+	background-position: -294px -131px;
+	width: 106px;
+	padding-right: 30px;
+    margin-left: 0px;
+}
+.nav-tabs li:first-child.active a { background-position: -294px -153px; }
+.nav-tabs li.active a { background-position: -294px -197px; }
+
+.tab-content {
+    border: solid 1px #3089b6;
+    padding: 10px;
+    background-color: rgba(21, 57, 102, 0.3);
+}
+
+.ui-spec-summary {
+
+}
+
+#shipcatalogue_specs_boxcontainer { height: 74px; }
+
+.ui-spec-summary li {
+	background: url(../images/shipcatalogue_sprite.png) no-repeat 0 -244px;
+	
+	height: 72px;
+	float: left;
+	display: block;
+	margin-right: 8px;
+	border: solid 1px #1e98df;
+	border-radius: 5px;
+	position: relative;
+	
+	transition: border 0.3s, box-shadow 0.3s;
+	-moz-transition: border 0.3s, box-shadow 0.3s;
+	-webkit-transition: border 0.3s, box-shadow 0.3s;
+	-o-transition: border 0.3s, box-shadow 0.3s;
+}
+.shipcatalogue_specs_box:hover { border-color: #65cfff; box-shadow: inset 0 0 35px rgba(62, 157, 255, 0.3); }
+.shipcatalogue_specs_box:last-child { margin-right: 0; }
+.shipcatalogue_specs_box span {
+	width: 100%;
+	font-weight: bold;
+	text-align: center;
+	display: block;
+	position: absolute;
+}
+.shipcatalogue_specs_box_title {
+	font-size: 10px;
+	color: #50cbff;
+	top: 11px;
+	line-height: 12px;
+}
+.shipcatalogue_specs_box_title.shipcatalogue_doubleline { top: 5px; }
+.shipcatalogue_specs_box_value {
+	font-size: 14px;
+	color: #26e8ff;
+	top: 37px;
+	text-shadow: 0 0 12px #2aacff;
+}
+.shipcatalogue_specs_box_unit {
+	font-size: 10px;
+	color: #4c768e;
+	bottom: 4px;
+}
+
+ 
+.js-hardpoint { border: solid 1px #1e98df; border-radius: 5px; height: 30px; width: 30px; float: right; margin-right: 5px; margin-bottom: 5px; list-style: none; }
+.js-hardpoint span { display: none; }
+.panel-cig { background: transparent; }
+.panel-cig .panel-heading { background: url(../images/shipcatalogue_sprite.png) no-repeat -80px -244px; width: 116px; height: 11px; padding: 0px; margin-left: 19px; }
+.panel-cig .panel-heading h4 { margin: 0px; width: 100%; font-size: 10px; font-weight: bold; color: white; display: block; text-align: center; position: relative; top: 3px; text-transform: uppercase; }
+.panel-cig .panel-body { background: rgba(0, 0, 0, 0.7); }
+.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; }
+
+/**/

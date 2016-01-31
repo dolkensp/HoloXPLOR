@@ -1590,17 +1590,22 @@ pre code {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    min-width: 750px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    min-width: 970px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    min-width: 1170px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    width: 1370px;
   }
 }
 .container-fluid {

@@ -23,9 +23,9 @@ $(document).ready(function () {
         // TODO: Allow removal of items
 
         if (!debug) { /* Check item sizes */
-            var itemSize = Number.parseInt($item.data('item-size'));
-            var minSize = Number.parseInt($port.data('port-min-size'));
-            var maxSize = Number.parseInt($port.data('port-max-size'));
+            var itemSize = parseInt($item.data('item-size'));
+            var minSize = parseInt($port.data('port-min-size'));
+            var maxSize = parseInt($port.data('port-max-size'));
 
             if (itemSize < minSize || itemSize > maxSize) {
                 // console.log("Rejected Size", minSize, itemSize, maxSize);
@@ -83,6 +83,10 @@ $(document).ready(function () {
             activeClass: "ui-state-default",
             hoverClass: "ui-state-hover",
             drop: dropItem
+        });
+
+        $("li.js-hardpoint:not(.js-tooltip)").addClass('js-tooltip').popover({
+            template: '<div class="popover popover-cig" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
         });
     }
 

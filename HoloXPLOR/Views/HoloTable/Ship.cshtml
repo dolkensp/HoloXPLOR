@@ -6,7 +6,7 @@
 @model DetailModel
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = Model.GameData_Ship.DisplayName;
 }
 
 @helper RenderItemCategory(String category, Dictionary<Guid, InventoryItem> items)
@@ -113,34 +113,35 @@
 
 <p><a href="@Url.Action("Hangar", "HoloTable", new { id = ViewBag.ID })">Back to Hangar</a></li></p>
 
-<div class="row">
+<div class="ui-container">
+    <div class="row">
 
-    <div class="col-lg-6 hidden-md hidden-sm">
-        <h3>@Model.GameData_Ship.DisplayName.ToLocalized()</h3>
-        <img src="http://placehold.it/800x600" alt="Hologram" width="100%" />
-    </div>
+        <div class="col-lg-6 hidden-md hidden-sm">
+            <h3>@Model.GameData_Ship.DisplayName.ToLocalized()</h3>
+            <img src="http://placehold.it/800x600" alt="Hologram" width="100%" />
+        </div>
 
-    <div class="col-lg-6 col-md-12">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#specs" role="tab" data-toggle="tab">Specs</a></li>
-            <li><a href="#weapons" role="tab" data-toggle="tab">Weapons</a></li>
-            <li><a href="#ordinance" role="tab" data-toggle="tab">Ammo</a></li>
-            <li><a href="#shields" role="tab" data-toggle="tab">Shields</a></li>
-            <li><a href="#other" role="tab" data-toggle="tab">Other</a></li>
-            <!--<li><a href="#ship_power" role="tab" data-toggle="tab">Power</a></li>-->
-        </ul>
+        <div class="col-lg-6 col-md-12">
+            <!-- Nav tabs -->
+            <ul class="nav-tabs nav list-unstyled" role="tablist">
+                <li class="active"><a href="#specs" role="tab" data-toggle="tab">Specs</a></li>
+                <li><a href="#weapons" role="tab" data-toggle="tab">Weapons</a></li>
+                <li><a href="#ordinance" role="tab" data-toggle="tab">Ammo</a></li>
+                <li><a href="#shields" role="tab" data-toggle="tab">Shields</a></li>
+                <li><a href="#other" role="tab" data-toggle="tab">Other</a></li>
+                <!--<li><a href="#ship_power" role="tab" data-toggle="tab">Power</a></li>-->
+            </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content row">
-            <div class="tab-pane active" id="specs">
-                <div class="col-md-6 col-sm-12" id="ship_specs">
-                    @{
-                        var crewCount = Model.GameData_PartsMap[Model.ShipID].Where(p => p.ItemPorts != null).SelectMany(p => p.ItemPorts).Where(ip => ip.Types != null).SelectMany(ip => ip.Types).Where(t => t.Type == "Seat" || t.SubType == "MannedTurret").Count();
-                        var shipMass = String.Format("{0:#,000}", Model.GameData_Ship.Parts[0].Mass);
-                        var upgradeSlots = Model.View_Loadout.Select(i => i.GameData_EquippedPort.MaxSize).Sum() - Model.View_Loadout.Where(i => i.GameData_Item != null).Select(i => i.ItemSize).Sum();
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane row active" id="specs">
+                    <div class="col-md-6 col-sm-12" id="ship_specs">
+                        @{
+                    var crewCount = Model.GameData_PartsMap[Model.ShipID].Where(p => p.ItemPorts != null).SelectMany(p => p.ItemPorts).Where(ip => ip.Types != null).SelectMany(ip => ip.Types).Where(t => t.Type == "Seat" || t.SubType == "MannedTurret").Count();
+                    var shipMass = String.Format("{0:#,000}", Model.GameData_Ship.Parts[0].Mass);
+                    var upgradeSlots = Model.View_Loadout.Select(i => i.GameData_EquippedPort.MaxSize).Sum() - Model.View_Loadout.Where(i => i.GameData_Item != null).Select(i => i.ItemSize).Sum();
 
-                        <ul class="row list-unstyled holo-overview">
+                        <ul class="row list-unstyled ui-spec-summary">
                             <li class="col-sm-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><h4>Max Crew</h4></div>
@@ -169,208 +170,209 @@
                                 </div>
                             </li>
                         </ul>
-                    }
+                        }
 
-                    @{
-                        var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
-                        var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
+                        @{
+                    var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
+                    var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
 
-                        var enginesByMaxSize = engines.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                        var enginesBySize = engines.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
+                    var enginesByMaxSize = engines.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                    var enginesBySize = engines.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
 
-                        var thrustersByMaxSize = thrusters.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                        var thrustersBySize = thrusters.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
+                    var thrustersByMaxSize = thrusters.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
+                    var thrustersBySize = thrusters.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
 
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h4>Propulsion</h4></div>
+                            <div class="panel-heading"><h4>Engine</h4></div>
                             <div class="panel-body">
                                 <ul class="list-unstyled">
                                     @if (enginesByMaxSize.Count > 0)
                                     {
                                         var engineMaxSize = enginesByMaxSize.Max(k => k.Key);
 
-                                        <li class="row">
-                                            <label class="col-md-6">Engines</label>
-                                            <dl class="col-md-6 list-unstyled">
-                                                <dl>
-                                                    @foreach (var size in Enumerable.Range(1, engineMaxSize).Reverse())
+                                    <li class="row">
+                                        <label class="col-md-6">Engines</label>
+                                        <dl class="col-md-6 list-unstyled">
+                                            <dl>
+                                                @foreach (var size in Enumerable.Range(1, engineMaxSize).Reverse())
                                                     {
                                                         var maxEngines = enginesByMaxSize.GetValue(size, new List<InventoryItem> { });
                                                         var sizeEngines = enginesBySize.GetValue(size, new List<InventoryItem> { });
 
                                                         if (maxEngines.Count + sizeEngines.Count > 0)
                                                         {
-                                                            <dt>
-                                                                <label>TR</label>
-                                                                <span>@size</span>
-                                                            </dt>
-                                                            <dd>@sizeEngines.Count / @maxEngines.Count</dd>
+                                                    <dt>
+                                                        <label>TR</label>
+                                                        <span>@size</span>
+                                                    </dt>
+                                                    <dd>@sizeEngines.Count / @maxEngines.Count</dd>
                                                         }
                                                     }
-                                                </dl>
                                             </dl>
-                                        </li>
+                                        </dl>
+                                    </li>
                                     }
                                     @if (thrustersByMaxSize.Count > 0)
                                     {
                                         var thrusterMaxSize = thrustersByMaxSize.Max(k => k.Key);
 
-                                        <li class="row">
-                                            <label class="col-md-6">Thrusters</label>
-                                            <dl class="col-md-6">
-                                                <dl>
-                                                    @foreach (var size in Enumerable.Range(1, thrusterMaxSize).Reverse())
+                                    <li class="row">
+                                        <label class="col-md-6">Thrusters</label>
+                                        <dl class="col-md-6">
+                                            <dl>
+                                                @foreach (var size in Enumerable.Range(1, thrusterMaxSize).Reverse())
                                                     {
                                                         var maxThrusters = thrustersByMaxSize.GetValue(size, new List<InventoryItem> { });
                                                         var sizeThrusters = thrustersBySize.GetValue(size, new List<InventoryItem> { });
 
                                                         if (maxThrusters.Count + sizeThrusters.Count > 0)
                                                         {
-                                                            <dt>
-                                                                <label>TR</label>
-                                                                <span>@size</span>
-                                                            </dt>
-                                                            <dd>@sizeThrusters.Count / @maxThrusters.Count</dd>
+                                                    <dt>
+                                                        <label>TR</label>
+                                                        <span>@size</span>
+                                                    </dt>
+                                                    <dd>@sizeThrusters.Count / @maxThrusters.Count</dd>
                                                         }
                                                     }
-                                                </dl>
                                             </dl>
-                                        </li>
+                                        </dl>
+                                    </li>
                                     }
                                     @if (thrustersByMaxSize.Count == 0 && enginesByMaxSize.Count == 0)
                                     {
-                                        <li class="alert alert-danger">Propulsion Offline</li>
+                                    <li class="alert alert-danger">Propulsion Offline</li>
                                     }
 
                                 </ul>
                             </div>
                         </div>
-                    }
-                </div>
-                <div class="col-md-6 col-sm-12" id="description">
-                    Description goes here
-                </div>
-            </div>
-
-            <div class="tab-pane" id="weapons">
-                <div class="col-md-6 col-sm-12" id="ship_weapons">
-                    @{
-                        var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
-                        var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
-                        var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack") || i.GameData_EquippedPort.Types.Select(t => t.Type).Any(t => t == "WeaponMissile"));
-                        var weaponsByMaxSize = weapons.Concat(racks).GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-
-                        if (weaponsByMaxSize.Count > 0)
-                        {
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><h4>Hardpoints</h4></div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled">
-                                        @foreach (var size in weaponsByMaxSize.Keys.OrderBy(k => k))
-                                        {
-                                            <li class="row">
-                                                <label class="col-md-4">Size @size</label>
-                                                <ul class="list-unstyled col-md-6">
-                                                    @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
-                                                    {
-                                                        <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                            @if (item.Inventory_Item != null)
-                                                            {
-                                                                @:@item.Item_DisplayName (@item.ItemSize)
-                                                    }
-                                                            else
-                                                            {
-                                                                @:Empty
-                                                    }
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
                         }
-                    }
+                    </div>
+                    <div class="col-md-6 col-sm-12" id="description">
+                        Description goes here
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-12" id="inventory_weapons">
-                    @RenderItemCategory("Weapons", Model.View_CategoryMap[Items.CategoryEnum.Weapon])
-                    @RenderItemCategory("Turrets", Model.View_CategoryMap[Items.CategoryEnum.Turret])
-                    @RenderItemCategory("Missile Racks", Model.View_CategoryMap[Items.CategoryEnum.MissileRack])
-                </div>
-            </div>
 
-            <div class="tab-pane" id="ordinance">
-                <div class="col-md-6 col-sm-12" id="ship_ordinance">
-                    @{
+                <div class="tab-pane row" id="weapons">
+                    <div class="col-md-6 col-sm-12" id="ship_weapons">
+                        @{
+                    var weaponTypes = new String[] { "Turret", "WeaponGun", "TurretBase" };
+                    var weapons = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(weaponTypes).Any());
+                    var racks = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.SubType).Any(t => t == "MissileRack") || i.GameData_EquippedPort.Types.Select(t => t.Type).Any(t => t == "WeaponMissile"));
+                    var weaponsByMaxSize = weapons.Concat(racks).GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
 
-                        var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
-                        var ammo = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(ammoTypes).Any());
-                        var ammoByMaxSize = ammo.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-
-                        if (ammoByMaxSize.Count > 0)
-                        {
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><h4>Ammo</h4></div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled">
-                                        @foreach (var size in ammoByMaxSize.Keys.OrderBy(k => k))
-                                        {
-                                            <li class="row">
-                                                <label class="col-md-4">Size @size</label>
-                                                <ul class="list-unstyled col-md-6">
-                                                    @foreach (var item in ammoByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                    if (weaponsByMaxSize.Count > 0)
+                    {
+                        <div class="panel panel-cig panel-default">
+                            <div class="panel-heading"><h4>Hardpoints</h4></div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    @foreach (var size in weaponsByMaxSize.Keys.OrderBy(k => k))
+                                    {
+                                    <li class="row">
+                                        <label class="col-md-3">Size @size</label>
+                                        <ul class="list-unstyled col-md-9">
+                                            @foreach (var item in weaponsByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                            {
+                                                <li class="js-hardpoint" @item.HTML_Attributes title="@item.Port_DisplayName" data-content="@item.Item_DisplayName" data-droppable="true" data-toggle="popover" data-placement="top" data-trigger="hover focus click">
+                                                    @if (item.Inventory_Item != null)
                                                     {
-                                                        <li @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
-                                                            @if (item.Inventory_Item != null)
-                                                            {
-                                                                @:@item.Item_DisplayName (@item.ItemSize)
+                                                        <span>@item.Item_DisplayName (@item.ItemSize)</span>
                                                     }
-                                                            else
-                                                            {
-                                                                @:Empty
+                                                    else
+                                                    {
+                                                        <span>Empty</span>
                                                     }
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                    }
+                                </ul>
                             </div>
-                        }
+                        </div>
                     }
+                        }
+                    </div>
+                    <div class="col-md-6 col-sm-12" id="inventory_weapons">
+                        @RenderItemCategory("Weapons", Model.View_CategoryMap[Items.CategoryEnum.Weapon])
+                        @RenderItemCategory("Turrets", Model.View_CategoryMap[Items.CategoryEnum.Turret])
+                        @RenderItemCategory("Missile Racks", Model.View_CategoryMap[Items.CategoryEnum.MissileRack])
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-12" id="inventory_ordinance">
-                    @RenderItemCategory("Missiles", Model.View_CategoryMap[Items.CategoryEnum.Missile])
-                    @RenderItemCategory("Ammo", Model.View_CategoryMap[Items.CategoryEnum.AmmoBox])
-                </div>
-                
-            </div>
 
-            <div class="tab-pane" id="shields">
-                <div class="col-md-6 col-sm-12" id="ship_shields">
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Armor)
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Shield)
-                </div>
-                <div class="col-md-6 col-sm-12" id="inventory_shields">
-                    @RenderItemCategory("Armor", Model.View_CategoryMap[Items.CategoryEnum.Armor])
-                    @RenderItemCategory("Shields", Model.View_CategoryMap[Items.CategoryEnum.Shield])
-                </div>
-            </div>
+                <div class="tab-pane row" id="ordinance">
+                    <div class="col-md-6 col-sm-12" id="ship_ordinance">
+                        @{
 
-            <div class="tab-pane" id="other">
-                <div class="col-md-6 col-sm-12" id="ship_other">
-                    @*@RenderHardpoints(null, null, Items.CategoryEnum.__Empty__)*@
-                    @RenderHardpoints(null, null, Items.CategoryEnum.PowerPlant)
-                    @RenderHardpoints(null, null, Items.CategoryEnum.Storage)
-                    @RenderHardpoints(null, null, Items.CategoryEnum.__Unknown__)
-                </div>
-                <div class="col-md-6 col-sm-12" id="inventory_other">
+                    var ammoTypes = new String[] { "AmmoBox", "Ordinance" };
+                    var ammo = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Select(t => t.Type).Intersect(ammoTypes).Any());
+                    var ammoByMaxSize = ammo.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
 
+                    if (ammoByMaxSize.Count > 0)
+                    {
+                        <div class="panel panel-cig">
+                            <div class="panel-heading"><h4>Ammo</h4></div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    @foreach (var size in ammoByMaxSize.Keys.OrderBy(k => k))
+                                    {
+                                        <li class="row">
+                                            <label class="col-md-3">Size @size</label>
+                                            <ul class="list-unstyled col-md-9">
+                                                @foreach (var item in ammoByMaxSize[size].OrderBy(i => i.ItemSize ?? 99))
+                                                {
+                                                    <li class="js-hardpoint" @item.HTML_Attributes title="@item.Port_DisplayName" data-droppable="true">
+                                                        @if (item.Inventory_Item != null)
+                                                        {
+                                                            <span>@item.Item_DisplayName (@item.ItemSize)</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Empty</span>
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                        }
+                    </div>
+                    <div class="col-md-6 col-sm-12" id="inventory_ordinance">
+                        @RenderItemCategory("Missiles", Model.View_CategoryMap[Items.CategoryEnum.Missile])
+                        @RenderItemCategory("Ammo", Model.View_CategoryMap[Items.CategoryEnum.AmmoBox])
+                    </div>
+
+                </div>
+
+                <div class="tab-pane row" id="shields">
+                    <div class="col-md-6 col-sm-12" id="ship_shields">
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Armor)
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Shield)
+                    </div>
+                    <div class="col-md-6 col-sm-12" id="inventory_shields">
+                        @RenderItemCategory("Armor", Model.View_CategoryMap[Items.CategoryEnum.Armor])
+                        @RenderItemCategory("Shields", Model.View_CategoryMap[Items.CategoryEnum.Shield])
+                    </div>
+                </div>
+
+                <div class="tab-pane row" id="other">
+                    <div class="col-md-6 col-sm-12" id="ship_other">
+                        @*@RenderHardpoints(null, null, Items.CategoryEnum.__Empty__)*@
+                        @RenderHardpoints(null, null, Items.CategoryEnum.PowerPlant)
+                        @RenderHardpoints(null, null, Items.CategoryEnum.Storage)
+                        @RenderHardpoints(null, null, Items.CategoryEnum.__Unknown__)
+                    </div>
+                    <div class="col-md-6 col-sm-12" id="inventory_other">
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>

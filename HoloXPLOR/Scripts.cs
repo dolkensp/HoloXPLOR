@@ -347,10 +347,12 @@ namespace HoloXPLOR.Data
                     vehicle.DisplayName = "Vanduul Glaive";
                     vehicle.Name = "VNCL_Glaive_Tutorial";
                     break;
+                case "AEGS_Avenger_Titan":
                 case "AEGS_Avenger_Stalker_Titan":
                     vehicle.Name = "AEGS_Avenger_Titan";
                     vehicle.DisplayName = "Aegis Avenger Titan";
                     break;
+                case "AEGS_Avenger_Warlock":
                 case "AEGS_Avenger_Stalker_Warlock":
                     vehicle.Name = "AEGS_Avenger_Warlock";
                     vehicle.DisplayName = "Aegis Avenger Warlock";
@@ -369,6 +371,10 @@ namespace HoloXPLOR.Data
                     break;
                 case "AEGS_Redeemer":
                     vehicle.DisplayName = "Aegis Redeemer";
+                    break;
+                default:
+                    if (String.IsNullOrWhiteSpace(vehicle.DisplayName))
+                        vehicle.DisplayName = vehicle.Name;
                     break;
             }
 
