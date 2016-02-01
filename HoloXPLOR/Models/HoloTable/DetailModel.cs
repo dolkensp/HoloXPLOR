@@ -169,7 +169,8 @@ namespace HoloXPLOR.Models.HoloTable
 
                     this._view_CategoryLoadout = this._view_CategoryLoadout ??
                         (from item in this.View_Loadout
-                         let key = item.GameData_Item == null ? Items.CategoryEnum.__Empty__ : item.GameData_Item.ItemCategory
+                         let keys = item.GameData_Item == null ? item.GameData_EquippedPort.ItemCategories : new Items.CategoryEnum[] { item.GameData_Item.ItemCategory }
+                         from key in keys
                          group item by key into groupedItems
                          select groupedItems).ToDictionary(k => k.Key, v => v.ToList());
 
@@ -248,9 +249,9 @@ namespace HoloXPLOR.Models.HoloTable
                 if (this._view_LoadoutMap == null)
                 {
                     var shipPorts = (from ship in this.Player.Ships
-                                     
+
                                      where this.ShipID == Guid.Empty || this.ShipID == ship.ID
-                                     
+
                                      let gameShip = this.GameData_ShipMap.GetValue(ship.ID, null)
                                      where gameShip != null
 
@@ -305,7 +306,6 @@ namespace HoloXPLOR.Models.HoloTable
                 return this._view_LoadoutMap;
             }
         }
-
 
         private Dictionary<Items.CategoryEnum, Dictionary<Guid, InventoryItem>> _view_CategoryMap;
         public Dictionary<Items.CategoryEnum, Dictionary<Guid, InventoryItem>> View_CategoryMap
@@ -378,6 +378,52 @@ namespace HoloXPLOR.Models.HoloTable
             }
         }
 
+        public String ShipDescription
+        {
+            get
+            {
+                return Scripts.ShipJsonMap.GetValue(
+                    Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0),
+                    new ShipMatrixJson { Description = "[REDACTED]" }).Description;
+            }
+        }
+
+        public String ShipName
+        {
+            get
+            {
+                return (this.ShipJson ?? new ShipMatrixJson { Name = this.GameData_Ship.DisplayName })
+                    .Name;
+            }
+        }
+
+        public Int32? ShipCargo
+        {
+            get
+            {
+                return (this.ShipJson ?? new ShipMatrixJson { })
+                    .CargoCapacity;
+            }
+        }
+
+        public String ShipImage
+        {
+            get
+            {
+                return (this.ShipJson ?? new ShipMatrixJson { Media = new ShipMatrixMediaJson[] { new ShipMatrixMediaJson { SourceURL = "http://placehold.it/800x600" } } })
+                    .Media[0]
+                    .SourceURL
+                    .Replace("/media", "http://robertsspaceindustries.com/media")
+                    .Replace("/source/", "/store_slideshow_small_zoom/");
+            }
+        }
+
+        public ShipMatrixJson ShipJson
+        {
+            get { return Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0), null); }
+        }
+
+
         #endregion
 
         #region Inventory
@@ -431,7 +477,7 @@ namespace HoloXPLOR.Models.HoloTable
                      where vehicle2 != null
                      where vehicle2.Name != "GRIN_PTV"
                      orderby vehicle2.DisplayName
-                     select new 
+                     select new
                      {
                          Key = ship.ID,
                          Value = vehicle2

@@ -13,6 +13,7 @@ using Inventory = HoloXPLOR.Data.XML.Inventory;
 using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
 using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
+using HoloXPLOR.Models;
 
 namespace System
 {
@@ -59,7 +60,7 @@ namespace HoloXPLOR.Data
                                 continue;
 
                             item = Scripts._CleanEdgeCases(item);
-                            
+
                             Scripts._items[item.Name] = Scripts._CleanEdgeCases(item);
 #if !DEBUG || DEBUG
                         }
@@ -109,6 +110,13 @@ namespace HoloXPLOR.Data
 
                         if (vehicle.Name == "CNOU_Mustang")
                             Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
+
+                        if (vehicle.Name == "ORIG")
+                            Scripts._vehicles["ORIG_300i"] = vehicle;
+
+                        if (vehicle.Name == "AEGS_Avenger")
+                            Scripts._vehicles["AEGS_Avenger_Stalker"] = vehicle;
+
                         // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
                         //     Scripts._vehicles["AEGS_Avenger_Warlock"] = vehicle;
                         // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
@@ -228,21 +236,21 @@ namespace HoloXPLOR.Data
                         item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
                         item.Params["itemSubType"] = "Ammo_CounterMeasure";
                         break;
-                    case "20mm_AMMO":         item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "24mm_AMMO":         item.DisplayName = String.Format("{0} 24mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "25mm_AMMO":         item.DisplayName = String.Format("{0} 25mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "30mm_AMMO":         item.DisplayName = String.Format("{0} 30mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "35mm_AMMO":         item.DisplayName = String.Format("{0} 35mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "40mm_AMMO":         item.DisplayName = String.Format("{0} 40mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "40mm_5km_AMMO":     item.DisplayName = String.Format("{0} 40mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "20mm_AMMO": item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "24mm_AMMO": item.DisplayName = String.Format("{0} 24mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "25mm_AMMO": item.DisplayName = String.Format("{0} 25mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "30mm_AMMO": item.DisplayName = String.Format("{0} 30mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "35mm_AMMO": item.DisplayName = String.Format("{0} 35mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "40mm_AMMO": item.DisplayName = String.Format("{0} 40mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "40mm_5km_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
                     case "40mm_5km_exp_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells (5km)", item.AmmoBox["max_ammo_count"]); break;
-                    case "50mm_AMMO":         item.DisplayName = String.Format("{0} 50mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "60mm_AMMO":         item.DisplayName = String.Format("{0} 60mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "60mm_Rail_AMMO":    item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
-                    case "80mm_AMMO":         item.DisplayName = String.Format("{0} 80mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "80mm_Rail_AMMO":    item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
-                    case "106mm_exp_AMMO":    item.DisplayName = String.Format("{0} 106mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "Rocket_AMMO":       item.DisplayName = String.Format("{0} Delta Rockets", item.AmmoBox["max_ammo_count"]); break;
+                    case "50mm_AMMO": item.DisplayName = String.Format("{0} 50mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "60mm_AMMO": item.DisplayName = String.Format("{0} 60mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "60mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
+                    case "80mm_AMMO": item.DisplayName = String.Format("{0} 80mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "80mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
+                    case "106mm_exp_AMMO": item.DisplayName = String.Format("{0} 106mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "Rocket_AMMO": item.DisplayName = String.Format("{0} Delta Rockets", item.AmmoBox["max_ammo_count"]); break;
                     default: item.DisplayName = String.Format("{0} {1}", item.AmmoBox["max_ammo_count"], item.AmmoBox["ammo_name"].Replace("_", " ")); break;
                 }
             }
@@ -264,12 +272,16 @@ namespace HoloXPLOR.Data
                 case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
                 case "ANVL_Gladiator_Turret_Ball_S2_Q2": item.DisplayName = "Gladiator S4 Ball Turret"; break;
                 case "DRAK_Cutlass_Turret": item.DisplayName = "Cutlass Manned Turret"; break;
-                case "drak_cutlass_s1_q2": item.DisplayName = "Cutlass Manned Turret"; break;
+                case "MISC_Freelancer_Turret": item.DisplayName = "Freelancer Manned Turret"; break;
+                case "AEGS_Vanguard_Turret": item.DisplayName = "Vanguard Manned Turret"; break;
+                case "AEGS_Retaliator_Turret": item.DisplayName = "Retaliator Manned Turret"; break;
+                case "item_Deskdrak_cutlass_s1_q2": item.DisplayName = "Cutlass Manned Turret"; break;
                 case "BRRA_HornetCanard_S2_Q1": item.DisplayName = "Hornet S3 Canard Mount"; break;
                 case "BRRA_HornetBall_S2_Q1": item.DisplayName = "Hornet S5 Ball Turret"; break;
                 case "CNOU_Mustang_S1_Q2": item.DisplayName = "Consolidated Outland Ball Turret"; break;
                 // case "BRRA_HornetBall_160f_S1_Q2": item.DisplayName = "Hornet S5 Ball Turret"; break;
-                case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S5 Fixed Mount"; break;
+                case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S4 Fixed Mount"; break;
+                case "DRAK_Fixed_Mount_S4": item.DisplayName = "Cutlass S4 Fixed Mount"; break;
                 case "BEHR_PC2_Dual_S4_Fixed": item.DisplayName = "Behring S4 Twin Rack"; break;
                 case "AEGS_S2_Rack_x4": item.DisplayName = "Aegis S2 Quad Rack"; break;
                 case "ANVL_S5_Rack_x2": item.DisplayName = "Anvil S5 Twin Rack"; break;
@@ -278,7 +290,7 @@ namespace HoloXPLOR.Data
                 case "Talon_Stalker_Platform_x2": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
                 case "Talon_Stalker_Platform_x4": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
                 case "VNCL_Mark_Platform_x4": item.DisplayName = "Vanduul S1 Quad Rack"; break;
-                
+
                 case "Mount_Gimbal_S1": item.DisplayName = "S1 Gimbal Mount"; break;
                 case "Mount_Gimbal_S2": item.DisplayName = "S2 Gimbal Mount"; break;
                 case "Mount_Gimbal_S3": item.DisplayName = "S3 Gimbal Mount"; break;
@@ -313,6 +325,11 @@ namespace HoloXPLOR.Data
                 case "AMRS_LaserCannon_S1": item.DisplayName = "Omnisky III Laser Cannon"; break;
                 case "AMRS_LaserCannon_S2": item.DisplayName = "Omnisky VI Laser Cannon"; break;
                 case "CNOU_Delta_RocketPod_x18": item.DisplayName = "R-18 rocket pod"; break;
+
+                case "VNCL_MissileRack_Blade": item.DisplayName = "Vanduul Blade"; break;
+                case "RSI_Constellation_Turret": item.DisplayName = "Constellation Turret"; break;
+                case "RSI_Constellation_MissilePod_S2_x3": item.DisplayName = "Constellation S2 Triple Rack"; break;
+                case "RSI_Constellation_MissilePod_S1_x7": item.DisplayName = "Constellation S1 Heavy Rack"; break;
             }
 
             #endregion
@@ -358,6 +375,7 @@ namespace HoloXPLOR.Data
                     vehicle.DisplayName = "Aegis Avenger Warlock";
                     break;
                 case "AEGS_Avenger_Stalker":
+                    vehicle.Name = "AEGS_Avenger";
                     vehicle.DisplayName = "Aegis Avenger Stalker";
                     break;
                 case "AEGS_Retaliator":
@@ -415,7 +433,10 @@ namespace HoloXPLOR.Data
                     {
                         #region Turret Port Names
 
+                        { "Countermeasure Launcher", "CounterMeasure Launcher" },
                         { "turrethelper", "Manned Turret" },
+                        { "RSI_Constellation_Turret_Base", "Constellation Turret"},
+                        { "MISC_Freelancer_Turret_Base", "Freelancer Turret"},
 
                         { "turret_left", "Left Turret Slot"},
                         { "turret_right", "Right Turret Slot"},
@@ -433,11 +454,15 @@ namespace HoloXPLOR.Data
                         { "hardpoint_turret_frontbottom", "Front Bottom Turret" },
                         
                         { "right wing Class 1 Slot", "Right Wing Class 1 Slot" },
-                        
+
                         #endregion
 
                         #region Shield Port Names
 
+                        { "hardpoint_shield_generator", "Shield Generator" },
+                        { "hardpoint_shield_generator_01", "Shield Generator" },
+                        { "hardpoint_shield_generator_02", "Shield Generator" },
+                        { "hardpoint_shield_generator_03", "Shield Generator" },
                         { "hardpoint_shieldgenerator_left", "Left Shield" },
                         { "hardpoint_shieldgenerator_right", "Right Shield" },
 
@@ -446,6 +471,11 @@ namespace HoloXPLOR.Data
                         #region Power Plant Port Names
 
                         { "hardpoint_powerplant", "Power Plant" },
+                        { "hardpoint_powerplant_left", "Left Power Plant" },
+                        { "hardpoint_powerplant_Right", "Right Power Plant" },
+                        { "hardpoint_power_plant_attach", "Power Plant" },
+                        { "hardpoint_power_plant_attach_01", "Power Plant" },
+                        { "hardpoint_power_plant_attach_02", "Power Plant" },
 
                         #endregion
 
@@ -547,6 +577,82 @@ namespace HoloXPLOR.Data
                 return Scripts._localization;
             }
         }
+
+        private static Dictionary<Int32, ShipMatrixJson> _shipJsonMap;
+        public static Dictionary<Int32, ShipMatrixJson> ShipJsonMap
+        {
+            get { return _shipJsonMap = _shipJsonMap ?? File.ReadAllText(HttpContext.Current.Server.MapPath(@"~/App_Data/shipmatrix.json")).FromJSON<ShipMatrixJson[]>().ToDictionary(k => k.ID, v => v); }
+        }
+
+        public static Dictionary<String, Int32> ShipJsonLookup = new Dictionary<String, Int32>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            { "ANVL_Hornet_F7CR", 14 },
+            { "ANVL_Hornet_F7CS", 13 },
+            { "ANVL_Hornet_F7CM", 15 },
+            { "ANVL_Hornet_F7C", 11 },
+            { "ANVL_Hornet_F7A", 37 },
+            { "RSI_Aurora_CL", 5 },
+            { "RSI_Aurora_ES", 1 },
+            { "RSI_Aurora_LN", 6 },
+            { "RSI_Aurora_LX", 3 },
+            { "RSI_Aurora_MR", 4 },
+            { "AEGS_Avenger", 100 },
+            { "AEGS_Avenger_Stalker", 100 },
+            { "AEGS_Avenger_Titan", 102 },
+            { "AEGS_Avenger_Warlock", 101 },
+            { "ANVL_Gladiator", 64 },
+            { "AEGS_Gladius", 60 },
+            { "ORIG", 7 },
+            { "ORIG_300i", 7 },
+            { "ORIG_315p", 8 },
+            { "ORIG_325a", 9 },
+            { "ORIG_350R", 10 },
+            { "MISC_Starfarer", 88 },
+            { "MISC_Starfarer_Gemini", 89 },
+            { "RSI_Constellation", 45 },
+            { "RSI_Constellation_Andromeda", 45 },
+            { "RSI_Constellation_Taurus", 46 },
+            { "RSI_Constellation_Phoenix", 49 },
+            { "RSI_Constellation_Aquila", 47 },
+            { "DRAK_Cutlass", 56 },
+            { "DRAK_Cutlass_Black", 56 },
+            { "DRAK_Cutlass_Red", 57 },
+            { "DRAK_Cutlass_Blue", 58 },
+            { "DRAK_Caterpillar", 24 },
+            { "VNCL_Glaive", 93 },
+            { "VNCL_Scythe", 26 },
+            { "AEGS_Vanguard", 75 },
+            { "AEGS_Vanguard_Warden", 75 },
+            { "AEGS_Vanguard_Harbringer", 95 },
+            { "AEGS_Vanguard_Sentinel", 96 },
+            { "AEGS_Idris", 27 },
+            { "AEGS_Idris_M", 27 },
+            { "AEGS_Idris_P", 28 },
+            { "AEGS_Retaliator", 72 },
+            { "AEGS_Retaliator_Bomber", 72 },
+            { "AEGS_Retaliator_Base", 99 },
+            { "MISC_Freelancer", 16 },
+            { "MISC_Freelancer_Base", 16 },
+            { "MISC_Freelancer_DUR", 31 },
+            { "MISC_Freelancer_MAX", 32 },
+            { "MISC_Freelancer_MIS", 33 },
+            { "ORIG_m50", 22 },
+            { "CNOU_Mustang", 65 },
+            { "CNOU_Mustang_Alpha", 65 },
+            { "CNOU_Mustang_Beta", 66 },
+            { "CNOU_Mustang_Delta", 69 },
+            { "CNOU_Mustang_Gamma", 67 },
+            { "CNOU_Mustang_Omega", 70 },
+            { "Xian_Khartu", 35 },
+            { "Xian_Khartu_Al", 35 },
+            { "Xian_Scout", 35 },
+            { "Banu_Merchantman", 36 },
+            { "ORIG_890_Jump", 55 },
+            { "KRIG_P52_Merlin", 92 },
+            { "KRIG_P72_Archimedes", 104 },
+            { "AEGS_Redeemer", 59 },
+            { "AEGS_Sabre", 98 },
+        };
 
         // https://robertsspaceindustries.com/media/kksqne0o8pi8tr/heap_infobox/BroadSword.jpg
         // https://robertsspaceindustries.com/media/kksqne0o8pi8tr/store_small/BroadSword.jpg

@@ -6,6 +6,7 @@ using Inventory = HoloXPLOR.Data.XML.Inventory;
 using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
 using Items = HoloXPLOR.Data.XML.Spaceships;
 using System.Text;
+using HoloXPLOR.Data;
 
 namespace HoloXPLOR.Models.HoloTable
 {
@@ -48,6 +49,9 @@ namespace HoloXPLOR.Models.HoloTable
                 if (this.GameData_EquippedPort != null)
                 {
                     sb.Append(this.GameData_EquippedPort.HTML_Attributes);
+
+                    if (!String.IsNullOrWhiteSpace(this.GameData_EquippedPort.DisplayName))
+                        sb.AppendFormat(@" data-port-name=""{0}""", Scripts.Localization.GetValue(this.GameData_EquippedPort.DisplayName, this.GameData_EquippedPort.DisplayName));
                 }
                 if (this.Inventory_EquippedItem != null)
                 {
@@ -56,6 +60,7 @@ namespace HoloXPLOR.Models.HoloTable
                 if (this.GameData_EquippedItem != null)
                 {
                     sb.Append(this.GameData_EquippedItem.HTML_Attributes.Replace("data-item-", "data-parent-"));
+                    sb.AppendFormat(@" data-parent-name=""{0}""", Scripts.Localization.GetValue(this.GameData_EquippedItem.DisplayName, this.GameData_EquippedItem.DisplayName));
                 }
 
                 return new HtmlString(sb.ToString().Trim());

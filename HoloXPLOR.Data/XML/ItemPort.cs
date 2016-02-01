@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HoloXPLOR.Data.XML.Spaceships;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace HoloXPLOR.Data.XML
     {
         [XmlAttribute(AttributeName = "name")]
         public String Name { get; set; }
-        
+
         [XmlAttribute(AttributeName = "display_name")]
         public String DisplayName { get; set; }
 
@@ -28,11 +29,11 @@ namespace HoloXPLOR.Data.XML
 
         [XmlAttribute(AttributeName = "requiredItemTags")]
         public String RequiredItemTags { get; set; }
-        
+
         [XmlAttribute(AttributeName = "minsize")]
         [DefaultValue(0)]
         public Int32 MinSize { get; set; }
-        
+
         [XmlAttribute(AttributeName = "maxsize")]
         [DefaultValue(0)]
         public Int32 MaxSize { get; set; }
@@ -54,7 +55,9 @@ namespace HoloXPLOR.Data.XML
                 StringBuilder sb = new StringBuilder();
 
                 if (!String.IsNullOrWhiteSpace(this.Name))
-                    sb.AppendFormat(@" data-port-name=""{0}""", this.Name);
+                    sb.AppendFormat(@" data-port-id=""{0}""", this.Name);
+                // if (!String.IsNullOrWhiteSpace(this.DisplayName))
+                //     sb.AppendFormat(@" data-port-name=""{0}""", this.DisplayName);
                 if (this.MinSize != 0)
                     sb.AppendFormat(@" data-port-min-size=""{0}""", this.MinSize);
                 if (this.MaxSize != 0)
@@ -69,6 +72,62 @@ namespace HoloXPLOR.Data.XML
                     sb.AppendFormat(@" data-port-types=""{0}""", String.Join(",", this.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType).Trim(':'))));
 
                 return sb.ToString();
+            }
+        }
+
+        [XmlIgnore]
+        public IEnumerable<CategoryEnum> ItemCategories
+        {
+            get
+            {
+                foreach (var t in this.Types)
+                {
+                    switch (t.Type)
+                    {
+                        case "Armor":
+                            yield return CategoryEnum.Armor;
+                            break;
+                        case "Shield":
+                            yield return CategoryEnum.Shield;
+                            break;
+                        case "MainThruster":
+                            yield return CategoryEnum.Engine;
+                            break;
+                        case "ManneuverThruster":
+                            yield return CategoryEnum.Thruster;
+                            break;
+                        case "Ordinance":
+                            if (t.SubType == "Missile")
+                                yield return CategoryEnum.Missile;
+                            else
+                                yield return CategoryEnum.__Unknown__;
+                            break;
+                        case "WeaponMissile":
+                            yield return CategoryEnum.MissileRack;
+                            break;
+                        case "AmmoBox":
+                            if (t.SubType == "Ammo_CounterMeasure")
+                                yield return CategoryEnum.CounterMeasure;
+                            else
+                                yield return CategoryEnum.AmmoBox;
+                            break;
+                        case "Turret":
+                            yield return CategoryEnum.Turret;
+                            break;
+                        case "WeaponGun":
+                            yield return CategoryEnum.Weapon;
+                            break;
+                        case "Container":
+                            yield return CategoryEnum.Storage;
+                            break;
+                        case "PowerPlant":
+                            yield return CategoryEnum.PowerPlant;
+                            break;
+                        default:
+                            yield return CategoryEnum.__Unknown__;
+                            break;
+                    }
+                }
             }
         }
     }

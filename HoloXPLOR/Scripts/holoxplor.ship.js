@@ -6,8 +6,81 @@ $(document).ready(function () {
 
     if ($form.length == 0) return;
 
+    var fadeTimer = null;
+    var $source = null;
+
+    var getInfo = function($target)
+    {
+        var $markup = $('<div>');
+
+        if ($target.data('empty') != undefined)
+        {
+            $markup = $('<h4 class="alert-danger">Remove Item</h4>');
+            return $markup;
+        }
+
+        if ($target.hasClass('js-available')) {
+            $markup.append('<h4>Available</h4>');
+        } else {
+            $markup.append('<h4>Equipped</h4>');
+        }
+        $markup.append('<p><strong>Name:</strong> ' + $target.attr('title') + '</p>');
+        if ($target.data('item-size') != undefined) {
+            $markup.append('<p><strong>Size:</strong> ' + $target.data('item-size') + '</p>');
+        }
+        if ($target.data('parent-name') != undefined && $target.data('port-name') != undefined) {
+            $markup.append('<p><strong>Mount:</strong> ' + $target.data('parent-name') + ' - ' + $target.data('port-name') + '</p>');
+        }
+        if ($target.data('parent-name') == undefined && $target.data('port-name') != undefined) {
+            $markup.append('<p><strong>Mount:</strong> ' + $target.data('port-name') + '</p>');
+        }
+
+        return $markup;
+    }
+
+    var hideInfo = function (timeout) {
+        window.clearTimeout(fadeTimer);
+        fadeTimer = window.setTimeout(function () {
+            var $markup = $('<div class="panel-body js-info">');
+
+            if ($source != null) {
+                $markup.append(getInfo($source));
+            } else {
+                $markup.html('Hover over an item to see more information');
+            }
+
+            $('.js-info').replaceWith($markup);
+        }, timeout);
+    };
+
+    var showInfo = function ($target) {
+        window.clearTimeout(fadeTimer);
+        var $markup = $('<div class="panel-body js-info">');
+        var $equipped = $target;
+        var $available = $source;
+
+        if ($target.hasClass('js-available'))
+        {
+            $equipped = $source;
+            $available = $target;
+        }
+
+        if ($equipped != null && $equipped != $available) {
+            $markup.append(getInfo($equipped));
+        }
+
+        if ($available != null) {
+            $markup.append(getInfo($available));
+        }
+
+        $('.js-info').replaceWith($markup);
+    }
+
     var acceptItem = function ($item) {
         var $port = $(this);
+
+        if ($port.data('empty') != undefined)
+            return true;
 
         // ensure we're always checking the item vs the port
         if (!$item.hasClass('js-available') && $port.hasClass('js-available')) {
@@ -73,20 +146,93 @@ $(document).ready(function () {
     }
 
     var bindAll = function (parent) {
+
         $("[data-draggable]:not(.js-equipped):not(.js-draggable)").addClass('js-draggable').draggable({
             helper: "clone",
-            appendTo: "body"
+            appendTo: "body",
+            cursorAt: { left: 16, top: 16 },
+            start: function () { $source = $(this); showInfo($source); if ($(this).data('equipped') != undefined) $('.js-empty').show(); },
+            stop: function () { $source = null; hideInfo(250); $('.js-empty').hide(); }
         });
 
         $("[data-droppable]:not(.js-droppable)").addClass('js-droppable').droppable({
             accept: acceptItem,
             activeClass: "ui-state-default",
             hoverClass: "ui-state-hover",
-            drop: dropItem
+            drop: dropItem,
+            over: function() { showInfo($(this)) },
+            out: function () { hideInfo(250) }
         });
 
-        $("li.js-hardpoint:not(.js-tooltip)").addClass('js-tooltip').popover({
-            template: '<div class="popover popover-cig" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+        $("li.js-hardpoint:not(.js-tooltip)").addClass('js-tooltip').on('mouseover', function () {
+            if ($source == null) showInfo($(this))
+        }).on('mouseout', function () {
+            if ($source == null) hideInfo(500)
+        });
+
+        // popover({
+        //     template: '<div class="popover popover-cig" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+        // });
+
+
+        var $panecontainer = $('#primary-pane');
+        var isscrolling = false;
+        var $currscrollbar = $('#primary-pane-scrollbar');
+        var scrollbarpos;
+        var $currcontent;
+        var $infocontent;
+
+        // Scrolling
+        $currscrollbar.on('mousedown', function (e) {
+            isscrolling = true;
+            $currcontent = $('.active .js-scrollable');
+            scrollbarpos = e.pageY - $currscrollbar.offset().top;
+            $('body').addClass('shipcatalogue_scrollingcursor');
+            $currscrollbar.find('span').addClass('shipcatalogue_descscrollbarglow');
+            return false;
+        });
+        $(document).bind('mouseup', function () {
+            if (isscrolling) {
+                isscrolling = false;
+                $('body').removeClass('shipcatalogue_scrollingcursor');
+                $currscrollbar.find('span').removeClass('shipcatalogue_descscrollbarglow');
+            }
+        });
+        $(document).bind('mousemove', function (e) {
+            if (isscrolling) {
+                var newpos = $currscrollbar.position().top - (scrollbarpos - (e.pageY - $currscrollbar.offset().top));
+                var parentH = $panecontainer.height();
+                if (newpos < 15) {
+                    newpos = 15;
+                } else if (newpos > 390) {
+                    newpos = 390;
+                }
+                $currscrollbar.css('top', newpos);
+                if ($currcontent.height() > parentH) {
+                    $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
+                }
+            }
+        });
+        $panecontainer.on('mousewheel', function (e) {
+            if (!isscrolling) {
+                $currcontent = $('.active .js-scrollable');
+                if ($currcontent.length == 0) return;
+
+                var parentH = $panecontainer.height();
+                var offset = (e.originalEvent.wheelDelta / 120 > 0 ? -50 : 50);
+                var newpos = $currscrollbar.position().top + (e.originalEvent.wheelDelta / 120 > 0 ? -50 : 50);
+                if (newpos < 15) {
+                    newpos = 15;
+                } else if (newpos > 390) {
+                    newpos = 390;
+                }
+                $currscrollbar.css('top', newpos);
+                if ($currcontent.height() > parentH) {
+                    $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
+                }
+
+                console.log($currcontent.height(), parentH, newpos, offset, $currscrollbar);
+            }
         });
     }
 
@@ -95,11 +241,11 @@ $(document).ready(function () {
         var $item = $(this);
         var $port = $(ui.draggable);
 
-        if ($item.data('item-id') != null)
-            $item = $('[data-item-id="' + $item.data('item-id') + '"');
-
-        if ($port.data('item-id') != null)
-            $port = $('[data-item-id="' + $port.data('item-id') + '"');
+        // if ($item.data('item-id') != null)
+        //     $item = $('[data-item-id="' + $item.data('item-id') + '"');
+        // 
+        // if ($port.data('item-id') != null)
+        //     $port = $('[data-item-id="' + $port.data('item-id') + '"');
 
         // ensure we're always checking the item vs the port
         if (!$item.hasClass('js-available') && $port.hasClass('js-available')) {
@@ -108,10 +254,20 @@ $(document).ready(function () {
             $port = temp;
         }
 
-        var data = {
-            newPartID: $item.data('item-id'),
-            parentID: $port.data('parent-id'),
-            portName: $port.data('port-name')
+        var data = {};
+
+        if ($item.data('empty') != undefined) {
+            data = {
+                newPartID: '00000000-0000-0000-0000-000000000000',
+                parentID: $port.data('parent-id'),
+                portName: $port.data('port-id')
+            }
+        } else {
+            data = {
+                newPartID: $item.data('item-id'),
+                parentID: $port.data('parent-id'),
+                portName: $port.data('port-id')
+            }
         }
 
         $.ajax({

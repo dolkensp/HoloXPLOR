@@ -1,5 +1,27 @@
-﻿body {
-    padding-top: 50px;
+﻿.gutter-5 .row { margin-left: -5px; margin-right: -5px; }
+.gutter-5 .col-xs-1, .gutter-5 .col-xs-2, .gutter-5 .col-xs-3, .gutter-5 .col-xs-4, .gutter-5 .col-xs-5, .gutter-5 .col-xs-6, .gutter-5 .col-xs-7, .gutter-5 .col-xs-8, .gutter-5 .col-xs-9, .gutter-5 .col-xs-10, .gutter-5 .col-xs-11, .gutter-5 .col-xs-12,
+.gutter-5 .col-sm-1, .gutter-5 .col-sm-2, .gutter-5 .col-sm-3, .gutter-5 .col-sm-4, .gutter-5 .col-sm-5, .gutter-5 .col-sm-6, .gutter-5 .col-sm-7, .gutter-5 .col-sm-8, .gutter-5 .col-sm-9, .gutter-5 .col-sm-10, .gutter-5 .col-sm-11, .gutter-5 .col-sm-12,
+.gutter-5 .col-md-1, .gutter-5 .col-md-2, .gutter-5 .col-md-3, .gutter-5 .col-md-4, .gutter-5 .col-md-5, .gutter-5 .col-md-6, .gutter-5 .col-md-7, .gutter-5 .col-md-8, .gutter-5 .col-md-9, .gutter-5 .col-md-10, .gutter-5 .col-md-11, .gutter-5 .col-md-12,
+.gutter-5 .col-lg-1, .gutter-5 .col-lg-2, .gutter-5 .col-lg-3, .gutter-5 .col-lg-4, .gutter-5 .col-lg-5, .gutter-5 .col-lg-6, .gutter-5 .col-lg-7, .gutter-5 .col-lg-8, .gutter-5 .col-lg-9, .gutter-5 .col-lg-10, .gutter-5 .col-lg-11, .gutter-5 .col-lg-12 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.gutter-5 .panel { margin-bottom: 10px; }
+.gutter-5 h1, .gutter-5 h2, .gutter-5 h3, .gutter-5 h4, .gutter-5 h5 { margin-top: 10px; }
+
+.gutter-10 .row { margin-left: -10px; margin-right: -10px; }
+.gutter-10 .col-xs-1, .gutter-10 .col-xs-2, .gutter-10 .col-xs-3, .gutter-10 .col-xs-4, .gutter-10 .col-xs-10, .gutter-10 .col-xs-6, .gutter-10 .col-xs-7, .gutter-10 .col-xs-8, .gutter-10 .col-xs-9, .gutter-10 .col-xs-10, .gutter-10 .col-xs-11, .gutter-10 .col-xs-12,
+.gutter-10 .col-sm-1, .gutter-10 .col-sm-2, .gutter-10 .col-sm-3, .gutter-10 .col-sm-4, .gutter-10 .col-sm-10, .gutter-10 .col-sm-6, .gutter-10 .col-sm-7, .gutter-10 .col-sm-8, .gutter-10 .col-sm-9, .gutter-10 .col-sm-10, .gutter-10 .col-sm-11, .gutter-10 .col-sm-12,
+.gutter-10 .col-md-1, .gutter-10 .col-md-2, .gutter-10 .col-md-3, .gutter-10 .col-md-4, .gutter-10 .col-md-10, .gutter-10 .col-md-6, .gutter-10 .col-md-7, .gutter-10 .col-md-8, .gutter-10 .col-md-9, .gutter-10 .col-md-10, .gutter-10 .col-md-11, .gutter-10 .col-md-12,
+.gutter-10 .col-lg-1, .gutter-10 .col-lg-2, .gutter-10 .col-lg-3, .gutter-10 .col-lg-4, .gutter-10 .col-lg-10, .gutter-10 .col-lg-6, .gutter-10 .col-lg-7, .gutter-10 .col-lg-8, .gutter-10 .col-lg-9, .gutter-10 .col-lg-10, .gutter-10 .col-lg-11, .gutter-10 .col-lg-12 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.gutter-10 .panel { margin-bottom: 15px; }
+.gutter-10 h1, .gutter-10 h2, .gutter-10 h3, .gutter-10 h4, .gutter-10 h5 { margin-top: 15px; }
+
+body {
+    padding-top: 60px;
     padding-bottom: 20px;
 }
 
@@ -23,8 +45,6 @@ textarea {
     max-width: 280px;
 }
 
-.ui-state-default { background: #abcdef; }
-.ui-state-hover { background: #67cd67; }
 [data-draggable] { 
     cursor: move;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -35,7 +55,6 @@ textarea {
     user-select: none;           /* non-prefixed version, currently
                                     not supported by any browser */
 }
-.js-equipped { font-style: italic; color: #666; cursor: no-drop; }
 
 .ui-table {
     display: table;
@@ -52,7 +71,7 @@ textarea {
     cursor: pointer;
 }
 
-/*
+/**/
 
 html { background: #133247; height: 100%; }
 
@@ -77,8 +96,10 @@ body {
 	width: 100%;
 	height: 22px;
     padding-left: 0px !important;
-	margin-bottom: 1px;
+	margin-top: 21px;
+    margin-bottom: 1px;
     border-bottom: 0px none;
+    clear: both;
 }
 
 .nav-tabs li { z-index: 1; position: relative; }
@@ -127,21 +148,72 @@ body {
     border: solid 1px #3089b6;
     padding: 10px;
     background-color: rgba(21, 57, 102, 0.3);
+    position: relative;
+    max-height: 90%;
+    overflow: hidden;
+    padding-right: 20px;
+    clear: both;
 }
 
-.ui-spec-summary {
+.ui-thumbnail { margin-bottom: 10px; }
 
+.ui-thumbnail img { max-width: 100%; }
+
+#primary-pane-scrollbar { position: relative; }
+
+.js-scrollable { position: relative; }
+.js-scrollable .js-hardpoint { clear: right; }
+.js-scrollable .js-hardpoint label {
+    display: block;
+    white-space: nowrap;
+    position: absolute;
+    right: 40px;
+    max-width: inherit;
+    line-height: 32px;
+    cursor: move;
 }
 
-#shipcatalogue_specs_boxcontainer { height: 74px; }
+.js-equipped { cursor: no-drop; }
+.js-hardpoint { border: solid 1px #1e98df; border-radius: 5px; height: 32px; width: 32px; float: right; margin-right: 5px; margin-bottom: 5px; list-style: none; position: relative; background: url(../images/icons8-ios-filled.png) no-repeat; }
+.js-hardpoint[data-item-type='WeaponGun'] { background-position: -64px -64px; }
+.js-hardpoint[data-item-type='Turret'] { background-position: 0px -224px; }
+.js-hardpoint[data-item-sub-type='GunTurret'] { background-position: -64px -224px; }
+.js-hardpoint[data-item-type='Armor'] { background-position: -96px -224px; }
+.js-hardpoint[data-item-type='Shield'] { background-position: -96px -96px; }
+.js-hardpoint[data-item-type='AmmoBox'] { background-position: -96px -160px; }
+.js-hardpoint[data-item-type='MainThruster'] { background-position: -64px -288px; }
+.js-hardpoint[data-item-type='ManneuverThruster'] { background-position: -32px -192px; }
+.js-hardpoint[data-item-type='PowerPlant'] { background-position: 0px -192px; }
+.js-hardpoint[data-item-sub-type='Ammo_CounterMeasure'] { background-position: -96px -288px; }
+.js-hardpoint[data-item-sub-type='Missile'],
+.js-hardpoint[data-item-type='WeaponMissile'] { background-position: -32px -128px; }
+.js-hardpoint label { display: none; }
+.js-hardpoint span.ui-count { display: block; font-size: 10px; text-transform: uppercase; position: absolute; bottom: 0px; right: 2px; font-weight: 700; color: #fff; }
+.panel-cig { background: transparent; }
+.panel-cig ul, .panel-cig dl, .panel-cig ol { margin-bottom: 0px; }
+.panel-cig .panel-heading { background: url(../images/shipcatalogue_sprite.png) no-repeat -80px -244px; width: 116px; height: 11px; padding: 0px; margin-left: 19px; }
+.panel-cig .panel-heading h4 { margin: 0px; width: 100%; font-size: 10px; font-weight: bold; color: white; display: block; text-align: center; position: relative; top: 3px; text-transform: uppercase; }
+.panel-cig .panel-body { background: rgba(0, 0, 0, 0.7); }
+.panel-cig .panel-footer { background: rgba(0, 0, 0, 0.7); border: 0px none; }
+.js-empty { display: none; }
+.panel-cig .panel-footer label { text-align: center; display: block; border: 1px solid; border-radius: 5px; padding: 5px; }
+.panel-cig .panel-footer label.ui-state-default { background: rgba(0, 0, 0, 0.7); }
+.panel-cig .panel-footer label.ui-state-hover { background: #67cd67; }
+.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; }
+.ui-draggable-dragging { background-color: #133247; }
+.ui-draggable-dragging .ui-count { display: none !important; }
+.ui-state-default { background-color: #abcdef; }
+.ui-state-hover { background-color: #67cd67; }
+#description .panel-body { font-size: 11px; color: #76bef6; line-height: 22px; }
+.js-info { font-size: 11px; color: #76bef6; line-height: 14px; }
+.js-info strong { color: #c7f0ff; font-weight: 700; }
+.js-info h4 { margin-top: 0px; background: transparent; }
+.js-info h4.alert-danger { margin-top: 20px; }
 
-.ui-spec-summary li {
-	background: url(../images/shipcatalogue_sprite.png) no-repeat 0 -244px;
+.panel-summary {
+	background: url(../images/bg-panel-summary.png) no-repeat;
 	
 	height: 72px;
-	float: left;
-	display: block;
-	margin-right: 8px;
 	border: solid 1px #1e98df;
 	border-radius: 5px;
 	position: relative;
@@ -151,41 +223,96 @@ body {
 	-webkit-transition: border 0.3s, box-shadow 0.3s;
 	-o-transition: border 0.3s, box-shadow 0.3s;
 }
-.shipcatalogue_specs_box:hover { border-color: #65cfff; box-shadow: inset 0 0 35px rgba(62, 157, 255, 0.3); }
-.shipcatalogue_specs_box:last-child { margin-right: 0; }
-.shipcatalogue_specs_box span {
-	width: 100%;
-	font-weight: bold;
-	text-align: center;
-	display: block;
-	position: absolute;
-}
-.shipcatalogue_specs_box_title {
-	font-size: 10px;
-	color: #50cbff;
-	top: 11px;
-	line-height: 12px;
-}
-.shipcatalogue_specs_box_title.shipcatalogue_doubleline { top: 5px; }
-.shipcatalogue_specs_box_value {
-	font-size: 14px;
-	color: #26e8ff;
-	top: 37px;
-	text-shadow: 0 0 12px #2aacff;
-}
-.shipcatalogue_specs_box_unit {
-	font-size: 10px;
-	color: #4c768e;
-	bottom: 4px;
+.panel-summary .panel-heading { padding: 0px 5px; display: table; height: 32px; width: 100%; }
+.panel-summary h4 { font-weight: 700; font-size: 10px; text-transform: uppercase; margin: 0px; text-align: center; display: table-cell; vertical-align: middle; margin: 0px auto; }
+.panel-summary .panel-body { color: #26e8ff; font-weight: 700; font-size: 14px; text-shadow: 0 0 12px #2aacff; text-align: center; padding: 0px; }
+.panel-summary label { font-weight: 400; color: #4c768e; font-size: 10px; display: block; }
+
+.jumbotron { color: #333 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.js-scrollpane { position: absolute; padding: 10px 5px; height: 100%; top: 0px; right: 0px; }
+#shipcatalogue_descscrollbarcontainer {
+	background: url(../images/shipcatalogue_scrollbarbg.png) repeat-y center;
+	width: 6px;
+	height: 100%;
+    position: relative;
 }
 
- 
-.js-hardpoint { border: solid 1px #1e98df; border-radius: 5px; height: 30px; width: 30px; float: right; margin-right: 5px; margin-bottom: 5px; list-style: none; }
-.js-hardpoint span { display: none; }
-.panel-cig { background: transparent; }
-.panel-cig .panel-heading { background: url(../images/shipcatalogue_sprite.png) no-repeat -80px -244px; width: 116px; height: 11px; padding: 0px; margin-left: 19px; }
-.panel-cig .panel-heading h4 { margin: 0px; width: 100%; font-size: 10px; font-weight: bold; color: white; display: block; text-align: center; position: relative; top: 3px; text-transform: uppercase; }
-.panel-cig .panel-body { background: rgba(0, 0, 0, 0.7); }
-.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; }
+#shipcatalogue_descscrolltopstop,
+#shipcatalogue_descscrollbottomstop {
+	background: #4ea6d4;
+	width: 100%;
+	height: 3px;
+	position: absolute;
+}
+#shipcatalogue_descscrolltopstop { top: 0; }
+#shipcatalogue_descscrollbottomstop { bottom: 0; }
+
+#primary-pane-scrollbar {
+	width: 28px;
+	height: 100px;
+	display: block;
+	position: absolute;
+	top: 15px;
+	left: -11px;
+}
+
+#primary-pane-scrollbar > span {
+	background: #b1d1ff;
+	width: 4px;
+	height: 100%;
+	margin: 0 auto;
+	display: block;
+	
+	transition: background 0.3s, box-shadow 0.3s;
+	-moz-transition: background 0.3s, box-shadow 0.3s;
+	-webkit-transition: background 0.3s, box-shadow 0.3s;
+	-o-transition: background 0.3s, box-shadow 0.3s;
+}
+
+#primary-pane-scrollbar:hover > span,
+.shipcatalogue_descscrollbarglow {
+	background-color: white !important;
+	box-shadow: 0 0 30px 1px #79cbff;
+}
+
+.shipcatalogue_scrollingcursor { cursor: pointer; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tab-content { padding-right: 10px; }
+.js-scrollpane { display: none; }
+.panel-cig .panel-footer { display: none !important; }
 
 /**/
