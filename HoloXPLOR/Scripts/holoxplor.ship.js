@@ -107,9 +107,9 @@ $(document).ready(function () {
         }
 
         if (!debug) { /* Normally, ship-specific tags */
-            var requiredPortTags = ($item.data('item-required-port-tags') || '').split(' ');
-            var portTags = ($port.data('port-tags') || '').split(' ');
-            var shipPortTags = ($port.data('ship-port-tags') || '').split(' ');
+            var requiredPortTags = ($item.data('item-required-port-tags') || '').toLowerCase().split(' ');
+            var portTags = ($port.data('port-tags') || '').toLowerCase().split(' ');
+            var shipPortTags = ($port.data('ship-port-tags') || '').toLowerCase().split(' ');
 
             if ($(requiredPortTags).not(portTags).not(shipPortTags).not(['']).length > 0) {
                 // console.log("Rejected Port Tags", requiredPortTags, portTags, shipPortTags);
@@ -118,8 +118,8 @@ $(document).ready(function () {
         }
 
         if (!debug) { /* Normally, equipment-specific tags */
-            var requiredItemTags = ($port.data('port-required-tags') || '').split(' ');
-            var itemTags = ($item.data('item-tags') || '').split(' ');
+            var requiredItemTags = ($port.data('port-required-tags') || '').toLowerCase().split(' ');
+            var itemTags = ($item.data('item-tags') || '').toLowerCase().split(' ');
 
             if ($(requiredItemTags).not(itemTags).not(['']).length > 0) {
                 // console.log("Rejected Item Tags", requiredItemTags, itemTags);
@@ -128,11 +128,11 @@ $(document).ready(function () {
         }
 
         { /* Item types */
-            var type = $item.data('item-type');
-            var subType = $item.data('item-sub-type');
+            var type = $item.data('item-type').toLowerCase();
+            var subType = $item.data('item-sub-type').toLowerCase();
             var fullType = (subType == "") ? type : (type + ":" + subType);
 
-            var accepted = ($port.data('port-types') || '').split(',');
+            var accepted = ($port.data('port-types') || '').toLowerCase().split(',');
 
             for (var i = 0, j = accepted.length; i < j; i++) {
                 if (accepted[i] == type || accepted[i] == fullType || accepted[i] == subType)

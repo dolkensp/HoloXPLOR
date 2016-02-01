@@ -142,12 +142,9 @@
     <Compile Include="Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\db_dolkensp.xml" />
-    <Content Include="App_Data\shipmatrix.json" />
-    <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
-    <Content Include="App_Data\Scripts\Entities\Items\DamageMultipliers.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\HitTypes.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\ItemPackages.xml" />
+    <Content Include="App_Data\db_dolkensp.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoBox_Pistol.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoBox_Rifle.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoCrate.xml" />
@@ -261,6 +258,7 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_006.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_007.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_008.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_CitizenCon.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_Constellation.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_Gamescom.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Flair\Flair_Poster_Murray_Cup.xml" />
@@ -527,6 +525,7 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_60rd_60mm_Rail.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_60rd_80mm_Rail.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_750rd_20mm.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_750rd_30mm.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_800rd_25mm.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1060,7 +1059,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\ALST\ALST_Interface\Interface_ALST_CDA_S1_Q1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\ALST\ALST_Interface\Interface_ALST_CDA_S1_Q2.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\ALST\ALST_Interface\Interface_ALST_CDA_S3_Q1.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\AMRS\AMRS_HEFR_S1_Q1.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\AMRS\AMRS_HEFR_S1_Q1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\AMRS\AMRS_HEFR_S1_Q2.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\AMRS\AMRS_HEFR_S2_Q1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\AMRS\AMRS_HEFR_S3_Q3.xml">
@@ -1927,7 +1928,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Class_2\Class_2_KRIG_BG_S3_Q3_Mount.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\ANVL\ANVL_Fixed_Mount_Hornet_Ball_S4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\ANVL\ANVL_Interface\Interface_ANVL_Fixed_Mount_Hornet_Ball_S4.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\Default\Default_Fixed_Mount_S3.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\Default\Default_Fixed_Mount_S4.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\Default\Default_Interface\Interface_Default_Fixed_Mount_S3.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\Default\Default_Interface\Interface_Default_Fixed_Mount_S4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\DRAK\DRAK_Fixed_Mount_S4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapon_Mounts\Fixed\DRAK\DRAK_Interface\Interface_DRAK_Fixed_Mount_S4.xml" />
@@ -1987,6 +1990,8 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Vehicles\ShipsShop\RSI_Constellation_Taurus_shop.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Vehicles\Weapons\RepairBeam.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Weapons\PickAndThrowWeapon.xml" />
+    <Content Include="App_Data\shipmatrix.json" />
+    <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Stalker.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Gladius.xml">
       <SubType>Designer</SubType>
@@ -2007,12 +2012,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\ARGO_MPUV.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\countermeasure.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\death.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\eject.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\gun.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\missile.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Cameras\pilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\CNOU_Mustang.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\DefaultVehicle.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\DRAK_Caterpillar.xml" />
@@ -2081,10 +2080,14 @@
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_IR1337_Weapon_Mount_Quad.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TEMPLATE_Xml.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TEMPLATE_Xml.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TNGS_AEGS_Redeemer.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\TNGS_ORIG_AX114.xml" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Blade.xml" />
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Blade.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\vncl_cleaver.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\VNCL_Scythe.xml">
       <SubType>Designer</SubType>
@@ -2096,6 +2099,9 @@
     </Content>
     <Content Include="Content\formstone.upload.css" />
     <Content Include="Images\anvilaerospace_logo.png" />
+    <Content Include="Images\bg-panel-summary.png" />
+    <Content Include="Images\icons8-ios-filled.png" />
+    <Content Include="Images\icons8-win8.png" />
     <Content Include="Images\shipcatalogue_bg_blackfadebottom.png" />
     <Content Include="Images\shipcatalogue_bg_blackfadetop.png" />
     <Content Include="Images\shipcatalogue_bg_blocks.png" />

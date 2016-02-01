@@ -1,5 +1,5 @@
 ﻿
-<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-005a-c345-0000-000000000000">
+<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-001c-bff0-0000-000000000000">
  <inventory count="2">
   <item __EID__id="fffa8108-0000-0000-0001-000000000000" />
   <item __EID__id="fffa8108-0000-0000-0002-000000000000" />
@@ -15672,7 +15672,7 @@
   </pipes>
  </ship>
  <ship oemId="00000000-0000-0000-0000-000000000000" id="00fa8108-001c-bff0-0000-000000000000" acMembershipId="15777564" class="DefaultSpaceShips.AEGS.AEGS_Vanguard" name="Ship_16">
-  <inventory count="72">
+  <inventory count="71">
    <item __EID__id="00fa8108-001c-bff0-0001-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0002-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0003-000000000000" />
@@ -15697,7 +15697,6 @@
    <item __EID__id="00fa8108-001c-bff0-001a-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001b-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001c-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-001d-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001f-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0020-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0021-000000000000" />
@@ -15709,9 +15708,6 @@
    <item __EID__id="00fa8108-001c-bff0-0028-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0029-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0030-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0031-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0032-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0033-000000000000" />
@@ -15744,7 +15740,10 @@
    <item __EID__id="00fa8108-001c-bff0-001e-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0023-000000000000" />
    <item __EID__id="01fa8108-003f-4c0b-0000-000000000000" />
-   <item __EID__id="01fa8108-00d0-280d-0000-000000000000" />
+   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
+   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
+   <item __EID__id="00fa8108-005a-c345-0002-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-001d-000000000000" />
   </inventory>
   <ports count="51">
    <port portName="hardpoint_engine_right" __EID__itemId="00fa8108-001c-bff0-0004-000000000000">
@@ -16635,7 +16634,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_nose" __EID__itemId="01fa8108-00d0-280d-0000-000000000000">
+   <port portName="hardpoint_weapon_gun_nose" __EID__itemId="00fa8108-00b2-1ae7-003b-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -41545,7 +41544,7 @@
  <item oemId="00fa8108-001c-bff0-0000-000000000000" id="00fa8108-001c-bff0-0029-000000000000" class="AEGS_Vanguard_Turret">
   <inventory />
   <ports count="3">
-   <port portName="turret_left" __EID__itemId="00fa8108-001c-bff0-002a-000000000000">
+   <port portName="turret_left" __EID__itemId="00fa8108-005a-c345-0002-000000000000">
     <pipes />
    </port>
    <port portName="turret_right" __EID__itemId="01fa8108-003f-4c0b-0000-000000000000">
@@ -42612,7 +42611,7 @@
   <ports />
  </item>
  <hangar oemId="00000000-0000-0000-0000-000000000000" id="fcfa8108-0000-0000-0000-000000000000" class="Aeroview" owner="alluran">
-  <inventory count="446">
+  <inventory count="458">
    <item __EID__id="00fa8108-002b-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-002c-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-0076-75e4-0000-000000000000" />
@@ -42962,15 +42961,6 @@
    <item __EID__id="00fa8108-005a-c345-0025-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0025-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0004-000000000000" />
-   <item __EID__id="00fa8108-005a-c345-0002-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003c-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003c-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003c-000000000000" />
-   <item __EID__id="00fa8108-00b2-1ae7-003c-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0003-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0003-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0003-000000000000" />
@@ -43024,7 +43014,6 @@
    <item __EID__id="00fa8108-005a-c345-001d-000000000000" />
    <item __EID__id="00fa8108-005a-c345-001d-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0006-000000000000" />
-   <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
    <item __EID__id="00fa8108-0029-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-002a-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-0060-c2ed-0034-000000000000" />
@@ -43059,6 +43048,28 @@
    <item __EID__id="01fa8108-00bc-670b-0000-000000000000" />
    <item __EID__id="01fa8108-00bd-670b-0000-000000000000" />
    <item __EID__id="01fa8108-00bd-670b-0000-000000000000" />
+   <item __EID__id="01fa8108-00d0-280d-0000-000000000000" />
+   <item __EID__id="01fa8108-00d0-280d-0000-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002b-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
+   <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
   </inventory>
   <rooms count="6">
    <room library="Aeroview_hangar" category="aeroview_hangar_stock">

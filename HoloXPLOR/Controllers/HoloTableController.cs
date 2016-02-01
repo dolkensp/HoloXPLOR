@@ -54,6 +54,8 @@ namespace HoloXPLOR.Controllers
             var port = model.Player.Items.Where(i => i.ID == parentID).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).SingleOrDefault() ??
                 ship.Ports.Items.Where(p => p.PortName == portName).SingleOrDefault();
 
+            var portData = model.View_ItemMap[port.ItemID];
+
             var oldPartID = port.ItemID;
 
             // TODO: Validate parts
