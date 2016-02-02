@@ -51,6 +51,14 @@
       <HintPath>..\packages\Dolkens.Framework.1.0.5648.17179\lib\net45\Dolkens.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ImageProcessor, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImageProcessor.1.9.1.0\lib\ImageProcessor.dll</HintPath>
       <Private>True</Private>
@@ -154,6 +162,7 @@
     <Content Include="App_Data\db_dolkensp.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\Logs\placeholder.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoBox_Pistol.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoBox_Rifle.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Ammo\AmmoCrate.xml" />
@@ -2004,6 +2013,7 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Vehicles\Weapons\RepairBeam.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Weapons\PickAndThrowWeapon.xml" />
     <Content Include="App_Data\shipmatrix.json" />
+    <Content Include="smtp.config" />
     <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Stalker.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Gladius.xml">

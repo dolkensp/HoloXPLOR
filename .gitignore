@@ -203,3 +203,4 @@ publish
 *.crx
 
 App_Data
+smtp.config

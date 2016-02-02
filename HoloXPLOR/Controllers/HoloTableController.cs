@@ -45,110 +45,127 @@ namespace HoloXPLOR.Controllers
         [HttpPost]
         public ActionResult Ship(String id, Guid shipID, Guid newPartID, Guid? parentID, String portName)
         {
-            var model = new DetailModel(id, shipID);
-
-            var ship = model.Player.Ships.Where(s => s.ID == shipID).SingleOrDefault();
-
-            var newItem = model.Player.Items.Where(i => i.ID == newPartID).SingleOrDefault();
-
-            var port = model.Player.Items.Where(i => i.ID == parentID).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).SingleOrDefault() ??
-                ship.Ports.Items.Where(p => p.PortName == portName).SingleOrDefault();
-
-            var oldPartID = port.ItemID;
-
-            // TODO: Validate parts
-
-            #region Move Old Child Items To Hangar
-
-            var hosts = model.Player.Items.Where(i => i.ID == oldPartID).ToList();
-
-            var nextHost = hosts.FirstOrDefault();
-
-            List<Inventory.InventoryItem> removed = new List<Inventory.InventoryItem> { };
-
-            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == oldPartID));
-            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == oldPartID));
-
-            if (!removed.Where(i => i.ID == oldPartID).Any())
-                removed.Add(new Inventory.InventoryItem { ID = oldPartID });
-
-            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
-            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
-
-            while (nextHost != null)
+            try
             {
-                hosts.RemoveAt(0);
+                var model = new DetailModel(id, shipID);
 
-                if (nextHost.Ports.Items != null)
+                var ship = model.Player.Ships.Where(s => s.ID == shipID).SingleOrDefault();
+
+                var newItem = model.Player.Items.Where(i => i.ID == newPartID).SingleOrDefault();
+
+                var port = model.Player.Items.Where(i => i.ID == parentID).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).SingleOrDefault() ??
+                    ship.Ports.Items.Where(p => p.PortName == portName).SingleOrDefault();
+
+                var oldPartID = port.ItemID;
+
+                // TODO: Validate parts
+
+                #region Move Old Child Items To Hangar
+
+                var hosts = model.Player.Items.Where(i => i.ID == oldPartID).ToList();
+
+                var nextHost = hosts.FirstOrDefault();
+
+                List<Inventory.InventoryItem> removed = new List<Inventory.InventoryItem> { };
+
+                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == oldPartID));
+                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == oldPartID));
+
+                if (!removed.Where(i => i.ID == oldPartID).Any())
+                    removed.Add(new Inventory.InventoryItem { ID = oldPartID });
+
+                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
+                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
+
+                while (nextHost != null)
                 {
-                    foreach (var childPort in nextHost.Ports.Items)
+                    hosts.RemoveAt(0);
+
+                    if (nextHost.Ports.Items != null)
                     {
-                        hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
-                        removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
-                        removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
-                        model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                        ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                        foreach (var childPort in nextHost.Ports.Items)
+                        {
+                            hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
+                            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
+                            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
+                            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                        }
                     }
+
+                    model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Concat(removed).ToArray();
+
+                    nextHost = hosts.FirstOrDefault();
                 }
 
-                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Concat(removed).ToArray();
+                #endregion
+
+                #region Move New Child Items To Ship
+
+                hosts = model.Player.Items.Where(i => i.ID == newPartID).ToList();
 
                 nextHost = hosts.FirstOrDefault();
-            }
 
-            #endregion
+                removed = new List<Inventory.InventoryItem> { };
 
-            #region Move New Child Items To Ship
+                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == newPartID));
+                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == newPartID));
 
-            hosts = model.Player.Items.Where(i => i.ID == newPartID).ToList();
+                if (!removed.Where(i => i.ID == newPartID).Any())
+                    removed.Add(new Inventory.InventoryItem { ID = newPartID });
 
-            nextHost = hosts.FirstOrDefault();
+                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
+                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
 
-            removed = new List<Inventory.InventoryItem> { };
-
-            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == newPartID));
-            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == newPartID));
-
-            if (!removed.Where(i => i.ID == newPartID).Any())
-                removed.Add(new Inventory.InventoryItem { ID = newPartID });
-
-            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
-            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
-
-            while (nextHost != null)
-            {
-                hosts.RemoveAt(0);
-
-                if (nextHost.Ports.Items != null)
+                while (nextHost != null)
                 {
-                    foreach (var childPort in nextHost.Ports.Items)
+                    hosts.RemoveAt(0);
+
+                    if (nextHost.Ports.Items != null)
                     {
-                        hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
-                        removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
-                        removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
-                        model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                        ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                        foreach (var childPort in nextHost.Ports.Items)
+                        {
+                            hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
+                            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
+                            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
+                            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
+                        }
                     }
+
+                    ship.Inventory.Items = ship.Inventory.Items.Concat(removed).ToArray();
+
+                    nextHost = hosts.FirstOrDefault();
                 }
 
-                ship.Inventory.Items = ship.Inventory.Items.Concat(removed).ToArray();
+                #endregion
 
-                nextHost = hosts.FirstOrDefault();
+                // Mount Item
+                port.ItemID = newPartID;
+
+                // Set current ship (Optional)
+                model.Player.VehicleID = shipID;
+
+                model.Save();
+
+                ViewBag.ID = id;
+
+                return View(model);            
             }
+            catch (Exception ex)
+            {
+                Elmah.ErrorLog.GetDefault(System.Web.HttpContext.Current).Log(new Elmah.Error(ex));
 
-            #endregion
+                this.Response.StatusCode = 500;
 
-            // Mount Item
-            port.ItemID = newPartID;
-
-            // Set current ship (Optional)
-            model.Player.VehicleID = shipID;
-
-            model.Save();
-
-            ViewBag.ID = id;
-
-            return View(model);
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        Reason = "System Error"
+                    }
+                };
+            }
         }
 
         public ActionResult Download(String id)

@@ -48,6 +48,12 @@ namespace HoloXPLOR.Controllers
                                     Width = parts[0].ToInt32(800)
                                 });
 
+                                // , new System.Drawing.Point
+                                // {
+                                //     X = factory.Image.Width / 2,
+                                //     Y = factory.Image.Height / 2
+                                // });
+
                                 if (Path.GetExtension(cacheFilename) == "jpg")
                                 {
                                     using (FileStream outStream = new FileStream(cacheFilename, FileMode.Create))
