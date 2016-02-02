@@ -2112,7 +2112,10 @@
     </Content>
     <Content Include="Content\formstone.upload.css" />
     <Content Include="Images\anvilaerospace_logo.png" />
+    <Content Include="Images\bg-header.png" />
     <Content Include="Images\bg-panel-summary.png" />
+    <Content Include="Images\icons8-ios-filled-box.png" />
+    <Content Include="Images\icons8-ios-filled-empty-box.png" />
     <Content Include="Images\icons8-ios-filled.png" />
     <Content Include="Images\icons8-win8.png" />
     <Content Include="Images\shipcatalogue_bg_blackfadebottom.png" />
