@@ -378,49 +378,37 @@ namespace HoloXPLOR.Models.HoloTable
             }
         }
 
-        public String ShipDescription
-        {
-            get
-            {
-                return Scripts.ShipJsonMap.GetValue(
-                    Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0),
-                    new ShipMatrixJson { Description = "[REDACTED]" }).Description;
-            }
-        }
-
-        public String ShipName
-        {
-            get
-            {
-                return (this.ShipJson ?? new ShipMatrixJson { Name = this.GameData_Ship.DisplayName })
-                    .Name;
-            }
-        }
-
-        public Int32? ShipCargo
-        {
-            get
-            {
-                return (this.ShipJson ?? new ShipMatrixJson { })
-                    .CargoCapacity;
-            }
-        }
-
-        public String ShipImage
-        {
-            get
-            {
-                return (this.ShipJson ?? new ShipMatrixJson { Media = new ShipMatrixMediaJson[] { new ShipMatrixMediaJson { SourceURL = "http://placehold.it/800x600" } } })
-                    .Media[0]
-                    .SourceURL
-                    .Replace("/media", "http://robertsspaceindustries.com/media")
-                    .Replace("/source/", "/store_slideshow_small_zoom/");
-            }
-        }
-
         public ShipMatrixJson ShipJson
         {
-            get { return Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0), null); }
+            get
+            {
+                return Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0), new ShipMatrixJson
+                    {
+                        Name = this.GameData_Ship.DisplayName,
+                        Description = "[REDACTED]",
+                        PledgeURL = "#REDACTED",
+                        Classification = "[REDACTED",
+                        Focus = "[REDACTED]",
+                        ID = 0,
+                        Media = new ShipMatrixMediaJson[] {
+                            new ShipMatrixMediaJson {
+                                SourceURL = "http://placehold.it/800x600"
+                            }
+                        },
+                        Manufacturer = new ShipMatrixManufacturerJson
+                        {
+                            Name = "[REDACTED]",
+                            Code = "RED",
+                            Description = "[REDACTED]",
+                            KnownFor = "[REDACTED]",
+                            Media = new ShipMatrixMediaJson[] {
+                                new ShipMatrixMediaJson {
+                                    SourceURL = "http://placehold.it/800x600"
+                                }
+                            },
+                        }
+                    });
+            }
         }
 
 

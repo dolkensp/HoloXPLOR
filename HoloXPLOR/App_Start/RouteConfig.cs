@@ -38,6 +38,12 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
+                name: "Media",
+                url: "media/{slug}/{format}/{filename}",
+                defaults: new { controller = "Media", action = "Cache" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

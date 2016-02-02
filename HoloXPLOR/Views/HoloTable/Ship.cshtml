@@ -89,9 +89,9 @@
                         <li class="row">
                             <label class="col-xs-3">Size @size</label>
                             <ul class="list-unstyled col-xs-9">
-                                @foreach (var item in itemsByMaxSize[size].OrderByDescending(i => i.Port_DisplayName).ThenBy(i => i.Item_DisplayName))
+                                @foreach (var item in itemsByMaxSize[size].OrderByDescending(i => i.Item_Type).ThenByDescending(i => i.Port_DisplayName).ThenByDescending(i => i.Item_DisplayName))
                                 {
-                                    <li class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
+                                    <li data-template="@item.Item_Type" class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
                                         @if (item.Inventory_Item != null)
                                         {
                                             <label>@item.Item_DisplayName</label>
@@ -121,9 +121,19 @@
     <div class="row">
 
         <div class="col-lg-4 col-xs-12">
-            <h3 data-ship-name="@Model.GameData_Ship.Name">@Model.ShipName</h3>
+            
+            <div class="ui-header">
+                <div class="col-xs-2 holo-icon">
+                    <img src="@Model.ShipJson.Manufacturer.Media[0].SourceURL.Replace("/source/", "/84x62/")" alt="@Html.Raw(Model.ShipJson.Manufacturer.Name)" />
+                </div>
+                <div class="col-xs-10">
+                    <h3 data-ship-name="@Model.GameData_Ship.Name">@Html.Raw(Model.ShipJson.Name) <small>@Html.Raw(Model.ShipJson.Focus)</small></h3>
+                    <a href="@Model.ShipJson.PledgeURL.Replace("/pledge/", "https://robertsspaceindustries.com/pledge/")" target="_pledge">Ship Specs</a>
+                </div>
+            </div>
+
             <div class="ui-thumbnail">
-                <img src="@Model.ShipImage" alt="@Model.ShipName" />
+                <img src="@Model.ShipJson.Media[0].SourceURL.Replace("/source/", "/440x440/")" alt="@Html.Raw(Model.ShipJson.Name)" />
             </div>
         </div>
 
@@ -180,7 +190,7 @@
                                     <div class="panel panel-summary">
                                         <div class="panel-heading"><h4>Cargo Capacity</h4></div>
                                         <div class="panel-body">
-                                            <span>@Model.ShipCargo</span>
+                                            <span>@Model.ShipJson.CargoCapacity</span>
                                             <label>Tons</label>
                                         </div>
                                     </div>
@@ -270,7 +280,9 @@
                         <div class="panel panel-cig">
                             <div class="panel-heading"><h4>Desc</h4></div>
                             <div class="panel-body">
-                                @Model.ShipDescription
+                                <h4>@Html.Raw(Model.ShipJson.Manufacturer.Name)</h4>
+                                <h3>@Html.Raw(Model.ShipJson.Name)</h3>
+                                <p>@Html.Raw(Model.ShipJson.Description)</p>
                             </div>
                         </div>
                     </div>

@@ -199,7 +199,7 @@ body {
 .panel-cig .panel-footer label { text-align: center; display: block; border: 1px solid; border-radius: 5px; padding: 5px; }
 .panel-cig .panel-footer label.ui-state-default { background: rgba(0, 0, 0, 0.7); }
 .panel-cig .panel-footer label.ui-state-hover { background: #67cd67; }
-.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; }
+.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; line-height: 32px; }
 .ui-draggable-dragging { background-color: #133247; }
 .ui-draggable-dragging .ui-count { display: none !important; }
 .ui-state-default { background-color: #abcdef; }
@@ -230,6 +230,8 @@ body {
 
 .jumbotron { color: #333 }
 
+.ui-header {}
+.ui-header img { width: 100%; }
 
 
 

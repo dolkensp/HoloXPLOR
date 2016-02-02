@@ -43,8 +43,16 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BitMiracle.LibJpeg.NET, Version=1.3.311.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BitMiracle.LibJpeg.NET.1.3.311.0\lib\net45\BitMiracle.LibJpeg.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Dolkens.Framework, Version=1.0.5648.17179, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dolkens.Framework.1.0.5648.17179\lib\net45\Dolkens.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageProcessor, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.1.9.1.0\lib\ImageProcessor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -132,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HoloTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2160,7 +2169,10 @@
     <Content Include="Views\HoloTable\Ship.cshtml" />
     <Content Include="Views\HoloTable\_Items.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\media\" />
+    <Folder Include="Views\Media\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -67,6 +67,7 @@ namespace HoloXPLOR.Models.HoloTable
             }
         }
 
+        public String Item_Type { get { return this.GameData_Item == null ? null : String.Format("{0}:{1}", this.GameData_Item.Params["itemType"], this.GameData_Item.Params["itemSubType"]); } }
         public String Port_DisplayName { get { return this.GameData_EquippedPort == null ? null : this.GameData_EquippedPort.DisplayName.ToLocalized(); } }
         public String Item_DisplayName { get { return this.GameData_Item == null ? null : this.GameData_Item.DisplayName.ToLocalized(); } }
         public Int32? MaxSize { get { return this.GameData_EquippedPort == null ? (Int32?)null : this.GameData_EquippedPort.MaxSize; } }

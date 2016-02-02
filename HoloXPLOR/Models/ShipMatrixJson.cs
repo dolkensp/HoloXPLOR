@@ -15,6 +15,7 @@ namespace HoloXPLOR.Models
         public String Focus { get; set; }
         public String Tagline { get; set; }
         public String Description { get; set; }
+        [JsonProperty("url")]
         public String PledgeURL { get; set; }
         public ShipMatrixManufacturerJson Manufacturer { get; set; }
         public ShipMatrixMediaJson[] Media { get; set; }
