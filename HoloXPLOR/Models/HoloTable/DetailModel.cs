@@ -438,6 +438,41 @@ namespace HoloXPLOR.Models.HoloTable
             set { this._inventory_ShipMap = value; }
         }
 
+        private Dictionary<Guid, ShipMatrixJson> _json_ShipMap;
+        public Dictionary<Guid, ShipMatrixJson> Json_ShipMap
+        {
+            get
+            {
+                return this._json_ShipMap = this._json_ShipMap ?? this.GameData_ShipMap.ToDictionary(k => k.Key, v => Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(v.Value.Name, 0), new ShipMatrixJson
+                {
+                     Name = v.Value.DisplayName,
+                     Description = "[REDACTED]",
+                     PledgeURL = "#REDACTED",
+                     Classification = "[REDACTED",
+                     Focus = "[REDACTED]",
+                     ID = 0,
+                     Media = new ShipMatrixMediaJson[] {
+                            new ShipMatrixMediaJson {
+                                SourceURL = "http://placehold.it/800x600"
+                            }
+                        },
+                     Manufacturer = new ShipMatrixManufacturerJson
+                     {
+                         Name = "[REDACTED]",
+                         Code = "RED",
+                         Description = "[REDACTED]",
+                         KnownFor = "[REDACTED]",
+                         Media = new ShipMatrixMediaJson[] {
+                                new ShipMatrixMediaJson {
+                                    SourceURL = "http://placehold.it/800x600"
+                                }
+                            },
+                     }
+                 }));
+            }
+            set { this._json_ShipMap = value; }
+        }
+
         #endregion
 
         #region Game Data

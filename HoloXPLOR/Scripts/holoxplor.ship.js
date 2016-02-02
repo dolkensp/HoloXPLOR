@@ -128,8 +128,8 @@ $(document).ready(function () {
         }
 
         { /* Item types */
-            var type = $item.data('item-type').toLowerCase();
-            var subType = $item.data('item-sub-type').toLowerCase();
+            var type = ($item.data('item-type') || '').toLowerCase();
+            var subType = ($item.data('item-sub-type') || '').toLowerCase();
             var fullType = (subType == "") ? type : (type + ":" + subType);
 
             var accepted = ($port.data('port-types') || '').toLowerCase().split(',');

@@ -123,6 +123,9 @@ namespace HoloXPLOR.Data.XML
                         case "PowerPlant":
                             yield return CategoryEnum.PowerPlant;
                             break;
+                        case "Paints":
+                            yield return CategoryEnum.Paints;
+                            break;
                         default:
                             yield return CategoryEnum.__Unknown__;
                             break;

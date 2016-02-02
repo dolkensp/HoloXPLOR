@@ -56,6 +56,17 @@ textarea {
                                     not supported by any browser */
 }
 
+.nav-tabs li, .panel-heading {
+    cursor: default;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+                                    not supported by any browser */
+}
+
 .ui-table {
     display: table;
     height: 100%;
@@ -78,9 +89,11 @@ html { background: #133247; height: 100%; }
 body {
     background: black url(../images/shipcatalogue_bg_grid.png) repeat;
     background: rgba(0, 0, 0, 0.9) url(../images/shipcatalogue_bg_grid.png) repeat 20px top;
-    min-height: 100%;
     color: #4bcaff;
+    min-height: 100%;
 }
+
+.body-container { height: 100%; }
 
 .ui-container {
     background: url(../images/shipcatalogue_bg_blackfadetop.png) repeat-x top,
@@ -89,20 +102,19 @@ body {
 				url(../images/shipcatalogue_bg_techlines.png) repeat -1px 92px,
 				url(../images/shipcatalogue_bg_blocks.png) repeat -124px top;
 	border: solid 1px #4588e0;
-    padding: 10px;
+    padding: 30px 25px;
+    height: 100%;
 }
 
 .nav-tabs {
 	width: 100%;
-	height: 22px;
     padding-left: 0px !important;
-	margin-top: 21px;
-    margin-bottom: 1px;
     border-bottom: 0px none;
     clear: both;
+    text-indent: 50px;
 }
 
-.nav-tabs li { z-index: 1; position: relative; }
+.nav-tabs li { z-index: 1; position: relative; margin-bottom: 2px; height: 22px; margin-right: -50px; text-indent: 0px; }
 .nav-tabs li.active { z-index: 999; }
 .nav-tabs li a {
     text-transform: uppercase;
@@ -110,16 +122,12 @@ body {
     background-color: transparent !important;
 	background: url(../images/shipcatalogue_sprite.png) no-repeat;
 	height: 22px;
-	display: block;
-	float: left;
-	position: relative;
-	padding-top: 4px;
-	
+	display: inline-block;
+	line-height: 22px; 
 	font-size: 10px;
 	font-weight: bold;
 	color: #5989a4 !important;
 	text-align: center;
-	
 	transition: color 0.3s;
 	-moz-transition: color 0.3s;
 	-webkit-transition: color 0.3s;
@@ -131,16 +139,14 @@ body {
 	background-position: -294px -175px;
 	width: 136px;
 	padding-right: 2px;
-	margin-left: -50px;
     outline: 0;
 }
 .nav-tabs li a:focus { text-decoration: none; }
 .nav-tabs li:first-child a {
 	background-position: -294px -131px;
 	width: 106px;
-	padding-right: 30px;
-    margin-left: 0px;
 }
+.nav-tabs li:first-child a { text-indent: -30px; }
 .nav-tabs li:first-child.active a { background-position: -294px -153px; }
 .nav-tabs li.active a { background-position: -294px -197px; }
 
@@ -184,24 +190,28 @@ body {
 .js-hardpoint[data-item-type='MainThruster'] { background-position: -64px -288px; }
 .js-hardpoint[data-item-type='ManneuverThruster'] { background-position: -32px -192px; }
 .js-hardpoint[data-item-type='PowerPlant'] { background-position: 0px -192px; }
+.js-hardpoint[data-item-type='Paints'] { background-position: 0px -192px; }
+.js-hardpoint[data-item-type='Container'] { background: url(../images/icons8-ios-filled-empty-box.png) no-repeat; background-position: 3px 2px; } /* TODO: Add to sprite */
 .js-hardpoint[data-item-sub-type='Ammo_CounterMeasure'] { background-position: -96px -288px; }
 .js-hardpoint[data-item-sub-type='Missile'],
 .js-hardpoint[data-item-type='WeaponMissile'] { background-position: -32px -128px; }
 .js-hardpoint label { display: none; }
-.js-hardpoint span.ui-count { display: block; font-size: 10px; text-transform: uppercase; position: absolute; bottom: 0px; right: 2px; font-weight: 700; color: #fff; }
+.js-hardpoint span.cig-count { display: block; font-size: 10px; text-transform: uppercase; position: absolute; bottom: 0px; right: 2px; font-weight: 700; color: #fff; line-height: 10px; }
 .panel-cig { background: transparent; }
 .panel-cig ul, .panel-cig dl, .panel-cig ol { margin-bottom: 0px; }
 .panel-cig .panel-heading { background: url(../images/shipcatalogue_sprite.png) no-repeat -80px -244px; width: 116px; height: 11px; padding: 0px; margin-left: 19px; }
-.panel-cig .panel-heading h4 { margin: 0px; width: 100%; font-size: 10px; font-weight: bold; color: white; display: block; text-align: center; position: relative; top: 3px; text-transform: uppercase; }
+.panel-cig .panel-heading h4 { margin: 0px; width: 100%; font-size: 10px; font-weight: bold; color: #fff; display: block; text-align: center; position: relative; top: 3px; text-transform: uppercase; }
 .panel-cig .panel-body { background: rgba(0, 0, 0, 0.7); }
 .panel-cig .panel-footer { background: rgba(0, 0, 0, 0.7); border: 0px none; }
 .js-empty { display: none; }
 .panel-cig .panel-footer label { text-align: center; display: block; border: 1px solid; border-radius: 5px; padding: 5px; }
 .panel-cig .panel-footer label.ui-state-default { background: rgba(0, 0, 0, 0.7); }
 .panel-cig .panel-footer label.ui-state-hover { background: #67cd67; }
-.panel-cig li label { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-right: 0px; line-height: 32px; }
+.cig-list, .cig-iconlist { font-size: 10px; font-weight: bold; color: #4bcaff; text-transform: uppercase; padding-left: 0px; padding-right: 0px; line-height: 32px; }
+.cig-list a, .cig-iconlist a { color: #4bcaff; }
+.cig-list li, .cig-iconlist li { list-style: none; }
 .ui-draggable-dragging { background-color: #133247; }
-.ui-draggable-dragging .ui-count { display: none !important; }
+.ui-draggable-dragging .cig-count { display: none !important; }
 .ui-state-default { background-color: #abcdef; }
 .ui-state-hover { background-color: #67cd67; }
 #description .panel-body { font-size: 11px; color: #76bef6; line-height: 22px; }
@@ -228,18 +238,68 @@ body {
 .panel-summary .panel-body { color: #26e8ff; font-weight: 700; font-size: 14px; text-shadow: 0 0 12px #2aacff; text-align: center; padding: 0px; }
 .panel-summary label { font-weight: 400; color: #4c768e; font-size: 10px; display: block; }
 
-.jumbotron { color: #333 }
-
-.ui-header {}
-.ui-header img { width: 100%; }
+.jumbotron, .modal-content { color: #333 }
 
 
+.ui-header h3 { margin: 0px; padding: 0px; line-height: 28px; font-size: 14px; color: #fff; text-transform: uppercase; white-space: nowrap; }
+.ui-header small { line-height: 28px; font-size: 10px; color: #7dacd0; text-transform: none; font-weight: 700; float: right; white-space: nowrap; }
 
 
+.ui-header {
+    /* background: url(/images/shipcatalogue_sprite.png) no-repeat;
+    background-position: 0px -33px;*/
+    width: 100%;
+    max-width: 538px;
+    position: relative;
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
 
+.ui-header h3 {
+    margin-top: -6px;
+    top: 21%;
+    position: absolute;
+    left: 23%;
+    z-index: 1;
+}
+.ui-header small {
+    margin-top: -6px;
+    top: 21%;
+    position: absolute;
+    right: 8.6%;
+    z-index: 1;
+}
+.ui-header img.cig-logo {
+    width: 16%; 
+    position: absolute;
+    left: 3.4%;
+    top: 16.5%;
+    z-index: 1;
+}
+.ui-header img.cig-back {
+    z-index: 0;
+    width: 100%;
+}
+.ui-header cite {
+    margin-top: -6px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #53b4dd;
+    position: absolute;
+    top: 65%;
+    left: 23%;
+    font-style: normal;
+    text-transform: uppercase;
+    z-index: 1;
+}
 
+.cig-manufacturer-icon { height: 62px; width: 84px; float: left; }
 
+footer a { color: #fff; }
+.cig-content a { color: #fff; }
 
+.cig-center { text-align: center; }
+.cig-center .row { display: inline-block; text-align: left; }
 
 
 
@@ -298,9 +358,26 @@ body {
 
 .shipcatalogue_scrollingcursor { cursor: pointer; }
 
+.js-ship {
+    height: 32px;
+    width: 32px;
+    border: solid 1px #1e98df;
+    border-radius: 5px;
+    position: relative;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background: url(../images/icons8-ios-filled.png) no-repeat -1px -130px;
+    display: block;
+}
 
-
-
+.js-ship label {
+    white-space: nowrap;
+    position: absolute;
+    left: 42px;
+    cursor: pointer;
+    max-width: inherit;
+    display: block;
+}
 
 
 

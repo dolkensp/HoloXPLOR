@@ -25,6 +25,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         Thruster,
         Turret,
         Weapon,
+        Paints,
     }
 
     public partial class Item
@@ -97,6 +98,10 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     #region Storage
                     case "VehicleItem:VehicleItemContainer":
                         return CategoryEnum.Storage;
+                    #endregion
+                    #region Paints
+                    case "Paints:":
+                        return CategoryEnum.Paints;
                     #endregion
                     #region Vehicle Parts
                     case "VehicleItem:VehicleItemHUDRadarDisplay":

@@ -733,7 +733,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_Motherboard.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_TC.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_TC.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_WC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultADS.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultAutopilot.xml" />
@@ -1031,7 +1033,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Missile_Racks\VNCL\VNCL_Scythe_MissilePlatform_x3_Left.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Missile_Racks\VNCL\VNCL_Scythe_MissilePlatform_x4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Missile_Racks\VNCL\VNCL_Stinger_Platform_x12.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_Blackbeard.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_Blackbeard.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_Pitchfork.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_SXSW15.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_UEE.xml" />
@@ -2167,7 +2171,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
-    <Content Include="Views\HoloTable\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />

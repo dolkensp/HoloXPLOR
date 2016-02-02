@@ -32,20 +32,20 @@
         <div class="panel panel-cig">
             <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
             <div class="panel-body">
-                <ul class="collapse in list-unstyled" id="pnl_@category.Replace(" ", "_")">
+                <ul class="collapse in cig-list" id="pnl_@category.Replace(" ", "_")">
                     @foreach (var subCategory in list)
                     {
                         <li class="row">
                             <label class="col-md-4">@subCategory.Key</label>
-                            <ul class="list-unstyled col-md-8">
+                            <ul class="cig-iconlist col-md-8">
                                 @foreach (var grouping in subCategory)
                                 {
                                     var isEquipped = !String.IsNullOrWhiteSpace(grouping.Key.ShipName);
                                     var isEquipped_Self = isEquipped && (grouping.Key.ShipID == Model.ShipID);
                                     var item = grouping.FirstOrDefault();
-                                    
+
                                     <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
-                                        <span class="ui-count">@(grouping.Count())x</span>
+                                        <span class="cig-count">@(grouping.Count())x</span>
                                         <label>@item.Item_DisplayName.ToLocalized()</label>
                                     </li>
                                 }
@@ -83,7 +83,7 @@
         <div class="panel panel-cig">
             <div class="panel-heading"><h4>@category</h4></div>
             <div class="panel-body">
-                <ul class="list-unstyled">
+                <ul class="cig-list">
                     @foreach (var size in itemsByMaxSize.Keys.OrderBy(k => k))
                     {
                         <li class="row">
@@ -120,20 +120,24 @@
 <div class="ui-container gutter-5">
     <div class="row">
 
-        <div class="col-lg-4 col-xs-12">
-            
-            <div class="ui-header">
-                <div class="col-xs-2 holo-icon">
-                    <img src="@Model.ShipJson.Manufacturer.Media[0].SourceURL.Replace("/source/", "/84x62/")" alt="@Html.Raw(Model.ShipJson.Manufacturer.Name)" />
-                </div>
-                <div class="col-xs-10">
-                    <h3 data-ship-name="@Model.GameData_Ship.Name">@Html.Raw(Model.ShipJson.Name) <small>@Html.Raw(Model.ShipJson.Focus)</small></h3>
-                    <a href="@Model.ShipJson.PledgeURL.Replace("/pledge/", "https://robertsspaceindustries.com/pledge/")" target="_pledge">Ship Specs</a>
+        <div class="col-lg-4 col-xs-12 cig-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ui-header">
+                        <img class="cig-back"   src="/Images/bg-header.png" />
+                        <img class="cig-logo" src="@Model.ShipJson.Manufacturer.Media[0].SourceURL.Replace("/source/", "/84x62/")" alt="@Html.Raw(Model.ShipJson.Manufacturer.Name)" title="@Html.Raw(Model.ShipJson.Manufacturer.Name)" />
+                        <h3 data-ship-name="@Model.GameData_Ship.Name">@Html.Raw(Model.ShipJson.Name)</h3>
+                        <small>@Html.Raw(Model.ShipJson.Focus)</small>
+                        <cite>@Html.Raw(Model.ShipJson.Manufacturer.Name)</cite>
+                    </div>
                 </div>
             </div>
-
-            <div class="ui-thumbnail">
-                <img src="@Model.ShipJson.Media[0].SourceURL.Replace("/source/", "/440x440/")" alt="@Html.Raw(Model.ShipJson.Name)" />
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ui-thumbnail">
+                        <img src="@Model.ShipJson.Media[0].SourceURL.Replace("/source/", "/540x400/")" alt="@Html.Raw(Model.ShipJson.Name)" title="@Html.Raw(Model.ShipJson.Name)" />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -190,7 +194,7 @@
                                     <div class="panel panel-summary">
                                         <div class="panel-heading"><h4>Cargo Capacity</h4></div>
                                         <div class="panel-body">
-                                            <span>@Model.ShipJson.CargoCapacity</span>
+                                            <span>@(Model.ShipJson.CargoCapacity.HasValue ? Model.ShipJson.CargoCapacity.ToString() : "?")</span>
                                             <label>Tons</label>
                                         </div>
                                     </div>
@@ -279,7 +283,7 @@
                     <div class="col-sm-6 col-xs-12" id="description">
                         <div class="panel panel-cig">
                             <div class="panel-heading"><h4>Desc</h4></div>
-                            <div class="panel-body">
+                            <div class="panel-body cig-content">
                                 <h4>@Html.Raw(Model.ShipJson.Manufacturer.Name)</h4>
                                 <h3>@Html.Raw(Model.ShipJson.Name)</h3>
                                 <p>@Html.Raw(Model.ShipJson.Description)</p>
@@ -352,10 +356,12 @@
 
                 <div class="tab-pane row" id="other">
                     <div class="col-sm-6 col-xs-12" id="ship_other">
-                        @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Storage, Items.CategoryEnum.__Unknown__)
+                        @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Storage, Items.CategoryEnum.Paints, Items.CategoryEnum.__Unknown__)
                         @RenderHover()
                     </div>
                     <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
+                        @RenderItemCategory("Storage", Items.CategoryEnum.Storage)
+                        @RenderItemCategory("Paints", Items.CategoryEnum.Paints)
                     </div>
                 </div>
             

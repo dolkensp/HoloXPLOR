@@ -9,26 +9,129 @@
     ViewBag.Title = "Hangar";
 }
 
-<div class="row">
-    <div class="col-xs-12">
-        <h2>Hangar</h2>
+@helper RenderItemCategory(String category, params Items.CategoryEnum[] filters)
+{
+    var items = new List<InventoryItem> { };
+    foreach (var filter in filters)
+    {
+        items.AddRange(Model.GameData_CategoryMap[filter].Where(i => Model.View_ItemMap.ContainsKey(i.Key)).Select(i => Model.View_ItemMap[i.Key]));
+    }
+
+    var list = (from item in items.Distinct()
+                let key = item.Inventory_Item.ID
+                let ship = (item.Inventory_Ship ?? new Inventory.Ship { })
+                let game_ship = (item.GameData_Ship ?? new Vehicles.Vehicle { DisplayName = String.Format(" Size {0}", item.ItemSize) })
+                group item by new
+                {
+                    DisplayName = item.Item_DisplayName,
+                    ItemSize = item.ItemSize,
+                    //    ShipName = game_ship.DisplayName
+                } into groupedItems
+                orderby groupedItems.Key.ItemSize, groupedItems.Key.DisplayName
+                group groupedItems by groupedItems.Key.ItemSize into groupedItems2
+                select groupedItems2).ToArray();
+
+    if (list.Length > 0)
+    {
+        <div class="panel panel-cig">
+            <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
+            <div class="panel-body">
+                <ul class="collapse cig-list" id="pnl_@category.Replace(" ", "_")">
+                    @foreach (var subCategory in list)
+                    {
+                        <li class="row">
+                            <label class="col-md-4">Size @subCategory.Key</label>
+                            <ul class="cig-iconlist col-md-8">
+                                @foreach (var grouping in subCategory.OrderBy(i => i.FirstOrDefault().Item_Type))
+                                {
+                                    var item = grouping.FirstOrDefault();
+
+                                    <li class="js-hardpoint js-item" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
+                                        <span class="cig-count">@(grouping.Count())x</span>
+                                        <label>@item.Item_DisplayName.ToLocalized()</label>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}
+
+@helper RenderHover()
+{
+    <div class="panel panel-cig">
+        <div class="panel-heading"><h4>Info</h4></div>
+        <div class="panel-body js-info">
+            <div>Hover over an item to see more information.</div>
+        </div>
     </div>
+}
 
-    <div class="col-sm-4">
-        <h3>Ships</h3>
+<div class="ui-container gutter-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="nav-tabs list-unstyled" role="tablist">
+                <li class="active"><a href="#ships" role="tab" data-toggle="tab" aria-expanded="true">Ships (@Model.GameData_ShipMap.Values.Count())</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane row active" id="ships">
+                    <ul class="cig-list">
+                        @{
+                            var shipsByManufacturer = (from ship in Model.GameData_ShipMap
+                                                       let jsonShip = Model.Json_ShipMap[ship.Key]
+                                                       group new { Json = jsonShip, GameData = ship.Value, ID = ship.Key } by jsonShip.Manufacturer.Code into groupedShips
+                                                       select groupedShips).ToDictionary(k => k.Key, v => v.ToList());
 
-        <ul>
-            @foreach (var ship in Model.GameData_ShipMap)
-            {
-                <li data-class="@ship.Value.Name">
-                    @Html.ActionLink(ship.Value.DisplayName, "Ship", new { id = Model.CurrentXML, shipID = ship.Key })
-                    <!-- Insert Hardpoint Overview Here -->
-                </li>
-            }
-        </ul>
-    </div>
+                            foreach (var manufacturer in shipsByManufacturer)
+                            {
+                                <li>
+                                    <div class="panel panel-cig">
+                                        <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@manufacturer.Key">@manufacturer.Key (@manufacturer.Value.Count)</h4></div>
+                                        <div class="panel-body">
 
-    <div class="col-sm-8">
-        @{ Html.RenderPartial("_Items", Model); }
+                                            <ul class="cig-iconlist collapse in" id="pnl_@manufacturer.Key">
+                                                @foreach (var ship in manufacturer.Value.OrderBy(s => s.Json.Name))
+                                                {
+                                                    <li data-class="@ship.GameData.Name">
+                                                        <a href="@Url.Action("Ship", new { id = Model.CurrentXML, shipID = ship.ID })" class="js-ship">
+                                                            <label>@ship.Json.Name</label>
+                                                        </a>
+                                                        <!-- Insert Hardpoint Overview Here -->
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <ul class="nav-tabs list-unstyled" role="tablist">
+                <li class="active"><a href="#inventory" role="tab" data-toggle="tab" aria-expanded="true">Inventory</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane row active" id="inventory">
+                    <div class="col-sm-6 js-scrollable">
+                        @RenderItemCategory("Weapons", Items.CategoryEnum.Weapon, Items.CategoryEnum.Turret, Items.CategoryEnum.MissileRack)
+                        @RenderItemCategory("Ordinance", Items.CategoryEnum.Missile, Items.CategoryEnum.AmmoBox)
+                        @RenderItemCategory("Defense", Items.CategoryEnum.Armor, Items.CategoryEnum.Shield)
+                        @RenderItemCategory("Power", Items.CategoryEnum.Engine, Items.CategoryEnum.Thruster, Items.CategoryEnum.PowerPlant)
+                        @RenderItemCategory("Other", Items.CategoryEnum.Storage, Items.CategoryEnum.Paints)
+                    </div>
+
+                    <div class="col-sm-6">
+                        @RenderHover()
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
