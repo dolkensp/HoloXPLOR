@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
-    var hideOverlay = 0;
     var $form = $('#form-upload');
 
     if ($form.length == 0) return;
+
+    var hideOverlay = 0;
 
     $("html").upload({
 

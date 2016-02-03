@@ -170,11 +170,6 @@ $(document).ready(function () {
             if ($source == null) hideInfo(500)
         });
 
-        // popover({
-        //     template: '<div class="popover popover-cig" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-        // });
-
-
         var $panecontainer = $('#primary-pane');
         var isscrolling = false;
         var $currscrollbar = $('#primary-pane-scrollbar');
@@ -230,8 +225,6 @@ $(document).ready(function () {
                 if ($currcontent.height() > parentH) {
                     $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
                 }
-
-                // console.log($currcontent.height(), parentH, newpos, offset, $currscrollbar);
             }
         });
     }
@@ -240,12 +233,6 @@ $(document).ready(function () {
 
         var $item = $(this);
         var $port = $(ui.draggable);
-
-        // if ($item.data('item-id') != null)
-        //     $item = $('[data-item-id="' + $item.data('item-id') + '"');
-        // 
-        // if ($port.data('item-id') != null)
-        //     $port = $('[data-item-id="' + $port.data('item-id') + '"');
 
         // ensure we're always checking the item vs the port
         if (!$item.hasClass('js-available') && $port.hasClass('js-available')) {
@@ -275,23 +262,28 @@ $(document).ready(function () {
             data: data,
             method: "POST",
             success: function (data) {
-                var itemPane_old = $item.closest('[id]')[0];
-                var portPane_old = $port.closest('[id]')[0];
-                var specPane_old = $('#ship_specs')[0];
-
                 $page = $(data);
 
-                var itemPane_new = $('#' + itemPane_old.id, $page)[0];
-                var portPane_new = $('#' + portPane_old.id, $page)[0];
-                var specPane_new = $('#ship_specs', $page)[0];
+                $('[id]').each(function () {
 
-                $(itemPane_old).replaceWith(itemPane_new);
-                $(portPane_old).replaceWith(portPane_new);
-                $(specPane_old).replaceWith(specPane_new);
+                    var $oldPane = $(this);
 
-                $(itemPane_new).addClass('active');
-                $(portPane_new).addClass('active');
+                    // Only act on deepest elements
+                    if ($('[id]', $oldPane).length != 0) return
+                    
+                    var $newPane = $('#' + this.id, $page);
 
+                    // Only act if pane exists in response
+                    if ($newPane.length == 0) return;
+
+                    // Preserve styling
+                    $newPane[0].className = this.className;
+
+                    // Replace with new method
+                    $oldPane.replaceWith($newPane);
+                });
+
+                // Rebind events
                 bindAll(document.body);
             }
         });
