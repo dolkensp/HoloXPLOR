@@ -78,6 +78,12 @@ namespace HoloXPLOR.Data
 
         #endregion
 
+        #region Ammo XML
+
+
+
+        #endregion
+
         #region Vehicle XML
 
         private static Dictionary<String, Ships.Vehicle> _vehicles;

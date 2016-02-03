@@ -39,10 +39,51 @@ namespace HoloXPLOR.Data.XML.Spaceships
         }
 
         private Int32? _itemSize;
+        [XmlIgnore]
         public Int32? ItemSize
         {
             get { return this._itemSize = this._itemSize ?? this.Params["itemSize"].ToInt32(); }
             set { this._itemSize = value; }
+        }
+
+        private String _itemType;
+        [XmlIgnore]
+        public String ItemType
+        {
+            get { return this._itemType = this._itemType ?? this.Params["itemType", String.Empty]; }
+            set { this._itemType = value; }
+        }
+
+        private String _itemSubType;
+        [XmlIgnore]
+        public String ItemSubType
+        {
+            get { return this._itemSubType = this._itemSubType ?? this.Params["itemSubType", String.Empty]; }
+            set { this._itemSubType = value; }
+        }
+
+        private Double? _mass;
+        [XmlIgnore]
+        public Double? Mass
+        {
+            get { return this._mass = this._mass ?? this.Params["mass", String.Empty].ToDouble(); }
+            set { this._mass = value; }
+        }
+
+        private Double? _price;
+        [XmlIgnore]
+        public Double? Price
+        {
+            get { return this._price = this._price ?? this.Params["price", String.Empty].ToDouble(); }
+            set { this._price = value; }
+        }
+
+        private Double? _hitPoints;
+        [XmlIgnore]
+        public Double? HitPoints
+        {
+            get { return this._hitPoints = this._hitPoints ?? this.Params["hitpoints", String.Empty].ToDouble(); }
+            set { this._hitPoints = value; }
         }
 
         [XmlIgnore]
