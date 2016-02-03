@@ -10,7 +10,5 @@ namespace HoloXPLOR.Data.XML.Spaceships
 {
     public partial class Item
     {
-        // TODO: Add <armor><signalMultipliers><multipliers name/value><damageMultipliers><damageMultipliers damageType/multiplier_physical/multiplier_energy/multiplier_distortion
-        public Armor Armor { get; set; }
     }
 }

@@ -69,6 +69,8 @@
     <Compile Include="XML\Inventory\Player.cs" />
     <Compile Include="XML\Inventory\Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XML\Spaceships\Armor.cs" />
+    <Compile Include="XML\Spaceships\DamageMultiplier.cs" />
     <Compile Include="XML\Spaceships\Pipe.cs" />
     <Compile Include="XML\Spaceships\PortCollection.cs" />
     <Compile Include="XML\Spaceships\_Calculated.cs" />

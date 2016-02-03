@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Not Found";
+}
+
+@using (Html.BeginForm("Upload", "HoloTable", FormMethod.Post, new { id = "form-upload" }))
+{ }
+
+<hgroup>
+    <h1>Error.</h1>
+    <h2>The hangar you requested has been removed.</h2>
+</hgroup>
+
+<p>This is normal. I remove existing inventories regularly to save space, and reduce any security risks.</p>
+<p>Please re-upload your file and try again.</p>

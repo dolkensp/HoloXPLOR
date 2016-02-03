@@ -26,15 +26,17 @@
         }, 200);
     }).on("filestart.upload", function (e, file) {
 
-        // TODO: Display Upload Overlay
+        $('#upload .modal-body').html('<p>Now uploading...</p>');
 
     }).on("fileerror.upload", function (e, file, response) {
 
-        // TODO: Display Error Overlay
+        $('#upload .modal-body').html('<p>There was an error uploading the file.</p>' +
+                                      '<p>If the errors persist, please email your hangar XML to <a href="mailto:plugins@ddrit.com?subject=Failing+Inventory+Upload">plugins@ddrit.com</a>.</p>' +
+                                      '<p>Alternatively, you can try deleting your inventory XML, and launching your hangar to get a fresh copy from CIG.</p>');
 
     }).on("fileprogress.upload", function (e, file, percent) {
 
-        // TODO: Display Upload Progress
+        $('#upload .modal-body').html('<p>Now uploading (' + percent + '%)...</p>');
 
     }).on("filecomplete.upload", function (e, file, response) {
 

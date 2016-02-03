@@ -2184,6 +2184,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
+    <Content Include="Views\HoloTable\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />

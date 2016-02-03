@@ -14,6 +14,12 @@ namespace HoloXPLOR
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "NotFound",
+                url: "NotFound",
+                defaults: new { controller = "HoloTable", action = "NotFound", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "HangarUpload",
                 url: "HoloTable/Upload",
                 defaults: new { controller = "HoloTable", action = "Upload" }

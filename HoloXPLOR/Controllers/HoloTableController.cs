@@ -26,20 +26,34 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Hangar(String id)
         {
-            var model = new DetailModel(id);
+            try
+            {
+                var model = new DetailModel(id);
 
-            ViewBag.ID = id;
+                ViewBag.ID = id;
 
-            return View(model);
+                return View(model);
+            }
+            catch (FileNotFoundException)
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         public ActionResult Ship(String id, Guid shipID)
         {
-            var model = new DetailModel(id, shipID);
+            try
+            {
+                var model = new DetailModel(id, shipID);
 
-            ViewBag.ID = id;
+                ViewBag.ID = id;
 
-            return View(model);
+                return View(model);
+            }
+            catch (FileNotFoundException)
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         [HttpPost]
@@ -152,6 +166,18 @@ namespace HoloXPLOR.Controllers
 
                 return View(model);            
             }
+            catch (FileNotFoundException)
+            {
+                this.Response.StatusCode = 500;
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        Reason = "Hangar Removed"
+                    }
+                };
+            }
             catch (Exception ex)
             {
                 Elmah.ErrorLog.GetDefault(System.Web.HttpContext.Current).Log(new Elmah.Error(ex));
@@ -241,6 +267,11 @@ namespace HoloXPLOR.Controllers
                     UrlPath = Url.Action("Hangar", new { id = Path.GetFileNameWithoutExtension(xmlFile) })
                 }
             };
+        }
+
+        public ActionResult NotFound()
+        {
+            return View();
         }
     }
 }
