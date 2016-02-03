@@ -9,7 +9,7 @@
         action: $form.attr('action'),
         label: false,
         dataType: "json",
-        maxSize: 0x200000,
+        maxSize: 0x500000,
         multiple: false,
         autoUpload: true,
         maxQueue: 1,

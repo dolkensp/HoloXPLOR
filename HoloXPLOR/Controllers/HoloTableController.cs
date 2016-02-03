@@ -218,7 +218,7 @@ namespace HoloXPLOR.Controllers
             String bakFile = Server.MapPath(String.Format(@"~/App_Data/{0}.bak", Path.GetFileNameWithoutExtension(file.FileName)));
             String tmpFile = Server.MapPath(String.Format(@"~/App_Data/{0}.tmp", Path.GetFileNameWithoutExtension(file.FileName)));
 
-            if (file.ContentLength > 0x200000)
+            if (file.ContentLength > 0x500000)
             {
                 this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
                 return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
