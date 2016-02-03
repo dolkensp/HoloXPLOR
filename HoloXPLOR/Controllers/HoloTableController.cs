@@ -57,15 +57,36 @@ namespace HoloXPLOR.Controllers
         }
 
         [HttpPost]
-        public ActionResult Ship(String id, Guid shipID, Guid newPartID, Guid? parentID, String portName)
+        public ActionResult Ship(String id, Guid shipID, Guid targetID, Guid? parentID, String portName)
         {
             try
             {
                 var model = new DetailModel(id, shipID);
 
+                // Parents being equipped
+                var parentItems = model.Player.Items.Where(i => i.ID == parentID).ToArray();
+                var parentShipPorts = model.Player.Ships.Where(s => s.ID == shipID).Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                var parentItemPorts = model.Player.Items.Where(i => i.ID == parentID).Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                var parentPorts = parentShipPorts.Concat(parentItemPorts).ToArray();
+
+                // Item IDs being replaced
+                var childItemIDs = new HashSet<Guid>(parentPorts.Select(p => p.ItemID));
+
+                var childShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => childItemIDs.Contains(i.ID))).ToArray();
+                var childHangarInventory = model.Player.Hangar.Inventory.Items.Where(i => childItemIDs.Contains(i.ID)).ToArray();
+
+                var targetShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => i.ID == targetID)).ToArray();
+                var targetHangarInventory = model.Player.Hangar.Inventory.Items.Where(i => i.ID == targetID).ToArray();
+                var targetItems = model.Player.Items.Where(i => i.ID == targetID).ToArray();
+
+                var targetShipPorts = model.Player.Ships.Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.ItemID == targetID).ToArray();
+                var targetItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == targetID).ToArray();
+
                 var ship = model.Player.Ships.Where(s => s.ID == shipID).SingleOrDefault();
 
-                var newItem = model.Player.Items.Where(i => i.ID == newPartID).SingleOrDefault();
+                
+
+                var newItem = model.Player.Items.Where(i => i.ID == targetID).SingleOrDefault();
 
                 var port = model.Player.Items.Where(i => i.ID == parentID).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).SingleOrDefault() ??
                     ship.Ports.Items.Where(p => p.PortName == portName).SingleOrDefault();
@@ -116,20 +137,20 @@ namespace HoloXPLOR.Controllers
 
                 #region Move New Child Items To Ship
 
-                hosts = model.Player.Items.Where(i => i.ID == newPartID).ToList();
+                hosts = model.Player.Items.Where(i => i.ID == targetID).ToList();
 
                 nextHost = hosts.FirstOrDefault();
 
                 removed = new List<Inventory.InventoryItem> { };
 
-                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == newPartID));
-                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == newPartID));
+                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == targetID));
+                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == targetID));
 
-                if (!removed.Where(i => i.ID == newPartID).Any())
-                    removed.Add(new Inventory.InventoryItem { ID = newPartID });
+                if (!removed.Where(i => i.ID == targetID).Any())
+                    removed.Add(new Inventory.InventoryItem { ID = targetID });
 
-                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
-                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != newPartID).ToArray();
+                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != targetID).ToArray();
+                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != targetID).ToArray();
 
                 while (nextHost != null)
                 {
@@ -155,7 +176,7 @@ namespace HoloXPLOR.Controllers
                 #endregion
 
                 // Mount Item
-                port.ItemID = newPartID;
+                port.ItemID = targetID;
 
                 // Set current ship (Optional)
                 model.Player.VehicleID = shipID;

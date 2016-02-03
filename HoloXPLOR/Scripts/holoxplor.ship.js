@@ -242,25 +242,13 @@ $(document).ready(function () {
             $port = temp;
         }
 
-        var data = {};
-
-        if ($item.data('empty') != undefined) {
-            data = {
-                newPartID: '00000000-0000-0000-0000-000000000000',
-                parentID: $port.data('parent-id'),
-                portName: $port.data('port-id')
-            }
-        } else {
-            data = {
-                newPartID: $item.data('item-id'),
-                parentID: $port.data('parent-id'),
-                portName: $port.data('port-id')
-            }
-        }
-
         $.ajax({
             url: $form.attr('action'),
-            data: data,
+            data: {
+                targetID: $item.data('item-id'),
+                parentID: $port.data('parent-id'),
+                portName: $port.data('port-id')
+            },
             method: "POST",
             success: function (data) {
                 $page = $(data);
