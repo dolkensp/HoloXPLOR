@@ -208,65 +208,77 @@ namespace HoloXPLOR.Controllers
         {
             Success = 200,
             FileTooLarge = 413,
-            InvalidFileFormat = 415
+            InvalidFileFormat = 415,
+            ServerError = 500
         }
 
         [HttpPost]
         public JsonResult Upload(HttpPostedFileBase file)
         {
-            String xmlFile = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", Path.GetFileNameWithoutExtension(file.FileName)));
-            String bakFile = Server.MapPath(String.Format(@"~/App_Data/{0}.bak", Path.GetFileNameWithoutExtension(file.FileName)));
-            String tmpFile = Server.MapPath(String.Format(@"~/App_Data/{0}.tmp", Path.GetFileNameWithoutExtension(file.FileName)));
-
-            if (file.ContentLength > 0x500000)
-            {
-                this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
-                return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
-            }
-
-            if (System.IO.File.Exists(tmpFile))
-            {
-                System.IO.File.Delete(tmpFile);
-            }
-
-            file.SaveAs(tmpFile);
-
             try
             {
-                var temp = System.IO.File.ReadAllText(tmpFile).FromXML<Inventory.Player>();
-                if (temp.Hangar == null || temp.Hangar.Inventory == null || temp.Hangar.Inventory.Count == 0)
+                String xmlFile = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", Path.GetFileNameWithoutExtension(file.FileName)));
+                String bakFile = Server.MapPath(String.Format(@"~/App_Data/{0}.bak", Path.GetFileNameWithoutExtension(file.FileName)));
+                String tmpFile = Server.MapPath(String.Format(@"~/App_Data/{0}.tmp", Path.GetFileNameWithoutExtension(file.FileName)));
+
+                if (file.ContentLength > 0x500000)
                 {
+                    this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
+                    return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
+                }
+
+                if (System.IO.File.Exists(tmpFile))
+                {
+                    System.IO.File.Delete(tmpFile);
+                }
+
+                file.SaveAs(tmpFile);
+
+                try
+                {
+                    var temp = System.IO.File.ReadAllText(tmpFile).FromXML<Inventory.Player>();
+                    if (temp.Hangar == null || temp.Hangar.Inventory == null || temp.Hangar.Inventory.Count == 0)
+                    {
+                        this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
+                        return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
+                    }
+                }
+                catch (Exception)
+                {
+                    System.IO.File.Delete(tmpFile);
                     this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
                     return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
                 }
-            }
-            catch (Exception)
-            {
-                System.IO.File.Delete(tmpFile);
-                this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
-                return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
-            }
 
-            if (System.IO.File.Exists(bakFile))
-            {
-                System.IO.File.Delete(bakFile);
-            }
-
-            if (System.IO.File.Exists(xmlFile))
-            {
-                System.IO.File.Delete(xmlFile);
-            }
-
-            System.IO.File.Move(tmpFile, xmlFile);
-
-            return new JsonResult
-            {
-                Data = new
+                if (System.IO.File.Exists(bakFile))
                 {
-                    Result = UploadResult.Success,
-                    UrlPath = Url.Action("Hangar", new { id = Path.GetFileNameWithoutExtension(xmlFile) })
+                    System.IO.File.Delete(bakFile);
                 }
-            };
+
+                if (System.IO.File.Exists(xmlFile))
+                {
+                    System.IO.File.Delete(xmlFile);
+                }
+
+                System.IO.File.Move(tmpFile, xmlFile);
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        Result = UploadResult.Success,
+                        UrlPath = Url.Action("Hangar", new { id = Path.GetFileNameWithoutExtension(xmlFile) })
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorLog.GetDefault(System.Web.HttpContext.Current).Log(new Elmah.Error(ex));
+
+                this.Response.StatusCode = (Int32)UploadResult.ServerError;
+
+                return new JsonResult { Data = new { Result = UploadResult.ServerError } };
+            }
         }
 
         public ActionResult NotFound()

@@ -30,9 +30,27 @@
 
     }).on("fileerror.upload", function (e, file, response) {
 
-        $('#upload .modal-body').html('<p>There was an error uploading the file.</p>' +
-                                      '<p>If the errors persist, please email your hangar XML to <a href="mailto:plugins@ddrit.com?subject=Failing+Inventory+Upload">plugins@ddrit.com</a>.</p>' +
-                                      '<p>Alternatively, you can try deleting your inventory XML, and launching your hangar to get a fresh copy from CIG.</p>');
+        switch(response)
+        {
+            case "size":
+            case "Request Entity Too Large":
+                $('#upload .modal-body').html('<p>The selected file is too large.</p>' +
+                                              '<p>If the errors persist, please email a copy of your XML file to <a href="mailto:plugins@ddrit.com?subject=Failing+Inventory+Upload">plugins@ddrit.com</a> and I will review the size limits.</p>' +
+                                              '<p>Alternatively, you can try deleting your <em>db_[yourhandle].xml</em> file, and launching your hangar to get a fresh copy from CIG.</p>');
+                break;
+            case "Unsupported Media Type":
+                $('#upload .modal-body').html('<p>There was an error processing the file.</p>' +
+                                              '<p>Please make sure you are uploading the <em>db_[yourhandle].xml</em> file from your USER/Database directory.</p>' +
+                                              '<p>If the errors persist, please email a copy of your XML file to <a href="mailto:plugins@ddrit.com?subject=Failing+Inventory+Upload">plugins@ddrit.com</a>.</p>' +
+                                              '<p>Alternatively, you can try deleting your <em>db_[yourhandle].xml</em> file, and launching your hangar to get a fresh copy from CIG.</p>');
+                break;
+            case "Internal Server Error":
+            default:
+                $('#upload .modal-body').html('<p>There was an error uploading the file.</p>' +
+                                              '<p>If the errors persist, please email a copy of your XML file to <a href="mailto:plugins@ddrit.com?subject=Failing+Inventory+Upload">plugins@ddrit.com</a>.</p>' +
+                                              '<p>Alternatively, you can try deleting your <em>db_[yourhandle].xml</em> file, and launching your hangar to get a fresh copy from CIG.</p>');
+                break;
+        }
 
     }).on("fileprogress.upload", function (e, file, percent) {
 
