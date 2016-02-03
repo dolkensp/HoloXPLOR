@@ -163,7 +163,7 @@ body {
 
 .ui-thumbnail { margin-bottom: 10px; }
 
-.ui-thumbnail img { max-width: 100%; }
+.ui-thumbnail img { width: 100%; }
 
 #primary-pane-scrollbar { position: relative; }
 

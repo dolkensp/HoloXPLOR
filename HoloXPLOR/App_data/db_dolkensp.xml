@@ -1,5 +1,5 @@
 ﻿
-<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-005a-c345-0000-000000000000">
+<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-0028-56f1-0000-000000000000">
  <inventory count="2">
   <item __EID__id="fffa8108-0000-0000-0001-000000000000" />
   <item __EID__id="fffa8108-0000-0000-0002-000000000000" />
@@ -9883,7 +9883,7 @@
   </pipes>
  </ship>
  <ship oemId="00000000-0000-0000-0000-000000000000" id="00fa8108-00a8-1ae7-0000-000000000000" acMembershipId="15145640" class="DefaultSpaceShips.AEGS.AEGS_Retaliator" name="Ship_10">
-  <inventory count="123">
+  <inventory count="124">
    <item __EID__id="00fa8108-00a8-1ae7-0001-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0002-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0003-000000000000" />
@@ -10007,6 +10007,7 @@
    <item __EID__id="00fa8108-00a8-1ae7-0058-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-005a-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-005c-000000000000" />
+   <item __EID__id="00fa8108-005a-c345-001b-000000000000" />
   </inventory>
   <ports count="60">
    <port portName="hardpoint_lights_ext" __EID__itemId="00fa8108-00a8-1ae7-007b-000000000000">
@@ -10455,7 +10456,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_shieldgenerator_left" __EID__itemId="00000000-0000-0000-0000-000000000000">
+   <port portName="hardpoint_shieldgenerator_left" __EID__itemId="00fa8108-005a-c345-001b-000000000000">
     <pipes />
    </port>
    <port portName="hardpoint_turret_backtopleft" __EID__itemId="00fa8108-00a8-1ae7-003c-000000000000">
@@ -17857,8 +17858,6 @@
    <item __EID__id="00fa8108-005b-dcf0-000f-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0010-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0011-000000000000" />
-   <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
-   <item __EID__id="00fa8108-005b-dcf0-0013-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0014-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0015-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0017-000000000000" />
@@ -17887,6 +17886,8 @@
    <item __EID__id="00fa8108-005b-dcf0-002f-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0018-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-001b-000000000000" />
+   <item __EID__id="00fa8108-005a-c345-0002-000000000000" />
+   <item __EID__id="00fa8108-005a-c345-0004-000000000000" />
   </inventory>
   <ports count="37">
    <port portName="hardpoint_avionics_motherboard" __EID__itemId="00fa8108-005b-dcf0-0029-000000000000">
@@ -18447,7 +18448,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="00fa8108-005b-dcf0-0013-000000000000">
+   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="00fa8108-005a-c345-0004-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -18472,7 +18473,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_class1_left_wing" __EID__itemId="00fa8108-005b-dcf0-0012-000000000000">
+   <port portName="hardpoint_weapon_gun_class1_left_wing" __EID__itemId="00fa8108-005a-c345-0002-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -19564,7 +19565,6 @@
    <item __EID__id="00fa8108-0028-56f1-0010-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0011-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0012-000000000000" />
-   <item __EID__id="00fa8108-0028-56f1-0013-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0014-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0015-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0016-000000000000" />
@@ -19593,6 +19593,7 @@
    <item __EID__id="00fa8108-0028-56f1-002f-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-0018-000000000000" />
    <item __EID__id="00fa8108-0028-56f1-001b-000000000000" />
+   <item __EID__id="00fa8108-0029-c1da-0000-000000000000" />
   </inventory>
   <ports count="37">
    <port portName="hardpoint_avionics_motherboard" __EID__itemId="00fa8108-0028-56f1-0029-000000000000">
@@ -20153,7 +20154,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="00fa8108-0028-56f1-0013-000000000000">
+   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="00fa8108-0029-c1da-0000-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -42607,7 +42608,7 @@
   <ports />
  </item>
  <hangar oemId="00000000-0000-0000-0000-000000000000" id="fcfa8108-0000-0000-0000-000000000000" class="Aeroview" owner="alluran">
-  <inventory count="486">
+  <inventory count="487">
    <item __EID__id="00fa8108-002b-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-002c-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-0076-75e4-0000-000000000000" />
@@ -42948,8 +42949,6 @@
    <item __EID__id="01fa8108-0005-930b-0002-000000000000" />
    <item __EID__id="01fa8108-0006-930b-0001-000000000000" />
    <item __EID__id="01fa8108-0006-930b-0001-000000000000" />
-   <item __EID__id="00fa8108-005a-c345-001b-000000000000" />
-   <item __EID__id="00fa8108-005a-c345-001b-000000000000" />
    <item __EID__id="01fa8108-0045-080d-0000-000000000000" />
    <item __EID__id="01fa8108-0045-080d-0000-000000000000" />
    <item __EID__id="01fa8108-0045-080d-0000-000000000000" />
@@ -42988,8 +42987,6 @@
    <item __EID__id="00fa8108-005a-c345-0024-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0025-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0025-000000000000" />
-   <item __EID__id="00fa8108-005a-c345-0004-000000000000" />
-   <item __EID__id="00fa8108-005a-c345-0002-000000000000" />
    <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
    <item __EID__id="00fa8108-00b2-1ae7-003b-000000000000" />
    <item __EID__id="00fa8108-00b2-1ae7-003c-000000000000" />
@@ -43092,8 +43089,13 @@
    <item __EID__id="00fa8108-005a-c345-0021-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0006-000000000000" />
    <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
-   <item __EID__id="00fa8108-0029-c1da-0000-000000000000" />
    <item __EID__id="00fa8108-002a-c1da-0000-000000000000" />
+   <item __EID__id="00fa8108-005b-dcf0-0013-000000000000" />
+   <item __EID__id="00fa8108-005b-dcf0-0013-000000000000" />
+   <item __EID__id="00fa8108-0028-56f1-0013-000000000000" />
+   <item __EID__id="00fa8108-0028-56f1-0013-000000000000" />
+   <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
+   <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
   </inventory>
   <rooms count="6">
    <room library="Aeroview_hangar" category="aeroview_hangar_stock">

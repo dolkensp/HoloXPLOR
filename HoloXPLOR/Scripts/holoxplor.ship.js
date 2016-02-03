@@ -231,7 +231,7 @@ $(document).ready(function () {
                     $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
                 }
 
-                console.log($currcontent.height(), parentH, newpos, offset, $currscrollbar);
+                // console.log($currcontent.height(), parentH, newpos, offset, $currscrollbar);
             }
         });
     }

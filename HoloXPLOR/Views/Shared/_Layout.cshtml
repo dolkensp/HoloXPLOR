@@ -5,6 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - HoloXPLOR</title>
     @Styles.Render("~/Content/css")
+    <script type="text/javascript">
+        // Advanced error handling, taken from http://stackoverflow.com/a/31750604/1533523
+
+        function wrap(func) {
+            // Ensure we only wrap the function once.
+            if (!func._wrapped) {
+                func._wrapped = function () {
+                    try {
+                        func.apply(this, arguments);
+                    } catch (e) {
+                        // Log error
+                        $.ajax({
+                            url: '/jserror',
+                            data: {
+                                url: location.href,
+                                message: e.message,
+                                stack: e.stack,
+                                number: e.number,
+                                description: e.description,
+                                name: e.name,
+                                args: JSON.stringify(arguments)
+                            },
+                            method: 'POST',
+                            dataType: 'json',
+                            cache: false,
+                        });
+
+                        throw e;
+                    }
+                }
+            }
+            return func._wrapped;
+        };
+
+        if (window.EventTarget) {
+            var addEventListener = window.EventTarget.prototype.addEventListener;
+            window.EventTarget.prototype.addEventListener = function (event, callback, bubble) {
+                addEventListener.call(this, event, wrap(callback), bubble);
+            }
+
+            var removeEventListener = window.EventTarget.prototype.removeEventListener;
+            window.EventTarget.prototype.removeEventListener = function (event, callback, bubble) {
+                removeEventListener.call(this, event, callback._wrapped || callback, bubble);
+            }
+        } else if (document.addEventListener)
+        {
+            // TODO: Figure out front-end logging for IE
+        }
+    </script>
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>

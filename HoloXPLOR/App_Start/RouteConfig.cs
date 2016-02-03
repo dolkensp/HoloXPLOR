@@ -20,6 +20,13 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
+                name: "JsError",
+                url: "JsError",
+                defaults: new { controller = "Error", action = "JsError", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+
                 name: "HangarUpload",
                 url: "HoloTable/Upload",
                 defaults: new { controller = "HoloTable", action = "Upload" }
