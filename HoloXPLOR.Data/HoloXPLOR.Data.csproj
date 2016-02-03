@@ -74,6 +74,11 @@
     <Compile Include="XML\Spaceships\Pipe.cs" />
     <Compile Include="XML\Spaceships\PortCollection.cs" />
     <Compile Include="XML\Spaceships\_Calculated.cs" />
+    <Compile Include="XML\Spaceships\_Missile.cs" />
+    <Compile Include="XML\Spaceships\_Turret.cs" />
+    <Compile Include="XML\Spaceships\_Thruster.cs" />
+    <Compile Include="XML\Spaceships\_Shield.cs" />
+    <Compile Include="XML\Spaceships\_PowerPlant.cs" />
     <Compile Include="XML\Spaceships\_Cooler.cs" />
     <Compile Include="XML\Spaceships\_Cargo.cs" />
     <Compile Include="XML\Spaceships\_Armor.cs" />
