@@ -119,9 +119,10 @@ $(document).ready(function () {
 
         if (!debug) { /* Normally, equipment-specific tags */
             var requiredItemTags = ($port.data('port-required-tags') || '').toLowerCase().split(' ');
+            var portItemTags = ($port.data('port-required-item-tags') || '').toLowerCase().split(' ');
             var itemTags = ($item.data('item-tags') || '').toLowerCase().split(' ');
 
-            if ($(requiredItemTags).not(itemTags).not(['']).length > 0) {
+            if ($(requiredItemTags).not(itemTags).not(['']).length > 0 || $(portItemTags).not(itemTags).not(['']).length > 0) {
                 // console.log("Rejected Item Tags", requiredItemTags, itemTags);
                 return false;
             }
