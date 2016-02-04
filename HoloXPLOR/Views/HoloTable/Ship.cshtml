@@ -360,8 +360,10 @@
                         @RenderHover()
                     </div>
                     <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
+                        @RenderItemCategory("Power Plants", Items.CategoryEnum.PowerPlant)
                         @RenderItemCategory("Storage", Items.CategoryEnum.Storage)
                         @RenderItemCategory("Paints", Items.CategoryEnum.Paints)
+                        @RenderItemCategory("Other", Items.CategoryEnum.__Unknown__)
                     </div>
                 </div>
             
