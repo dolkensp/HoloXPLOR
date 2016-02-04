@@ -427,14 +427,16 @@ namespace HoloXPLOR.Models.HoloTable
         private Dictionary<Guid, Inventory.Item> _inventory_ItemMap;
         public Dictionary<Guid, Inventory.Item> Inventory_ItemMap
         {
-            get { return this._inventory_ItemMap = this._inventory_ItemMap ?? this.Player.Items.ToDictionary(k => k.ID, v => v); }
+            get {
+                return this._inventory_ItemMap = this._inventory_ItemMap ?? this.Player.Items.GroupBy(i => i.ID).Select(g => g.FirstOrDefault()).ToDictionary(k => k.ID, v => v);
+            }
             set { this._inventory_ItemMap = value; }
         }
 
         private Dictionary<Guid, Inventory.Ship> _inventory_ShipMap;
         public Dictionary<Guid, Inventory.Ship> Inventory_ShipMap
         {
-            get { return this._inventory_ShipMap = this._inventory_ShipMap ?? this.Player.Ships.ToDictionary(k => k.ID, v => v); }
+            get { return this._inventory_ShipMap = this._inventory_ShipMap ?? this.Player.Ships.GroupBy(i => i.ID).Select(g => g.FirstOrDefault()).ToDictionary(k => k.ID, v => v); }
             set { this._inventory_ShipMap = value; }
         }
 
