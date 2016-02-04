@@ -27,6 +27,13 @@ namespace HoloXPLOR.Models.HoloTable
             {
                 this.Player = System.IO.File.ReadAllText(filename).FromXML<Inventory.Player>();
                 this.ShipID = shipID ?? Guid.Empty;
+
+                var shipItemIDs = new HashSet<Guid>(this.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
+
+                this.Player.Inventory = new Inventory.Inventory
+                {
+                    Items = this.Player.Items.Where(i => !shipItemIDs.Contains(i.ID)).Select(i => new Inventory.InventoryItem { ID = i.ID }).ToArray()
+                };
             }
             else
             {
@@ -427,9 +434,7 @@ namespace HoloXPLOR.Models.HoloTable
         private Dictionary<Guid, Inventory.Item> _inventory_ItemMap;
         public Dictionary<Guid, Inventory.Item> Inventory_ItemMap
         {
-            get {
-                return this._inventory_ItemMap = this._inventory_ItemMap ?? this.Player.Items.GroupBy(i => i.ID).Select(g => g.FirstOrDefault()).ToDictionary(k => k.ID, v => v);
-            }
+            get { return this._inventory_ItemMap = this._inventory_ItemMap ?? this.Player.Items.GroupBy(i => i.ID).Select(g => g.OrderByDescending(i => i.Ports != null && i.Ports.Items != null ? i.Ports.Items.Length : 0).FirstOrDefault()).ToDictionary(k => k.ID, v => v); }
             set { this._inventory_ItemMap = value; }
         }
 

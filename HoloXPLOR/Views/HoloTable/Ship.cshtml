@@ -16,7 +16,7 @@
     {
         items.AddRange(Model.GameData_CategoryMap[filter].Where(i => Model.View_ItemMap.ContainsKey(i.Key)).Select(i => Model.View_ItemMap[i.Key]));
     }
-        
+
     var list = (from item in items.Distinct()
                 let key = item.Inventory_Item.ID
                 let ship = (item.Inventory_Ship ?? new Inventory.Ship { })
@@ -27,35 +27,32 @@
                 group groupedItems by groupedItems.Key.ShipID != Guid.Empty ? groupedItems.Key.ShipName : String.Format("Size {0}", groupedItems.Key.ItemSize) into groupedItems2
                 select groupedItems2).ToArray();
 
-    if (list.Length > 0)
-    {
-        <div class="panel panel-cig">
-            <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
-            <div class="panel-body">
-                <ul class="collapse in cig-list" id="pnl_@category.Replace(" ", "_")">
-                    @foreach (var subCategory in list)
-                    {
-                        <li class="row">
-                            <label class="col-md-4">@subCategory.Key</label>
-                            <ul class="cig-iconlist col-md-8">
-                                @foreach (var grouping in subCategory)
-                                {
-                                    var isEquipped = !String.IsNullOrWhiteSpace(grouping.Key.ShipName);
-                                    var isEquipped_Self = isEquipped && (grouping.Key.ShipID == Model.ShipID);
-                                    var item = grouping.FirstOrDefault();
+    <div class="panel panel-cig cig-count@(list.Length)">
+        <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
+        <div class="panel-body">
+            <ul class="collapse in cig-list" id="pnl_@category.Replace(" ", "_")">
+                @foreach (var subCategory in list)
+                {
+                    <li class="row">
+                        <label class="col-md-4">@subCategory.Key</label>
+                        <ul class="cig-iconlist col-md-8">
+                            @foreach (var grouping in subCategory)
+                            {
+                                var isEquipped = !String.IsNullOrWhiteSpace(grouping.Key.ShipName);
+                                var isEquipped_Self = isEquipped && (grouping.Key.ShipID == Model.ShipID);
+                                var item = grouping.FirstOrDefault();
 
-                                    <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
-                                        <span class="cig-count">@(grouping.Count())x</span>
-                                        <label>@item.Item_DisplayName.ToLocalized()</label>
-                                    </li>
-                                }
-                            </ul>
-                        </li>
-                    }
-                </ul>
-            </div>
+                                <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
+                                    <span class="cig-count">@(grouping.Count())x</span>
+                                    <label>@item.Item_DisplayName.ToLocalized()</label>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
         </div>
-    }
+    </div>
 }
 
 @helper RenderHover()
@@ -75,43 +72,40 @@
     {
         items.AddRange(Model.View_CategoryLoadout[filter]);
     }
-    
+
     var itemsByMaxSize = items.Distinct().GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-    
-    if (itemsByMaxSize.Count > 0)
-    {
-        <div class="panel panel-cig">
-            <div class="panel-heading"><h4>@category</h4></div>
-            <div class="panel-body">
-                <ul class="cig-list">
-                    @foreach (var size in itemsByMaxSize.Keys.OrderBy(k => k))
-                    {
-                        <li class="row">
-                            <label class="col-xs-3">Size @size</label>
-                            <ul class="list-unstyled col-xs-9">
-                                @foreach (var item in itemsByMaxSize[size].OrderByDescending(i => i.Item_Type).ThenByDescending(i => i.Port_DisplayName).ThenByDescending(i => i.Item_DisplayName))
-                                {
-                                    <li data-template="@item.Item_Type" class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
-                                        @if (item.Inventory_Item != null)
-                                        {
-                                            <label>@item.Item_DisplayName</label>
-                                        }
-                                        else
-                                        {
-                                            <label>Empty</label>
-                                        }
-                                    </li>
-                                }
-                            </ul>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="panel-footer js-empty">
-                <label data-droppable data-empty class="js-available" title="Remove Item" data-item-id="00000000-0000-0000-0000-000000000000">Remove Item</label>
-            </div>
+
+    <div class="panel panel-cig  cig-count@(itemsByMaxSize.Count)">
+        <div class="panel-heading"><h4>@category</h4></div>
+        <div class="panel-body">
+            <ul class="cig-list">
+                @foreach (var size in itemsByMaxSize.Keys.OrderBy(k => k))
+                {
+                    <li class="row">
+                        <label class="col-xs-3">Size @size</label>
+                        <ul class="list-unstyled col-xs-9">
+                            @foreach (var item in itemsByMaxSize[size].OrderByDescending(i => i.Item_Type).ThenByDescending(i => i.Port_DisplayName).ThenByDescending(i => i.Item_DisplayName))
+                            {
+                                <li data-template="@item.Item_Type" class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
+                                    @if (item.Inventory_Item != null)
+                                    {
+                                        <label>@item.Item_DisplayName</label>
+                                    }
+                                    else
+                                    {
+                                        <label>Empty</label>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
         </div>
-    }
+        <div class="panel-footer js-empty">
+            <label data-droppable data-empty class="js-available" title="Remove Item" data-item-id="00000000-0000-0000-0000-000000000000">Remove Item</label>
+        </div>
+    </div>
 }
 
 @using (Html.BeginForm("Ship", "HoloTable", new { id = Model.CurrentXML, shipID = Model.ShipID }, FormMethod.Post, new { id = "form-ship" }))

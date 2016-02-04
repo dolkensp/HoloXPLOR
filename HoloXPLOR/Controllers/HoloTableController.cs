@@ -109,8 +109,7 @@ namespace HoloXPLOR.Controllers
                 var oldItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
                 var oldPorts = oldItemPorts.Concat(oldShipPorts).ToArray();
 
-                // Move all affected inventory
-                model.Player.Inventory.Items = model.Player.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).Union(oldInventory).ToArray();
+                // Configure Ship inventory
                 foreach (var ship in model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null))
                 {
                     ship.Inventory.Items = ship.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).ToArray();
@@ -120,6 +119,14 @@ namespace HoloXPLOR.Controllers
                         ship.Inventory.Items = ship.Inventory.Items.Union(newInventory).ToArray();
                     }
                 }
+
+                // Configure Player inventory
+                var shipItemIDs = new HashSet<Guid>(model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
+
+                model.Player.Inventory = new Inventory.Inventory
+                {
+                    Items = model.Player.Items.Where(i => !shipItemIDs.Contains(i.ID)).Select(i => new Inventory.InventoryItem { ID = i.ID }).ToArray()
+                };
 
                 var oldPort = oldPorts.SingleOrDefault();
 
