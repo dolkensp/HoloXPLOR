@@ -245,7 +245,7 @@ $(document).ready(function () {
         $.ajax({
             url: $form.attr('action'),
             data: {
-                targetID: $item.data('item-id'),
+                newID: $item.data('item-id'),
                 parentID: $port.data('parent-id'),
                 portName: $port.data('port-id')
             },

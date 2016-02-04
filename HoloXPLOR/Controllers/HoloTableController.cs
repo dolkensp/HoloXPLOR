@@ -56,8 +56,20 @@ namespace HoloXPLOR.Controllers
             }
         }
 
+        private IEnumerable<Guid> FlattenIDs(DetailModel model, Item item)
+        {
+            if (item != null || item.ID != Guid.Empty)
+            {
+                yield return item.ID;
+
+                if (item.Ports != null && item.Ports.Items != null)
+                    foreach (var childID in item.Ports.Items.Where(i => i.ItemID != Guid.Empty).SelectMany(i => this.FlattenIDs(model, model.Inventory_ItemMap.GetValue(i.ItemID, null))))
+                        yield return childID;
+            }
+        }
+
         [HttpPost]
-        public ActionResult Ship(String id, Guid shipID, Guid targetID, Guid? parentID, String portName)
+        public ActionResult Ship(String id, Guid shipID, Guid newID, Guid? parentID, String portName)
         {
             try
             {
@@ -65,118 +77,65 @@ namespace HoloXPLOR.Controllers
 
                 // Parents being equipped
                 var parentItems = model.Player.Items.Where(i => i.ID == parentID).ToArray();
-                var parentShipPorts = model.Player.Ships.Where(s => s.ID == shipID).Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.PortName == portName).ToArray();
-                var parentItemPorts = model.Player.Items.Where(i => i.ID == parentID).Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).ToArray();
-                var parentPorts = parentShipPorts.Concat(parentItemPorts).ToArray();
+                
+                // Ports being equipped
+                var newShipPorts = model.Player.Ships.Where(s => s.ID == shipID).Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                var newItemPorts = model.Player.Items.Where(i => i.ID == parentID).Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                var newPorts = newShipPorts.Concat(newItemPorts).ToArray();
 
                 // Item IDs being replaced
-                var childItemIDs = new HashSet<Guid>(parentPorts.Select(p => p.ItemID));
+                var oldItemIDs = new HashSet<Guid>(newPorts.Select(p => p.ItemID));
 
-                var childShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => childItemIDs.Contains(i.ID))).ToArray();
-                var childHangarInventory = model.Player.Hangar.Inventory.Items.Where(i => childItemIDs.Contains(i.ID)).ToArray();
-
-                var targetShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => i.ID == targetID)).ToArray();
-                var targetHangarInventory = model.Player.Hangar.Inventory.Items.Where(i => i.ID == targetID).ToArray();
-                var targetItems = model.Player.Items.Where(i => i.ID == targetID).ToArray();
-
-                var targetShipPorts = model.Player.Ships.Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.ItemID == targetID).ToArray();
-                var targetItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == targetID).ToArray();
-
-                var ship = model.Player.Ships.Where(s => s.ID == shipID).SingleOrDefault();
-
+                // Items being replaced
+                var oldItems = model.Player.Items.Where(i => oldItemIDs.Contains(i.ID)).ToArray();
+                var oldIDs = new HashSet<Guid>(oldItems.SelectMany(i => this.FlattenIDs(model, i)));
                 
+                // Inventory being moved
+                var oldHangarInventory = model.Player.Inventory.Items.Where(i => oldIDs.Contains(i.ID));
+                var oldShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => oldIDs.Contains(i.ID)));
+                var oldInventory = oldShipInventory.Union(oldHangarInventory).ToArray();
 
-                var newItem = model.Player.Items.Where(i => i.ID == targetID).SingleOrDefault();
+                // Items being equipped
+                var newItems = model.Player.Items.Where(i => i.ID == newID).ToArray();
+                var newIDs = new HashSet<Guid>(newItems.SelectMany(i => this.FlattenIDs(model, i)));
+                
+                // Inventory being moved
+                var newHangarInventory = model.Player.Inventory.Items.Where(i => newIDs.Contains(i.ID));
+                var newShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => newIDs.Contains(i.ID)));
+                var newInventory = newShipInventory.Union(newHangarInventory).ToArray();
 
-                var port = model.Player.Items.Where(i => i.ID == parentID).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).SingleOrDefault() ??
-                    ship.Ports.Items.Where(p => p.PortName == portName).SingleOrDefault();
+                // Old ports
+                var oldShipPorts = model.Player.Ships.Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
+                var oldItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
+                var oldPorts = oldItemPorts.Concat(oldShipPorts).ToArray();
 
-                var oldPartID = port.ItemID;
+                // Move all affected inventory
+                model.Player.Inventory.Items = model.Player.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).Union(oldInventory).ToArray();
+                foreach (var ship in model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null))
+                {
+                    ship.Inventory.Items = ship.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).ToArray();
+
+                    if (ship.ID == shipID)
+                    {
+                        ship.Inventory.Items = ship.Inventory.Items.Union(newInventory).ToArray();
+                    }
+                }
+
+                var oldPort = oldPorts.SingleOrDefault();
+
+                if (oldPort != null)
+                {
+                    oldPort.ItemID = oldItemIDs.Distinct().SingleOrDefault();
+                }
+
+                var newPort = newPorts.SingleOrDefault();
+
+                if (newPort != null)
+                {
+                    newPort.ItemID = newID;
+                }
 
                 // TODO: Validate parts
-
-                #region Move Old Child Items To Hangar
-
-                var hosts = model.Player.Items.Where(i => i.ID == oldPartID).ToList();
-
-                var nextHost = hosts.FirstOrDefault();
-
-                List<Inventory.InventoryItem> removed = new List<Inventory.InventoryItem> { };
-
-                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == oldPartID));
-                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == oldPartID));
-
-                if (!removed.Where(i => i.ID == oldPartID).Any())
-                    removed.Add(new Inventory.InventoryItem { ID = oldPartID });
-
-                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
-                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != oldPartID).ToArray();
-
-                while (nextHost != null)
-                {
-                    hosts.RemoveAt(0);
-
-                    if (nextHost.Ports.Items != null)
-                    {
-                        foreach (var childPort in nextHost.Ports.Items)
-                        {
-                            hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
-                            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
-                            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
-                            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                        }
-                    }
-
-                    model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Concat(removed).ToArray();
-
-                    nextHost = hosts.FirstOrDefault();
-                }
-
-                #endregion
-
-                #region Move New Child Items To Ship
-
-                hosts = model.Player.Items.Where(i => i.ID == targetID).ToList();
-
-                nextHost = hosts.FirstOrDefault();
-
-                removed = new List<Inventory.InventoryItem> { };
-
-                removed.AddRange(ship.Inventory.Items.Where(i => i.ID == targetID));
-                removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == targetID));
-
-                if (!removed.Where(i => i.ID == targetID).Any())
-                    removed.Add(new Inventory.InventoryItem { ID = targetID });
-
-                model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != targetID).ToArray();
-                ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != targetID).ToArray();
-
-                while (nextHost != null)
-                {
-                    hosts.RemoveAt(0);
-
-                    if (nextHost.Ports.Items != null)
-                    {
-                        foreach (var childPort in nextHost.Ports.Items)
-                        {
-                            hosts.AddRange(model.Player.Items.Where(i => i.ID == childPort.ItemID));
-                            removed.AddRange(ship.Inventory.Items.Where(i => i.ID == childPort.ItemID));
-                            removed.AddRange(model.Player.Ships.Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Where(i => i.ID == childPort.ItemID));
-                            model.Player.Hangar.Inventory.Items = model.Player.Hangar.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                            ship.Inventory.Items = ship.Inventory.Items.Where(i => i.ID != childPort.ItemID).ToArray();
-                        }
-                    }
-
-                    ship.Inventory.Items = ship.Inventory.Items.Concat(removed).ToArray();
-
-                    nextHost = hosts.FirstOrDefault();
-                }
-
-                #endregion
-
-                // Mount Item
-                port.ItemID = targetID;
 
                 // Set current ship (Optional)
                 model.Player.VehicleID = shipID;
