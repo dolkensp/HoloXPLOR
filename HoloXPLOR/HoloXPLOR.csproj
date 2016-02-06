@@ -2203,6 +2203,7 @@
     <Content Include="Views\Shared\_GettingStarted.cshtml" />
     <Content Include="Views\Shared\_Modal.Upload.cshtml" />
     <Content Include="Views\Shared\_Modal.Download.cshtml" />
+    <Content Include="smtp.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />
