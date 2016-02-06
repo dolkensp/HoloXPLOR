@@ -132,6 +132,18 @@ $(document).ready(function () {
         return $markup;
     }
 
+    var getComparison = function ($equipped, $available) {
+        var $markup = $('<div>');
+
+        $markup.append(getInfo($equipped));
+
+        if ($equipped != $available) {
+            $markup.append(getInfo($available));
+        }
+
+        return $markup;
+    }
+
     var hideInfo = function (timeout) {
         window.clearTimeout(fadeTimer);
         fadeTimer = window.setTimeout(function () {
@@ -159,11 +171,12 @@ $(document).ready(function () {
             $available = $target;
         }
 
-        if ($equipped != null && $equipped != $available) {
+        if ($equipped != null && $available != null)
+        {
+            $markup.append(getComparison($available, $equipped));
+        } else if ($equipped != null) {
             $markup.append(getInfo($equipped));
-        }
-
-        if ($available != null) {
+        } else if ($available != null) {
             $markup.append(getInfo($available));
         }
 
