@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
     public partial class Item
     {
         [XmlAttribute(AttributeName = "weaponParams")]
+        [JsonIgnore]
         [DefaultValue(0)]
         public Int32 __WeaponParams
         {
@@ -20,7 +22,9 @@ namespace HoloXPLOR.Data.XML.Spaceships
         [XmlIgnore]
         public Boolean WeaponParams { get; set; }
 
+        // TODO: Consider if we want to preserve this to allow filling ammo boxes easily
         [XmlElement(ElementName = "defaultLoadout")]
+        [JsonIgnore]
         public Loadout DefaultLoadout { get; set; }
 
         

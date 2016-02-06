@@ -7,6 +7,12 @@ using System.Xml.Serialization;
 
 namespace HoloXPLOR.Data.XML.Spaceships
 {
+    public partial class Item
+    {
+        [XmlElement(ElementName = "armor")]
+        public Armor Armor { get; set; }
+    }
+
     [XmlRoot(ElementName = "armor")]
     public partial class Armor
     {

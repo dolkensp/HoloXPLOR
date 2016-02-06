@@ -8,6 +8,10 @@ $(document).ready(function () {
 
     var fadeTimer = null;
     var $source = null;
+
+    var inventoryMap = {};
+
+    $.ajax({ url: '/HoloTable/Inventory', dataType: 'json', success: function (data) { inventoryMap = data } })
     
     var cleanType = function(type)
     {
@@ -70,9 +74,11 @@ $(document).ready(function () {
         if ($target.data('parent-name') == undefined && $target.data('port-name') != undefined) {
             $markup.append('<p><strong>Mount:</strong> ' + $target.data('port-name') + '</p>');
         }
-        if ($target.data('item-type') != undefined && $target.data('item-sub-type') != undefined) {
-            $markup.append('<p><strong>Type:</strong> ' + cleanType($target.data('item-type') + ':' + $target.data('item-sub-type')) + '</p>');
-        }
+
+        // if ($target.data('item-type') != undefined) {
+        //     $markup.append('<p><strong>Type:</strong> ' + cleanType($target.data('item-type') + ':' + $target.data('item-sub-type') || '') + '</p>');
+        // }
+
         if ($target.data('port-types') != undefined) {
             var accepted = [];
 
@@ -85,6 +91,42 @@ $(document).ready(function () {
             });
 
             $markup.append('<p><strong>Accepted:</strong> ' + $.unique(accepted).join(', ') + '</p>');
+        }
+
+        if ($target.data('item-name') != undefined) {
+            var itemData = inventoryMap[$target.data('item-name')];
+
+            if (itemData != undefined)
+            {
+                if (itemData.Armor != undefined) {
+                    $markup.append('<p><strong>Physical Res:</strong> ' + Math.round(100 - itemData.Armor.DamageMultipliers[0].Physical * 100) + '%</p>');
+                    $markup.append('<p><strong>Energy Res:</strong> ' + Math.round(100 - itemData.Armor.DamageMultipliers[0].Energy * 100) + '%</p>');
+                    $markup.append('<p><strong>Distortion Res:</strong> ' + Math.round(100 - itemData.Armor.DamageMultipliers[0].Distortion * 100) + '%</p>');
+                }
+
+                if (itemData.Shields != undefined) {
+                    $markup.append('<h5>Shield</h5>');
+
+                    $markup.append('<p><strong>Type:</strong> ' + itemData.Shields.FaceType + '</p>');
+                    $markup.append('<p><strong>HP:</strong> ' + itemData.Shields.MaxHitPoints + '</p>');
+                    $markup.append('<p><strong>Regen Rate:</strong> ' + itemData.Shields.MaxRegenRate + '</p>');
+                    $markup.append('<p><strong>Regen Delay:</strong> ' + itemData.Shields.RegenDelay + '</p>');
+
+                    $markup.append('<h5>Physical</h5>');
+                    $markup.append('<p><strong>Damage Absorb:</strong> ' + itemData.Shields.Physical_DamageAbsorbDirect + '</p>');
+                    $markup.append('<p><strong>Splash Absorb:</strong> ' + itemData.Shields.Physical_DamageAbsorbSplash + '</p>');
+
+                    $markup.append('<h5>Energy</h5>');
+                    $markup.append('<p><strong>Damage Absorb:</strong> ' + itemData.Shields.Energy_DamageAbsorbDirect + '</p>');
+                    $markup.append('<p><strong>Splash Absorb:</strong> ' + itemData.Shields.Energy_DamageAbsorbSplash + '</p>');
+
+                    $markup.append('<h5>Distortion</h5>');
+                    $markup.append('<p><strong>Damage Absorb:</strong> ' + itemData.Shields.Distortion_DamageAbsorbDirect + '</p>');
+                    $markup.append('<p><strong>Splash Absorb:</strong> ' + itemData.Shields.Distortion_DamageAbsorbSplash + '</p>');
+                }
+
+                console.log(itemData);
+            }
         }
 
         return $markup;

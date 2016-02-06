@@ -27,5 +27,36 @@ namespace HoloXPLOR.Data.XML.Spaceships
         // TODO: Signature
         // TODO: States>State>Value
         // TODO: States>State>Pipe*
+
+        // <Pipes>
+        //    <Pipe class="Power" prioType="manageable" prioGroup="shield">
+        //            <Signature name="Electromagnetic" multiplier="0.25" />
+        //            <Pool capacity="-800" rate="-120" critical="1"/>
+        //      <StateLevels>
+        //        <Warning  value = "0.50" />
+        //        <Critical value = "0.25" />
+        //        <Fail     value = "0.01" />
+        //      </StateLevels>
+
+        //      <States>
+        //        <State state="Default">
+        //          <Value value="-10"	/><!-- Base consumption -->
+        //          <!-- <Variable name="allocated_hitpoints" value="-1" critical="0"/> --><!-- 1 unit of shield hitpoints allocated = 1 units of power -->
+        //          <Variable name="total_regen" value="-15" critical="0"/><!-- 1 unit of shield regen allocated = 0.1 units of power -->
+        //        </State>
+        //          <State state="Off">
+        //              <Value value="0" />
+        //          </State>
+        //      </States>
+        //    </Pipe>
+        //      <Pipe class="Heat" prioType="manageable" prioGroup="shield">
+        //      <Signature name="Infrared" poolMultiplier="0.1" />
+        //      <Pool capacity="100" rate="5.5" critical="1"/>
+        //      <States>
+        //        <State state="Default"><Value value="5.5" /></State>
+        //      </States>
+        //    </Pipe>
+        //</Pipes>
+
     }
 }

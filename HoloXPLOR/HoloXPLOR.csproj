@@ -2024,7 +2024,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Weapons\PickAndThrowWeapon.xml" />
     <Content Include="App_Data\shipmatrix.json" />
     <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
-    <Content Include="smtp.config" />
     <None Include="Properties\PublishProfiles\holoxplor-test.azurewebsites.net.pubxml" />
     <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Stalker.xml" />

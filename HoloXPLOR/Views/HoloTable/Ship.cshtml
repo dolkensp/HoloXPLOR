@@ -86,7 +86,7 @@
                         <ul class="list-unstyled col-xs-9">
                             @foreach (var item in itemsByMaxSize[size].OrderByDescending(i => i.Item_Type).ThenByDescending(i => i.Port_DisplayName).ThenByDescending(i => i.Item_DisplayName))
                             {
-                                <li data-template="@item.Item_Type" class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
+                                <li class="js-hardpoint" @item.HTML_Attributes title="@(item.Item_DisplayName ?? "Empty")" data-droppable data-equipped>
                                     @if (item.Inventory_Item != null)
                                     {
                                         <label>@item.Item_DisplayName</label>

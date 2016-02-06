@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,9 +23,11 @@ namespace HoloXPLOR.Data.XML.Spaceships
         public String Category { get; set; }
 
         [XmlAttribute(AttributeName = "interface")]
+        [JsonIgnore]
         public String Interface { get; set; }
 
         [XmlAttribute(AttributeName = "invisible")]
+        [JsonIgnore]
         [DefaultValue(0)]
         public Int32 __Invisible
         {
@@ -35,16 +38,20 @@ namespace HoloXPLOR.Data.XML.Spaceships
         public Boolean Invisible { get; set; }
 
         [XmlElement(ElementName = "params")]
+        [JsonIgnore]
         public ParamCollection Params { get; set; }
 
         [XmlElement(ElementName = "portParams")]
+        [JsonIgnore]
         public PortCollection PortParams { get; set; }
 
         [XmlArray(ElementName = "Pipes")]
         [XmlArrayItem(ElementName = "Pipe")]
+        [JsonIgnore]
         public Pipe[] Pipes { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public String HTML_Attributes
         {
             get
@@ -63,6 +70,8 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     sb.AppendFormat(@" data-item-sub-type=""{0}""", this.Params["itemSubType", null]);
                 if (!String.IsNullOrWhiteSpace(this.Params["itemSize", null]))
                     sb.AppendFormat(@" data-item-size=""{0}""", this.Params["itemSize", null]);
+
+                sb.AppendFormat(@" data-item-name=""{0}""", this.Name);
                 
                 return sb.ToString();
             }

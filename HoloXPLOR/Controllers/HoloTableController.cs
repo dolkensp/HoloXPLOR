@@ -56,6 +56,15 @@ namespace HoloXPLOR.Controllers
             }
         }
 
+        public ActionResult Inventory()
+        {
+            return new ContentResult
+            {
+                Content = Scripts.Items.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).ToDictionary(k => k.Name, v => v).ToJSON(),
+                ContentType = "application/json"
+            };
+        }
+
         private IEnumerable<Guid> FlattenIDs(DetailModel model, Item item)
         {
             if (item != null || item.ID != Guid.Empty)

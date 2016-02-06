@@ -39,6 +39,13 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
+
+                name: "HangarInventory",
+                url: "HoloTable/Inventory",
+                defaults: new { controller = "HoloTable", action = "Inventory" }
+            );
+
+            routes.MapRoute(
                 name: "Hangar",
                 url: "HoloTable/{id}",
                 defaults: new { controller = "HoloTable", action = "Hangar" }

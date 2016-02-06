@@ -38,52 +38,34 @@ namespace HoloXPLOR.Data.XML.Spaceships
             set { this._displayName = value; }
         }
 
-        private Int32? _itemSize;
-        [XmlIgnore]
         public Int32? ItemSize
         {
-            get { return this._itemSize = this._itemSize ?? this.Params["itemSize"].ToInt32(); }
-            set { this._itemSize = value; }
+            get { return this.Params["itemSize"].ToInt32(); }
         }
 
-        private String _itemType;
-        [XmlIgnore]
         public String ItemType
         {
-            get { return this._itemType = this._itemType ?? this.Params["itemType", String.Empty]; }
-            set { this._itemType = value; }
+            get { return this.Params["itemType", String.Empty]; }
         }
 
-        private String _itemSubType;
-        [XmlIgnore]
         public String ItemSubType
         {
-            get { return this._itemSubType = this._itemSubType ?? this.Params["itemSubType", String.Empty]; }
-            set { this._itemSubType = value; }
+            get { return this.Params["itemSubType", String.Empty]; }
         }
 
-        private Double? _mass;
-        [XmlIgnore]
         public Double? Mass
         {
-            get { return this._mass = this._mass ?? this.Params["mass", String.Empty].ToDouble(); }
-            set { this._mass = value; }
+            get { return this.Params["mass"].ToDouble(); }
         }
 
-        private Double? _price;
-        [XmlIgnore]
         public Double? Price
         {
-            get { return this._price = this._price ?? this.Params["price", String.Empty].ToDouble(); }
-            set { this._price = value; }
+            get { return this.Params["price"].ToDouble(); }
         }
 
-        private Double? _hitPoints;
-        [XmlIgnore]
         public Double? HitPoints
         {
-            get { return this._hitPoints = this._hitPoints ?? this.Params["hitpoints", String.Empty].ToDouble(); }
-            set { this._hitPoints = value; }
+            get { return this.Params["hitpoints"].ToDouble(); }
         }
 
         [XmlIgnore]

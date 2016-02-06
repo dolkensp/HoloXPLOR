@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
     public partial class ParamCollection
     {
         [XmlIgnore]
+        [JsonIgnore]
         public Param[] Items
         {
             get { return (this._Items1 ?? new Param[] { }).Concat(this._Items2 ?? new Param[] { }).ToArray(); }
@@ -18,9 +20,11 @@ namespace HoloXPLOR.Data.XML.Spaceships
         }
 
         [XmlElement(ElementName = "param")]
+        [JsonIgnore]
         public Param[] _Items1 { get; set; }
 
         [XmlElement(ElementName = "parm")]
+        [JsonIgnore]
         public Param[] _Items2 { get; set; }
 
         // TODO: Add itemStats
