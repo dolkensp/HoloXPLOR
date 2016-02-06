@@ -24,6 +24,7 @@ $(document).ready(function () {
         type = type.replace('Turret', 'Turret/Gimbal');
         type = type.replace('GimbalTurret', 'Gimbal');
         type = type.replace('GunTurret', 'Gimbal');
+        type = type.replace('CanardTurret', 'Canard Turret');
         type = type.replace('Container:Cargo', 'Cargo Container');
         type = type.replace('Turret:CanardTurret', 'Canard Turret');
         type = type.replace('WeaponMissile:MissileRack', 'Missile Rack');
