@@ -15,7 +15,8 @@ namespace HoloXPLOR
                         "~/Scripts/jquery.validate.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/jquery.ui.touch-punch-0.2.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/aframe").Include(
                         "~/Scripts/aframe-{version}.js"));

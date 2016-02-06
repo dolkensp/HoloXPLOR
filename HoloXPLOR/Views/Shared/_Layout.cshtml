@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - HoloXPLOR</title>
+    <meta property="og:title" content="HoloXPLOR - Online 2D HoloTable Replacement for Star Citizen" />
+    <meta property="og:url" content="http://holoxplor.azurewebsites.net" />
+    <meta property="og:site_name" content="HoloXPLOR" />
+    <meta property="og:image" content="http://i.imgur.com/Y5Nkz8y.jpg" />
+    <meta property="og:description" content="HoloXPLOR is a 2D replacement for the in-game HoloTable.  Simply upload your inventory XML file, and you’re away.  With an intuitive 2D drag-and-drop interface, it’s much easier to configure your loadouts until the new HoloTable designs are implemented in-game.  Based on concepts by Zane Bien – it’s since evolved to be the HoloTable the community needs right now!" />
     @Styles.Render("~/Content/css")
     <script type="text/javascript">
         // Advanced error handling, taken from http://stackoverflow.com/a/31750604/1533523
@@ -75,7 +80,7 @@
                         { 
                             <li><a href="@Url.Action("Hangar", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-globe"></span> Hangar</a></li>
                         }
-                        <li><a href="@Url.Action("Download", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-cloud-download"></span> Download</a></li>
+                        <li><a href="@Url.Action("Download", "HoloTable", new { id = ViewBag.ID })" class="js-download"><span class="glyphicon glyphicon-cloud-download"></span> Download</a></li>
                     </ul>
                 </div>
             }
@@ -85,41 +90,29 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - HoloXPLOR | Icons by <a href="https://icons8.com/" target="_icons8">Icons8</a> | Original <a href="http://zanimation.com/cataloguedemo/" target="_concept">Concept</a> and <a href="http://z-design.deviantart.com/art/Star-Citizen-Roberts-Space-Industries-Ship-UI-359807242" target="_deviantart">Designs</a> by <a href="http://zanimation.com" target="_zanimation">Zane Bien</a></p>
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_donate">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="CA3VSDP39JT4G">
+
+                <p class="pull-left">
+                    &copy; @DateTime.Now.Year - HoloXPLOR
+                </p>
+                <p class="pull-right">
+                    @*
+                    <button type="submit" name="submit" class="btn btn-primary btn-sm"><span class="cig-social cig-icon-paypal glyphicon glyphicon-credit-card"></span></button>
+                    <a href="https://www.reddit.com/u/alluran" target="_reddit" class="cig-icon cig-icon-reddit" title="Reddit">Reddit</a> 
+                    <a href="https://twitter.com/dolkensp" target="_twitter" class="cig-icon cig-icon-twitter" title="Twitter">Twitter</a>
+                    <a href="https://www.reddit.com/u/alluran" target="_github" class="cig-icon cig-icon-github" title="GitHub">GitHub</a> |*@
+                    <span>Icons by <a href="https://icons8.com/" target="_icons8">Icons8</a></span> |
+                    <span>Original <a href="http://zanimation.com/cataloguedemo/" target="_concept">Concept</a> and <a href="http://z-design.deviantart.com/art/Star-Citizen-Roberts-Space-Industries-Ship-UI-359807242" target="_deviantart">Designs</a> by <a href="http://zanimation.com" target="_zanimation">Zane Bien</a></span>
+                </p>
+            </form>
         </footer>
     </div>
 
-    <div id="upload" class="modal fade" role="dialog">
-        <div class="ui-table">
-            <div class="ui-table-cell">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Upload Inventory XML</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Drop your XML file here.</p>
-                            <p>You can locate the inventory XML file in your Star Citizen USER directory.</p>
-                            <ol>
-                                <li>Browse to your Star Citizen installation directory</li>
-                                <li>Open the <em>Public</em> folder if you want to edit the Live hangar, or the <em>Test</em> folder for the PTU</li>
-                                <li>Open the <em>USER</em> directory</li>
-                                <li>Open the <em>Database</em> directory</li>
-                                <li>Drag the <em>db_[yourhandle].xml</em> file onto this page</li>
-                            </ol>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_Modal.Download")
+    @Html.Partial("_Modal.Upload")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")

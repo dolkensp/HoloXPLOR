@@ -27,32 +27,32 @@
                 group groupedItems by groupedItems.Key.ShipID != Guid.Empty ? groupedItems.Key.ShipName : String.Format("Size {0}", groupedItems.Key.ItemSize) into groupedItems2
                 select groupedItems2).ToArray();
 
-    <div class="panel panel-cig cig-count@(list.Length)">
-        <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_")">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
-        <div class="panel-body">
-            <ul class="collapse in cig-list" id="pnl_@category.Replace(" ", "_")">
-                @foreach (var subCategory in list)
-                {
-                    <li class="row">
-                        <label class="col-md-4">@subCategory.Key</label>
-                        <ul class="cig-iconlist col-md-8">
-                            @foreach (var grouping in subCategory)
+                <div class="panel panel-cig cig-count@(list.Length)" id="pnl_@category.Replace(" ", "_")">
+                    <div class="panel-heading"><h4 data-toggle="collapse" data-target="#pnl_@category.Replace(" ", "_") .cig-list">@category (@list.Sum(s => s.Sum(i => i.Count())))</h4></div>
+                    <div class="panel-body">
+                        <ul class="collapse in cig-list">
+                            @foreach (var subCategory in list)
                             {
-                                var isEquipped = !String.IsNullOrWhiteSpace(grouping.Key.ShipName);
-                                var isEquipped_Self = isEquipped && (grouping.Key.ShipID == Model.ShipID);
-                                var item = grouping.FirstOrDefault();
+                                <li class="row">
+                                    <label class="col-md-4">@subCategory.Key</label>
+                                    <ul class="cig-iconlist col-md-8">
+                                        @foreach (var grouping in subCategory)
+                                        {
+                                            var isEquipped = !String.IsNullOrWhiteSpace(grouping.Key.ShipName);
+                                            var isEquipped_Self = isEquipped && (grouping.Key.ShipID == Model.ShipID);
+                                            var item = grouping.FirstOrDefault();
 
-                                <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
-                                    <span class="cig-count">@(grouping.Count())x</span>
-                                    <label>@item.Item_DisplayName.ToLocalized()</label>
+                                            <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
+                                                <span class="cig-count">@(grouping.Count())x</span>
+                                                <label>@item.Item_DisplayName.ToLocalized()</label>
+                                            </li>
+                                        }
+                                    </ul>
                                 </li>
                             }
                         </ul>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
+                    </div>
+                </div>
 }
 
 @helper RenderHover()
@@ -196,83 +196,10 @@
                             </ul>
                         }
 
-                        @RenderByMaxSize("Equipped", Items.CategoryEnum.Weapon, Items.CategoryEnum.Turret, Items.CategoryEnum.MissileRack)
+                        @RenderByMaxSize("Offense", Items.CategoryEnum.Weapon, Items.CategoryEnum.Turret, Items.CategoryEnum.MissileRack)
+                        @RenderByMaxSize("Defense", Items.CategoryEnum.Armor, Items.CategoryEnum.Shield)
+                        @RenderByMaxSize("Power", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Thruster, Items.CategoryEnum.Engine)
 
-                        @{
-                            var engines = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "MainThruster"));
-                            var thrusters = Model.View_Loadout.Where(i => i.GameData_EquippedPort.Types.Any(t => t.Type == "ManneuverThruster"));
-
-                            var enginesByMaxSize = engines.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                            var enginesBySize = engines.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
-
-                            var thrustersByMaxSize = thrusters.GroupBy(k => k.GameData_EquippedPort.MaxSize).ToDictionary(k => k.Key, v => v.ToList());
-                            var thrustersBySize = thrusters.Where(i => i.GameData_Item != null).GroupBy(k => k.GameData_Item.ItemSize).ToDictionary(k => k.Key, v => v.ToList());
-                            
-                            <div class="panel panel-cig">
-                                <div class="panel-heading"><h4>Engine</h4></div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled">
-                                        @if (enginesByMaxSize.Count > 0)
-                                        {
-                                            var engineMaxSize = enginesByMaxSize.Max(k => k.Key);
-
-                                            <li class="row">
-                                                <label class="col-md-6">Engines</label>
-                                                <dl class="col-md-6 list-unstyled">
-                                                    <dl>
-                                                        @foreach (var size in Enumerable.Range(1, engineMaxSize).Reverse())
-                                                        {
-                                                            var maxEngines = enginesByMaxSize.GetValue(size, new List<InventoryItem> { });
-                                                            var sizeEngines = enginesBySize.GetValue(size, new List<InventoryItem> { });
-
-                                                            if (maxEngines.Count + sizeEngines.Count > 0)
-                                                            {
-                                                                <dt>
-                                                                    <label>TR</label>
-                                                                    <span>@size</span>
-                                                                </dt>
-                                                                <dd>@sizeEngines.Count / @maxEngines.Count</dd>
-                                                            }
-                                                        }
-                                                    </dl>
-                                                </dl>
-                                            </li>
-                                        }
-                                        @if (thrustersByMaxSize.Count > 0)
-                                        {
-                                            var thrusterMaxSize = thrustersByMaxSize.Max(k => k.Key);
-
-                                            <li class="row">
-                                                <label class="col-md-6">Thrusters</label>
-                                                <dl class="col-md-6">
-                                                    <dl>
-                                                        @foreach (var size in Enumerable.Range(1, thrusterMaxSize).Reverse())
-                                                        {
-                                                            var maxThrusters = thrustersByMaxSize.GetValue(size, new List<InventoryItem> { });
-                                                            var sizeThrusters = thrustersBySize.GetValue(size, new List<InventoryItem> { });
-
-                                                            if (maxThrusters.Count + sizeThrusters.Count > 0)
-                                                            {
-                                                                <dt>
-                                                                    <label>TR</label>
-                                                                    <span>@size</span>
-                                                                </dt>
-                                                                <dd>@sizeThrusters.Count / @maxThrusters.Count</dd>
-                                                            }
-                                                        }
-                                                    </dl>
-                                                </dl>
-                                            </li>
-                                        }
-                                        @if (thrustersByMaxSize.Count == 0 && enginesByMaxSize.Count == 0)
-                                        {
-                                            <li class="alert alert-danger">Propulsion Offline</li>
-                                        }
-
-                                    </ul>
-                                </div>
-                            </div>
-                        }
                     </div>
                     <div class="col-sm-6 col-xs-12" id="description">
                         <div class="panel panel-cig">
@@ -350,14 +277,13 @@
 
                 <div class="tab-pane row" id="other">
                     <div class="col-sm-6 col-xs-12" id="ship_other">
-                        @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Storage, Items.CategoryEnum.Paints, Items.CategoryEnum.__Unknown__)
+                        @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Storage, Items.CategoryEnum.Paints)
                         @RenderHover()
                     </div>
                     <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
                         @RenderItemCategory("Power Plants", Items.CategoryEnum.PowerPlant)
                         @RenderItemCategory("Storage", Items.CategoryEnum.Storage)
                         @RenderItemCategory("Paints", Items.CategoryEnum.Paints)
-                        @RenderItemCategory("Other", Items.CategoryEnum.__Unknown__)
                     </div>
                 </div>
             

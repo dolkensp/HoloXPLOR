@@ -1,1 +1,1 @@
-﻿
+﻿$('.js-download').bind('click', function (e) { $('#download').modal('show'); });

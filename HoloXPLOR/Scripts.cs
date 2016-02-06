@@ -76,6 +76,123 @@ namespace HoloXPLOR.Data
             }
         }
 
+        private static Items.Item _CleanEdgeCases(Items.Item item)
+        {
+            #region Edge Case Support
+
+            if (item.AmmoBox != null && item.AmmoBox.Items != null)
+            {
+                switch (item.AmmoBox["ammo_name"])
+                {
+                    case "BEHR_Flare":
+                        item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]);
+                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
+                        break;
+                    case "TALN_Chaff":
+                        item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
+                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
+                        break;
+                    case "20mm_AMMO": item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "24mm_AMMO": item.DisplayName = String.Format("{0} 24mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "25mm_AMMO": item.DisplayName = String.Format("{0} 25mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "30mm_AMMO": item.DisplayName = String.Format("{0} 30mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "35mm_AMMO": item.DisplayName = String.Format("{0} 35mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "40mm_AMMO": item.DisplayName = String.Format("{0} 40mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "40mm_5km_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "40mm_5km_exp_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells (5km)", item.AmmoBox["max_ammo_count"]); break;
+                    case "50mm_AMMO": item.DisplayName = String.Format("{0} 50mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "60mm_AMMO": item.DisplayName = String.Format("{0} 60mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "60mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
+                    case "80mm_AMMO": item.DisplayName = String.Format("{0} 80mm Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "80mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
+                    case "106mm_exp_AMMO": item.DisplayName = String.Format("{0} 106mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
+                    case "Rocket_AMMO": item.DisplayName = String.Format("{0} Delta Rockets", item.AmmoBox["max_ammo_count"]); break;
+                    default: item.DisplayName = String.Format("{0} {1}", item.AmmoBox["max_ammo_count"], item.AmmoBox["ammo_name"].Replace("_", " ")); break;
+                }
+            }
+
+            if (item.PortParams != null && item.PortParams.Items != null)
+            {
+                var cmp = item.PortParams.Items.Where(p => p.Types != null).SelectMany(p => p.Types.Where(t => t.Type == "AmmoBox").Where(t => String.IsNullOrWhiteSpace(t.SubType)));
+
+                foreach (var port in cmp)
+                {
+                    port.SubType = "Ammo_CounterMeasure";
+                }
+            }
+
+            switch (item.Name)
+            {
+                case "Class_2_KRIG_BG_S3_Q3_Mount": item.DisplayName = "Kruger S3 Gattling Nose Mount"; break;
+                case "Class_2_GATS_BG_S2_Mount": item.DisplayName = "Gallenson Tactical S2 Gattling Mount"; break;
+                case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
+                case "ANVL_Gladiator_Turret_Ball_S2_Q2": item.DisplayName = "Gladiator S4 Ball Turret"; break;
+                case "DRAK_Cutlass_Turret": item.DisplayName = "Cutlass Manned Turret"; break;
+                case "MISC_Freelancer_Turret": item.DisplayName = "Freelancer Manned Turret"; break;
+                case "AEGS_Vanguard_Turret": item.DisplayName = "Vanguard Manned Turret"; break;
+                case "AEGS_Retaliator_Turret": item.DisplayName = "Retaliator Manned Turret"; break;
+                case "BRRA_HornetCanard_S2_Q1": item.DisplayName = "Hornet S3 Canard Mount"; break;
+                case "BRRA_HornetBall_S2_Q1": item.DisplayName = "Hornet S5 Ball Turret"; break;
+                case "CNOU_Mustang_S1_Q2": item.DisplayName = "Consolidated Outland Ball Turret"; break;
+                // case "BRRA_HornetBall_160f_S1_Q2": item.DisplayName = "Hornet S5 Ball Turret"; break;
+                case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S4 Fixed Mount"; break;
+                case "DRAK_Fixed_Mount_S4": item.DisplayName = "Cutlass S4 Fixed Mount"; break;
+                case "BEHR_PC2_Dual_S4_Fixed": item.DisplayName = "Behring S4 Twin Rack"; break;
+                case "AEGS_S2_Rack_x4": item.DisplayName = "Aegis S2 Quad Rack"; break;
+                case "ANVL_S5_Rack_x2": item.DisplayName = "Anvil S5 Twin Rack"; break;
+                case "Talon_Stalker_Twin": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
+                case "Talon_Stalker_Quad": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
+                case "Talon_Stalker_Platform_x2": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
+                case "Talon_Stalker_Platform_x4": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
+                case "VNCL_Mark_Platform_x4": item.DisplayName = "Vanduul S1 Quad Rack"; break;
+
+                case "Mount_Gimbal_S1": item.DisplayName = "S1 Gimbal Mount"; break;
+                case "Mount_Gimbal_S2": item.DisplayName = "S2 Gimbal Mount"; break;
+                case "Mount_Gimbal_S3": item.DisplayName = "S3 Gimbal Mount"; break;
+                case "Mount_Gimbal_S4": item.DisplayName = "S4 Gimbal Mount"; break;
+                case "Mount_Gimbal_S5": item.DisplayName = "S5 Gimbal Mount"; break;
+
+                case "JOKR_DistortionCannon_S1": item.DisplayName = "\"Suckerpunch\" Distortion Cannon"; break;
+                case "VNCL_Weak_LC_S1": item.DisplayName = "'Weak' Laser Cannon"; break;
+                case "KBAR_BallisticCannon_S1": item.DisplayName = "9-Series Longsword"; break;
+                case "KBAR_BallisticCannon_S3": item.DisplayName = "11-Series Broadsword"; break;
+                case "GATS_BallisticGatling_S2": item.DisplayName = "Scorpion GT-215"; break;
+                case "GATS_BallisticGatling_S3": item.DisplayName = "Mantis GT-220"; break;
+                case "GATS_BallisticCannon_S2": item.DisplayName = "Tarantula GT-870"; break;
+                case "GATS_BallisticCannon_S3": item.DisplayName = "Tarantula GT-870 Mark 3"; break;
+                case "KLWE_LaserRepeater_S3": item.DisplayName = "CF-227 Panther Repeater"; break;
+                case "KLWE_LaserRepeater_S2": item.DisplayName = "CF-117 Badger Repeater"; break;
+                case "KLWE_LaserRepeater_S1": item.DisplayName = "CF-007 Bulldog Repeater"; break;
+                case "KLWE_MassDriverCannon_S1": item.DisplayName = "Sledge II Mass Driver Cannon"; break;
+                case "KRIG_BallisticGatling_S3": item.DisplayName = "Kruger Tigerstreik T-21"; break;
+                case "KRIG_BallisticGatling_S2_Parasite": item.DisplayName = "Kruger Tigerstreik T-19P"; break;
+                case "APAR_MassDriver_S2": item.DisplayName = "Strife Mass Driver"; break;
+                case "APAR_BallisticGatling_S4": item.DisplayName = "Death Ballistic Gattling"; break;
+                case "AEGS_EMP_Device": item.DisplayName = "REP-8 EMP Generator"; break;
+                case "BEHR_LaserCannon_S1": item.DisplayName = "M3A Laser Cannon"; break;
+                case "BEHR_LaserCannon_S2": item.DisplayName = "M4A Laser Cannon"; break;
+                case "BEHR_LaserCannon_Vanguard_S2": item.DisplayName = "M4A Laser Cannon - Vanguard"; break;
+                case "BEHR_LaserCannon_S3": item.DisplayName = "M5A Laser Cannon"; break;
+                case "BEHR_LaserCannon_S4": item.DisplayName = "M6A Laser Cannon"; break;
+                case "BEHR_BallisticCannon_S4": item.DisplayName = "C-788 \"Combine\" Ballistic Cannon"; break;
+                case "BEHR_BallisticRepeater_S2": item.DisplayName = "SW16BR2 \"Sawbuck\""; break;
+                case "MXOX_NeutronCannon_S1": item.DisplayName = "Maxox NN-13 Neutron Cannon"; break;
+                case "MXOX_NeutronCannon_S2": item.DisplayName = "Maxox NN-14 Neutron Cannon"; break;
+                case "AMRS_LaserCannon_S1": item.DisplayName = "Omnisky III Laser Cannon"; break;
+                case "AMRS_LaserCannon_S2": item.DisplayName = "Omnisky VI Laser Cannon"; break;
+                case "CNOU_Delta_RocketPod_x18": item.DisplayName = "R-18 rocket pod"; break;
+
+                case "VNCL_MissileRack_Blade": item.DisplayName = "Vanduul Blade"; break;
+                case "RSI_Constellation_Turret": item.DisplayName = "Constellation Turret"; break;
+                case "RSI_Constellation_MissilePod_S2_x3": item.DisplayName = "Constellation S2 Triple Rack"; break;
+                case "RSI_Constellation_MissilePod_S1_x7": item.DisplayName = "Constellation S1 Heavy Rack"; break;
+            }
+
+            #endregion
+
+            return item;
+        }
+
         #endregion
 
         #region Ammo XML
@@ -226,123 +343,6 @@ namespace HoloXPLOR.Data
         }
 
 
-        private static Items.Item _CleanEdgeCases(Items.Item item)
-        {
-            #region Edge Case Support
-
-            if (item.AmmoBox != null && item.AmmoBox.Items != null)
-            {
-                switch (item.AmmoBox["ammo_name"])
-                {
-                    case "BEHR_Flare":
-                        item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]);
-                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
-                        break;
-                    case "TALN_Chaff":
-                        item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
-                        item.Params["itemSubType"] = "Ammo_CounterMeasure";
-                        break;
-                    case "20mm_AMMO": item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "24mm_AMMO": item.DisplayName = String.Format("{0} 24mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "25mm_AMMO": item.DisplayName = String.Format("{0} 25mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "30mm_AMMO": item.DisplayName = String.Format("{0} 30mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "35mm_AMMO": item.DisplayName = String.Format("{0} 35mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "40mm_AMMO": item.DisplayName = String.Format("{0} 40mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "40mm_5km_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "40mm_5km_exp_AMMO": item.DisplayName = String.Format("{0} 40mm Explosive Shells (5km)", item.AmmoBox["max_ammo_count"]); break;
-                    case "50mm_AMMO": item.DisplayName = String.Format("{0} 50mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "60mm_AMMO": item.DisplayName = String.Format("{0} 60mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "60mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
-                    case "80mm_AMMO": item.DisplayName = String.Format("{0} 80mm Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "80mm_Rail_AMMO": item.DisplayName = String.Format("{0} 60mm Slugs", item.AmmoBox["max_ammo_count"]); break;
-                    case "106mm_exp_AMMO": item.DisplayName = String.Format("{0} 106mm Explosive Shells", item.AmmoBox["max_ammo_count"]); break;
-                    case "Rocket_AMMO": item.DisplayName = String.Format("{0} Delta Rockets", item.AmmoBox["max_ammo_count"]); break;
-                    default: item.DisplayName = String.Format("{0} {1}", item.AmmoBox["max_ammo_count"], item.AmmoBox["ammo_name"].Replace("_", " ")); break;
-                }
-            }
-
-            if (item.PortParams != null && item.PortParams.Items != null)
-            {
-                var cmp = item.PortParams.Items.Where(p => p.Types != null).SelectMany(p => p.Types.Where(t => t.Type == "AmmoBox").Where(t => String.IsNullOrWhiteSpace(t.SubType)));
-
-                foreach (var port in cmp)
-                {
-                    port.SubType = "Ammo_CounterMeasure";
-                }
-            }
-
-            switch (item.Name)
-            {
-                case "Class_2_KRIG_BG_S3_Q3_Mount": item.DisplayName = "Kruger S3 Gattling Nose Mount"; break;
-                case "Class_2_GATS_BG_S2_Mount": item.DisplayName = "Gallenson Tactical S2 Gattling Mount"; break;
-                case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
-                case "ANVL_Gladiator_Turret_Ball_S2_Q2": item.DisplayName = "Gladiator S4 Ball Turret"; break;
-                case "DRAK_Cutlass_Turret": item.DisplayName = "Cutlass Manned Turret"; break;
-                case "MISC_Freelancer_Turret": item.DisplayName = "Freelancer Manned Turret"; break;
-                case "AEGS_Vanguard_Turret": item.DisplayName = "Vanguard Manned Turret"; break;
-                case "AEGS_Retaliator_Turret": item.DisplayName = "Retaliator Manned Turret"; break;
-                case "item_Deskdrak_cutlass_s1_q2": item.DisplayName = "Cutlass Manned Turret"; break;
-                case "BRRA_HornetCanard_S2_Q1": item.DisplayName = "Hornet S3 Canard Mount"; break;
-                case "BRRA_HornetBall_S2_Q1": item.DisplayName = "Hornet S5 Ball Turret"; break;
-                case "CNOU_Mustang_S1_Q2": item.DisplayName = "Consolidated Outland Ball Turret"; break;
-                // case "BRRA_HornetBall_160f_S1_Q2": item.DisplayName = "Hornet S5 Ball Turret"; break;
-                case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S4 Fixed Mount"; break;
-                case "DRAK_Fixed_Mount_S4": item.DisplayName = "Cutlass S4 Fixed Mount"; break;
-                case "BEHR_PC2_Dual_S4_Fixed": item.DisplayName = "Behring S4 Twin Rack"; break;
-                case "AEGS_S2_Rack_x4": item.DisplayName = "Aegis S2 Quad Rack"; break;
-                case "ANVL_S5_Rack_x2": item.DisplayName = "Anvil S5 Twin Rack"; break;
-                case "Talon_Stalker_Twin": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
-                case "Talon_Stalker_Quad": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
-                case "Talon_Stalker_Platform_x2": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
-                case "Talon_Stalker_Platform_x4": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
-                case "VNCL_Mark_Platform_x4": item.DisplayName = "Vanduul S1 Quad Rack"; break;
-
-                case "Mount_Gimbal_S1": item.DisplayName = "S1 Gimbal Mount"; break;
-                case "Mount_Gimbal_S2": item.DisplayName = "S2 Gimbal Mount"; break;
-                case "Mount_Gimbal_S3": item.DisplayName = "S3 Gimbal Mount"; break;
-                case "Mount_Gimbal_S4": item.DisplayName = "S4 Gimbal Mount"; break;
-                case "Mount_Gimbal_S5": item.DisplayName = "S5 Gimbal Mount"; break;
-
-                case "JOKR_DistortionCannon_S1": item.DisplayName = "\"Suckerpunch\" Distortion Cannon"; break;
-                case "VNCL_Weak_LC_S1": item.DisplayName = "'Weak' Laser Cannon"; break;
-                case "KBAR_BallisticCannon_S3": item.DisplayName = "11-Series Broadsword"; break;
-                case "GATS_BallisticGatling_S2": item.DisplayName = "Scorpion GT-215"; break;
-                case "GATS_BallisticGatling_S3": item.DisplayName = "Mantis GT-220"; break;
-                case "GATS_BallisticCannon_S2": item.DisplayName = "Tarantula GT-870"; break;
-                case "GATS_BallisticCannon_S3": item.DisplayName = "Tarantula GT-870 Mark 3"; break;
-                case "KLWE_LaserRepeater_S3": item.DisplayName = "CF-227 Panther Repeater"; break;
-                case "KLWE_LaserRepeater_S2": item.DisplayName = "CF-117 Badger Repeater"; break;
-                case "KLWE_LaserRepeater_S1": item.DisplayName = "CF-007 Bulldog Repeater"; break;
-                case "KLWE_MassDriverCannon_S1": item.DisplayName = "Sledge II Mass Driver Cannon"; break;
-                case "KRIG_BallisticGatling_S3": item.DisplayName = "Kruger Tigerstreik T-21"; break;
-                case "KRIG_BallisticGatling_S2_Parasite": item.DisplayName = "Kruger Tigerstreik T-19P"; break;
-                case "APAR_MassDriver_S2": item.DisplayName = "Strife Mass Driver"; break;
-                case "APAR_BallisticGatling_S4": item.DisplayName = "Death Ballistic Gattling"; break;
-                case "AEGS_EMP_Device": item.DisplayName = "REP-8 EMP Generator"; break;
-                case "BEHR_LaserCannon_S1": item.DisplayName = "M3A Laser Cannon"; break;
-                case "BEHR_LaserCannon_S2": item.DisplayName = "M4A Laser Cannon"; break;
-                case "BEHR_LaserCannon_Vanguard_S2": item.DisplayName = "M4A Laser Cannon - Vanguard"; break;
-                case "BEHR_LaserCannon_S3": item.DisplayName = "M5A Laser Cannon"; break;
-                case "BEHR_LaserCannon_S4": item.DisplayName = "M6A Laser Cannon"; break;
-                case "BEHR_BallisticCannon_S4": item.DisplayName = "C-788 \"Combine\" Ballistic Cannon"; break;
-                case "BEHR_BallisticRepeater_S2": item.DisplayName = "SW16BR2 \"Sawbuck\""; break;
-                case "MXOX_NeutronCannon_S1": item.DisplayName = "Maxox NN-13 Neutron Cannon"; break;
-                case "MXOX_NeutronCannon_S2": item.DisplayName = "Maxox NN-14 Neutron Cannon"; break;
-                case "AMRS_LaserCannon_S1": item.DisplayName = "Omnisky III Laser Cannon"; break;
-                case "AMRS_LaserCannon_S2": item.DisplayName = "Omnisky VI Laser Cannon"; break;
-                case "CNOU_Delta_RocketPod_x18": item.DisplayName = "R-18 rocket pod"; break;
-
-                case "VNCL_MissileRack_Blade": item.DisplayName = "Vanduul Blade"; break;
-                case "RSI_Constellation_Turret": item.DisplayName = "Constellation Turret"; break;
-                case "RSI_Constellation_MissilePod_S2_x3": item.DisplayName = "Constellation S2 Triple Rack"; break;
-                case "RSI_Constellation_MissilePod_S1_x7": item.DisplayName = "Constellation S1 Heavy Rack"; break;
-            }
-
-            #endregion
-
-            return item;
-        }
-
         private static Ships.Vehicle _CleanEdgeCases(XML.Vehicles.Implementations.Vehicle vehicle)
         {
             #region Edge Case Support
@@ -443,6 +443,7 @@ namespace HoloXPLOR.Data
                         { "turrethelper", "Manned Turret" },
                         { "RSI_Constellation_Turret_Base", "Constellation Turret"},
                         { "MISC_Freelancer_Turret_Base", "Freelancer Turret"},
+                        { "item_Descdrak_cutlass_s1_q2", "Cutlass Turret" },
 
                         { "turret_left", "Left Turret Slot"},
                         { "turret_right", "Right Turret Slot"},

@@ -20,6 +20,12 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
+                name: "Thanks",
+                url: "Thanks",
+                defaults: new { controller = "Home", action = "Thanks", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "JsError",
                 url: "JsError",
                 defaults: new { controller = "Error", action = "JsError", id = UrlParameter.Optional }

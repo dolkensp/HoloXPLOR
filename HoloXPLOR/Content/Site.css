@@ -45,6 +45,17 @@ textarea {
     max-width: 280px;
 }
 
+.nav-tabs li, .panel-heading {
+    cursor: default;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+                                    not supported by any browser */
+}
+
 [data-draggable] { 
     cursor: move;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -56,15 +67,8 @@ textarea {
                                     not supported by any browser */
 }
 
-.nav-tabs li, .panel-heading {
-    cursor: default;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* IE/Edge */
-    user-select: none;           /* non-prefixed version, currently
-                                    not supported by any browser */
+[data-draggable] label {
+    cursor: move;
 }
 
 .ui-table {
@@ -168,7 +172,7 @@ body {
 #primary-pane-scrollbar { position: relative; }
 
 .js-scrollable { position: relative; }
-.js-scrollable .js-hardpoint { clear: right; }
+.js-scrollable .js-hardpoint { float: right; clear: right; text-indent: 0px; overflow: visible; margin-bottom: 5px; }
 .js-scrollable .js-hardpoint label {
     display: block;
     white-space: nowrap;
@@ -176,11 +180,26 @@ body {
     right: 40px;
     max-width: inherit;
     line-height: 32px;
-    cursor: move;
 }
 
 .js-equipped { cursor: no-drop; }
-.js-hardpoint { border: solid 1px #1e98df; border-radius: 5px; height: 32px; width: 32px; float: right; margin-right: 5px; margin-bottom: 5px; list-style: none; position: relative; background: url(../images/icons8-ios-filled.png) no-repeat; }
+.cig-list ul { text-align: right; }
+.js-hardpoint, .cig-icon {
+    display: inline-block;
+    border: solid 1px #1e98df;
+    border-radius: 5px;
+    height: 32px;
+    width: 32px;
+    margin-left: 5px;
+    margin-bottom: -5px;
+    list-style: none;
+    position: relative;
+    background: url(../images/icons8-ios-filled.png) no-repeat;
+    text-indent: -99999px;
+    overflow: hidden;
+    line-height: 32px;
+}
+footer .cig-icon { margin-bottom: -12px; }
 .js-hardpoint[data-item-type='WeaponGun'] { background-position: -64px -64px; }
 .js-hardpoint[data-item-type='Turret'] { background-position: 0px -224px; }
 .js-hardpoint[data-item-sub-type='GunTurret'] { background-position: -64px -224px; }
@@ -381,8 +400,8 @@ footer a { color: #fff; }
 
 .fs-upload-input { display: none !important; }
 
-
-
+.cig-count0 { display: none; }
+.js-info strong { width: 60px; display: inline-block; padding-right: 5px; text-align: right; }
 
 
 

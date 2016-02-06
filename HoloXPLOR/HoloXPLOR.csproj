@@ -2023,7 +2023,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Vehicles\Weapons\RepairBeam.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Weapons\PickAndThrowWeapon.xml" />
     <Content Include="App_Data\shipmatrix.json" />
+    <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
     <Content Include="smtp.config" />
+    <None Include="Properties\PublishProfiles\holoxplor-test.azurewebsites.net.pubxml" />
     <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Stalker.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Gladius.xml">
@@ -2195,6 +2197,13 @@
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
     <Content Include="Views\HoloTable\NotFound.cshtml" />
+    <Content Include="Views\Home\Thanks.cshtml" />
+    <Content Include="Views\HoloTable\Index.cshtml" />
+    <Content Include="Views\Shared\_Support.cshtml" />
+    <Content Include="Views\Shared\_Instructions.cshtml" />
+    <Content Include="Views\Shared\_GettingStarted.cshtml" />
+    <Content Include="Views\Shared\_Modal.Upload.cshtml" />
+    <Content Include="Views\Shared\_Modal.Download.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />

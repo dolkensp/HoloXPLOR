@@ -8,6 +8,36 @@ $(document).ready(function () {
 
     var fadeTimer = null;
     var $source = null;
+    
+    var cleanType = function(type)
+    {
+        type = type.replace('WeaponGun:Gun', 'Gun');
+        type = type.replace('WeaponGun:NoseMounted', 'Nose Mounted Gun');
+        type = type.replace('WeaponGun', 'Gun');
+        type = type.replace('Turret:GunTurret', 'Gimbal');
+        type = type.replace('Turret:Gun', 'Gimbal');
+        type = type.replace('Turret:BallTurret', 'Ball Turret');
+        type = type.replace('Turret', 'Turret/Gimbal');
+        type = type.replace('GimbalTurret', 'Gimbal');
+        type = type.replace('GunTurret', 'Gimbal');
+        type = type.replace('Container:Cargo', 'Cargo Container');
+        type = type.replace('Turret:CanardTurret', 'Canard Turret');
+        type = type.replace('WeaponMissile:MissileRack', 'Missile Rack');
+        type = type.replace('WeaponMissile', 'Missile Rack');
+        type = type.replace('MainThruster', 'Engine');
+        type = type.replace('ManneuverThruster:JointThruster', 'Thruster');
+        type = type.replace('ManneuverThruster', 'Thruster');
+        type = type.replace('PowerPlant', 'Power Plant');
+        type = type.replace('Paints', 'Paint');
+        type = type.replace('Ordinance:', '');
+        type = type.replace('AmmoBox:', '');
+        type = type.replace('Ammo_:', '');
+        type = type.replace('CounterMeasure:', 'Counter Measure');
+        type = type.replace('_', ' ');
+        type = type.replace(':', ' ');
+
+        return type;
+    }
 
     var getInfo = function($target)
     {
@@ -26,13 +56,35 @@ $(document).ready(function () {
         }
         $markup.append('<p><strong>Name:</strong> ' + $target.attr('title') + '</p>');
         if ($target.data('item-size') != undefined) {
-            $markup.append('<p><strong>Size:</strong> ' + $target.data('item-size') + '</p>');
+            if ($target.data('port-max-size') != undefined) {
+                $markup.append('<p><strong>Size:</strong> ' + $target.data('item-size') + ' (' + $target.data('port-max-size') + ')</p>');
+            } else {
+                $markup.append('<p><strong>Size:</strong> ' + $target.data('item-size') + '</p>');
+            }
+        } else if ($target.data('port-max-size') != undefined) {
+            $markup.append('<p><strong>Size:</strong> Empty (' + $target.data('port-max-size') + ')</p>');
         }
         if ($target.data('parent-name') != undefined && $target.data('port-name') != undefined) {
             $markup.append('<p><strong>Mount:</strong> ' + $target.data('parent-name') + ' - ' + $target.data('port-name') + '</p>');
         }
         if ($target.data('parent-name') == undefined && $target.data('port-name') != undefined) {
             $markup.append('<p><strong>Mount:</strong> ' + $target.data('port-name') + '</p>');
+        }
+        if ($target.data('item-type') != undefined && $target.data('item-sub-type') != undefined) {
+            $markup.append('<p><strong>Type:</strong> ' + cleanType($target.data('item-type') + ':' + $target.data('item-sub-type')) + '</p>');
+        }
+        if ($target.data('port-types') != undefined) {
+            var accepted = [];
+
+            $.each($target.data('port-types').split(','), function () {
+                var type = this;
+
+                type = cleanType(type);
+
+                accepted.push(type);
+            });
+
+            $markup.append('<p><strong>Accepted:</strong> ' + $.unique(accepted).join(', ') + '</p>');
         }
 
         return $markup;
@@ -265,8 +317,13 @@ $(document).ready(function () {
                     // Only act if pane exists in response
                     if ($newPane.length == 0) return;
 
-                    // Preserve styling
-                    $newPane[0].className = this.className;
+                    var $newList = $('.cig-list', $newPane);
+                    var $oldList = $('.cig-list', this);
+
+                    if ($newList.length == 1 && $oldList.length == 1) {
+                        // Preserve styling
+                        $newList[0].className = $oldList[0].className;
+                    }
 
                     // Replace with new method
                     $oldPane.replaceWith($newPane);
