@@ -403,9 +403,24 @@ footer a { color: #fff; }
 .cig-count0 { display: none; }
 .js-info strong { width: 100px; display: inline-block; padding-right: 5px; text-align: right; }
 
+.cig-table .cig-property { width: 40% }
+.cig-table-3 .cig-equipped,
+.cig-table-3 .cig-available { width: 30% }
+.cig-table-2 .cig-equipped,
+.cig-table-2 .cig-available { width: 60% }
+.cig-table th { text-transform: uppercase; font-size: 10px; }
+.cig-table .cig-equipped,
+.cig-table .cig-available { font-size: 11px; }
+.cig-table h4 { margin: 0px; font-size: 20px; }
+.cig-table h5 { margin: 0px; font-size: 14px; }
+.cig-table th,
+.cig-table td { text-align: right; }
+.table-borderless td,
+.table-borderless th { border: none !important; margin-bottom: 0px !important; }
 
-
-
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(255,255,255,0.1);
+}
 
 
 

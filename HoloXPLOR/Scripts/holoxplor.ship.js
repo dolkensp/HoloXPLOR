@@ -13,35 +13,46 @@ $(document).ready(function () {
 
     $.ajax({ url: '/HoloTable/Inventory', dataType: 'json', success: function (data) { inventoryMap = data } })
     
-    var cleanType = function(type)
+    var cleanValue = function(input)
     {
-        type = type.replace('WeaponGun:Gun', 'Gun');
-        type = type.replace('WeaponGun:NoseMounted', 'Nose Mounted Gun');
-        type = type.replace('WeaponGun', 'Gun');
-        type = type.replace('Turret:GunTurret', 'Gimbal');
-        type = type.replace('Turret:Gun', 'Gimbal');
-        type = type.replace('Turret:BallTurret', 'Ball Turret');
-        type = type.replace('Turret', 'Turret/Gimbal');
-        type = type.replace('GimbalTurret', 'Gimbal');
-        type = type.replace('GunTurret', 'Gimbal');
-        type = type.replace('CanardTurret', 'Canard Turret');
-        type = type.replace('Container:Cargo', 'Cargo Container');
-        type = type.replace('Turret:CanardTurret', 'Canard Turret');
-        type = type.replace('WeaponMissile:MissileRack', 'Missile Rack');
-        type = type.replace('WeaponMissile', 'Missile Rack');
-        type = type.replace('MainThruster', 'Engine');
-        type = type.replace('ManneuverThruster:JointThruster', 'Thruster');
-        type = type.replace('ManneuverThruster', 'Thruster');
-        type = type.replace('PowerPlant', 'Power Plant');
-        type = type.replace('Paints', 'Paint');
-        type = type.replace('Ordinance:', '');
-        type = type.replace('AmmoBox:', '');
-        type = type.replace('Ammo_:', '');
-        type = type.replace('CounterMeasure:', 'Counter Measure');
-        type = type.replace('_', ' ');
-        type = type.replace(':', ' ');
+        switch (input) {
+            case 'FireAndForget': return 'Fire And Forget';
+            case 'WeaponGun:NoseMounted': return 'Nose Mounted Gun';
+            case 'WeaponGun:Gun':
+            case 'WeaponGun': return 'Gun';
+            case 'Turret:BallTurret': return 'Ball Turret';
+            case 'Shield:': return 'Shield';
+            case 'Armor:': return 'Armor';
+            case 'Turret:GunTurret':
+            case 'Turret:Gun':
+            case 'GimbalTurret':
+            case 'GunTurret': return 'Gimbal';
+            case 'Turret:MannedTurret': return 'Manned Turret';
+            case 'Turret:CanardTurret':
+            case 'CanardTurret': return 'Canard Turret';
+            case 'Turret': return 'Gimbal / Turret';
+            case 'Container:Cargo': return 'Cargo Container';
+            case 'WeaponMissile:MissileRack':
+            case 'WeaponMissile': return 'Missile Rack';
+            case 'MainThruster:FixedThruster': return 'Engine';
+            case 'ManneuverThruster:JointThruster':
+            case 'ManneuverThruster:FlexThruster':
+            case 'ManneuverThruster': return 'Thruster';
+            case 'PowerPlant:Power': return 'Power Plant';
+            default:
+                console.log('Clean Value', input);
+                if (input.startsWith("Ammo:")) input = "Ammunition";
+                input = input.replace('Paints', 'Paint');
+                input = input.replace('Ordinance:', '');
+                input = input.replace('AmmoBox:', '');
+                input = input.replace('AmmoBox_', '');
+                input = input.replace('Ammo_', '');
+                input = input.replace('CounterMeasure', 'Counter Measure');
+                input = input.replace(/_/gi, ' ');
+                input = input.replace(/:/gi, ' ');
+        }
 
-        return type;
+        return input;
     }
 
     var getInfo = function($target)
@@ -76,9 +87,9 @@ $(document).ready(function () {
             $markup.append('<p><strong>Mount:</strong> ' + $target.data('port-name') + '</p>');
         }
 
-        // if ($target.data('item-type') != undefined) {
-        //     $markup.append('<p><strong>Type:</strong> ' + cleanType($target.data('item-type') + ':' + $target.data('item-sub-type') || '') + '</p>');
-        // }
+        if ($target.data('item-type') != undefined) {
+            $markup.append('<p><strong>Type:</strong> ' + cleanType($target.data('item-type') + ':' + $target.data('item-sub-type') || '') + '</p>');
+        }
 
         if ($target.data('port-types') != undefined) {
             var accepted = [];
@@ -126,32 +137,265 @@ $(document).ready(function () {
                     $markup.append('<p><strong>Splash Absorb:</strong> ' + itemData.Shields.Distortion_DamageAbsorbSplash + '</p>');
                 }
 
-                console.log(itemData);
+                // console.log(itemData);
             }
         }
 
         return $markup;
     }
 
-    var getComparison = function ($equipped, $available) {
-        var $markup = $('<div>');
+    var tableHeader = function (label, equipped, available, size) {
+        size = size || 4;
 
-        $markup.append(getInfo($equipped));
+        var width = 0;
+        if (equipped != null)
+            width++;
+        if (available != null)
+            width++;
 
-        if ($equipped != $available) {
-            $markup.append(getInfo($available));
+        return $('<tr><th><h' + size + '>' + label + '</h' + size + '></th><th colspan=' + width + '></th></tr>');
+    }
+
+    var tableRow = function(label, equipped, available, places, unit) {
+        unit = unit || '';
+        places = places || 0;
+        var $row = $('<tr>');
+
+        $row.append('<th>' + label + '</th>');
+        if (equipped != null)
+            $row.append('<td>' + equipped.toLocaleString('en', { maximumFractionDigits: places, useGrouping: true }) + (equipped != '' ? unit : '') + '</td>');
+
+        if (available != null)
+            $row.append('<td>' + available.toLocaleString('en', { maximumFractionDigits: places, useGrouping: true }) + (available != '' ? unit : '') + '</td>');
+
+        return $row;
+    }
+
+    var getComparison = function ($target, $source) {
+        var enull = null;
+        var anull = null;
+        var azero = null;
+        var ezero = null;
+        var width = 1;
+
+        var $equipped = $target;
+        var $available = $source;
+
+        if ($target.hasClass('js-available')) {
+            $equipped = $source;
+            $available = $target;
         }
+
+        if ($equipped == $available)
+            $available = null;
+
+        var $header = $('<tr>');
+        $header.append('<th class="cig-property">');
+        if ($equipped != null) {
+            $header.append('<th class="cig-equipped">Equipped</th>');
+            enull = '';
+            ezero = 0;
+            width++;
+        }
+        if ($available != null) {
+            $header.append('<th class="cig-selected">Selected</th>');
+            anull = '';
+            azero = 0;
+            width++;
+        }
+
+        var $markup = $('<table class="table table-borderless table-striped table-condensed cig-table cig-table-' + width + '">');
+
+        $markup.append(tableHeader(
+            cleanValue(($equipped || $available).data('item-type') + ':' + (($equipped || $available).data('item-sub-type') || '')),
+            $equipped,
+            $available));
+
+        $markup.append($header);
+
+        $equipped = $equipped || { data: function () { } };
+        $available = $available || { data: function () { } };
+
+        if ($equipped.data('item-name') != undefined || $available.data('item-name') != undefined) {
+            var equippedData = inventoryMap[$equipped.data('item-name')];
+            var availableData = inventoryMap[$available.data('item-name')];
+
+            if (equippedData != undefined || availableData != undefined) {
+                equippedData = equippedData || {};
+                availableData = availableData || {};
+
+                if (equippedData.Armor != undefined || availableData.Armor != undefined) {
+                    equippedData.Armor = equippedData.Armor || {};
+                    availableData.Armor = availableData.Armor || {};
+
+                    $markup.append(tableRow(
+                        'Physical Res',
+                        100 - equippedData.Armor.DamageMultipliers[0].Physical * 100,
+                        100 - availableData.Armor.DamageMultipliers[0].Physical * 100,
+                        0, '%'));
+                    $markup.append(tableRow(
+                        'Energy Res',
+                        100 - equippedData.Armor.DamageMultipliers[0].Energy * 100,
+                        100 - availableData.Armor.DamageMultipliers[0].Energy * 100,
+                        0, '%'));
+                    $markup.append(tableRow(
+                        'Distortion Res',
+                        100 - equippedData.Armor.DamageMultipliers[0].Distortion * 100,
+                        100 - availableData.Armor.DamageMultipliers[0].Distortion * 100,
+                        0, '%'));
+                }
+
+                if (equippedData.Missile != undefined || availableData.Missile != undefined) {
+                    equippedData.Missile = equippedData.Missile || {};
+                    availableData.Missile = availableData.Missile || {};
+                    equippedData.Explosion = equippedData.Explosion || {};
+                    availableData.Explosion = availableData.Explosion || {};
+
+                    $markup.append(tableRow(
+                        'Type',
+                        equippedData.Missile.GuidanceType,
+                        availableData.Missile.GuidanceType));
+                    $markup.append(tableRow(
+                        'Proximity',
+                        equippedData.Missile.ExplodeProximity || ezero,
+                        availableData.Missile.ExplodeProximity || azero,
+                        0, 'm'));
+
+                    $markup.append(tableHeader(
+                        'Explosive',
+                        $equipped,
+                        $available,
+                        5));
+                    $markup.append(tableRow(
+                        'Radius',
+                        equippedData.Explosion.MaxRadius,
+                        availableData.Explosion.MaxRadius,
+                        0, 'm'));
+                    $markup.append(tableRow(
+                        'Pressure',
+                        equippedData.Explosion.Pressure,
+                        availableData.Explosion.Pressure,
+                        0, 'psi'));
+
+                    $markup.append(tableHeader(
+                        'Damage',
+                        $equipped,
+                        $available,
+                        5));
+                    if (equippedData.Explosion.Damage_Physical > 0 || availableData.Explosion.Damage_Physical > 0) {
+                        $markup.append(tableRow(
+                            'Physical',
+                            equippedData.Explosion.Damage_Physical,
+                            availableData.Explosion.Damage_Physical));
+                    }
+
+                    if (equippedData.Explosion.Damage_Energy > 0 || availableData.Explosion.Damage_Energy > 0) {
+                        $markup.append(tableRow(
+                            'Energy',
+                            equippedData.Explosion.Damage_Energy,
+                            availableData.Explosion.Damage_Energy));
+                    }
+
+                    if (equippedData.Explosion.Damage_Distortion > 0 || availableData.Explosion.Damage_Distortion > 0) {
+                        $markup.append(tableRow(
+                            'Distortion',
+                            equippedData.Explosion.Damage_Distortion,
+                            availableData.Explosion.Damage_Distortion));
+                    }
+                }
+
+                if (equippedData.Shields != undefined || availableData.Shields != undefined) {
+                    equippedData.Shields = equippedData.Shields || {};
+                    availableData.Shields = availableData.Shields || {};
+
+                    $markup.append(tableRow(
+                        'Type',
+                        equippedData.Shields.FaceType,
+                        availableData.Shields.FaceType));
+                    $markup.append(tableRow(
+                        'Hit Points',
+                        equippedData.Shields.MaxHitPoints,
+                        availableData.Shields.MaxHitPoints,
+                        2));
+                    $markup.append(tableRow(
+                        'Regen Rate',
+                        equippedData.Shields.MaxRegenRate,
+                        availableData.Shields.MaxRegenRate,
+                        2));
+                    $markup.append(tableRow(
+                        'Regen Delay',
+                        equippedData.Shields.RegenDelay,
+                        availableData.Shields.RegenDelay,
+                        2));
+
+                    $markup.append(tableHeader(
+                        'Physical',
+                        $equipped,
+                        $available,
+                        5));
+                    $markup.append(tableRow(
+                        'Damage Absorb',
+                        equippedData.Shields.Physical_DamageAbsorbDirect,
+                        availableData.Shields.Physical_DamageAbsorbDirect,
+                        2));
+                    $markup.append(tableRow(
+                        'Splash Absorb',
+                        equippedData.Shields.Physical_DamageAbsorbDirect,
+                        availableData.Shields.Physical_DamageAbsorbDirect,
+                        2));
+
+                    $markup.append(tableHeader(
+                        'Energy',
+                        $equipped,
+                        $available,
+                        5));
+                    $markup.append(tableRow(
+                        'Damage Absorb',
+                        equippedData.Shields.Energy_DamageAbsorbDirect,
+                        availableData.Shields.Energy_DamageAbsorbDirect,
+                        2));
+                    $markup.append(tableRow(
+                        'Splash Absorb',
+                        equippedData.Shields.Energy_DamageAbsorbDirect,
+                        availableData.Shields.Energy_DamageAbsorbDirect,
+                        2));
+
+                    $markup.append(tableHeader(
+                        'Distortion',
+                        $equipped,
+                        $available,
+                        5));
+                    $markup.append(tableRow(
+                        'Damage Absorb',
+                        equippedData.Shields.Distortion_DamageAbsorbDirect,
+                        availableData.Shields.Distortion_DamageAbsorbDirect,
+                        2));
+                    $markup.append(tableRow(
+                        'Splash Absorb',
+                        equippedData.Shields.Distortion_DamageAbsorbDirect,
+                        availableData.Shields.Distortion_DamageAbsorbDirect,
+                        2));
+                }
+            }
+        }
+
+        // $markup.append(getInfo($equipped));
+        // 
+        // if ($equipped != $available) {
+        //     $markup.append(getInfo($available));
+        // }
 
         return $markup;
     }
 
     var hideInfo = function (timeout) {
+        return;
         window.clearTimeout(fadeTimer);
         fadeTimer = window.setTimeout(function () {
             var $markup = $('<div class="panel-body js-info">');
 
             if ($source != null) {
-                $markup.append(getInfo($source));
+                $markup.append(getComparison($source));
             } else {
                 $markup.html('Hover over an item to see more information');
             }
@@ -163,23 +407,8 @@ $(document).ready(function () {
     var showInfo = function ($target) {
         window.clearTimeout(fadeTimer);
         var $markup = $('<div class="panel-body js-info">');
-        var $equipped = $target;
-        var $available = $source;
 
-        if ($target.hasClass('js-available'))
-        {
-            $equipped = $source;
-            $available = $target;
-        }
-
-        if ($equipped != null && $available != null)
-        {
-            $markup.append(getComparison($available, $equipped));
-        } else if ($equipped != null) {
-            $markup.append(getInfo($equipped));
-        } else if ($available != null) {
-            $markup.append(getInfo($available));
-        }
+        $markup.append(getComparison($target, $source));
 
         $('.js-info').replaceWith($markup);
     }
