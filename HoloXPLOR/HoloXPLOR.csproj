@@ -169,6 +169,12 @@
     <Compile Include="Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\sample.tpl">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\sample.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\db_dolkensp.xml">
       <SubType>Designer</SubType>
     </Content>

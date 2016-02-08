@@ -13,7 +13,12 @@ namespace HoloXPLOR.Controllers
         [ValidateInput(false)]
         public ActionResult JsError(String message, String stack, String name, String args, String url)
         {
-            var data = args.FromJSON();
+            dynamic data = null;
+
+            if (!String.IsNullOrEmpty(args))
+            {
+                data = args.FromJSON();
+            }
 
             // By cachine this method, we prevent more than 1 of the same error being logged in any 15 minute window
             CacheUtils.GetCachedData(CacheUtils.DefaultSettings, () =>
@@ -22,7 +27,7 @@ namespace HoloXPLOR.Controllers
                     new Elmah.Error(
                         new JavascriptException(message)
                         {
-                            Args = args.FromJSON(),
+                            Args = data,
                             Name = name,
                             Stack = stack,
                             Url = url,

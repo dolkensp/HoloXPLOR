@@ -70,6 +70,14 @@
     </div>
 }
 
+@section meta
+{
+    @if (Model.CurrentXML != "sample")
+    { 
+        <meta name="robots" content="noindex, nofoloow" />
+    }
+}
+
 @using (Html.BeginForm("Upload", "HoloTable", FormMethod.Post, new { id = "form-upload" }))
 { }
 
