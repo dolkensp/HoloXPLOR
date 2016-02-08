@@ -111,6 +111,9 @@
 @using (Html.BeginForm("Ship", "HoloTable", new { id = Model.CurrentXML, shipID = Model.ShipID }, FormMethod.Post, new { id = "form-ship" }))
 { }
 
+@using (Html.BeginForm("Inventory", "HoloTable", new { id = Model.CurrentXML }, FormMethod.Post, new { id = "form-inventory" }))
+{ }
+
 <div class="ui-container gutter-5">
     <div class="row">
 

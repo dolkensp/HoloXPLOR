@@ -56,11 +56,15 @@ namespace HoloXPLOR.Controllers
             }
         }
 
-        public ActionResult Inventory()
+        public ActionResult Inventory(String id)
         {
+            DetailModel model = new DetailModel(id);
+            HashSet<String> currentItems = new HashSet<String>(model.GameData_ItemMap.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).Select(k => k.Name).Distinct());
+
             return new ContentResult
             {
-                Content = Scripts.Items.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).ToDictionary(k => k.Name, v => v).ToJSON(),
+                
+                Content = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v).ToJSON(),
                 ContentType = "application/json"
             };
         }

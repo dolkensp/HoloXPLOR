@@ -119,7 +119,7 @@ body {
 }
 
 .nav-tabs li { z-index: 1; position: relative; margin-bottom: 2px; height: 22px; margin-right: -50px; text-indent: 0px; }
-.nav-tabs li.active { z-index: 999; }
+.nav-tabs li.active { z-index: 2; }
 .nav-tabs li a {
     text-transform: uppercase;
     border: 0px none !important;
@@ -184,6 +184,7 @@ body {
 
 .js-equipped { cursor: no-drop; }
 .cig-list ul { text-align: right; }
+.js-hardpoint { z-index: 3; }
 .js-hardpoint, .cig-icon {
     display: inline-block;
     border: solid 1px #1e98df;
@@ -405,12 +406,12 @@ footer a { color: #fff; }
 
 .cig-table .cig-property { width: 40% }
 .cig-table-3 .cig-equipped,
-.cig-table-3 .cig-available { width: 30% }
+.cig-table-3 .cig-selected { width: 30% }
 .cig-table-2 .cig-equipped,
-.cig-table-2 .cig-available { width: 60% }
+.cig-table-2 .cig-selected { width: 60% }
 .cig-table th { text-transform: uppercase; font-size: 10px; }
 .cig-table .cig-equipped,
-.cig-table .cig-available { font-size: 11px; }
+.cig-table .cig-selected { font-size: 11px; }
 .cig-table h4 { margin: 0px; font-size: 20px; }
 .cig-table h5 { margin: 0px; font-size: 14px; }
 .cig-table th,
