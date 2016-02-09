@@ -11,11 +11,16 @@ $(document).ready(function () {
     var $source = null;
 
     var inventoryMap = {};
+    var ammoMap = {};
 
-    $.ajax({ url: $form_inventory[0].action, dataType: 'json', success: function (data) { inventoryMap = data } })
+    $.ajax({ url: $form_inventory[0].action, dataType: 'json', success: function (data) { inventoryMap = data.Inventory; ammoMap = data.Ammo } })
     
     var cleanValue = function(input)
     {
+        if (input == null || input == undefined) return null;
+
+        if (typeof input != "string") return input;
+
         if (input.startsWith("Ammo:")) input = "Ammunition";
         if (input.startsWith("Armor:")) input = "Armor";
 
@@ -41,16 +46,17 @@ $(document).ready(function () {
             case 'MainThruster:FixedThruster': return 'Engine';
             case 'ManneuverThruster:JointThruster':
             case 'ManneuverThruster:FlexThruster':
+            case 'ManneuverThruster:FixedThruster':
             case 'ManneuverThruster': return 'Thruster';
             case 'PowerPlant:Power': return 'Power Plant';
+            case 'Ordinance:Missile': return 'Missile';
+            case 'AmmoBox:Ammo_CounterMeasure': return 'Counter Measure';
             default:
-                console.log('Clean Value', input);
                 input = input.replace('Paints', 'Paint');
                 input = input.replace('Ordinance:', '');
                 input = input.replace('AmmoBox:', '');
                 input = input.replace('AmmoBox_', '');
                 input = input.replace('Ammo_', '');
-                input = input.replace('CounterMeasure', 'Counter Measure');
                 input = input.replace(/_/gi, ' ');
                 input = input.replace(/:/gi, ' ');
         }
@@ -117,24 +123,57 @@ $(document).ready(function () {
         return $('<tr><th><h' + size + '>' + label + '</h' + size + '></th><th colspan=' + width + '></th></tr>');
     }
 
+    var format = function (value, places) {
+        if (value == undefined || value == null || value != value || value == 0)
+            return null;
+
+        places = places || 0;
+        switch (typeof value) {
+            case 'object':
+                if (value.from == null && value.to == null)
+                    return null;
+
+                if (!isNaN(value.from) && !isNaN(value.to)) {
+                    value = parseFloat(value.from).toFixed(places) + '-' + parseFloat(value.to).toFixed(places);
+                } else {
+                    value.from = value.from || null;
+                    value.to = value.to || null;
+
+                    if (value.from != null && value.to != null) {
+                        value = value.from + '-' + value.to;
+                    } else {
+                        value = value.from || value.to;
+                    }
+                }
+                break;
+            case 'number':
+                if (places > 0) {
+                    value = value.toFixed(places);
+                }
+                break;
+            case 'string':
+                if (!isNaN(value) && places > 0) {
+                    value = parseFloat(value).toFixed(places);
+                }
+                break;
+        }
+        return value;
+    }
+
     var tableRow = function (label, equipped, available, places, unit) {
         if (equipped == null && available == null)
             return null;
 
         unit = unit || '';
-        places = places || 0;
+        equipped = format(equipped, places);
+        available = format(available, places);
 
-        if (places > 0) {
-            if (!isNaN(equipped)) equipped = parseFloat(equipped).toFixed(places);
-            if (!isNaN(available)) available = parseFloat(available).toFixed(places);
-        }
-
-        if (equipped != equipped) equipped = null;
-        if (available != available) available = null;
-
+        if (equipped == null && available == null)
+            return;
+        
         var $row = $('<tr>');
-
         $row.append('<th>' + label + '</th>');
+
         if (equipped != null)
             $row.append('<td>' + equipped.toLocaleString('en', { maximumFractionDigits: places, useGrouping: true }) + (equipped != '' ? unit : '') + '</td>');
 
@@ -149,33 +188,52 @@ $(document).ready(function () {
         var anull = null;
         var azero = null;
         var ezero = null;
+        var $port = null;
         var width = 1;
 
-        if ($target == $source) {
-            if ($target.hasClass('js-available'))
+        if ($target != null && $target.data('port-name') != undefined) {
+            $port = $target;
+        }
+
+        if ($source != null && $source.data('port-name') != undefined) {
+            $port = $source;
+        }
+
+        if ($target != null && ($target.data('item-id') == undefined || $target.data('item-id') == '00000000-0000-0000-0000-000000000000')) {
+            $target = null;
+        }
+
+        if ($source != null && ($source.data('item-id') == undefined || $source.data('item-id') == '00000000-0000-0000-0000-000000000000')) {
+            $source = null;
+        }
+
+        if ($target == $source && $target != null) {
+            if ($target.hasClass('js-available')) {
                 $source = null;
-            else
+            }
+            else {
                 $target = null;
+            }
         }
 
         var $equipped = $target;
         var $available = $source;
 
-        if ($target != null && $target.hasClass('js-available') || $source != null && !$source.hasClass('js-available')) {
+        if (($source != null && $source.data('port-name') != undefined) || ($target != null && $target.data('port-name') == undefined)) {
             $equipped = $source;
             $available = $target;
         }
 
         var $header = $('<tr>');
         $header.append('<th class="cig-property">');
-        if ($equipped != null) {
+        if ($equipped != null || $available == null) {
             $header.append('<th class="cig-equipped">Equipped</th>');
             enull = '';
             ezero = 0.000000001;
             width++;
         }
         if ($available != null) {
-            $header.append('<th class="cig-selected">Selected</th>');
+            $header.append('<th class="cig-selected">Available</th>');
             anull = '';
             azero = 0.000000001;
             width++;
@@ -183,35 +241,23 @@ $(document).ready(function () {
 
         var $markup = $('<table class="table table-borderless table-striped table-condensed cig-table cig-table-' + width + '">');
 
-        $markup.append('<tr><th colspan="' + width + '"><h4>' + cleanValue(($equipped || $available).data('item-type') + ':' + (($equipped || $available).data('item-sub-type') || '')) + '</h4></th></tr>');
-
-        if ($equipped != null) {
-            if ($equipped.data('port-name') != undefined && $equipped.data('parent-name') != undefined) {
-                $markup.append('<tr><th>Mount</th><td colspan="' + (width - 1) + '">' + $equipped.data('parent-name') + ' - ' + $equipped.data('port-name') + '</td></tr>');
-            } else {
-                $markup.append('<tr><th>Mount</th><td colspan="' + (width - 1) + '">' + $equipped.data('port-name') + '</td></tr>');
-            }
-            $markup.append('<tr><th>Max Size</th><td colspan="' + (width - 1) + '">' + $equipped.data('port-max-size') + '</td></tr>');
+        if ($equipped != null || $available != null) {
+            $markup.append('<tr><th colspan="' + width + '"><h4>' + cleanValue(($equipped || $available).data('item-type') + ':' + (($equipped || $available).data('item-sub-type') || '')) + '</h4></th></tr>');
+        } else {
+            $markup.append('<tr><th colspan="2"><h4>Empty</h4></th></tr>');
         }
 
+
+        if ($port != null) {
+            if ($port.data('port-name') != undefined && $port.data('parent-name') != undefined) {
+                $markup.append('<tr><td colspan="' + width + '">' + $port.data('parent-name') + ' - ' + $port.data('port-name') + '</td></tr>');
+            } else {
+                $markup.append('<tr><td colspan="' + width + '">' + $port.data('port-name') + '</td></tr>');
+            }
+        }
+
+
         $markup.append($header);
-
-        // if ($target.data('item-size') != undefined) {
-        //     if ($target.data('port-max-size') != undefined) {
-        //         $markup.append('<p><strong>Size:</strong> ' + $target.data('item-size') + ' (' + $target.data('port-max-size') + ')</p>');
-        //     } else {
-        //         $markup.append('<p><strong>Size:</strong> ' + $equipped.data('item-size') + '</p>');
-        //     }
-        // } else if ($equipped.data('port-max-size') != undefined) {
-        //     $markup.append('<p><strong>Size:</strong> Empty (' + $equipped.data('port-max-size') + ')</p>');
-        // }
-
-        // if ($equipped.data('parent-name') != undefined && $equipped.data('port-name') != undefined) {
-        //     $markup.append('<p><strong>Mount:</strong> ' + $equipped.data('parent-name') + ' - ' + $equipped.data('port-name') + '</p>');
-        // }
-        // if ($equipped.data('parent-name') == undefined && $equipped.data('port-name') != undefined) {
-        //     $markup.append('<p><strong>Mount:</strong> ' + $equipped.data('port-name') + '</p>');
-        // }
 
         $equipped = $equipped || { data: function () { } };
         $available = $available || { data: function () { } };
@@ -223,6 +269,17 @@ $(document).ready(function () {
             if (equippedData != undefined || availableData != undefined) {
                 equippedData = equippedData || {};
                 availableData = availableData || {};
+
+                $markup.append(tableRow(
+                    'Name',
+                    equippedData.DisplayName,
+                    availableData.DisplayName));
+
+                $markup.append(tableRow(
+                    'Size',
+                    $equipped.data('item-size'),
+                    $available.data('item-size'),
+                    0));
 
                 if (equippedData.Armor != undefined || availableData.Armor != undefined) {
                     equippedData.Armor = equippedData.Armor || {};
@@ -247,21 +304,86 @@ $(document).ready(function () {
                         0, '%'));
                 }
 
+                if (equippedData.FireModes != undefined || availableData.FireModes != undefined) {
+                    equippedData.FireModes = equippedData.FireModes || [];
+                    availableData.FireModes = availableData.FireModes || [];
+
+                    for (var i = 0, j = Math.max(equippedData.FireModes.length, availableData.FireModes.length) ; i < j; i++) {
+                        equippedData.FireMode = equippedData.FireModes[i] || {};
+                        availableData.FireMode = availableData.FireModes[i] || {};
+
+                        equippedData.FireMode.Burst = equippedData.FireMode.Burst || {};
+                        availableData.FireMode.Burst = availableData.FireMode.Burst || {};
+
+                        $markup.append(tableHeader('Weapon', width));
+                        $markup.append(tableRow(
+                            'Fire Mode',
+                            equippedData.FireMode.Type,
+                            availableData.FireMode.Type));
+
+                        if (equippedData.FireMode.Spread != undefined || availableData.FireMode.Spread != undefined) {
+                            equippedData.FireMode.Spread = equippedData.FireMode.Spread || {};
+                            availableData.FireMode.Spread = availableData.FireMode.Spread || {};
+
+                            $markup.append(tableRow(
+                                'Spread',
+                                { from: equippedData.FireMode.Spread.Min, to: equippedData.FireMode.Spread.Max },
+                                { from: availableData.FireMode.Spread.Min, to: availableData.FireMode.Spread.Max },
+                                2, '&deg;'));
+                        }
+                        if (equippedData.FireMode.Fire != undefined || availableData.FireMode.Fire != undefined) {
+                            equippedData.FireMode.Fire = equippedData.FireMode.Fire || {};
+                            availableData.FireMode.Fire = availableData.FireMode.Fire || {};
+                            equippedData.AmmoType = equippedData.AmmoType || [];
+                            availableData.AmmoType = availableData.AmmoType || [];
+                            equippedData.Ammo = ammoMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || ammoMap[(inventoryMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
+                            availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
+                            equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
+                            availableData.Ammo.Explosion = availableData.Ammo.Explosion || {};
+
+                            $markup.append(tableRow(
+                                'Fire Rate',
+                                (equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate,
+                                (availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate,
+                                0, ' rpm'));
+
+                            $markup.append(tableRow(
+                                'Physical',
+                                (equippedData.Ammo.Damage_Physical || equippedData.Ammo.Explosion.Damage_Physical) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
+                                (availableData.Ammo.Damage_Physical || availableData.Ammo.Explosion.Damage_Physical) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
+                                0, ' dps'));
+                            $markup.append(tableRow(
+                                'Energy',
+                                (equippedData.Ammo.Damage_Energy || equippedData.Ammo.Explosion.Damage_Energy) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
+                                (availableData.Ammo.Damage_Energy || availableData.Ammo.Explosion.Damage_Energy) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
+                                0, ' dps'));
+                            $markup.append(tableRow(
+                                'Distortion',
+                                (equippedData.Ammo.Damage_Distortion || equippedData.Ammo.Explosion.Damage_Distortion) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
+                                (availableData.Ammo.Damage_Distortion || availableData.Ammo.Explosion.Damage_Distortion) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
+                                0, ' dps'));
+                        }
+                    }
+                }
+
                 if (equippedData.Missile != undefined || availableData.Missile != undefined) {
                     equippedData.Missile = equippedData.Missile || {};
                     availableData.Missile = availableData.Missile || {};
-                    equippedData.Explosion = equippedData.Explosion || {};
-                    availableData.Explosion = availableData.Explosion || {};
 
                     $markup.append(tableRow(
                         'Type',
-                        equippedData.Missile.GuidanceType,
-                        availableData.Missile.GuidanceType));
+                        cleanValue(equippedData.Missile.GuidanceType),
+                        cleanValue(availableData.Missile.GuidanceType)));
                     $markup.append(tableRow(
                         'Proximity',
                         equippedData.Missile.ExplodeProximity || ezero,
                         availableData.Missile.ExplodeProximity || azero,
                         0, ' m'));
+                }
+
+                if (equippedData.Explosion != undefined || availableData.Explosion != undefined) {
+                    equippedData.Explosion = equippedData.Explosion || {};
+                    availableData.Explosion = availableData.Explosion || {};
 
                     $markup.append(tableHeader('Explosive', width));
                     $markup.append(tableRow(
@@ -275,27 +397,20 @@ $(document).ready(function () {
                         availableData.Explosion.Pressure,
                         0, ' psi'));
 
-                    $markup.append(tableHeader('Damage', width));
-                    if (equippedData.Explosion.Damage_Physical > 0 || availableData.Explosion.Damage_Physical > 0) {
-                        $markup.append(tableRow(
-                            'Physical',
-                            equippedData.Explosion.Damage_Physical,
-                            availableData.Explosion.Damage_Physical));
-                    }
+                    $markup.append(tableRow(
+                        'Physical',
+                        equippedData.Explosion.Damage_Physical,
+                        availableData.Explosion.Damage_Physical));
 
-                    if (equippedData.Explosion.Damage_Energy > 0 || availableData.Explosion.Damage_Energy > 0) {
-                        $markup.append(tableRow(
-                            'Energy',
-                            equippedData.Explosion.Damage_Energy,
-                            availableData.Explosion.Damage_Energy));
-                    }
+                    $markup.append(tableRow(
+                        'Energy',
+                        equippedData.Explosion.Damage_Energy,
+                        availableData.Explosion.Damage_Energy));
 
-                    if (equippedData.Explosion.Damage_Distortion > 0 || availableData.Explosion.Damage_Distortion > 0) {
-                        $markup.append(tableRow(
-                            'Distortion',
-                            equippedData.Explosion.Damage_Distortion,
-                            availableData.Explosion.Damage_Distortion));
-                    }
+                    $markup.append(tableRow(
+                        'Distortion',
+                        equippedData.Explosion.Damage_Distortion,
+                        availableData.Explosion.Damage_Distortion));
                 }
 
                 if (equippedData.Shields != undefined || availableData.Shields != undefined) {

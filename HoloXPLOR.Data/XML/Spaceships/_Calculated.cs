@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -69,6 +70,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public CategoryEnum ItemCategory
         {
             get

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,16 @@ namespace HoloXPLOR.Data.XML.Spaceships
     public partial class Item
     {
         [XmlElement(ElementName = "ammoBox")]
-        public ParamCollection AmmoBox { get; set; }
+        public AmmoCollection AmmoBox { get; set; }
+    }
+
+    public partial class AmmoCollection : ParamCollection
+    {
+        [XmlIgnore]
+        [JsonProperty("AmmoType")]
+        public String AmmoName { get { return this["ammo_name"]; } }
+
+        [XmlIgnore]
+        public Int32? MaxAmmo { get { return this["max_ammo_count"].ToInt16(); } }
     }
 }

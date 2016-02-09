@@ -64,7 +64,10 @@ namespace HoloXPLOR.Controllers
             return new ContentResult
             {
                 
-                Content = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v).ToJSON(),
+                Content = new {
+                    Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
+                    Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v)
+                }.ToJSON(),
                 ContentType = "application/json"
             };
         }

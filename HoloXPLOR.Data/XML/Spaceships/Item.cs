@@ -43,7 +43,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
 
         [XmlElement(ElementName = "portParams")]
         [JsonIgnore]
-        public PortCollection PortParams { get; set; }
+        public PortCollection Ports { get; set; }
 
         [XmlArray(ElementName = "Pipes")]
         [XmlArrayItem(ElementName = "Pipe")]
@@ -76,9 +76,5 @@ namespace HoloXPLOR.Data.XML.Spaceships
                 return sb.ToString();
             }
         }
-
-        // TODO: DamageLevels
-        // TODO: Geometry
-        // TODO: Add <Pipes><Pipe class/prioType><StateLevels><Warning value><Critical value><Fail value> <States><Pipe name/value><State state/ignorepool/transition><Value value> <Signature name/multiplier>
     }
 }

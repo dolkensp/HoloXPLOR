@@ -354,9 +354,9 @@ namespace HoloXPLOR.Models.HoloTable
         {
             yield return item;
 
-            if (item.GameData_Item != null && item.GameData_Item.PortParams != null)
+            if (item.GameData_Item != null && item.GameData_Item.Ports != null)
             {
-                var children = (from gamePort in item.GameData_Item.PortParams.Items
+                var children = (from gamePort in item.GameData_Item.Ports.Items
                                 where item.Inventory_Item.Ports.Items != null
                                 from shipPort in item.Inventory_Item.Ports.Items
                                 where shipPort.PortName == gamePort.Name

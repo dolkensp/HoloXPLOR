@@ -3,23 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace HoloXPLOR.Data.XML.Spaceships
 {
+    [XmlRoot(ElementName = "ammo")]
     public partial class Ammo
     {
-        //<!-- Autogen Projectiles for ammo -->
+        [XmlAttribute(AttributeName = "name")]
+        public String Name { get; set; }
 
-        //<ammo name="24mm_AMMO" class="LaserBolt" interface="interface_24mm_AMMO">
-        //    <flags>
-        //        <param name="clientonly" value="1" />
-        //        <param name="reusable" value="1" />
-        //    </flags>
-        //    <AudioPreloads>
-        //        <Preload name = "SC_WPWB_WPHA_25mm"/>
-        //    </AudioPreloads>
+        [XmlAttribute(AttributeName = "class")]
+        public String Class { get; set; }
 
-   
+        [XmlAttribute(AttributeName = "interface")]
+        public String Interface { get; set; }
+
+        [XmlElement(ElementName = "flags")]
+        public ParamCollection Flags { get; set; }
+
+        [XmlElement(ElementName = "physics")]
+        public PhysicsCollection Physics { get; set; }
+
+        [XmlElement(ElementName = "params")]
+        public ParamCollection Params { get; set; }
+
+        [XmlElement(ElementName = "explosion")]
+        public Explosion Explosion { get; set; }
+
+        [XmlIgnore]
+        public Double? Lifetime { get { return this.Params["lifetime"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? Damage_Physical { get { return this.Params["damage"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? Damage_Energy { get { return this.Params["damage_energy"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? Damage_Distortion { get { return this.Params["damage_distortion"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? DamageRadius { get { return this.Params["damage_radius"].ToDouble(); } }
+    }
+
+    public partial class PhysicsCollection : ParamCollection
+    {
+        [XmlAttribute(AttributeName = "type")]
+        public String Type { get; set; }
+
+        [XmlIgnore]
+        public Double? Mass { get { return this["mass"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? Speed { get { return this["speed"].ToDouble(); } }
+
+        [XmlIgnore]
+        public Double? Radius { get { return this["radius"].ToDouble(); } }
+
         //    <physics type="particle">
         //        <param name="mass" value="1.2" />
         //        <param name="speed" value="1340" />
@@ -36,17 +77,5 @@ namespace HoloXPLOR.Data.XML.Spaceships
         //        <param name="constant_orientation" value="1"/>
         //        <param name="no_self_collisions" value="1"/>
         //    </physics>
-
-        //    <params>
-        //        <param name="lifetime" value="3.8" />
-        //        <param name="showtime" value="0" /> <!-- Amount of time delayed before the particle effect is shown in seconds -->
-        //        <param name="damage" value="27" /> 		<!-- This is PHYSICAL damage -->
-        //        <param name="damage_energy" value="0" /> <!-- This is ENERGY damage -->
-        //        <param name="damage_distortion" value="0" /> <!-- This is DISTORTION damage -->
-        //        <param name="damage_radius" value="0" /> <!-- This is the damage radius of the projectile. 0 is point impact -->
-        //    </params>
-	
-        //</ammo>
-
     }
 }

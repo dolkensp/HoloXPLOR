@@ -27,7 +27,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         public RapidCollection Rapid { get; set; }
 
         [XmlElement(ElementName = "spread")]
-        public ParamCollection Spread { get; set; }
+        public SpreadCollection Spread { get; set; }
 
         [XmlArray(ElementName = "pools")]
         [XmlArrayItem(ElementName = "pool")]
@@ -117,6 +117,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
             set { this.WeaponParams = value == 1; }
         }
         [XmlIgnore]
+        [JsonIgnore]
         public Boolean WeaponParams { get; set; }
 
         // TODO: Consider if we want to preserve this to allow filling ammo boxes easily
@@ -128,5 +129,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         [XmlArrayItem(ElementName = "firemode")]
         public FireMode[] FireModes { get; set; }
 
+        [XmlIgnore]
+        public String[] AmmoType { get { return this.Ports != null && this.Ports.Items != null ? this.Ports.Items.Where(p => p.Types != null).SelectMany(p => p.Types).Where(t => t.Type == "AmmoBox").Select(t => t.SubType).Distinct().ToArray() : null; } }
     }
 }

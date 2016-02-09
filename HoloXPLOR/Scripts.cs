@@ -111,9 +111,9 @@ namespace HoloXPLOR.Data
                 }
             }
 
-            if (item.PortParams != null && item.PortParams.Items != null)
+            if (item.Ports != null && item.Ports.Items != null)
             {
-                var cmp = item.PortParams.Items.Where(p => p.Types != null).SelectMany(p => p.Types.Where(t => t.Type == "AmmoBox").Where(t => String.IsNullOrWhiteSpace(t.SubType)));
+                var cmp = item.Ports.Items.Where(p => p.Types != null).SelectMany(p => p.Types.Where(t => t.Type == "AmmoBox").Where(t => String.IsNullOrWhiteSpace(t.SubType)));
 
                 foreach (var port in cmp)
                 {
@@ -197,7 +197,55 @@ namespace HoloXPLOR.Data
 
         #region Ammo XML
 
+        private static Dictionary<String, XML.Spaceships.Ammo> _ammo;
+        public static Dictionary<String, XML.Spaceships.Ammo> Ammo
+        {
+            get
+            {
+                if (Scripts._ammo == null)
+                {
+                    Scripts._ammo = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
 
+                    DirectoryInfo ammoDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Ammo"));
+
+                    foreach (FileInfo file in ammoDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                    {
+                        if (file.FullName.Contains(@"AmmoBoxes") ||
+                            file.FullName.Contains(@"TEMP"))
+                            continue;
+
+#if !DEBUG || DEBUG
+                        try
+                        {
+#endif
+                            var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
+
+                            if (ammo == null)
+                                continue;
+
+                            Scripts._ammo[ammo.Name] = Scripts._CleanEdgeCases(ammo);
+#if !DEBUG || DEBUG
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                        }
+#endif
+                    }
+                }
+
+                return Scripts._ammo;
+            }
+        }
+
+        private static Items.Ammo _CleanEdgeCases(Items.Ammo ammo)
+        {
+            #region Edge Case Support
+
+            #endregion
+
+            return ammo;
+        }
 
         #endregion
 

@@ -1,6 +1,6 @@
 ﻿
-<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-005a-c345-0000-000000000000">
- <inventory count="200">
+<player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-00a8-1ae7-0000-000000000000">
+ <inventory count="197">
   <item __EID__id="00fa8108-0001-f38c-0000-000000000000" />
   <item __EID__id="00fa8108-002c-969f-0000-000000000000" />
   <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
@@ -9,7 +9,6 @@
   <item __EID__id="00fa8108-0028-c1d7-0000-000000000000" />
   <item __EID__id="00fa8108-0029-c1d7-0000-000000000000" />
   <item __EID__id="00fa8108-00a8-58d8-0000-000000000000" />
-  <item __EID__id="00fa8108-0029-c1da-0000-000000000000" />
   <item __EID__id="00fa8108-002a-c1da-0000-000000000000" />
   <item __EID__id="00fa8108-002b-c1da-0000-000000000000" />
   <item __EID__id="00fa8108-002c-c1da-0000-000000000000" />
@@ -44,7 +43,6 @@
   <item __EID__id="01fa8108-0004-930b-0000-000000000000" />
   <item __EID__id="01fa8108-004c-940b-0000-000000000000" />
   <item __EID__id="01fa8108-004d-940b-0000-000000000000" />
-  <item __EID__id="01fa8108-0089-cd0c-0000-000000000000" />
   <item __EID__id="01fa8108-002a-070d-0000-000000000000" />
   <item __EID__id="01fa8108-002b-070d-0000-000000000000" />
   <item __EID__id="01fa8108-002c-070d-0000-000000000000" />
@@ -111,7 +109,6 @@
   <item __EID__id="01fa8108-00ce-280d-0000-000000000000" />
   <item __EID__id="01fa8108-00cf-280d-0000-000000000000" />
   <item __EID__id="01fa8108-00d0-280d-0000-000000000000" />
-  <item __EID__id="01fa8108-00d1-280d-0000-000000000000" />
   <item __EID__id="01fa8108-00d2-280d-0000-000000000000" />
   <item __EID__id="01fa8108-00d3-280d-0000-000000000000" />
   <item __EID__id="01fa8108-00d4-280d-0000-000000000000" />
@@ -143,6 +140,8 @@
   <item __EID__id="00fa8108-005a-c345-0003-000000000000" />
   <item __EID__id="00fa8108-005a-c345-0008-000000000000" />
   <item __EID__id="02fa8108-0002-0000-0020-000000000000" />
+  <item __EID__id="00fa8108-00e9-28db-0013-000000000000" />
+  <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
   <item __EID__id="01fa8108-0043-4c0b-0001-000000000000" />
   <item __EID__id="01fa8108-0043-4c0b-0002-000000000000" />
   <item __EID__id="01fa8108-0044-4c0b-0001-000000000000" />
@@ -185,8 +184,6 @@
   <item __EID__id="01fa8108-0051-0a0d-0002-000000000000" />
   <item __EID__id="01fa8108-0052-0a0d-0001-000000000000" />
   <item __EID__id="01fa8108-0052-0a0d-0002-000000000000" />
-  <item __EID__id="01fa8108-00d1-280d-0001-000000000000" />
-  <item __EID__id="01fa8108-00d1-280d-0002-000000000000" />
   <item __EID__id="00fa8108-005a-c345-0002-000000000000" />
   <item __EID__id="00fa8108-005a-c345-0004-000000000000" />
   <item __EID__id="00fa8108-005a-c345-0006-000000000000" />
@@ -2333,7 +2330,6 @@
    <item __EID__id="00fa8108-005a-c345-0019-000000000000" />
    <item __EID__id="00fa8108-005a-c345-0029-000000000000" />
    <item __EID__id="00fa8108-005a-c345-002b-000000000000" />
-   <item __EID__id="00fa8108-00a8-1ae7-0072-000000000000" />
    <item __EID__id="01fa8108-0041-4c0b-0000-000000000000" />
    <item __EID__id="01fa8108-0041-4c0b-0001-000000000000" />
    <item __EID__id="01fa8108-0041-4c0b-0002-000000000000" />
@@ -2343,9 +2339,6 @@
    <item __EID__id="01fa8108-00dd-4e0b-0000-000000000000" />
    <item __EID__id="01fa8108-00dd-4e0b-0001-000000000000" />
    <item __EID__id="01fa8108-00dd-4e0b-0002-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0000-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0001-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0002-000000000000" />
    <item __EID__id="01fa8108-0006-930b-0000-000000000000" />
    <item __EID__id="01fa8108-0006-930b-0001-000000000000" />
    <item __EID__id="01fa8108-0006-930b-0002-000000000000" />
@@ -2357,6 +2350,10 @@
    <item __EID__id="01fa8108-00d7-280d-0000-000000000000" />
    <item __EID__id="00fa8108-005a-c345-001f-000000000000" />
    <item __EID__id="01fa8108-00d8-280d-0000-000000000000" />
+   <item __EID__id="01fa8108-0005-930b-0000-000000000000" />
+   <item __EID__id="01fa8108-0005-930b-0001-000000000000" />
+   <item __EID__id="01fa8108-0005-930b-0002-000000000000" />
+   <item __EID__id="01fa8108-0089-cd0c-0000-000000000000" />
   </inventory>
   <ports count="42">
    <port portName="hardpoint_class_2_left_wing" __EID__itemId="01fa8108-0042-4c0b-0000-000000000000">
@@ -2626,7 +2623,7 @@
    <port portName="landingpad_helper" __EID__itemId="00fa8108-005a-c345-001a-000000000000">
     <pipes />
    </port>
-   <port portName="hardpoint_shield_generator" __EID__itemId="00fa8108-00a8-1ae7-0072-000000000000">
+   <port portName="hardpoint_shield_generator" __EID__itemId="01fa8108-0089-cd0c-0000-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -8165,7 +8162,7 @@
   </pipes>
  </ship>
  <ship oemId="00000000-0000-0000-0000-000000000000" id="00fa8108-00e9-28db-0000-000000000000" acMembershipId="14362857" class="DefaultSpaceShips.AEGS.AEGS_Avenger_Warlock" name="Ship_8">
-  <inventory count="47">
+  <inventory count="49">
    <item __EID__id="00fa8108-00e9-28db-0001-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0002-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0003-000000000000" />
@@ -8184,7 +8181,6 @@
    <item __EID__id="00fa8108-00e9-28db-0010-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0011-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0012-000000000000" />
-   <item __EID__id="00fa8108-00e9-28db-0013-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0014-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0018-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-001b-000000000000" />
@@ -8213,6 +8209,9 @@
    <item __EID__id="00fa8108-00e9-28db-002d-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0016-000000000000" />
    <item __EID__id="00fa8108-00e9-28db-0017-000000000000" />
+   <item __EID__id="01fa8108-00d1-280d-0000-000000000000" />
+   <item __EID__id="01fa8108-00d1-280d-0001-000000000000" />
+   <item __EID__id="01fa8108-00d1-280d-0002-000000000000" />
   </inventory>
   <ports count="34">
    <port portName="hardpoint_multilight_exterior" __EID__itemId="00fa8108-00e9-28db-0001-000000000000">
@@ -8622,7 +8621,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="00fa8108-00e9-28db-0013-000000000000">
+   <port portName="hardpoint_weapon_gun_class1_right_wing" __EID__itemId="01fa8108-00d1-280d-0000-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -9018,7 +9017,7 @@
   </pipes>
  </ship>
  <ship oemId="00000000-0000-0000-0000-000000000000" id="00fa8108-00a8-1ae7-0000-000000000000" acMembershipId="15145640" class="DefaultSpaceShips.AEGS.AEGS_Retaliator" name="Ship_9">
-  <inventory count="122">
+  <inventory count="123">
    <item __EID__id="00fa8108-00a8-1ae7-0001-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0002-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0003-000000000000" />
@@ -9141,6 +9140,7 @@
    <item __EID__id="00fa8108-00a8-1ae7-0050-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0051-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0045-000000000000" />
+   <item __EID__id="00fa8108-00a8-1ae7-0072-000000000000" />
   </inventory>
   <ports count="60">
    <port portName="hardpoint_mainthruster_left" __EID__itemId="00fa8108-00a8-1ae7-0001-000000000000">
@@ -10445,7 +10445,7 @@
    <port portName="landingpad_helper" __EID__itemId="00fa8108-00a8-1ae7-0071-000000000000">
     <pipes />
    </port>
-   <port portName="hardpoint_shieldgenerator_right" __EID__itemId="00000000-0000-0000-0000-000000000000">
+   <port portName="hardpoint_shieldgenerator_right" __EID__itemId="00fa8108-00a8-1ae7-0072-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -13929,7 +13929,6 @@
    <item __EID__id="00fa8108-001c-bff0-0013-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0014-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0015-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-0016-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001a-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001b-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001c-000000000000" />
@@ -13954,7 +13953,6 @@
    <item __EID__id="00fa8108-001c-bff0-004b-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-004c-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-004d-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-0017-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-001f-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0020-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0021-000000000000" />
@@ -13972,8 +13970,6 @@
    <item __EID__id="00fa8108-001c-bff0-0048-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0049-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-004a-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-0018-000000000000" />
-   <item __EID__id="00fa8108-001c-bff0-0019-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-002a-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-002d-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-0030-000000000000" />
@@ -13985,6 +13981,10 @@
    <item __EID__id="00fa8108-001c-bff0-002e-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-002f-000000000000" />
    <item __EID__id="00fa8108-001c-bff0-002c-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-0016-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-0017-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-0018-000000000000" />
+   <item __EID__id="00fa8108-001c-bff0-0019-000000000000" />
   </inventory>
   <ports count="46">
    <port portName="landingpad_helper" __EID__itemId="00fa8108-001c-bff0-0001-000000000000">
@@ -16103,7 +16103,6 @@
    <item __EID__id="00fa8108-005b-dcf0-000f-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0010-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0011-000000000000" />
-   <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0013-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0014-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0018-000000000000" />
@@ -16133,6 +16132,7 @@
    <item __EID__id="00fa8108-005b-dcf0-002d-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0017-000000000000" />
    <item __EID__id="00fa8108-005b-dcf0-0016-000000000000" />
+   <item __EID__id="00fa8108-0029-c1da-0000-000000000000" />
   </inventory>
   <ports count="34">
    <port portName="hardpoint_multilight_exterior" __EID__itemId="00fa8108-005b-dcf0-0001-000000000000">
@@ -16517,7 +16517,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_weapon_gun_class1_left_wing" __EID__itemId="00fa8108-005b-dcf0-0012-000000000000">
+   <port portName="hardpoint_weapon_gun_class1_left_wing" __EID__itemId="00fa8108-0029-c1da-0000-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
