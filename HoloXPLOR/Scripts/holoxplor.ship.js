@@ -161,6 +161,9 @@ $(document).ready(function () {
     }
 
     var tableRow = function (label, equipped, available, places, unit) {
+
+        // console.log(label, equipped, available, places, unit);
+
         if (equipped == null && available == null)
             return null;
 
@@ -170,7 +173,9 @@ $(document).ready(function () {
 
         if (equipped == null && available == null)
             return;
-        
+
+        // console.log(label, equipped, available, places, unit);
+
         var $row = $('<tr>');
         $row.append('<th>' + label + '</th>');
 
@@ -256,7 +261,6 @@ $(document).ready(function () {
             }
         }
 
-
         $markup.append($header);
 
         $equipped = $equipped || { data: function () { } };
@@ -334,10 +338,13 @@ $(document).ready(function () {
                         if (equippedData.FireMode.Fire != undefined || availableData.FireMode.Fire != undefined) {
                             equippedData.FireMode.Fire = equippedData.FireMode.Fire || {};
                             availableData.FireMode.Fire = availableData.FireMode.Fire || {};
+
                             equippedData.AmmoType = equippedData.AmmoType || [];
                             availableData.AmmoType = availableData.AmmoType || [];
+
                             equippedData.Ammo = ammoMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || ammoMap[(inventoryMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
                             availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
+
                             equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
                             availableData.Ammo.Explosion = availableData.Ammo.Explosion || {};
 
@@ -347,21 +354,32 @@ $(document).ready(function () {
                                 (availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate,
                                 0, ' rpm'));
 
-                            $markup.append(tableRow(
-                                'Physical',
-                                (equippedData.Ammo.Damage_Physical || equippedData.Ammo.Explosion.Damage_Physical) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
-                                (availableData.Ammo.Damage_Physical || availableData.Ammo.Explosion.Damage_Physical) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
-                                0, ' dps'));
-                            $markup.append(tableRow(
-                                'Energy',
-                                (equippedData.Ammo.Damage_Energy || equippedData.Ammo.Explosion.Damage_Energy) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
-                                (availableData.Ammo.Damage_Energy || availableData.Ammo.Explosion.Damage_Energy) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
-                                0, ' dps'));
-                            $markup.append(tableRow(
-                                'Distortion',
-                                (equippedData.Ammo.Damage_Distortion || equippedData.Ammo.Explosion.Damage_Distortion) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate) / 60,
-                                (availableData.Ammo.Damage_Distortion || availableData.Ammo.Explosion.Damage_Distortion) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate) / 60,
-                                0, ' dps'));
+                            if (equippedData.Ammo.Damage_Physical || equippedData.Ammo.Explosion.Damage_Physical ||
+                                availableData.Ammo.Damage_Physical || availableData.Ammo.Explosion.Damage_Physical)
+                            {
+                                $markup.append(tableRow(
+                                    'Physical',
+                                    (equippedData.Ammo.Damage_Physical || equippedData.Ammo.Explosion.Damage_Physical || ezero) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate || ezero) / 60,
+                                    (availableData.Ammo.Damage_Physical || availableData.Ammo.Explosion.Damage_Physical || azero) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate || azero) / 60,
+                                    0, ' dps'));
+                            }
+                            if (equippedData.Ammo.Damage_Energy || equippedData.Ammo.Explosion.Damage_Energy ||
+                                availableData.Ammo.Damage_Energy || availableData.Ammo.Explosion.Damage_Energy) {
+                                $markup.append(tableRow(
+                                    'Energy',
+                                    (equippedData.Ammo.Damage_Energy || equippedData.Ammo.Explosion.Damage_Energy || ezero) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate || ezero) / 60,
+                                    (availableData.Ammo.Damage_Energy || availableData.Ammo.Explosion.Damage_Energy || azero) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate || ezero) / 60,
+                                    0, ' dps'));
+                            }
+                            if (equippedData.Ammo.Damage_Distortion || equippedData.Ammo.Explosion.Damage_Distortion ||
+                                availableData.Ammo.Damage_Distortion || availableData.Ammo.Explosion.Damage_Distortion)
+                            {
+                                $markup.append(tableRow(
+                                    'Distortion',
+                                    (equippedData.Ammo.Damage_Distortion || equippedData.Ammo.Explosion.Damage_Distortion || ezero) * ((equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate || ezero) / 60,
+                                    (availableData.Ammo.Damage_Distortion || availableData.Ammo.Explosion.Damage_Distortion || azero) * ((availableData.FireMode.Burst.Rate * availableData.FireMode.Burst.BurstSize) || availableData.FireMode.Fire.Rate || ezero) / 60,
+                                    0, ' dps'));
+                            }
                         }
                     }
                 }
@@ -397,20 +415,24 @@ $(document).ready(function () {
                         availableData.Explosion.Pressure,
                         0, ' psi'));
 
-                    $markup.append(tableRow(
-                        'Physical',
-                        equippedData.Explosion.Damage_Physical,
-                        availableData.Explosion.Damage_Physical));
-
-                    $markup.append(tableRow(
-                        'Energy',
-                        equippedData.Explosion.Damage_Energy,
-                        availableData.Explosion.Damage_Energy));
-
-                    $markup.append(tableRow(
-                        'Distortion',
-                        equippedData.Explosion.Damage_Distortion,
-                        availableData.Explosion.Damage_Distortion));
+                    if (equippedData.Explosion.Damage_Physical || availableData.Explosion.Damage_Physical) {
+                        $markup.append(tableRow(
+                            'Physical',
+                            equippedData.Explosion.Damage_Physical || ezero,
+                            availableData.Explosion.Damage_Physical || azero));
+                    }
+                    if (equippedData.Explosion.Damage_Energy || availableData.Explosion.Damage_Energy) {
+                        $markup.append(tableRow(
+                            'Energy',
+                            equippedData.Explosion.Damage_Energy || ezero,
+                            availableData.Explosion.Damage_Energy || azero));
+                    }
+                    if (equippedData.Explosion.Damage_Distortion || availableData.Explosion.Damage_Distortion) {
+                        $markup.append(tableRow(
+                            'Distortion',
+                            equippedData.Explosion.Damage_Distortion || ezero,
+                            availableData.Explosion.Damage_Distortion || azero));
+                    }
                 }
 
                 if (equippedData.Shields != undefined || availableData.Shields != undefined) {
