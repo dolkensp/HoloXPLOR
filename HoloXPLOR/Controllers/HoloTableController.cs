@@ -66,7 +66,40 @@ namespace HoloXPLOR.Controllers
                 
                 Content = new {
                     Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
-                    Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v)
+                    Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v),
+                    Loadouts = Scripts.Loadout.ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
+                    // Ship = Scripts.Vehicles.Values.GroupBy(g => g.Name).ToDictionary(k => k.Key, v => v.FirstOrDefault().DisplayName)
+                }.ToJSON(),
+                ContentType = "application/json"
+            };
+        }
+
+        // http://holoxplor.ddrit.com/HoloTable/Rating/sample/00fa8108-001c-bff0-0000-000000000000/ANVL_Hornet_F7CM
+        public ActionResult Rating(String id, Guid shipID, String targetShip)
+        {
+            DetailModel model = new DetailModel(id, shipID);
+
+            var ownWeapons = model.View_CategoryLoadout[Items.CategoryEnum.Weapon].Select(s => s.GameData_Item).ToArray();
+            var ownShields = model.View_CategoryLoadout[Items.CategoryEnum.Shield].Select(s => s.GameData_Item).ToArray();
+            var ownArmor = model.View_CategoryLoadout[Items.CategoryEnum.Armor].Select(s => s.GameData_Item).ToArray();
+
+            var enemy = Scripts.Loadout[targetShip];
+
+            return new ContentResult
+            {
+                Content = new {
+                    Self = new
+                    {
+                        Weapons = ownWeapons,
+                        Shields = ownShields,
+                        Armor = ownArmor,
+                    },
+                    Enemy = new
+                    {
+                        Weapons = null as Ships.Part[],
+                        Shields = null as Ships.Part[],
+                        Armor = null as Ships.Part[],
+                    }
                 }.ToJSON(),
                 ContentType = "application/json"
             };

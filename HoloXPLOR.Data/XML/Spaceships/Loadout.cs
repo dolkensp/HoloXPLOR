@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace HoloXPLOR.Data.XML.Spaceships
 {
-    [XmlRoot(ElementName = "loadout")]
+    [XmlRoot(ElementName = "Loadout")]
     public partial class Loadout
     {
         [XmlArray(ElementName = "Items")]

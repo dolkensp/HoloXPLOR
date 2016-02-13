@@ -348,6 +348,15 @@ $(document).ready(function () {
                             equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
                             availableData.Ammo.Explosion = availableData.Ammo.Explosion || {};
 
+                            equippedData.Ammo.Physics = equippedData.Ammo.Physics || {};
+                            availableData.Ammo.Physics = availableData.Ammo.Physics || {};
+
+                            $markup.append(tableRow(
+                                'Projectile Speed',
+                                equippedData.Ammo.Physics.Speed,
+                                availableData.Ammo.Physics.Speed,
+                                0, ' mps'));
+
                             $markup.append(tableRow(
                                 'Fire Rate',
                                 (equippedData.FireMode.Burst.Rate * equippedData.FireMode.Burst.BurstSize) || equippedData.FireMode.Fire.Rate,

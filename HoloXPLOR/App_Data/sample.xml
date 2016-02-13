@@ -1,5 +1,5 @@
 ﻿
-<player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-00a8-1ae7-0000-000000000000">
+<player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-00a8-1ae7-0000-000000000000">
  <inventory count="197">
   <item __EID__id="00fa8108-0001-f38c-0000-000000000000" />
   <item __EID__id="00fa8108-002c-969f-0000-000000000000" />
@@ -9042,7 +9042,6 @@
    <item __EID__id="00fa8108-00a8-1ae7-0016-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0017-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0018-000000000000" />
-   <item __EID__id="00fa8108-00a8-1ae7-0019-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-001a-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-001b-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0026-000000000000" />
@@ -9066,7 +9065,6 @@
    <item __EID__id="00fa8108-00a8-1ae7-006a-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-006b-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-006c-000000000000" />
-   <item __EID__id="00fa8108-00a8-1ae7-006d-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-006e-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-006f-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0070-000000000000" />
@@ -9141,6 +9139,8 @@
    <item __EID__id="00fa8108-00a8-1ae7-0051-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0045-000000000000" />
    <item __EID__id="00fa8108-00a8-1ae7-0072-000000000000" />
+   <item __EID__id="02fa8108-0004-0000-0002-000000000000" />
+   <item __EID__id="00fa8108-00a8-1ae7-006d-000000000000" />
   </inventory>
   <ports count="60">
    <port portName="hardpoint_mainthruster_left" __EID__itemId="00fa8108-00a8-1ae7-0001-000000000000">
@@ -9757,7 +9757,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_cockpit_audio" __EID__itemId="00fa8108-00a8-1ae7-0019-000000000000">
+   <port portName="hardpoint_cockpit_audio" __EID__itemId="02fa8108-0004-0000-0002-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -33312,7 +33312,6 @@
    <item __EID__id="02fa8108-0002-0000-002c-000000000000" />
    <item __EID__id="02fa8108-0002-0000-002d-000000000000" />
    <item __EID__id="02fa8108-0002-0000-002e-000000000000" />
-   <item __EID__id="02fa8108-0002-0000-002f-000000000000" />
    <item __EID__id="02fa8108-0002-0000-0030-000000000000" />
    <item __EID__id="02fa8108-0002-0000-0031-000000000000" />
    <item __EID__id="02fa8108-0002-0000-0032-000000000000" />
@@ -33333,6 +33332,7 @@
    <item __EID__id="02fa8108-0002-0000-0002-000000000000" />
    <item __EID__id="02fa8108-0002-0000-0004-000000000000" />
    <item __EID__id="00fa8108-005a-c345-001b-000000000000" />
+   <item __EID__id="00fa8108-00a8-1ae7-0019-000000000000" />
   </inventory>
   <ports count="35">
    <port portName="hardpoint_class_2_left_wing" __EID__itemId="02fa8108-0002-0000-0001-000000000000">
@@ -34020,7 +34020,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_cockpit_audio" __EID__itemId="02fa8108-0002-0000-002f-000000000000">
+   <port portName="hardpoint_cockpit_audio" __EID__itemId="00fa8108-00a8-1ae7-0019-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">
@@ -36731,7 +36731,6 @@
  <ship oemId="00000000-0000-0000-0000-000000000000" id="02fa8108-0004-0000-0000-000000000000" class="DefaultSpaceShips.DRAK.DRAK_Cutlass_Black" name="Ship_36">
   <inventory count="70">
    <item __EID__id="02fa8108-0004-0000-0001-000000000000" />
-   <item __EID__id="02fa8108-0004-0000-0002-000000000000" />
    <item __EID__id="02fa8108-0004-0000-0003-000000000000" />
    <item __EID__id="02fa8108-0004-0000-0004-000000000000" />
    <item __EID__id="02fa8108-0004-0000-0005-000000000000" />
@@ -36800,6 +36799,7 @@
    <item __EID__id="02fa8108-0004-0000-000b-000000000000" />
    <item __EID__id="02fa8108-0004-0000-000d-000000000000" />
    <item __EID__id="02fa8108-0004-0000-000e-000000000000" />
+   <item __EID__id="02fa8108-0002-0000-002f-000000000000" />
   </inventory>
   <ports count="41">
    <port portName="hardpoint_lights_body" __EID__itemId="02fa8108-0004-0000-0001-000000000000">
@@ -36813,7 +36813,7 @@
      </connection>
     </pipes>
    </port>
-   <port portName="hardpoint_cockpit_audio" __EID__itemId="02fa8108-0004-0000-0002-000000000000">
+   <port portName="hardpoint_cockpit_audio" __EID__itemId="02fa8108-0002-0000-002f-000000000000">
     <pipes count="3">
      <connection pipeClass="Power" pipe="MainPower">
       <PrioGroup count="3">

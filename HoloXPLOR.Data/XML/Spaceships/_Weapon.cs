@@ -116,6 +116,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
             get { return this.WeaponParams ? 1 : 0; }
             set { this.WeaponParams = value == 1; }
         }
+
         [XmlIgnore]
         [JsonIgnore]
         public Boolean WeaponParams { get; set; }

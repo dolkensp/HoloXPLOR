@@ -153,7 +153,8 @@
                 <li><a href="#weapons" role="tab" data-toggle="tab">Weapons</a></li>
                 <li><a href="#ordinance" role="tab" data-toggle="tab">Ammo</a></li>
                 <li><a href="#shields" role="tab" data-toggle="tab">Shields</a></li>
-                <li><a href="#propulsion" role="tab" data-toggle="tab">Propulsion</a></li>
+                <li><a href="#power" role="tab" data-toggle="tab">Power</a></li>
+                <li><a href="#avionics" role="tab" data-toggle="tab">Avionics</a></li>
                 <li><a href="#other" role="tab" data-toggle="tab">Other</a></li>
                 <!--<li><a href="#ship_power" role="tab" data-toggle="tab">Power</a></li>-->
             </ul>
@@ -210,6 +211,7 @@
                         @RenderByMaxSize("Offense", Items.CategoryEnum.Weapon, Items.CategoryEnum.Turret, Items.CategoryEnum.MissileRack)
                         @RenderByMaxSize("Defense", Items.CategoryEnum.Armor, Items.CategoryEnum.Shield)
                         @RenderByMaxSize("Power", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Thruster, Items.CategoryEnum.Engine)
+                        @RenderByMaxSize("Avionics", Items.CategoryEnum.CockpitAudio)
 
                     </div>
                     <div class="col-sm-6 col-xs-12" id="description">
@@ -271,10 +273,10 @@
                     </div>
                 </div>
 
-                <div class="tab-pane row" id="propulsion">
+                <div class="tab-pane row" id="power">
                     <div class="col-sm-6 col-xs-12">
-                        <div id="ship_propulsion">
-                            @RenderByMaxSize("Equipped", Items.CategoryEnum.Engine, Items.CategoryEnum.Thruster)
+                        <div id="ship_power">
+                            @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Engine, Items.CategoryEnum.Thruster)
                         </div>
                         @RenderHover()
                     </div>
@@ -282,17 +284,27 @@
                         <div id="inventory_propulsion">
                             @RenderItemCategory("Engines", Items.CategoryEnum.Engine)
                             @RenderItemCategory("Thrusters", Items.CategoryEnum.Thruster)
+                            @RenderItemCategory("Power Plants", Items.CategoryEnum.PowerPlant)
                         </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane row" id="avionics">
+                    <div class="col-sm-6 col-xs-12" id="ship_avionics">
+                        @RenderByMaxSize("Equipped", Items.CategoryEnum.CockpitAudio)
+                        @RenderHover()
+                    </div>
+                    <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
+                        @RenderItemCategory("Cockpit", Items.CategoryEnum.CockpitAudio)
                     </div>
                 </div>
 
                 <div class="tab-pane row" id="other">
                     <div class="col-sm-6 col-xs-12" id="ship_other">
-                        @RenderByMaxSize("Equipped", Items.CategoryEnum.PowerPlant, Items.CategoryEnum.Storage, Items.CategoryEnum.Paints)
+                        @RenderByMaxSize("Equipped", Items.CategoryEnum.Storage, Items.CategoryEnum.Paints)
                         @RenderHover()
                     </div>
                     <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
-                        @RenderItemCategory("Power Plants", Items.CategoryEnum.PowerPlant)
                         @RenderItemCategory("Storage", Items.CategoryEnum.Storage)
                         @RenderItemCategory("Paints", Items.CategoryEnum.Paints)
                     </div>

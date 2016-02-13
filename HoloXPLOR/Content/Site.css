@@ -208,9 +208,10 @@ footer .cig-icon { margin-bottom: -12px; }
 .js-hardpoint[data-item-type='Shield'] { background-position: -96px -96px; }
 .js-hardpoint[data-item-type='AmmoBox'] { background-position: -96px -160px; }
 .js-hardpoint[data-item-type='MainThruster'] { background-position: -64px -288px; }
-.js-hardpoint[data-item-type='ManneuverThruster'] { background-position: -32px -192px; }
+.js-hardpoint[data-item-type='ManneuverThruster'] { background-position: -32px -288px; }
 .js-hardpoint[data-item-type='PowerPlant'] { background-position: 0px -192px; }
 .js-hardpoint[data-item-type='Paints'] { background-position: 0px -192px; }
+.js-hardpoint[data-item-sub-type='Cockpit_Audio'] { background-position: -32px -320px; }
 .js-hardpoint[data-item-type='Container'] { background: url(../images/icons8-ios-filled-empty-box.png) no-repeat; background-position: 3px 2px; } /* TODO: Add to sprite */
 .js-hardpoint[data-item-sub-type='Ammo_CounterMeasure'] { background-position: -96px -288px; }
 .js-hardpoint[data-item-sub-type='Missile'],
