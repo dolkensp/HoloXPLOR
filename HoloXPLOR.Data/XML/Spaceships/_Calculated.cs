@@ -27,6 +27,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         Turret,
         Weapon,
         Paints,
+        CockpitAudio,
     }
 
     public partial class Item
@@ -128,6 +129,10 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     case "Paints:":
                         return CategoryEnum.Paints;
                     #endregion
+                    #region Cockpit Audio
+                    case "VehicleItem:VehicleItemCockpitAudio":
+                        return CategoryEnum.CockpitAudio;
+                    #endregion
                     #region Vehicle Parts
                     case "VehicleItem:VehicleItemHUDRadarDisplay":
                     case "VehicleItem:VehicleItemQuantumFuelTank":
@@ -142,7 +147,6 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     case "VehicleItem:VehicleItemIdentifier":
                     case "VehicleItem:VehicleItemRadar":
                     case "VehicleItem:VehicleItemFuelTank":
-                    case "VehicleItem:VehicleItemCockpitAudio":
                     case "VehicleItem:VehicleItemWeaponControl":
                     case "VehicleItem:VehicleItemTargetSelector":
                     case "VehicleItem:VehicleItemMultiLight":

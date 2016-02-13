@@ -17,5 +17,14 @@ namespace HoloXPLOR.Data.XML.Spaceships
 
         [XmlAttribute(AttributeName = "itemName")]
         public String ItemName { get; set; }
+
+        [XmlArray(ElementName = "Items")]
+        [XmlArrayItem(ElementName = "Item")]
+        public ItemLink[] Items { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0}: {1}", this.PortName, this.ItemName);
+        }
     }
 }

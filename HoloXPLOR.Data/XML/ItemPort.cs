@@ -68,7 +68,7 @@ namespace HoloXPLOR.Data.XML
                     sb.AppendFormat(@" data-port-required-tags=""{0}""", this.RequiredTags);
                 if (!String.IsNullOrWhiteSpace(this.RequiredItemTags))
                     sb.AppendFormat(@" data-port-required-item-tags=""{0}""", this.RequiredItemTags);
-                if (this.Types.Count() > 0)
+                if (this.Types != null && this.Types.Count() > 0)
                     sb.AppendFormat(@" data-port-types=""{0}""", String.Join(",", this.Types.Select(t => String.Format("{0}:{1}", t.Type, t.SubType).Trim(':'))));
 
                 return sb.ToString();
@@ -80,56 +80,69 @@ namespace HoloXPLOR.Data.XML
         {
             get
             {
-                foreach (var t in this.Types)
+                if (this.Types != null)
                 {
-                    switch (t.Type)
+                    foreach (var t in this.Types)
                     {
-                        case "Armor":
-                            yield return CategoryEnum.Armor;
-                            break;
-                        case "Shield":
-                            yield return CategoryEnum.Shield;
-                            break;
-                        case "MainThruster":
-                            yield return CategoryEnum.Engine;
-                            break;
-                        case "ManneuverThruster":
-                            yield return CategoryEnum.Thruster;
-                            break;
-                        case "Ordinance":
-                            if (t.SubType == "Missile")
-                                yield return CategoryEnum.Missile;
-                            else
+                        switch (t.Type)
+                        {
+                            case "Armor":
+                                yield return CategoryEnum.Armor;
+                                break;
+                            case "Shield":
+                                yield return CategoryEnum.Shield;
+                                break;
+                            case "MainThruster":
+                                yield return CategoryEnum.Engine;
+                                break;
+                            case "ManneuverThruster":
+                                yield return CategoryEnum.Thruster;
+                                break;
+                            case "Ordinance":
+                                if (t.SubType == "Missile")
+                                    yield return CategoryEnum.Missile;
+                                else
+                                    yield return CategoryEnum.__Unknown__;
+                                break;
+                            case "Avionics":
+                                if (t.SubType == "Cockpit_Audio")
+                                    yield return CategoryEnum.CockpitAudio;
+                                else
+                                    yield return CategoryEnum.__Unknown__;
+                                break;
+                            case "WeaponMissile":
+                                yield return CategoryEnum.MissileRack;
+                                break;
+                            case "AmmoBox":
+                                if (t.SubType == "Ammo_CounterMeasure")
+                                    yield return CategoryEnum.CounterMeasure;
+                                else
+                                    yield return CategoryEnum.AmmoBox;
+                                break;
+                            case "Turret":
+                                yield return CategoryEnum.Turret;
+                                break;
+                            case "WeaponGun":
+                                yield return CategoryEnum.Weapon;
+                                break;
+                            case "Container":
+                                yield return CategoryEnum.Storage;
+                                break;
+                            case "PowerPlant":
+                                yield return CategoryEnum.PowerPlant;
+                                break;
+                            case "Paints":
+                                yield return CategoryEnum.Paints;
+                                break;
+                            default:
                                 yield return CategoryEnum.__Unknown__;
-                            break;
-                        case "WeaponMissile":
-                            yield return CategoryEnum.MissileRack;
-                            break;
-                        case "AmmoBox":
-                            if (t.SubType == "Ammo_CounterMeasure")
-                                yield return CategoryEnum.CounterMeasure;
-                            else
-                                yield return CategoryEnum.AmmoBox;
-                            break;
-                        case "Turret":
-                            yield return CategoryEnum.Turret;
-                            break;
-                        case "WeaponGun":
-                            yield return CategoryEnum.Weapon;
-                            break;
-                        case "Container":
-                            yield return CategoryEnum.Storage;
-                            break;
-                        case "PowerPlant":
-                            yield return CategoryEnum.PowerPlant;
-                            break;
-                        case "Paints":
-                            yield return CategoryEnum.Paints;
-                            break;
-                        default:
-                            yield return CategoryEnum.__Unknown__;
-                            break;
+                                break;
+                        }
                     }
+                }
+                else
+                {
+                    yield return CategoryEnum.__Unknown__;
                 }
             }
         }

@@ -249,6 +249,51 @@ namespace HoloXPLOR.Data
 
         #endregion
 
+
+        #region Loadout XML
+
+        private static Dictionary<String, XML.Spaceships.Loadout> _loadout;
+        public static Dictionary<String, XML.Spaceships.Loadout> Loadout
+        {
+            get
+            {
+                if (Scripts._loadout == null)
+                {
+                    Scripts._loadout = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
+
+                    DirectoryInfo loadoutDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Loadouts/Vehicles"));
+
+                    foreach (FileInfo file in loadoutDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                    {
+#if !DEBUG || DEBUG
+                        try
+                        {
+#endif
+                            var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
+
+                            if (loadout == null)
+                                continue;
+
+                            String name = Path.GetFileNameWithoutExtension(file.Name).Replace("Default_Loadout_", "");
+
+                            Scripts._loadout[name] = loadout;
+#if !DEBUG || DEBUG
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                        }
+#endif
+                    }
+                }
+
+                return Scripts._loadout;
+            }
+        }
+
+        #endregion
+
+
         #region Vehicle XML
 
         private static Dictionary<String, Ships.Vehicle> _vehicles;
