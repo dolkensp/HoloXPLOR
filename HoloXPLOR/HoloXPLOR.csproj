@@ -169,9 +169,9 @@
     <Compile Include="Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Data\sample.tpl">
+    <Content Include="App_Data\sample.tpl">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <Content Include="App_Data\sample.xml">
       <SubType>Designer</SubType>
     </Content>
