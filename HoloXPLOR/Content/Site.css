@@ -430,3 +430,15 @@ footer a { color: #fff; }
 .js-scrollpane { display: none; }
 
 /**/
+
+#rating {
+    width: 100%;
+}
+#rating svg {
+    width: 100%;
+    height: auto;
+    background: rgba(255, 255, 255, 0.4);
+}
+#rating svg path {
+    stroke-width: 5px;
+}

@@ -1,5 +1,4 @@
-﻿var pause = {};
-
+﻿
 $(document).ready(function () {
     var debug = false;
     var $form = $('#form-ship');
@@ -12,9 +11,11 @@ $(document).ready(function () {
 
     var inventoryMap = {};
     var ammoMap = {};
+    var rating = {};
 
-    $.ajax({ url: $form_inventory[0].action, dataType: 'json', success: function (data) { inventoryMap = data.Inventory; ammoMap = data.Ammo } })
+    $.ajax({ url: $form_inventory[0].action, method: 'POST', dataType: 'json', success: function (data) { inventoryMap = data.Inventory; ammoMap = data.Ammo } })
     
+
     var cleanValue = function(input)
     {
         if (input == null || input == undefined) return null;

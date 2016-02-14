@@ -79,27 +79,14 @@ namespace HoloXPLOR.Controllers
         {
             DetailModel model = new DetailModel(id, shipID);
 
-            var ownWeapons = model.View_CategoryLoadout[Items.CategoryEnum.Weapon].Select(s => s.GameData_Item).ToArray();
-            var ownShields = model.View_CategoryLoadout[Items.CategoryEnum.Shield].Select(s => s.GameData_Item).ToArray();
-            var ownArmor = model.View_CategoryLoadout[Items.CategoryEnum.Armor].Select(s => s.GameData_Item).ToArray();
-
-            var enemy = Scripts.Loadout[targetShip];
+            ShipLoadout selfLoadout = new ShipLoadout(model);
+            ShipLoadout enemyLoadout = new ShipLoadout(Scripts.Vehicles[targetShip]);
 
             return new ContentResult
             {
                 Content = new {
-                    Self = new
-                    {
-                        Weapons = ownWeapons,
-                        Shields = ownShields,
-                        Armor = ownArmor,
-                    },
-                    Enemy = new
-                    {
-                        Weapons = null as Ships.Part[],
-                        Shields = null as Ships.Part[],
-                        Armor = null as Ships.Part[],
-                    }
+                    Self = selfLoadout,
+                    Enemy = enemyLoadout,
                 }.ToJSON(),
                 ContentType = "application/json"
             };

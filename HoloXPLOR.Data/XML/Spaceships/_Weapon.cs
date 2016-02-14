@@ -103,7 +103,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
         public String Class { get; set; }
 
         [XmlAttribute(AttributeName = "value")]
-        public String Value { get; set; }
+        public Double Value { get; set; }
     }
 
     public partial class Item

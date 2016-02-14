@@ -8,6 +8,19 @@ using System.Xml.Serialization;
 
 namespace HoloXPLOR.Data.XML.Spaceships
 {
+    [XmlRoot(ElementName = "Pool")]
+    public partial class PipePool
+    {
+        [XmlAttribute(AttributeName = "capacity")]
+        public Double Capacity { get; set; }
+
+        [XmlAttribute(AttributeName = "rate")]
+        public Double Rate { get; set; }
+        
+        [XmlAttribute(AttributeName = "critical")]
+        public Double Critical { get; set; }
+    }
+
     [XmlRoot(ElementName = "Pipe")]
     public partial class Pipe
     {
@@ -23,6 +36,9 @@ namespace HoloXPLOR.Data.XML.Spaceships
         }
         [XmlIgnore]
         public Boolean AllowThrottle { get; set; }
+
+        [XmlElement(ElementName = "Pool")]
+        public PipePool Pool { get; set; }
 
         // TODO: Signature
         // TODO: States>State>Value
