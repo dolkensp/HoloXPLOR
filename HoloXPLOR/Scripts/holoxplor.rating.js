@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     var attack = function(source, target, time, min_max)
     {
-        if (target.Health <= -5)
+        if (target.Health <= 0)
             return;
 
         var aggregate = {
@@ -134,8 +134,8 @@ $(document).ready(function () {
             if (target.Health < 0 && target.TTK == null)
             {
                 target.TTK = time;
+                target.Health = 0;
             }
-            target.Health = Math.max(-5, target.Health);
         }
     }
 
@@ -249,6 +249,7 @@ $(document).ready(function () {
                 $table.append('<tr><th></th><th>' + data.Self.DisplayName + '</th><th>' + data.Enemy.DisplayName + '</th></tr>');
                 $table.append('<tr><th>Min TTK</th><td>' + minSelf.TTK.toFixed(2) + 's</td><td>' + minEnemy.TTK.toFixed(2) + 's</td></tr>');
                 $table.append('<tr><th>Max TTK</th><td>' + maxSelf.TTK.toFixed(2) + 's</td><td>' + maxEnemy.TTK.toFixed(2) + 's</td></tr>');
+                $table.append('<tr><th>Survivability</th><td colspan="2">' + ((((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) / (((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) * 100).toFixed(0) + '%</td></tr>');
 
                 $rating.append($table);
                 $rating.html($rating.html());
