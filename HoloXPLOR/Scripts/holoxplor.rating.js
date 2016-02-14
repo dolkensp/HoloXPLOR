@@ -38,6 +38,9 @@ $(document).ready(function () {
     {
         if (weapon.Heat + weapon.HeatingRate < weapon.MaxHeat) {
             weapon.ShotsFired++;
+            weapon.TotalDamage += weapon.Physical;
+            weapon.TotalDamage += weapon.Energy;
+            weapon.TotalDamage += weapon.Distortion;
             weapon.Heat += weapon.HeatingRate;
 
             aggregate.Physical += weapon.Physical;
@@ -50,7 +53,7 @@ $(document).ready(function () {
 
     var attack = function(source, target, time, min_max)
     {
-        if (target.Health <= 0)
+        if (target.Health <= -5)
             return;
 
         var aggregate = {
@@ -60,15 +63,18 @@ $(document).ready(function () {
         };
 
         if (time > 0) {
-            for (var i = 0, j = source.Damage.length; i < j; i++) {
-                aggregate = {
-                    Physical: 0,
-                    Energy: 0,
-                    Distortion: 0,
-                };
+            aggregate = {
+                Physical: 0,
+                Energy: 0,
+                Distortion: 0,
+            };
 
+            for (var i = 0, j = source.Damage.length; i < j; i++) {
                 if (source.Damage[i].ShotsFired == null)
                     source.Damage[i].ShotsFired = 0;
+
+                if (source.Damage[i].TotalDamage == null)
+                    source.Damage[i].TotalDamage = 0;
 
                 if (source.Damage[i].ShotsChecked == null)
                     source.Damage[i].ShotsChecked = 0;
@@ -78,18 +84,12 @@ $(document).ready(function () {
 
                 source.Damage[i].Heat = Math.max(0, source.Damage[i].Heat - source.Damage[i].CoolingRate * timeStep);
 
-                console.log(source.Damage[i].ShotsChecked, time, source.Damage[i].Rate / 60);
-
                 while (source.Damage[i].ShotsChecked < (time * source.Damage[i].Rate / 60)) {
                     source.Damage[i].ShotsChecked++;
                     fireWeapon(source.Damage[i], aggregate);
                 }
             }
         }
-
-        // if (min_max == "min") {
-        //     console.log('Shield', source.DisplayName, source.Damage.length, 'Guns', (aggregate.Physical + aggregate.Energy + aggregate.Distortion), 'Damage', target.Shield, target.Health);
-        // }
 
         target.Shield = 0;
 
@@ -114,16 +114,11 @@ $(document).ready(function () {
                     }
                 }
 
-                // if (target.Shields[i].HitPoints < target.Shields[i].MaxHitPoints)
-                //     target.Shields[i].HitPoints = Math.min(target.Shields[i].MaxHitPoints, target.Shields[i].HitPoints + target.Shields[i].MaxRegenRate);
-
                 shieldWeapon(target.Shields[i], aggregate);
 
                 target.Shield += target.Shields[i].HitPoints;
             }
         }
-
-        // console.log('Armor', source.DisplayName, source.Damage.length, 'Guns', (aggregate.Physical + aggregate.Energy + aggregate.Distortion), 'Damage');
 
         if (target.Armor != null) {
             aggregate.Physical = aggregate.Physical * target.Armor.Physical;
@@ -139,8 +134,8 @@ $(document).ready(function () {
             if (target.Health < 0 && target.TTK == null)
             {
                 target.TTK = time;
-                target.Health = Math.max(0, target.Health);
             }
+            target.Health = Math.max(-5, target.Health);
         }
     }
 
@@ -149,48 +144,40 @@ $(document).ready(function () {
             url: $form[0].action,
             method: 'POST',
             data: { targetShip: $('#cig-rating').val() },
-            // data: { targetShip: 'AEGS_Retaliator' },
             dataType: 'json',
             success: function (data) {
                 rating = data;
 
                 
-                var maxSelf1 = $.extend(true, { Health: data.Self.MaxHealth }, data.Self);
-                var minSelf1 = $.extend(true, { Health: data.Self.MinHealth }, data.Self);
-                var maxEnemy1 = $.extend(true, { Health: data.Enemy.MaxHealth }, data.Enemy);
-                var minEnemy1 = $.extend(true, { Health: data.Enemy.MinHealth }, data.Enemy);
-
-                var maxSelf2 = $.extend(true, { Health: data.Self.MaxHealth }, data.Self);
-                var minSelf2 = $.extend(true, { Health: data.Self.MinHealth }, data.Self);
-                var maxEnemy2 = $.extend(true, { Health: data.Enemy.MaxHealth }, data.Enemy);
-                var minEnemy2 = $.extend(true, { Health: data.Enemy.MinHealth }, data.Enemy);
+                var maxSelf = $.extend(true, { Health: data.Self.MaxHealth }, data.Self);
+                var minSelf = $.extend(true, { Health: data.Self.MinHealth }, data.Self);
+                var maxEnemy = $.extend(true, { Health: data.Enemy.MaxHealth }, data.Enemy);
+                var minEnemy = $.extend(true, { Health: data.Enemy.MinHealth }, data.Enemy);
 
                 var time = 0;
                 var raw = []; // { self: self.Health, enemy: enemy.Health, time: time }];
 
-                while ((maxSelf2.Health > 0 || maxEnemy2.Health > 0) && (time < 1800)) {
-                    attack(maxSelf1, maxEnemy2, time);
-                    attack(maxEnemy1, maxSelf2, time);
+                while ((maxSelf.Health > 0 || maxEnemy.Health > 0) && (time < 1800)) {
+                    attack(maxSelf, maxEnemy, time);
+                    attack(maxEnemy, maxSelf, time);
 
-                    attack(minSelf1, minEnemy2, time, "min");
-                    attack(minEnemy1, minSelf2, time, "min");
+                    attack(minSelf, minEnemy, time, "min");
+                    attack(minEnemy, minSelf, time, "min");
 
                     raw.push({
-                        maxSelf: maxSelf2.Health + maxSelf2.Shield,
-                        maxEnemy: maxEnemy2.Health + maxEnemy2.Shield,
-                        minSelf: minSelf2.Health + minSelf2.Shield,
-                        minEnemy: minEnemy2.Health + minEnemy2.Shield,
+                        maxSelf: maxSelf.Health + maxSelf.Shield,
+                        maxEnemy: maxEnemy.Health + maxEnemy.Shield,
+                        minSelf: minSelf.Health + minSelf.Shield,
+                        minEnemy: minEnemy.Health + minEnemy.Shield,
                         time: time
                     });
 
                     time += timeStep;
                 }
 
-                console.log(maxSelf2, maxEnemy2, minSelf2, minEnemy2);
-
                 var margin = { top: 10, right: 10, bottom: 10, left: 10 },
                     width = 650,
-                    height = 200;
+                    height = 150;
 
                 var color = d3.scale.category10();
 
@@ -256,6 +243,14 @@ $(document).ready(function () {
 
                 // Hack for Chrome
                 var $rating = $('#rating');
+
+                var $table = $('<table class="table table-borderless table-striped table-condensed cig-table cig-table-2">');
+
+                $table.append('<tr><th></th><th>' + data.Self.DisplayName + '</th><th>' + data.Enemy.DisplayName + '</th></tr>');
+                $table.append('<tr><th>Min TTK</th><td>' + minSelf.TTK.toFixed(2) + 's</td><td>' + minEnemy.TTK.toFixed(2) + 's</td></tr>');
+                $table.append('<tr><th>Max TTK</th><td>' + maxSelf.TTK.toFixed(2) + 's</td><td>' + maxEnemy.TTK.toFixed(2) + 's</td></tr>');
+
+                $rating.append($table);
                 $rating.html($rating.html());
             }
         });
