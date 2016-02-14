@@ -14,7 +14,6 @@ $(document).ready(function () {
     var rating = {};
 
     $.ajax({ url: $form_inventory[0].action, method: 'POST', dataType: 'json', success: function (data) { inventoryMap = data.Inventory; ammoMap = data.Ammo } })
-    
 
     var cleanValue = function(input)
     {
@@ -613,6 +612,8 @@ $(document).ready(function () {
     }
 
     var bindAll = function (parent) {
+
+        $('#cig-rating').on('change', checkRating);
 
         $("[data-draggable]:not(.js-equipped):not(.js-draggable)").addClass('js-draggable').draggable({
             helper: "clone",

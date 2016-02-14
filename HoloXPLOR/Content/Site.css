@@ -437,8 +437,27 @@ footer a { color: #fff; }
 #rating svg {
     width: 100%;
     height: auto;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
 }
 #rating svg path {
     stroke-width: 5px;
 }
+#rating svg .max-enemy { stroke: #A00; }
+#rating svg .max-self { stroke: #0A0; }
+#rating svg .min-enemy { stroke: #f00; }
+#rating svg .min-self { stroke: #0F0; }
+#rating svg .axis * { stroke: #fff; }
+#rating svg .axis { font-size: 1.8em; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.cig-content select { max-width: 650px; }
