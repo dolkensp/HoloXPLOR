@@ -131,7 +131,7 @@ $(document).ready(function () {
             target.Health -= aggregate.Energy;
             target.Health -= aggregate.Distortion;
 
-            if (target.Health < 0 && target.TTK == null)
+            if (target.Health <= 0 && target.TTK == null)
             {
                 target.TTK = time;
                 target.Health = 0;
@@ -190,23 +190,23 @@ $(document).ready(function () {
 
                 var maxhealth_self = d3.svg.line()
                     .interpolate("monotone")
-                    .x(function (d) { return x(d.time); })
-                    .y(function (d) { return y(d.maxSelf); });
+                    .x(function (d) { if (d.time <= maxSelf.TTK) return x(d.time); return x(maxSelf.TTK) })
+                    .y(function (d) { if (d.time <= maxSelf.TTK) return y(d.maxSelf); return y(0) });
 
                 var minhealth_self = d3.svg.line()
                     .interpolate("monotone")
-                    .x(function (d) { return x(d.time); })
-                    .y(function (d) { return y(d.minSelf); });
+                    .x(function (d) { if (d.time <= minSelf.TTK) return x(d.time); return x(minSelf.TTK) })
+                    .y(function (d) { if (d.time <= minSelf.TTK) return y(d.minSelf); return y(0) });
 
                 var maxhealth_enemy = d3.svg.line()
                     .interpolate("monotone")
-                    .x(function (d) { return x(d.time); })
-                    .y(function (d) { return y(d.maxEnemy); });
+                    .x(function (d) { if (d.time <= maxEnemy.TTK) return x(d.time); return x(maxEnemy.TTK) })
+                    .y(function (d) { if (d.time <= maxEnemy.TTK) return y(d.maxEnemy); return y(0) });
 
                 var minhealth_enemy = d3.svg.line()
                     .interpolate("monotone")
-                    .x(function (d) { return x(d.time); })
-                    .y(function (d) { return y(d.minEnemy); });
+                    .x(function (d) { if (d.time <= minEnemy.TTK) return x(d.time); return x(minEnemy.TTK) })
+                    .y(function (d) { if (d.time <= minEnemy.TTK) return y(d.minEnemy); return y(0) });
 
                 $('#rating').empty();
 
@@ -222,18 +222,13 @@ $(document).ready(function () {
                     .attr("class", "graph");
 
                 graph.append("path")
-                    .attr("class", "max-self")
-                    .attr("d", function (d) { return maxhealth_self(d); })
-                    .style("fill", "none");
-
-                graph.append("path")
-                    .attr("class", "min-self")
-                    .attr("d", function (d) { return minhealth_self(d); })
-                    .style("fill", "none");
-
-                graph.append("path")
                     .attr("class", "max-enemy")
                     .attr("d", function (d) { return maxhealth_enemy(d); })
+                    .style("fill", "none");
+
+                graph.append("path")
+                    .attr("class", "max-self")
+                    .attr("d", function (d) { return maxhealth_self(d); })
                     .style("fill", "none");
 
                 graph.append("path")
@@ -241,15 +236,23 @@ $(document).ready(function () {
                     .attr("d", function (d) { return minhealth_enemy(d); })
                     .style("fill", "none");
 
+                graph.append("path")
+                    .attr("class", "min-self")
+                    .attr("d", function (d) { return minhealth_self(d); })
+                    .style("fill", "none");
+
                 // Hack for Chrome
                 var $rating = $('#rating');
 
                 var $table = $('<table class="table table-borderless table-striped table-condensed cig-table cig-table-2">');
 
-                $table.append('<tr><th></th><th>' + data.Self.DisplayName + '</th><th>' + data.Enemy.DisplayName + '</th></tr>');
+                $table.append('<tr><th class=""></th><th class="cig-property">' + data.Self.DisplayName + '</th><th class="cig-property">' + data.Enemy.DisplayName + '</th></tr>');
                 $table.append('<tr><th>Min TTK</th><td>' + minSelf.TTK.toFixed(2) + 's</td><td>' + minEnemy.TTK.toFixed(2) + 's</td></tr>');
                 $table.append('<tr><th>Max TTK</th><td>' + maxSelf.TTK.toFixed(2) + 's</td><td>' + maxEnemy.TTK.toFixed(2) + 's</td></tr>');
-                $table.append('<tr><th>Survivability</th><td colspan="2">' + ((((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) / (((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) * 100).toFixed(0) + '%</td></tr>');
+                $table.append('<tr><th>Survivability</th>' +
+                    '<td>' + ((((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) / (((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) * 100).toFixed(0) + '%</td>' +
+                    '<td>' + ((((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) / (((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) * 100).toFixed(0) + '%</td>' +
+                    '</tr>');
 
                 $rating.append($table);
                 $rating.html($rating.html());

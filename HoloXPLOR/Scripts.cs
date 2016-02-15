@@ -29,6 +29,7 @@ namespace HoloXPLOR.Data
     {
         #region Item XML
 
+        private static Object _itemsLock = new Object();
         private static Dictionary<String, XML.Spaceships.Item> _items;
         public static Dictionary<String, XML.Spaceships.Item> Items
         {
@@ -36,39 +37,45 @@ namespace HoloXPLOR.Data
             {
                 if (Scripts._items == null)
                 {
-                    Scripts._items = new Dictionary<String, XML.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
-
-                    DirectoryInfo weaponsDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships"));
-
-                    foreach (FileInfo file in weaponsDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                    lock (Scripts._itemsLock)
                     {
-                        if (file.FullName.Contains(@"_Interface\") ||
-                            file.FullName.Contains(@"\Interface_") ||
-                            file.FullName.Contains(@"\Ammo\Ballistic_Ammo\") ||
-                            file.FullName.Contains(@"\Ammo\Countermeasures\") ||
-                            file.FullName.Contains(@"\Ammo\Laser_Bolts\") ||
-                            file.FullName.Contains(@"\Ammo\Rocket_Ammo\"))
-                            continue;
+                        if (Scripts._items == null)
+                        {
+                            Scripts._items = new Dictionary<String, XML.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
+
+                            DirectoryInfo weaponsDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships"));
+
+                            foreach (FileInfo file in weaponsDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                            {
+                                if (file.FullName.Contains(@"_Interface\") ||
+                                    file.FullName.Contains(@"\Interface_") ||
+                                    file.FullName.Contains(@"\Ammo\Ballistic_Ammo\") ||
+                                    file.FullName.Contains(@"\Ammo\Countermeasures\") ||
+                                    file.FullName.Contains(@"\Ammo\Laser_Bolts\") ||
+                                    file.FullName.Contains(@"\Ammo\Rocket_Ammo\"))
+                                    continue;
 
 #if !DEBUG || DEBUG
-                        try
-                        {
+                                try
+                                {
 #endif
-                            var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
+                                    var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
 
-                            if (item == null)
-                                continue;
+                                    if (item == null)
+                                        continue;
 
-                            item = Scripts._CleanEdgeCases(item);
+                                    item = Scripts._CleanEdgeCases(item);
 
-                            Scripts._items[item.Name] = Scripts._CleanEdgeCases(item);
+                                    Scripts._items[item.Name] = Scripts._CleanEdgeCases(item);
 #if !DEBUG || DEBUG
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
-                        }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                                }
 #endif
+                            }
+                        }
                     }
                 }
 
@@ -197,6 +204,7 @@ namespace HoloXPLOR.Data
 
         #region Ammo XML
 
+        private static Object _ammoLock = new Object();
         private static Dictionary<String, XML.Spaceships.Ammo> _ammo;
         public static Dictionary<String, XML.Spaceships.Ammo> Ammo
         {
@@ -204,33 +212,39 @@ namespace HoloXPLOR.Data
             {
                 if (Scripts._ammo == null)
                 {
-                    Scripts._ammo = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
-
-                    DirectoryInfo ammoDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Ammo"));
-
-                    foreach (FileInfo file in ammoDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                    lock (Scripts._ammoLock)
                     {
-                        if (file.FullName.Contains(@"AmmoBoxes") ||
-                            file.FullName.Contains(@"TEMP"))
-                            continue;
+                        if (Scripts._ammo == null)
+                        {
+                            Scripts._ammo = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
+
+                            DirectoryInfo ammoDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Ammo"));
+
+                            foreach (FileInfo file in ammoDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                            {
+                                if (file.FullName.Contains(@"AmmoBoxes") ||
+                                    file.FullName.Contains(@"TEMP"))
+                                    continue;
 
 #if !DEBUG || DEBUG
-                        try
-                        {
+                                try
+                                {
 #endif
-                            var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
+                                    var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
 
-                            if (ammo == null)
-                                continue;
+                                    if (ammo == null)
+                                        continue;
 
-                            Scripts._ammo[ammo.Name] = Scripts._CleanEdgeCases(ammo);
+                                    Scripts._ammo[ammo.Name] = Scripts._CleanEdgeCases(ammo);
 #if !DEBUG || DEBUG
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
-                        }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                                }
 #endif
+                            }
+                        }
                     }
                 }
 
@@ -252,6 +266,7 @@ namespace HoloXPLOR.Data
 
         #region Loadout XML
 
+        private static Object _loadoutLock = new Object();
         private static Dictionary<String, XML.Spaceships.Loadout> _loadout;
         public static Dictionary<String, XML.Spaceships.Loadout> Loadout
         {
@@ -259,31 +274,37 @@ namespace HoloXPLOR.Data
             {
                 if (Scripts._loadout == null)
                 {
-                    Scripts._loadout = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
-
-                    DirectoryInfo loadoutDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Loadouts/Vehicles"));
-
-                    foreach (FileInfo file in loadoutDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                    lock (Scripts._loadoutLock)
                     {
-#if !DEBUG || DEBUG
-                        try
+                        if (Scripts._loadout == null)
                         {
-#endif
-                            var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
+                            Scripts._loadout = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
 
-                            if (loadout == null)
-                                continue;
+                            DirectoryInfo loadoutDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Loadouts/Vehicles"));
 
-                            String name = Path.GetFileNameWithoutExtension(file.Name).Replace("Default_Loadout_", "");
-
-                            Scripts._loadout[name] = loadout;
+                            foreach (FileInfo file in loadoutDir.GetFiles("*.xml", SearchOption.AllDirectories))
+                            {
 #if !DEBUG || DEBUG
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
-                        }
+                                try
+                                {
 #endif
+                                    var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
+
+                                    if (loadout == null)
+                                        continue;
+
+                                    String name = Path.GetFileNameWithoutExtension(file.Name).Replace("Default_Loadout_", "");
+
+                                    Scripts._loadout[name] = loadout;
+#if !DEBUG || DEBUG
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
+                                }
+#endif
+                            }
+                        }
                     }
                 }
 
@@ -296,6 +317,7 @@ namespace HoloXPLOR.Data
 
         #region Vehicle XML
 
+        private static Object _vehicleLock = new Object();
         private static Dictionary<String, Ships.Vehicle> _vehicles;
         public static Dictionary<String, Ships.Vehicle> Vehicles
         {
@@ -303,122 +325,126 @@ namespace HoloXPLOR.Data
             {
                 if (Scripts._vehicles == null)
                 {
-                    Scripts._vehicles = new Dictionary<String, Ships.Vehicle>(StringComparer.InvariantCultureIgnoreCase);
-
-                    DirectoryInfo vehicleDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml"));
-
-                    #region Load all vehicle files
-
-                    foreach (FileInfo file in vehicleDir.GetFiles("*.xml", SearchOption.TopDirectoryOnly))
+                    lock (Scripts._vehicleLock)
                     {
+                        if (Scripts._vehicles == null)
+                        {
+                            Scripts._vehicles = new Dictionary<String, Ships.Vehicle>(StringComparer.InvariantCultureIgnoreCase);
+
+                            DirectoryInfo vehicleDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml"));
+
+                            #region Load all vehicle files
+
+                            foreach (FileInfo file in vehicleDir.GetFiles("*.xml", SearchOption.TopDirectoryOnly))
+                            {
 #if !DEBUG
                         try
                         {
 #endif
-                        var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
+                                var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
 
-                        if (vehicle == null)
-                            continue;
+                                if (vehicle == null)
+                                    continue;
 
-                        vehicle = Scripts._CleanEdgeCases(vehicle);
+                                vehicle = Scripts._CleanEdgeCases(vehicle);
 
-                        Scripts._vehicles[vehicle.Name] = vehicle;
+                                Scripts._vehicles[vehicle.Name] = vehicle;
 
-                        if (vehicle.Name == "CNOU_Mustang")
-                            Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
+                                if (vehicle.Name == "CNOU_Mustang")
+                                    Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
 
-                        if (vehicle.Name == "ORIG")
-                            Scripts._vehicles["ORIG_300i"] = vehicle;
+                                if (vehicle.Name == "ORIG")
+                                    Scripts._vehicles["ORIG_300i"] = vehicle;
 
-                        if (vehicle.Name == "AEGS_Avenger")
-                            Scripts._vehicles["AEGS_Avenger_Stalker"] = vehicle;
+                                if (vehicle.Name == "AEGS_Avenger")
+                                    Scripts._vehicles["AEGS_Avenger_Stalker"] = vehicle;
 
-                        // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
-                        //     Scripts._vehicles["AEGS_Avenger_Warlock"] = vehicle;
-                        // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
-                        //     Scripts._vehicles["AEGS_Avenger_Titan"] = vehicle;
+                                // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
+                                //     Scripts._vehicles["AEGS_Avenger_Warlock"] = vehicle;
+                                // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
+                                //     Scripts._vehicles["AEGS_Avenger_Titan"] = vehicle;
 
 
-                        #region Variant Support
+                                #region Variant Support
 
-                        if (vehicle.Modifications != null && vehicle.Modifications.Length > 0)
-                        {
-                            foreach (var modification in vehicle.Modifications)
-                            {
-                                var variantXML = new XmlDocument();
-                                variantXML.LoadXml(vehicle.ToXML().Remove(0, 39));
-
-                                var replacementParts = modification.Parts;
-
-                                #region Patch Support
-
-                                if (!String.IsNullOrWhiteSpace(modification.PatchFile))
+                                if (vehicle.Modifications != null && vehicle.Modifications.Length > 0)
                                 {
-                                    var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
-
-                                    if (patch.Parts != null && patch.Parts.Length > 0)
+                                    foreach (var modification in vehicle.Modifications)
                                     {
-                                        replacementParts = patch.Parts;
-                                    }
+                                        var variantXML = new XmlDocument();
+                                        variantXML.LoadXml(vehicle.ToXML().Remove(0, 39));
 
-                                    patch.Elements = patch.Elements ?? new Ships.Element[] { };
+                                        var replacementParts = modification.Parts;
 
-                                    foreach (var difference in patch.Elements)
-                                    {
-                                        var element = variantXML.SelectSingleNode(String.Format("//*[@id='{0}']", difference.IDRef));
+                                        #region Patch Support
 
-                                        if (element != null)
+                                        if (!String.IsNullOrWhiteSpace(modification.PatchFile))
                                         {
-                                            var attribute = element.Attributes[difference.Name];
-                                            if (attribute == null)
+                                            var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
+
+                                            if (patch.Parts != null && patch.Parts.Length > 0)
                                             {
-                                                attribute = variantXML.CreateAttribute(difference.Name);
-                                                element.Attributes.Append(attribute);
+                                                replacementParts = patch.Parts;
                                             }
-                                            attribute.Value = difference.Value;
+
+                                            patch.Elements = patch.Elements ?? new Ships.Element[] { };
+
+                                            foreach (var difference in patch.Elements)
+                                            {
+                                                var element = variantXML.SelectSingleNode(String.Format("//*[@id='{0}']", difference.IDRef));
+
+                                                if (element != null)
+                                                {
+                                                    var attribute = element.Attributes[difference.Name];
+                                                    if (attribute == null)
+                                                    {
+                                                        attribute = variantXML.CreateAttribute(difference.Name);
+                                                        element.Attributes.Append(attribute);
+                                                    }
+                                                    attribute.Value = difference.Value;
+                                                }
+                                            }
                                         }
+
+                                        #endregion
+
+                                        modification.Elements = modification.Elements ?? new Ships.Element[] { };
+
+                                        foreach (var difference in modification.Elements)
+                                        {
+                                            var element = variantXML.SelectSingleNode(String.Format("//*[@id='{0}']", difference.IDRef));
+
+                                            if (element != null)
+                                            {
+                                                var attribute = element.Attributes[difference.Name];
+                                                if (attribute == null)
+                                                {
+                                                    attribute = variantXML.CreateAttribute(difference.Name);
+                                                    element.Attributes.Append(attribute);
+                                                }
+                                                attribute.Value = difference.Value;
+                                            }
+                                        }
+
+                                        var variant = variantXML.InnerXml.FromXML<XML.Vehicles.Implementations.Vehicle>();
+
+                                        if (replacementParts != null && replacementParts.Length > 0)
+                                            variant.Parts = replacementParts;
+
+                                        if (vehicle.Name.Split('_')[0] == modification.Name.Split('_')[0])
+                                            variant.Name = modification.Name;
+                                        else
+                                            variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
+
+                                        variant = Scripts._CleanEdgeCases(variant);
+
+                                        variant.Modifications = null;
+
+                                        Scripts._vehicles[variant.Name] = variant;
                                     }
                                 }
 
                                 #endregion
-
-                                modification.Elements = modification.Elements ?? new Ships.Element[] { };
-
-                                foreach (var difference in modification.Elements)
-                                {
-                                    var element = variantXML.SelectSingleNode(String.Format("//*[@id='{0}']", difference.IDRef));
-
-                                    if (element != null)
-                                    {
-                                        var attribute = element.Attributes[difference.Name];
-                                        if (attribute == null)
-                                        {
-                                            attribute = variantXML.CreateAttribute(difference.Name);
-                                            element.Attributes.Append(attribute);
-                                        }
-                                        attribute.Value = difference.Value;
-                                    }
-                                }
-
-                                var variant = variantXML.InnerXml.FromXML<XML.Vehicles.Implementations.Vehicle>();
-
-                                if (replacementParts != null && replacementParts.Length > 0)
-                                    variant.Parts = replacementParts;
-
-                                if (vehicle.Name.Split('_')[0] == modification.Name.Split('_')[0])
-                                    variant.Name = modification.Name;
-                                else
-                                    variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
-
-                                variant = Scripts._CleanEdgeCases(variant);
-
-                                variant.Modifications = null;
-
-                                Scripts._vehicles[variant.Name] = variant;
-                            }
-                        }
-
-                        #endregion
 #if !DEBUG
                         }
                         catch (Exception ex)
@@ -426,9 +452,11 @@ namespace HoloXPLOR.Data
                             Debug.WriteLine("Unable to parse {0} - {1}", file.FullName, ex.Message);
                         }
 #endif
-                    }
+                            }
 
-                    #endregion
+                            #endregion
+                        }
+                    }
                 }
 
                 return Scripts._vehicles;

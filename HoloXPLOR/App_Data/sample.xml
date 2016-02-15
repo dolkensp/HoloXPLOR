@@ -1,6 +1,6 @@
 ﻿
 <player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" oemId="00000000-0000-0000-0000-000000000000" id="fffa8108-0000-0000-0000-000000000000" class="Player" Version="5" __DSID__currVehicleDID="00fa8108-005a-c345-0000-000000000000">
- <inventory count="193">
+ <inventory count="197">
   <item __EID__id="00fa8108-0001-f38c-0000-000000000000" />
   <item __EID__id="00fa8108-002c-969f-0000-000000000000" />
   <item __EID__id="00fa8108-0025-c1d7-0000-000000000000" />
@@ -41,6 +41,8 @@
   <item __EID__id="01fa8108-00dd-4e0b-0000-000000000000" />
   <item __EID__id="01fa8108-00bc-670b-0000-000000000000" />
   <item __EID__id="01fa8108-00bd-670b-0000-000000000000" />
+  <item __EID__id="01fa8108-0005-930b-0000-000000000000" />
+  <item __EID__id="01fa8108-0006-930b-0000-000000000000" />
   <item __EID__id="01fa8108-002a-070d-0000-000000000000" />
   <item __EID__id="01fa8108-002b-070d-0000-000000000000" />
   <item __EID__id="01fa8108-002c-070d-0000-000000000000" />
@@ -138,8 +140,6 @@
   <item __EID__id="00fa8108-005a-c345-0003-000000000000" />
   <item __EID__id="00fa8108-005a-c345-0008-000000000000" />
   <item __EID__id="02fa8108-0002-0000-0020-000000000000" />
-  <item __EID__id="00fa8108-00e9-28db-0013-000000000000" />
-  <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
   <item __EID__id="00fa8108-0025-56f1-0012-000000000000" />
   <item __EID__id="00fa8108-0025-56f1-0013-000000000000" />
   <item __EID__id="01fa8108-0041-4c0b-0001-000000000000" />
@@ -154,6 +154,10 @@
   <item __EID__id="01fa8108-0045-4c0b-0002-000000000000" />
   <item __EID__id="01fa8108-00dd-4e0b-0001-000000000000" />
   <item __EID__id="01fa8108-00dd-4e0b-0002-000000000000" />
+  <item __EID__id="01fa8108-0005-930b-0001-000000000000" />
+  <item __EID__id="01fa8108-0005-930b-0002-000000000000" />
+  <item __EID__id="01fa8108-0006-930b-0001-000000000000" />
+  <item __EID__id="01fa8108-0006-930b-0002-000000000000" />
   <item __EID__id="01fa8108-002a-070d-0001-000000000000" />
   <item __EID__id="01fa8108-002a-070d-0002-000000000000" />
   <item __EID__id="01fa8108-002b-070d-0001-000000000000" />
@@ -2279,7 +2283,7 @@
   </pipes>
  </ship>
  <ship oemId="00000000-0000-0000-0000-000000000000" id="00fa8108-005a-c345-0000-000000000000" acMembershipId="4571994" class="DefaultSpaceShips.ANVL.ANVL_Hornet_F7CM" name="Ship_2">
-  <inventory count="70">
+  <inventory count="66">
    <item __EID__id="00fa8108-005a-c345-0005-000000000000" />
    <item __EID__id="00fa8108-005a-c345-000b-000000000000" />
    <item __EID__id="00fa8108-005a-c345-000c-000000000000" />
@@ -2344,12 +2348,8 @@
    <item __EID__id="01fa8108-0004-930b-0000-000000000000" />
    <item __EID__id="01fa8108-0004-930b-0001-000000000000" />
    <item __EID__id="01fa8108-0004-930b-0002-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0000-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0001-000000000000" />
-   <item __EID__id="01fa8108-0005-930b-0002-000000000000" />
-   <item __EID__id="01fa8108-0006-930b-0000-000000000000" />
-   <item __EID__id="01fa8108-0006-930b-0001-000000000000" />
-   <item __EID__id="01fa8108-0006-930b-0002-000000000000" />
+   <item __EID__id="00fa8108-00e9-28db-0013-000000000000" />
+   <item __EID__id="00fa8108-005b-dcf0-0012-000000000000" />
   </inventory>
   <ports count="42">
    <port portName="hardpoint_class_2_left_wing" __EID__itemId="01fa8108-0003-930b-0000-000000000000">
@@ -41315,10 +41315,10 @@
  <item oemId="00fa8108-005a-c345-0000-000000000000" id="00fa8108-005a-c345-0005-000000000000" acMembershipId="4571994" class="BRRA_HornetBall_S2_Q1">
   <inventory />
   <ports count="2">
-   <port portName="hardpoint_class_1_left" __EID__itemId="01fa8108-0005-930b-0000-000000000000">
+   <port portName="hardpoint_class_1_left" __EID__itemId="00fa8108-00e9-28db-0013-000000000000">
     <pipes />
    </port>
-   <port portName="hardpoint_class_1_right" __EID__itemId="01fa8108-0006-930b-0000-000000000000">
+   <port portName="hardpoint_class_1_right" __EID__itemId="00fa8108-005b-dcf0-0012-000000000000">
     <pipes />
    </port>
   </ports>

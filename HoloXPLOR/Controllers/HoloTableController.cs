@@ -18,6 +18,8 @@ namespace HoloXPLOR.Controllers
 {
     public class HoloTableController : Controller
     {
+        private static Dictionary<String, Object> _lockMap = new Dictionary<String, Object>(StringComparer.InvariantCultureIgnoreCase);
+
         // GET: HoloTable
         public ActionResult Index()
         {
@@ -28,11 +30,16 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
-                var model = new DetailModel(id);
+                HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-                ViewBag.ID = id;
+                lock (HoloTableController._lockMap[id])
+                {
+                    var model = new DetailModel(id);
 
-                return View(model);
+                    ViewBag.ID = id;
+
+                    return View(model);
+                }
             }
             catch (FileNotFoundException)
             {
@@ -44,11 +51,16 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
-                var model = new DetailModel(id, shipID);
+                HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-                ViewBag.ID = id;
+                lock (HoloTableController._lockMap[id])
+                {
+                    var model = new DetailModel(id, shipID);
 
-                return View(model);
+                    ViewBag.ID = id;
+
+                    return View(model);
+                }
             }
             catch (FileNotFoundException)
             {
@@ -58,38 +70,50 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Inventory(String id)
         {
-            DetailModel model = new DetailModel(id);
-            HashSet<String> currentItems = new HashSet<String>(model.GameData_ItemMap.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).Select(k => k.Name).Distinct());
+            HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-            return new ContentResult
+            lock (HoloTableController._lockMap[id])
             {
-                
-                Content = new {
-                    Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
-                    Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v),
-                    Loadouts = Scripts.Loadout.ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
-                    // Ship = Scripts.Vehicles.Values.GroupBy(g => g.Name).ToDictionary(k => k.Key, v => v.FirstOrDefault().DisplayName)
-                }.ToJSON(),
-                ContentType = "application/json"
-            };
+                DetailModel model = new DetailModel(id);
+                HashSet<String> currentItems = new HashSet<String>(model.GameData_ItemMap.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).Select(k => k.Name).Distinct());
+
+                return new ContentResult
+                {
+
+                    Content = new
+                    {
+                        Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
+                        Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v),
+                        Loadouts = Scripts.Loadout.ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
+                        // Ship = Scripts.Vehicles.Values.GroupBy(g => g.Name).ToDictionary(k => k.Key, v => v.FirstOrDefault().DisplayName)
+                    }.ToJSON(),
+                    ContentType = "application/json"
+                };
+            }
         }
 
         // http://holoxplor.ddrit.com/HoloTable/Rating/sample/00fa8108-001c-bff0-0000-000000000000/ANVL_Hornet_F7CM
         public ActionResult Rating(String id, Guid shipID, String targetShip)
         {
-            DetailModel model = new DetailModel(id, shipID);
+            HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-            ShipLoadout selfLoadout = new ShipLoadout(model);
-            ShipLoadout enemyLoadout = new ShipLoadout(Scripts.Vehicles[targetShip]);
-
-            return new ContentResult
+            lock (HoloTableController._lockMap[id])
             {
-                Content = new {
-                    Self = selfLoadout,
-                    Enemy = enemyLoadout,
-                }.ToJSON(),
-                ContentType = "application/json"
-            };
+                DetailModel model = new DetailModel(id, shipID);
+
+                ShipLoadout selfLoadout = new ShipLoadout(model);
+                ShipLoadout enemyLoadout = new ShipLoadout(targetShip);
+
+                return new ContentResult
+                {
+                    Content = new
+                    {
+                        Self = selfLoadout,
+                        Enemy = enemyLoadout,
+                    }.ToJSON(),
+                    ContentType = "application/json"
+                };
+            }
         }
 
         private IEnumerable<Guid> FlattenIDs(DetailModel model, Item item)
@@ -109,85 +133,90 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
-                var model = new DetailModel(id, shipID);
+                HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-                // Parents being equipped
-                var parentItems = model.Player.Items.Where(i => i.ID == parentID).ToArray();
-                
-                // Ports being equipped
-                var newShipPorts = model.Player.Ships.Where(s => s.ID == shipID).Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.PortName == portName).ToArray();
-                var newItemPorts = model.Player.Items.Where(i => i.ID == parentID).Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).ToArray();
-                var newPorts = newShipPorts.Concat(newItemPorts).ToArray();
-
-                // Item IDs being replaced
-                var oldItemIDs = new HashSet<Guid>(newPorts.Select(p => p.ItemID));
-
-                // Items being replaced
-                var oldItems = model.Player.Items.Where(i => oldItemIDs.Contains(i.ID)).ToArray();
-                var oldIDs = new HashSet<Guid>(oldItems.SelectMany(i => this.FlattenIDs(model, i)));
-                
-                // Inventory being moved
-                var oldHangarInventory = model.Player.Inventory.Items.Where(i => oldIDs.Contains(i.ID));
-                var oldShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => oldIDs.Contains(i.ID)));
-                var oldInventory = oldShipInventory.Union(oldHangarInventory).ToArray();
-
-                // Items being equipped
-                var newItems = model.Player.Items.Where(i => i.ID == newID).ToArray();
-                var newIDs = new HashSet<Guid>(newItems.SelectMany(i => this.FlattenIDs(model, i)));
-                
-                // Inventory being moved
-                var newHangarInventory = model.Player.Inventory.Items.Where(i => newIDs.Contains(i.ID));
-                var newShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => newIDs.Contains(i.ID)));
-                var newInventory = newShipInventory.Union(newHangarInventory).ToArray();
-
-                // Old ports
-                var oldShipPorts = model.Player.Ships.Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
-                var oldItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
-                var oldPorts = oldItemPorts.Concat(oldShipPorts).ToArray();
-
-                // Configure Ship inventory
-                foreach (var ship in model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null))
+                lock (HoloTableController._lockMap[id])
                 {
-                    ship.Inventory.Items = ship.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).ToArray();
+                    var model = new DetailModel(id, shipID);
 
-                    if (ship.ID == shipID)
+                    // Parents being equipped
+                    var parentItems = model.Player.Items.Where(i => i.ID == parentID).ToArray();
+
+                    // Ports being equipped
+                    var newShipPorts = model.Player.Ships.Where(s => s.ID == shipID).Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                    var newItemPorts = model.Player.Items.Where(i => i.ID == parentID).Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.PortName == portName).ToArray();
+                    var newPorts = newShipPorts.Concat(newItemPorts).ToArray();
+
+                    // Item IDs being replaced
+                    var oldItemIDs = new HashSet<Guid>(newPorts.Select(p => p.ItemID));
+
+                    // Items being replaced
+                    var oldItems = model.Player.Items.Where(i => oldItemIDs.Contains(i.ID)).ToArray();
+                    var oldIDs = new HashSet<Guid>(oldItems.SelectMany(i => this.FlattenIDs(model, i)));
+
+                    // Inventory being moved
+                    var oldHangarInventory = model.Player.Inventory.Items.Where(i => oldIDs.Contains(i.ID));
+                    var oldShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => oldIDs.Contains(i.ID)));
+                    var oldInventory = oldShipInventory.Union(oldHangarInventory).ToArray();
+
+                    // Items being equipped
+                    var newItems = model.Player.Items.Where(i => i.ID == newID).ToArray();
+                    var newIDs = new HashSet<Guid>(newItems.SelectMany(i => this.FlattenIDs(model, i)));
+
+                    // Inventory being moved
+                    var newHangarInventory = model.Player.Inventory.Items.Where(i => newIDs.Contains(i.ID));
+                    var newShipInventory = model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items.Where(i => newIDs.Contains(i.ID)));
+                    var newInventory = newShipInventory.Union(newHangarInventory).ToArray();
+
+                    // Old ports
+                    var oldShipPorts = model.Player.Ships.Where(s => s.Ports != null).Where(s => s.Ports.Items != null).SelectMany(s => s.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
+                    var oldItemPorts = model.Player.Items.Where(i => i.Ports != null).Where(i => i.Ports.Items != null).SelectMany(i => i.Ports.Items).Where(p => p.ItemID == newID).Where(p => p.ItemID != Guid.Empty).ToArray();
+                    var oldPorts = oldItemPorts.Concat(oldShipPorts).ToArray();
+
+                    // Configure Ship inventory
+                    foreach (var ship in model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null))
                     {
-                        ship.Inventory.Items = ship.Inventory.Items.Union(newInventory).ToArray();
+                        ship.Inventory.Items = ship.Inventory.Items.Where(i => !oldIDs.Contains(i.ID)).Where(i => !newIDs.Contains(i.ID)).ToArray();
+
+                        if (ship.ID == shipID)
+                        {
+                            ship.Inventory.Items = ship.Inventory.Items.Union(newInventory).ToArray();
+                        }
                     }
+
+                    // Configure Player inventory
+                    var shipItemIDs = new HashSet<Guid>(model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
+
+                    model.Player.Inventory = new Inventory.Inventory
+                    {
+                        Items = model.Player.Items.Where(i => !shipItemIDs.Contains(i.ID)).Select(i => new Inventory.InventoryItem { ID = i.ID }).ToArray()
+                    };
+
+                    var oldPort = oldPorts.SingleOrDefault();
+
+                    if (oldPort != null)
+                    {
+                        oldPort.ItemID = oldItemIDs.Distinct().SingleOrDefault();
+                    }
+
+                    var newPort = newPorts.SingleOrDefault();
+
+                    if (newPort != null)
+                    {
+                        newPort.ItemID = newID;
+                    }
+
+                    // TODO: Validate parts
+
+                    // Set current ship (Optional)
+                    model.Player.VehicleID = shipID;
+
+                    model.Save();
+
+                    ViewBag.ID = id;
+
+                    return View(model);
                 }
-
-                // Configure Player inventory
-                var shipItemIDs = new HashSet<Guid>(model.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
-
-                model.Player.Inventory = new Inventory.Inventory
-                {
-                    Items = model.Player.Items.Where(i => !shipItemIDs.Contains(i.ID)).Select(i => new Inventory.InventoryItem { ID = i.ID }).ToArray()
-                };
-
-                var oldPort = oldPorts.SingleOrDefault();
-
-                if (oldPort != null)
-                {
-                    oldPort.ItemID = oldItemIDs.Distinct().SingleOrDefault();
-                }
-
-                var newPort = newPorts.SingleOrDefault();
-
-                if (newPort != null)
-                {
-                    newPort.ItemID = newID;
-                }
-
-                // TODO: Validate parts
-
-                // Set current ship (Optional)
-                model.Player.VehicleID = shipID;
-
-                model.Save();
-
-                ViewBag.ID = id;
-
-                return View(model);            
             }
             catch (FileNotFoundException)
             {
@@ -219,12 +248,17 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Download(String id)
         {
-            String filename = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
+            HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-            if (!System.IO.File.Exists(filename))
-                return RedirectToAction("NotFound");
+            lock (HoloTableController._lockMap[id])
+            {
+                String filename = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
 
-            return File(filename, "application/xml", String.Format("{0}.xml", id));
+                if (!System.IO.File.Exists(filename))
+                    return RedirectToAction("NotFound");
+
+                return File(filename, "application/xml", String.Format("{0}.xml", id));
+            }
         }
 
         public enum UploadResult
@@ -273,26 +307,34 @@ namespace HoloXPLOR.Controllers
                     return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
                 }
 
-                if (System.IO.File.Exists(bakFile))
-                {
-                    System.IO.File.Delete(bakFile);
-                }
+                String id = Path.GetFileNameWithoutExtension(xmlFile);
 
-                if (System.IO.File.Exists(xmlFile))
-                {
-                    System.IO.File.Delete(xmlFile);
-                }
+                HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-                System.IO.File.Move(tmpFile, xmlFile);
-
-                return new JsonResult
+                lock (HoloTableController._lockMap[id])
                 {
-                    Data = new
+
+                    if (System.IO.File.Exists(bakFile))
                     {
-                        Result = UploadResult.Success,
-                        UrlPath = Url.Action("Hangar", new { id = Path.GetFileNameWithoutExtension(xmlFile) })
+                        System.IO.File.Delete(bakFile);
                     }
-                };
+
+                    if (System.IO.File.Exists(xmlFile))
+                    {
+                        System.IO.File.Delete(xmlFile);
+                    }
+
+                    System.IO.File.Move(tmpFile, xmlFile);
+
+                    return new JsonResult
+                    {
+                        Data = new
+                        {
+                            Result = UploadResult.Success,
+                            UrlPath = Url.Action("Hangar", new { id = id })
+                        }
+                    };
+                }
             }
             catch (Exception ex)
             {

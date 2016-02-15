@@ -440,7 +440,7 @@ footer a { color: #fff; }
     background: rgba(255, 255, 255, 0.1);
 }
 #rating svg path {
-    stroke-width: 5px;
+    stroke-width: 4px;
 }
 #rating svg .max-enemy { stroke: #A00; }
 #rating svg .max-self { stroke: #0A0; }

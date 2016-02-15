@@ -39,7 +39,7 @@ namespace HoloXPLOR.Models.HoloTable
         
         public ShipLoadout(DetailModel model)
         {
-            this.DisplayName = model.GameData_Ship.DisplayName;
+            this.DisplayName = model.ShipJson.Name;
 
             this._weapons = model.View_CategoryLoadout[Items.CategoryEnum.Weapon]
                 .Where(s => s.GameData_Item != null)
@@ -59,13 +59,14 @@ namespace HoloXPLOR.Models.HoloTable
             this.MaxHealth = this._Flatten(model.GameData_Ship.Parts).Select(p => p.DamageMax).Sum();
         }
 
-        public ShipLoadout(Ships.Vehicle ship)
+        public ShipLoadout(String targetShip)
         {
-            var loadout = this._Flatten(Scripts.Loadout[ship.Name].Ports).Select(p => Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null).ToArray();
+            var ship = Scripts.Vehicles[targetShip];
+            var loadout = this._Flatten(Scripts.Loadout[targetShip].Ports).Select(p => Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null).ToArray();
 
             loadout = this._Flatten(loadout).ToArray();
 
-            this.DisplayName = ship.DisplayName;
+            this.DisplayName = Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(ship.Name, 0), new ShipMatrixJson { Name = ship.DisplayName }).Name;
 
             this._weapons = loadout
                 .Where(i => i.ItemCategory == Items.CategoryEnum.Weapon)
@@ -144,24 +145,25 @@ namespace HoloXPLOR.Models.HoloTable
                                                        let ammo = Scripts.Ammo.GetValue(ammoType2, null) ?? Scripts.Ammo.GetValue(ammoType1, null)
                                                        where ammo != null
                                                        let heatPipe = weapon.Pipes.Where(p => p.Class == "Heat").FirstOrDefault()
-                                                       let heatPool = firemode.Pools.Where(p => p.Class == "Heat").FirstOrDefault()
+                                                       let heatPool = firemode.Pools == null ? null : firemode.Pools.Where(p => p.Class == "Heat").FirstOrDefault()
                                                        group new WeaponSpec
                                                        {
                                                            Weapon = weapon.DisplayName,
+                                                           WeaponName = weapon.Name,
                                                            FireMode = firemode.Name,
                                                            Ammo = ammo.Name,
                                                            Speed = ammo.Physics.Speed ?? 0,
                                                            Rate = ((firemode.Burst == null) ? firemode.Fire.Rate : (firemode.Burst.BurstSize * firemode.Burst.Rate)) ?? 0,
                                                            MaxHeat = heatPipe.Pool.Capacity,
                                                            CoolingRate = heatPipe.Pool.Rate,
-                                                           HeatingRate = heatPool.Value,
+                                                           HeatingRate = heatPool == null ? heatPipe.Pool.Rate : heatPool.Value,
                                                            Physical = (ammo.Damage_Physical ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Physical ?? 0),
                                                            Energy = (ammo.Damage_Energy ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Energy ?? 0),
                                                            Distortion = (ammo.Damage_Distortion ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Distortion ?? 0),
                                                            MaxRadius = ammo.Explosion == null ? 0 : ammo.Explosion.MaxRadius ?? 0,
                                                            Pressure = ammo.Explosion == null ? 0 : ammo.Explosion.Pressure ?? 0,
-                                                           MinSpread = firemode.Spread.Min ?? 0,
-                                                           MaxSpread = firemode.Spread.Max ?? 0,
+                                                           MinSpread = (firemode.Spread == null) ? 0 : (firemode.Spread.Min ?? 0),
+                                                           MaxSpread = (firemode.Spread == null) ? 0 : (firemode.Spread.Max ?? 0),
                                                        } by index into weapons
                                                        let optimum = weapons.OrderByDescending(a => a.Rate * (a.Physical + a.Energy + a.Distortion)).First()
                                                        select optimum).ToArray();
@@ -200,5 +202,7 @@ namespace HoloXPLOR.Models.HoloTable
         public Double MinSpread { get; set; }
 
         public Double MaxSpread { get; set; }
+
+        public String WeaponName { get; set; }
     }
 }
