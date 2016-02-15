@@ -8,8 +8,7 @@ $(document).ready(function () {
 
     var timeStep = 0.05;
 
-    var shieldWeapon = function (shield, aggregate)
-    {
+    var shieldWeapon = function (shield, aggregate) {
         if (shield.HitPoints > 0) {
             var hp = shield.HitPoints;
             shield.HitPoints -= aggregate.Physical / shield.Physical_DamageAbsorbDirect;
@@ -34,8 +33,7 @@ $(document).ready(function () {
         return aggregate;
     }
 
-    var fireWeapon = function(weapon, aggregate)
-    {
+    var fireWeapon = function (weapon, aggregate) {
         if (weapon.Heat + weapon.HeatingRate < weapon.MaxHeat) {
             weapon.ShotsFired++;
             weapon.TotalDamage += weapon.Physical;
@@ -51,8 +49,7 @@ $(document).ready(function () {
         return aggregate;
     }
 
-    var attack = function(source, target, time, min_max)
-    {
+    var attack = function (source, target, time, min_max) {
         if (target.Health <= 0)
             return;
 
@@ -97,8 +94,7 @@ $(document).ready(function () {
             for (var i = 0, j = target.Shields.length; i < j; i++) {
                 if (target.Shields[i].HitPoints == null) {
                     if (min_max == "min") {
-                        switch (target.Shields[i].FaceType)
-                        {
+                        switch (target.Shields[i].FaceType) {
                             case "Quadrant":
                                 target.Shields[i].HitPoints = target.Shields[i].MaxHitPoints / 4;
                                 break;
@@ -114,10 +110,21 @@ $(document).ready(function () {
                     }
                 }
 
+                if (target.Shields[i].FaceType == "Quadrant" || target.Shields[i].FaceType == "FrontBack") {
+                    if (min_max != "min" &&
+                        target.Shields[i].HitPoints < target.Shields[i].MaxHitPoints &&
+                        time >= target.Shields[i].RegenDelay)
+                        target.Shields[i].HitPoints = Math.min(target.Shields[i].MaxHitPoints, target.Shields[i].HitPoints + target.Shields[i].MaxRegenRate * timeStep);
+                }
+
                 shieldWeapon(target.Shields[i], aggregate);
 
                 target.Shield += target.Shields[i].HitPoints;
             }
+        }
+
+        if (target.Shield == 0 && target.TTDS == null) {
+            target.TTDS = time;
         }
 
         if (target.Armor != null) {
@@ -131,8 +138,7 @@ $(document).ready(function () {
             target.Health -= aggregate.Energy;
             target.Health -= aggregate.Distortion;
 
-            if (target.Health <= 0 && target.TTK == null)
-            {
+            if (target.Health <= 0 && target.TTK == null) {
                 target.TTK = time;
                 target.Health = 0;
             }
@@ -148,7 +154,7 @@ $(document).ready(function () {
             success: function (data) {
                 rating = data;
 
-                
+
                 var maxSelf = $.extend(true, { Health: data.Self.MaxHealth }, data.Self);
                 var minSelf = $.extend(true, { Health: data.Self.MinHealth }, data.Self);
                 var maxEnemy = $.extend(true, { Health: data.Enemy.MaxHealth }, data.Enemy);
@@ -181,7 +187,7 @@ $(document).ready(function () {
 
                 var color = d3.scale.category10();
 
-                var x = d3.scale.linear().range([0, width]).domain([0, d3.max(raw, function(d) { return d.time })]);
+                var x = d3.scale.linear().range([0, width]).domain([0, d3.max(raw, function (d) { return d.time })]);
                 var y = d3.scale.linear().range([0, height]).domain([Math.max(d3.max(raw, function (d) { return d.maxSelf }), d3.max(raw, function (d) { return d.maxEnemy })), 0]);
 
                 var xAxis = d3.svg.axis()
@@ -247,8 +253,9 @@ $(document).ready(function () {
                 var $table = $('<table class="table table-borderless table-striped table-condensed cig-table cig-table-2">');
 
                 $table.append('<tr><th class=""></th><th class="cig-property">' + data.Self.DisplayName + '</th><th class="cig-property">' + data.Enemy.DisplayName + '</th></tr>');
-                $table.append('<tr><th>Min TTK</th><td>' + minSelf.TTK.toFixed(2) + 's</td><td>' + minEnemy.TTK.toFixed(2) + 's</td></tr>');
-                $table.append('<tr><th>Max TTK</th><td>' + maxSelf.TTK.toFixed(2) + 's</td><td>' + maxEnemy.TTK.toFixed(2) + 's</td></tr>');
+                $table.append('<tr><th>TTK Shield</th><td>' + minSelf.TTDS.toFixed(2) + '-' + maxSelf.TTDS.toFixed(2) + 's</td><td>' + minEnemy.TTDS.toFixed(2) + '-' + maxEnemy.TTDS.toFixed(2) + 's</td></tr>');
+                $table.append('<tr><th>TTK Hull</th><td>' + (minSelf.TTK - minSelf.TTDS).toFixed(2) + '-' + (maxSelf.TTK - maxSelf.TTDS).toFixed(2) + 's</td><td>' + (minEnemy.TTK - minEnemy.TTDS).toFixed(2) + '-' + (maxEnemy.TTK - maxEnemy.TTDS).toFixed(2) + 's</td></tr>');
+                $table.append('<tr><th>Time To Kill</th><td>' + minSelf.TTK.toFixed(2) + '-' + maxSelf.TTK.toFixed(2) + 's</td><td>' + minEnemy.TTK.toFixed(2) + '-' + maxEnemy.TTK.toFixed(2) + 's</td></tr>');
                 $table.append('<tr><th>Survivability</th>' +
                     '<td>' + ((((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) / (((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) * 100).toFixed(0) + '%</td>' +
                     '<td>' + ((((maxEnemy.TTK - minEnemy.TTK) / 2) + minEnemy.TTK) / (((maxSelf.TTK - minSelf.TTK) / 2) + minSelf.TTK) * 100).toFixed(0) + '%</td>' +
