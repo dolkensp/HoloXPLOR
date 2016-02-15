@@ -110,12 +110,13 @@ $(document).ready(function () {
                     }
                 }
 
-                if (target.Shields[i].FaceType == "Quadrant" || target.Shields[i].FaceType == "FrontBack") {
-                    if (min_max != "min" &&
-                        target.Shields[i].HitPoints < target.Shields[i].MaxHitPoints &&
-                        time >= target.Shields[i].RegenDelay)
-                        target.Shields[i].HitPoints = Math.min(target.Shields[i].MaxHitPoints, target.Shields[i].HitPoints + target.Shields[i].MaxRegenRate * timeStep);
-                }
+                // TODO: Need to only apply this if we can actually hold an opponent off one shield face completely
+                // if (target.Shields[i].FaceType == "Quadrant" || target.Shields[i].FaceType == "FrontBack") {
+                //     if (min_max != "min" &&
+                //         target.Shields[i].HitPoints < target.Shields[i].MaxHitPoints &&
+                //         time >= target.Shields[i].RegenDelay)
+                //         target.Shields[i].HitPoints = Math.min(target.Shields[i].MaxHitPoints, target.Shields[i].HitPoints + target.Shields[i].MaxRegenRate * timeStep);
+                // }
 
                 shieldWeapon(target.Shields[i], aggregate);
 
