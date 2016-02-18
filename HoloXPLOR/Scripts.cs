@@ -130,6 +130,7 @@ namespace HoloXPLOR.Data
 
             switch (item.Name)
             {
+                case "GODI_Retaliator_Shield_S3": item.Params["requiredPortTags"] = "AEGS_Retaliator_Base"; break;
                 case "Class_2_KRIG_BG_S3_Q3_Mount": item.DisplayName = "Kruger S3 Gattling Nose Mount"; break;
                 case "Class_2_GATS_BG_S2_Mount": item.DisplayName = "Gallenson Tactical S2 Gattling Mount"; break;
                 case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
@@ -263,7 +264,6 @@ namespace HoloXPLOR.Data
 
         #endregion
 
-
         #region Loadout XML
 
         private static Object _loadoutLock = new Object();
@@ -313,7 +313,6 @@ namespace HoloXPLOR.Data
         }
 
         #endregion
-
 
         #region Vehicle XML
 
