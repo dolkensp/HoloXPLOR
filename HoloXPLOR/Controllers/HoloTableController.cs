@@ -13,6 +13,7 @@ using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Threading;
 
 namespace HoloXPLOR.Controllers
 {
@@ -114,6 +115,28 @@ namespace HoloXPLOR.Controllers
                     ContentType = "application/json"
                 };
             }
+        }
+
+        public ActionResult Delete(String id)
+        {
+            if (String.Equals("sample", id, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return RedirectToAction("NotAllowed");
+            }
+
+            HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
+
+            lock (HoloTableController._lockMap[id])
+            {
+                String filename = HttpContext.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
+
+                if (System.IO.File.Exists(filename))
+                {
+                    System.IO.File.Delete(filename);
+                }
+            }
+
+            return View();
         }
 
         private IEnumerable<Guid> FlattenIDs(DetailModel model, Item item)

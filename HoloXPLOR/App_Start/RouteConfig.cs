@@ -45,6 +45,12 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
+                name: "HangarDelete",
+                url: "HoloTable/Delete/{id}",
+                defaults: new { controller = "HoloTable", action = "Delete" }
+            );
+
+            routes.MapRoute(
                 name: "HangarRating",
                 url: "HoloTable/Rating/{id}/{shipid}/{targetship}",
                 defaults: new { controller = "HoloTable", action = "Rating", targetship = "ANVL_Hornet_F7CM" }

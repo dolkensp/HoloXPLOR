@@ -2133,7 +2133,7 @@
     <Content Include="App_Data\shipmatrix.json" />
     <Content Include="Scripts\holoxplor.rating.js" />
     <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
-    <None Include="Properties\PublishProfiles\holoxplor-test.azurewebsites.net.pubxml" />
+    <None Include="Properties\PublishProfiles\holoxplor-ptu.pubxml" />
     <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Avenger_Stalker.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\AEGS_Gladius.xml">
@@ -2312,7 +2312,10 @@
     <Content Include="Views\Shared\_GettingStarted.cshtml" />
     <Content Include="Views\Shared\_Modal.Upload.cshtml" />
     <Content Include="Views\Shared\_Modal.Download.cshtml" />
-    <Content Include="smtp.config" />
+    <Content Include="smtp.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\HoloTable\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />
