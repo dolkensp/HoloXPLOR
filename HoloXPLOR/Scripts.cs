@@ -14,6 +14,7 @@ using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
 using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
 using HoloXPLOR.Models;
+using HoloXPLOR.DataForge;
 
 namespace System
 {
@@ -47,8 +48,7 @@ namespace HoloXPLOR.Data
 
                             foreach (FileInfo file in weaponsDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
-                                if (file.FullName.Contains(@"_Interface\") ||
-                                    file.FullName.Contains(@"\Interface_") ||
+                                if (file.FullName.Contains(@"Interface") ||
                                     file.FullName.Contains(@"\Ammo\Ballistic_Ammo\") ||
                                     file.FullName.Contains(@"\Ammo\Countermeasures\") ||
                                     file.FullName.Contains(@"\Ammo\Laser_Bolts\") ||
@@ -59,7 +59,8 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
+                                    var item = DataForgeSerializer.Deserialize<XML.Spaceships.Item>(file.FullName);
+                                    // var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
 
                                     if (item == null)
                                         continue;
@@ -224,14 +225,16 @@ namespace HoloXPLOR.Data
                             foreach (FileInfo file in ammoDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
                                 if (file.FullName.Contains(@"AmmoBoxes") ||
-                                    file.FullName.Contains(@"TEMP"))
+                                    file.FullName.Contains(@"TEMP") ||
+                                    file.FullName.Contains(@"Interface"))
                                     continue;
 
 #if !DEBUG || DEBUG
                                 try
                                 {
 #endif
-                                    var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
+                                    var ammo = DataForgeSerializer.Deserialize<XML.Spaceships.Ammo>(file.FullName);
+                                    // var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
 
                                     if (ammo == null)
                                         continue;
@@ -284,11 +287,14 @@ namespace HoloXPLOR.Data
 
                             foreach (FileInfo file in loadoutDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
+                                if (file.FullName.Contains(@"Interface"))
+                                    continue;
 #if !DEBUG || DEBUG
                                 try
                                 {
 #endif
-                                    var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
+                                    var loadout = DataForgeSerializer.Deserialize<XML.Spaceships.Loadout>(file.FullName);
+                                    // var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
 
                                     if (loadout == null)
                                         continue;
@@ -340,7 +346,8 @@ namespace HoloXPLOR.Data
                         try
                         {
 #endif
-                                var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
+                                var vehicle = DataForgeSerializer.Deserialize<Ships.Vehicle>(file.FullName);
+                                // var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
 
                                 if (vehicle == null)
                                     continue;
@@ -363,7 +370,6 @@ namespace HoloXPLOR.Data
                                 // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
                                 //     Scripts._vehicles["AEGS_Avenger_Titan"] = vehicle;
 
-
                                 #region Variant Support
 
                                 if (vehicle.Modifications != null && vehicle.Modifications.Length > 0)
@@ -379,7 +385,8 @@ namespace HoloXPLOR.Data
 
                                         if (!String.IsNullOrWhiteSpace(modification.PatchFile))
                                         {
-                                            var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
+                                            var patch = DataForgeSerializer.Deserialize<Ships.Modification>(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile)));
+                                            // var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
 
                                             if (patch.Parts != null && patch.Parts.Length > 0)
                                             {

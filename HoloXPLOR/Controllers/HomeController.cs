@@ -18,6 +18,19 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Index()
         {
+            if (Request.Url.Host == "holoxplor.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+
             try
             {
                 FileInfo sample = new FileInfo(Server.MapPath("~/App_Data/sample.xml"));
@@ -43,6 +56,19 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Thanks()
         {
+            if (Request.Url.Host == "holoxplor.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+
             return View();
         }
     }

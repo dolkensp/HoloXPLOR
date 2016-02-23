@@ -1,0 +1,18 @@
+0x000000: CryTekB
+
+0x000008: 0x000565 00001381
+
+0x00000C: 0x00002C 00000044
+0x000010: 0x00000E 00000014x28
+
+0x00000C: 0x0001E8 00000488
+0x000010: 0x000020 00000032x8 - IDs of parent nodes to update?
+
+0x00000C: 0x0001B4 00000436
+0x000010: 0x00000D 00000013x4 - IDs of nodes? 1,2,3,4,5,6,7,8,9,10,11,12,13
+
+0x000030: 0x0002E8 00000744 -- Content Offset
+0x00003A: 0x00027D 00000637+1381
+
+Need way to clone an existing node, then apply changes (Insert Attribute, Modify Attribute, Delete Attribute)
+

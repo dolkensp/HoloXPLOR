@@ -101,6 +101,7 @@ $(document).ready(function () {
                             case "FrontBack":
                                 target.Shields[i].HitPoints = target.Shields[i].MaxHitPoints / 2;
                                 break;
+                            case "Bubble":
                             default:
                                 target.Shields[i].HitPoints = target.Shields[i].MaxHitPoints;
                                 break;

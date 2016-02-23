@@ -24,11 +24,37 @@ namespace HoloXPLOR.Controllers
         // GET: HoloTable
         public ActionResult Index()
         {
+            if (Request.Url.Host == "holoxplor.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+
             return View();
         }
 
         public ActionResult Hangar(String id)
         {
+            if (Request.Url.Host == "holoxplor.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+
             try
             {
                 HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
@@ -50,6 +76,19 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Ship(String id, Guid shipID)
         {
+            if (Request.Url.Host == "holoxplor.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
+            {
+                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
+
+                return RedirectPermanent(newUri.ToString());
+            }
+
             try
             {
                 HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
@@ -297,6 +336,18 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
+                if (String.Equals("sample", Path.GetFileNameWithoutExtension(file.FileName), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return new JsonResult
+                    {
+                        Data = new
+                        {
+                            Result = UploadResult.ServerError,
+                            UrlPath = Url.Action("NotAllowed")
+                        }
+                    };
+                }
+
                 String xmlFile = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", Path.GetFileNameWithoutExtension(file.FileName)));
                 String bakFile = Server.MapPath(String.Format(@"~/App_Data/{0}.bak", Path.GetFileNameWithoutExtension(file.FileName)));
                 String tmpFile = Server.MapPath(String.Format(@"~/App_Data/{0}.tmp", Path.GetFileNameWithoutExtension(file.FileName)));
@@ -370,6 +421,11 @@ namespace HoloXPLOR.Controllers
         }
 
         public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult NotAllowed()
         {
             return View();
         }

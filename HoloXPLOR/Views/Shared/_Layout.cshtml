@@ -60,7 +60,7 @@
             // TODO: Figure out front-end logging for IE
         }
     </script>
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -119,11 +119,11 @@
     @Html.Partial("_Modal.Download")
     @Html.Partial("_Modal.Upload")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/holoxplor")
-    @Scripts.Render("~/bundles/formstone")
+    @Scripts.Render("~/Content/jquery")
+    @Scripts.Render("~/Content/jqueryui")
+    @Scripts.Render("~/Content/bootstrap")
+    @Scripts.Render("~/Content/holoxplor")
+    @Scripts.Render("~/Content/formstone")
 
     @RenderSection("scripts", required: false)
 

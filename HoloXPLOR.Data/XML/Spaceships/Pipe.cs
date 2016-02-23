@@ -12,13 +12,19 @@ namespace HoloXPLOR.Data.XML.Spaceships
     public partial class PipePool
     {
         [XmlAttribute(AttributeName = "capacity")]
-        public Double Capacity { get; set; }
+        public String _capacity { get; set; }
+        [XmlIgnore]
+        public Double Capacity { get { return this._capacity.ToDouble(0); } }
 
         [XmlAttribute(AttributeName = "rate")]
-        public Double Rate { get; set; }
+        public String _rate { get; set; }
+        [XmlIgnore]
+        public Double Rate { get { return this._rate.ToDouble(0); } }
         
         [XmlAttribute(AttributeName = "critical")]
-        public Double Critical { get; set; }
+        public String _critical { get; set; }
+        [XmlIgnore]
+        public Double Critical { get { return this._critical.ToDouble(0); } }
     }
 
     [XmlRoot(ElementName = "Pipe")]

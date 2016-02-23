@@ -76,5 +76,10 @@ namespace HoloXPLOR.Data.XML.Spaceships
                 return sb.ToString();
             }
         }
+
+        public override String ToString()
+        {
+            return String.Format("{0}", this.DisplayName); // base.ToString();
+        }
     }
 }

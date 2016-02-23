@@ -89,6 +89,9 @@ namespace HoloXPLOR.Data.XML
                             case "Armor":
                                 yield return CategoryEnum.Armor;
                                 break;
+                            case "Cooler":
+                                yield return CategoryEnum.Cooler;
+                                break;
                             case "Shield":
                                 yield return CategoryEnum.Shield;
                                 break;

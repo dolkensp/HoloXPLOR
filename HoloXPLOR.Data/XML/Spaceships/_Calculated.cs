@@ -16,6 +16,7 @@ namespace HoloXPLOR.Data.XML.Spaceships
 
         AmmoBox,
         Armor,
+        Cooler,
         CounterMeasure,
         Missile,
         MissileRack,
@@ -86,6 +87,10 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     case "VehicleWeapon:VehicleMissileRack":
                         return CategoryEnum.MissileRack;
                     #endregion
+                    #region Coolers
+                    case "VehicleItem:VehicleItemCooler":
+                        return CategoryEnum.Cooler;
+                    #endregion
                     #region Ammo/Consumables
                     case "VehicleItem:VehicleItemAmmoBox":
                         return CategoryEnum.AmmoBox;
@@ -140,7 +145,6 @@ namespace HoloXPLOR.Data.XML.Spaceships
                     case "VehicleItem:VehicleItemTurretAIModule":
                     case "VehicleItem:VehicleItem":
                     case "VehicleItem:VehicleItemLight":
-                    case "VehicleItem:VehicleItemCooler":
                     case "VehicleItem:VehicleItemSeat":
                     case "VehicleItem:VehicleItemLandingGearSystem":
                     case "VehicleItem:VehicleItemQDrive":

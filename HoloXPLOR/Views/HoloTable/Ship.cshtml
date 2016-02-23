@@ -244,7 +244,7 @@
                                         <option value="CNOU_Mustang_Beta">Mustang Beta (Stock)</option>
                                         <option value="CNOU_Mustang_Delta">Mustang Delta (Stock)</option>
                                         <option value="CNOU_Mustang_Gamma">Mustang Gamma/Omega (Stock)</option>
-                                        <option value="DRAK_Caterpillar">Caterpillar (Stock)</option>
+                                        <!--<option value="DRAK_Caterpillar">Caterpillar (Stock)</option>-->
                                         <option value="DRAK_Cutlass_Black">Cutlass Black (Stock)</option>
                                         <option value="DRAK_Cutlass_Red">Cutlass Red (Stock)</option>
                                         <option value="DRAK_Cutlass_Blue">Cutlass Blue (Stock)</option>
@@ -263,7 +263,7 @@
                                         <!--<option value="RSI_Constellation_Phoenix">Constellation Phoenix (Stock)</option>-->
                                         <!--<option value="RSI_Constellation_Taurus">Constellation Taurus (Stock)</option>-->
                                         <option value="VNCL_Glaive">Glaive (Stock)</option>
-                                        <option value="VNCL_Stinger">Stinger (Stock)</option>
+                                        <!--<option value="VNCL_Stinger">Stinger (Stock)</option>-->
                                         <option value="VNCL_Scythe">Scythe (Stock)</option>
                                         <!--<option value="VNCL_Void">Void (Stock)</option>-->
                                         <!--<option value="XIAN_Scour">Khartu-Al (Stock)</option>-->
@@ -355,6 +355,7 @@
                         @RenderHover()
                     </div>
                     <div class="col-sm-6 col-xs-12 js-scrollable" id="inventory_other">
+                        @RenderItemCategory("Coolers", Items.CategoryEnum.Cooler)
                         @RenderItemCategory("Storage", Items.CategoryEnum.Storage)
                         @RenderItemCategory("Paints", Items.CategoryEnum.Paints)
                     </div>

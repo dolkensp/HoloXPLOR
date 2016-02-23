@@ -140,7 +140,10 @@ namespace HoloXPLOR.Models.HoloTable
                                                        let ammoTypes1 = weapon.AmmoType ?? new String[] { firemode.Fire.AmmoType }
                                                        where ammoTypes1 != null
                                                        from ammoType1 in ammoTypes1
-                                                       let ammoBox = Scripts.Items.GetValue(ammoType1, null)
+                                                       join item in Scripts.Items.Values
+                                                       on ammoType1.ToLowerInvariant() equals item.ItemSubType.ToLowerInvariant()
+                                                       into ammoBoxes
+                                                       from ammoBox in ammoBoxes.DefaultIfEmpty()
                                                        let ammoType2 = ammoBox == null || ammoBox.AmmoBox == null ? ammoType1 : ammoBox.AmmoBox.AmmoName
                                                        let ammo = Scripts.Ammo.GetValue(ammoType2, null) ?? Scripts.Ammo.GetValue(ammoType1, null)
                                                        where ammo != null

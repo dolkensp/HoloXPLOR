@@ -21,13 +21,19 @@ namespace HoloXPLOR.Data.XML.Spaceships
         public String Flags { get; set; }
 
         [XmlAttribute(AttributeName = "maxThrust")]
-        public Double MaxThrust { get; set; }
+        public String _maxThrust { get; set; }
+        [XmlIgnore]
+        public Double MaxThrust { get { return _maxThrust.ToDouble(0); } }
 
         [XmlAttribute(AttributeName = "boostScale")]
-        public Double BoostScale { get; set; }
+        public String _boostScale { get; set; }
+        [XmlIgnore]
+        public Double BoostScale { get { return _boostScale.ToDouble(0); } }
 
         [XmlAttribute(AttributeName = "rotationScale")]
-        public Double RotationScale { get; set; }
+        public String _rotationScale { get; set; }
+        [XmlIgnore]
+        public Double RotationScale { get { return _rotationScale.ToDouble(0); } }
 
         //<thrusters>
         //    <thruster flags="maneuver orientation" maxThrust ="1000000" rotationScale="1" boostScale="1.3" >
@@ -45,6 +51,6 @@ namespace HoloXPLOR.Data.XML.Spaceships
         //        </exhausts>
         //    </thruster>
         //</thrusters>
-  
+
     }
 }

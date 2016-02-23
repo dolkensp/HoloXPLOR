@@ -128,6 +128,7 @@ namespace HoloXPLOR.Models.HoloTable
             "MainThruster",
             "PowerPlant",
             "ManneuverThruster", // Maneuvering Thrusters
+            "Cooler",
             // "TurretBase",
             "Paints",
             
@@ -135,7 +136,6 @@ namespace HoloXPLOR.Models.HoloTable
             // "WeaponDefensive",   // Counter Measures
             // "Seat",              // Seats
 
-            // "Cooler",
             // "FuelIntake",
             // "FuelTank",
             // "SelfDestruct",

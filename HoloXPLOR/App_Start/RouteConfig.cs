@@ -14,21 +14,15 @@ namespace HoloXPLOR
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "NotFound",
-                url: "NotFound",
-                defaults: new { controller = "HoloTable", action = "NotFound", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "Thanks",
                 url: "Thanks",
-                defaults: new { controller = "Home", action = "Thanks", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Thanks" }
             );
 
             routes.MapRoute(
                 name: "JsError",
                 url: "JsError",
-                defaults: new { controller = "Error", action = "JsError", id = UrlParameter.Optional }
+                defaults: new { controller = "Error", action = "JsError" }
             );
 
             routes.MapRoute(
@@ -39,27 +33,33 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
-                name: "HangarInventory",
-                url: "HoloTable/Inventory/{id}",
-                defaults: new { controller = "HoloTable", action = "Inventory" }
+                name: "NotFound",
+                url: "HoloTable/NotFound",
+                defaults: new { controller = "HoloTable", action = "NotFound" }
             );
 
             routes.MapRoute(
-                name: "HangarDelete",
-                url: "HoloTable/Delete/{id}",
-                defaults: new { controller = "HoloTable", action = "Delete" }
-            );
-
-            routes.MapRoute(
-                name: "HangarRating",
-                url: "HoloTable/Rating/{id}/{shipid}/{targetship}",
-                defaults: new { controller = "HoloTable", action = "Rating", targetship = "ANVL_Hornet_F7CM" }
+                name: "NotAllowed",
+                url: "HoloTable/NotAllowed",
+                defaults: new { controller = "HoloTable", action = "NotAllowed" }
             );
 
             routes.MapRoute(
                 name: "Hangar",
                 url: "HoloTable/{id}",
                 defaults: new { controller = "HoloTable", action = "Hangar" }
+            );
+
+            routes.MapRoute(
+                name: "HangarInventory",
+                url: "HoloTable/{id}/Inventory",
+                defaults: new { controller = "HoloTable", action = "Inventory" }
+            );
+
+            routes.MapRoute(
+                name: "HangarDelete",
+                url: "HoloTable/{id}/Delete",
+                defaults: new { controller = "HoloTable", action = "Delete" }
             );
 
             routes.MapRoute(
@@ -70,8 +70,14 @@ namespace HoloXPLOR
 
             routes.MapRoute(
                 name: "Ship",
-                url: "HoloTable/{id}/{shipid}/{action}",
+                url: "HoloTable/{id}/{shipid}",
                 defaults: new { controller = "HoloTable", action = "Ship" }
+            );
+
+            routes.MapRoute(
+                name: "HangarRating",
+                url: "HoloTable/{id}/{shipid}/Rating/{targetship}",
+                defaults: new { controller = "HoloTable", action = "Rating", targetship = "ANVL_Hornet_F7CM" }
             );
 
             routes.MapRoute(

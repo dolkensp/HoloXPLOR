@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Not Allowed";
+}
+
+@using (Html.BeginForm("Upload", "HoloTable", FormMethod.Post, new { id = "form-upload" }))
+{ }
+
+<hgroup>
+    <h1>Error.</h1>
+    <h2>The action you requested is not allowed.</h2>
+</hgroup>
+
+<div class="row cig-content">
+    @Html.Partial("_GettingStarted")
+    @Html.Partial("_Instructions")
+    @Html.Partial("_Support")
+</div>
