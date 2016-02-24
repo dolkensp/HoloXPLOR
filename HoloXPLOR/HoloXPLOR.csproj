@@ -170,13 +170,16 @@
     <Compile Include="Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Inventory\placeholder.txt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\sample.tpl">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\sample.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Logs\placeholder.xml">
+    <Content Include="App_Data\Logs\placeholder.txt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Scripts\Entities\Items\DamageMultipliers.xml" />
@@ -1661,6 +1664,7 @@
     <Content Include="App_Data\Scripts\Loadouts\Vehicles\Survival\Default_Loadout_VNCL_Scythe_Survival.xml" />
     <Content Include="App_Data\shipmatrix.json" />
     <Content Include="Scripts\holoxplor.rating.js" />
+    <Content Include="Scripts\jquery.cookie-1.4.1.js" />
     <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetCanard_S2_Q1.bug" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\Greycat\Greycat_Industrial_Sure_Grip_Tractor.bug" />
