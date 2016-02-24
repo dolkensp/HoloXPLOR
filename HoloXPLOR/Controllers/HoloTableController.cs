@@ -18,44 +18,18 @@ using System.Text.RegularExpressions;
 
 namespace HoloXPLOR.Controllers
 {
-    public class HoloTableController : Controller
+    public class HoloTableController : _BaseController
     {
         private static Dictionary<String, Object> _lockMap = new Dictionary<String, Object>(StringComparer.InvariantCultureIgnoreCase);
 
         // GET: HoloTable
         public ActionResult Index()
         {
-            if (Request.Url.Host == "holoxplor.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-
             return View();
         }
 
         public ActionResult Hangar(String id)
         {
-            if (Request.Url.Host == "holoxplor.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-
             try
             {
                 HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
@@ -77,19 +51,6 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Ship(String id, Guid shipID)
         {
-            if (Request.Url.Host == "holoxplor.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-            else if (Request.Url.Host == "holoxplor-ptu.azurewebsites.net")
-            {
-                var newUri = new Uri(new Uri("https://ptu.holoxplor.space/"), Request.Url.PathAndQuery);
-
-                return RedirectPermanent(newUri.ToString());
-            }
-
             try
             {
                 HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());

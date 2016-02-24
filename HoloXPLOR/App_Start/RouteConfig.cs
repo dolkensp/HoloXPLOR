@@ -26,7 +26,6 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
-
                 name: "HangarUpload",
                 url: "HoloTable/Upload",
                 defaults: new { controller = "HoloTable", action = "Upload" }

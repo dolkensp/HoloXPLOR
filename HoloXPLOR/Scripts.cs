@@ -42,7 +42,7 @@ namespace HoloXPLOR.Data
                     {
                         if (Scripts._items == null)
                         {
-                            Scripts._items = new Dictionary<String, XML.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, XML.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
 
                             DirectoryInfo weaponsDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships"));
 
@@ -67,7 +67,7 @@ namespace HoloXPLOR.Data
 
                                     item = Scripts._CleanEdgeCases(item);
 
-                                    Scripts._items[item.Name] = Scripts._CleanEdgeCases(item);
+                                    buffer[item.Name] = Scripts._CleanEdgeCases(item);
 #if !DEBUG || DEBUG
                                 }
                                 catch (Exception ex)
@@ -76,6 +76,8 @@ namespace HoloXPLOR.Data
                                 }
 #endif
                             }
+
+                            Scripts._items = buffer;
                         }
                     }
                 }
@@ -218,7 +220,7 @@ namespace HoloXPLOR.Data
                     {
                         if (Scripts._ammo == null)
                         {
-                            Scripts._ammo = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
 
                             DirectoryInfo ammoDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Ammo"));
 
@@ -239,7 +241,7 @@ namespace HoloXPLOR.Data
                                     if (ammo == null)
                                         continue;
 
-                                    Scripts._ammo[ammo.Name] = Scripts._CleanEdgeCases(ammo);
+                                    buffer[ammo.Name] = Scripts._CleanEdgeCases(ammo);
 #if !DEBUG || DEBUG
                                 }
                                 catch (Exception ex)
@@ -248,6 +250,8 @@ namespace HoloXPLOR.Data
                                 }
 #endif
                             }
+
+                            Scripts._ammo = buffer;
                         }
                     }
                 }
@@ -281,7 +285,7 @@ namespace HoloXPLOR.Data
                     {
                         if (Scripts._loadout == null)
                         {
-                            Scripts._loadout = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
 
                             DirectoryInfo loadoutDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Loadouts/Vehicles"));
 
@@ -301,7 +305,7 @@ namespace HoloXPLOR.Data
 
                                     String name = Path.GetFileNameWithoutExtension(file.Name).Replace("Default_Loadout_", "");
 
-                                    Scripts._loadout[name] = loadout;
+                                    buffer[name] = loadout;
 #if !DEBUG || DEBUG
                                 }
                                 catch (Exception ex)
@@ -310,6 +314,8 @@ namespace HoloXPLOR.Data
                                 }
 #endif
                             }
+
+                            Scripts._loadout = buffer;
                         }
                     }
                 }
@@ -334,7 +340,7 @@ namespace HoloXPLOR.Data
                     {
                         if (Scripts._vehicles == null)
                         {
-                            Scripts._vehicles = new Dictionary<String, Ships.Vehicle>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, Ships.Vehicle>(StringComparer.InvariantCultureIgnoreCase);
 
                             DirectoryInfo vehicleDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml"));
 
@@ -354,21 +360,21 @@ namespace HoloXPLOR.Data
 
                                 vehicle = Scripts._CleanEdgeCases(vehicle);
 
-                                Scripts._vehicles[vehicle.Name] = vehicle;
+                                buffer[vehicle.Name] = vehicle;
 
                                 if (vehicle.Name == "CNOU_Mustang")
-                                    Scripts._vehicles["CNOU_Mustang_Alpha"] = vehicle;
+                                    buffer["CNOU_Mustang_Alpha"] = vehicle;
 
                                 if (vehicle.Name == "ORIG")
-                                    Scripts._vehicles["ORIG_300i"] = vehicle;
+                                    buffer["ORIG_300i"] = vehicle;
 
                                 if (vehicle.Name == "AEGS_Avenger")
-                                    Scripts._vehicles["AEGS_Avenger_Stalker"] = vehicle;
+                                    buffer["AEGS_Avenger_Stalker"] = vehicle;
 
                                 // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
-                                //     Scripts._vehicles["AEGS_Avenger_Warlock"] = vehicle;
+                                //     buffer["AEGS_Avenger_Warlock"] = vehicle;
                                 // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
-                                //     Scripts._vehicles["AEGS_Avenger_Titan"] = vehicle;
+                                //     buffer["AEGS_Avenger_Titan"] = vehicle;
 
                                 #region Variant Support
 
@@ -446,7 +452,7 @@ namespace HoloXPLOR.Data
 
                                         variant.Modifications = null;
 
-                                        Scripts._vehicles[variant.Name] = variant;
+                                        buffer[variant.Name] = variant;
                                     }
                                 }
 
@@ -461,6 +467,8 @@ namespace HoloXPLOR.Data
                             }
 
                             #endregion
+
+                            Scripts._vehicles = buffer;
                         }
                     }
                 }
