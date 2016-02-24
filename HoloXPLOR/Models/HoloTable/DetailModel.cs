@@ -21,7 +21,13 @@ namespace HoloXPLOR.Models.HoloTable
         {
             this._currentXML = id;
 
-            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+
+            // Special locatio for samples
+            if (Path.GetFileNameWithoutExtension(filename) == "sample")
+            {
+                filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+            }
 
             if (File.Exists(filename))
             {
@@ -43,7 +49,13 @@ namespace HoloXPLOR.Models.HoloTable
 
         public void Save()
         {
-            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+
+            // Special locatio for samples
+            if (Path.GetFileNameWithoutExtension(filename) == "sample")
+            {
+                filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+            }
 
             if (File.Exists(filename))
             {
@@ -55,15 +67,38 @@ namespace HoloXPLOR.Models.HoloTable
                 }
 
                 XmlSerializer xs = new XmlSerializer(typeof(Inventory.Player));
-                XmlTextWriter xw = new XmlTextWriter(filename, Encoding.UTF8);
+                using (XmlTextWriter xw = new XmlTextWriter(filename, Encoding.UTF8))
+                {
 
-                xw.Indentation = 1;
-                xw.IndentChar = ' ';
-                xw.Formatting = Formatting.Indented;
+                    xw.Indentation = 1;
+                    xw.IndentChar = ' ';
+                    xw.Formatting = Formatting.Indented;
 
-                xw.WriteWhitespace("");
-                xs.Serialize(xw, this.Player);
-                xw.Close();
+                    xw.WriteWhitespace("");
+                    xs.Serialize(xw, this.Player);
+                    xw.Close();
+                }
+            }
+        }
+
+        public Byte[] GetBytes()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(Inventory.Player));
+                using (XmlTextWriter xw = new XmlTextWriter(ms, Encoding.UTF8))
+                {
+                    xw.Indentation = 1;
+                    xw.IndentChar = ' ';
+                    xw.Formatting = Formatting.Indented;
+
+                    xw.WriteWhitespace("");
+                    xs.Serialize(xw, this.Player);
+                    
+                    ms.Seek(0, SeekOrigin.Begin);
+
+                    return ms.ToArray();
+                }
             }
         }
 

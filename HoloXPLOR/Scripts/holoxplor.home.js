@@ -59,6 +59,8 @@
 
     }).on("filecomplete.upload", function (e, file, response) {
 
+        $.cookie('js_handle', response.Handle);
+
         window.location.href = response.UrlPath;
 
     })

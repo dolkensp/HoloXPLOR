@@ -9,7 +9,8 @@ namespace HoloXPLOR
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Content/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.cookie-{version}.js"));
 
             // bundles.Add(new ScriptBundle("~/Content/jqueryval").Include(
             //             "~/Scripts/jquery.validate.min.js"));

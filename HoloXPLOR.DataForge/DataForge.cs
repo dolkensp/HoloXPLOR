@@ -14,7 +14,7 @@ namespace HoloXPLOR.DataForge
 {
     public static class DataForgeSerializer
     {
-        public static TObject Deserialize<TObject>(String inFile) where TObject : class
+        public static XmlDocument ReadFile(String inFile)
         {
             using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
             {
@@ -156,25 +156,23 @@ namespace HoloXPLOR.DataForge
                         xmlDoc.AppendChild(element);
                 }
 
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    // if (bugged)
-                    // {
-                    //     xmlDoc.Save(Path.ChangeExtension(inFile, "bug"));
-                    // }
-                    // else
-                    // {
-                    //     xmlDoc.Save(Path.ChangeExtension(inFile, "raw"));
-                    // }
+                return xmlDoc;
+            }
+        }
 
-                    xmlDoc.Save(ms);
+        public static TObject Deserialize<TObject>(String inFile) where TObject : class
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                var xmlDoc = DataForgeSerializer.ReadFile(inFile);
 
-                    ms.Seek(0, SeekOrigin.Begin);
+                xmlDoc.Save(ms);
 
-                    XmlSerializer xs = new XmlSerializer(typeof(TObject));
+                ms.Seek(0, SeekOrigin.Begin);
 
-                    return xs.Deserialize(ms) as TObject;
-                }
+                XmlSerializer xs = new XmlSerializer(typeof(TObject));
+
+                return xs.Deserialize(ms) as TObject;
             }
         }
     }
