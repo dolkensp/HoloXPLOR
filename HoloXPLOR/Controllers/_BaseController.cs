@@ -15,6 +15,8 @@ namespace HoloXPLOR.Controllers
 
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
+            #region Force HTTPS
+
             var hostname = filterContext.HttpContext.Request.Url.Host;
             var path = filterContext.HttpContext.Request.Url.PathAndQuery;
             var scheme = filterContext.HttpContext.Request.Url.Scheme;
@@ -25,6 +27,18 @@ namespace HoloXPLOR.Controllers
                 !String.Equals(xfHeader, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase) &&
                 !String.Equals(scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase))
                 filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, hostname, path));
+
+            #endregion
+
+            #region Force new URLs
+
+            if (String.Equals(hostname, "holoxplor.azurewebsites.net", StringComparison.InvariantCultureIgnoreCase))
+                filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
+
+            if (String.Equals(hostname, "holoxplor-ptu.azurewebsites.net", StringComparison.InvariantCultureIgnoreCase))
+                filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "ptu.holoxplor.space", path));
+
+            #endregion
         }
     }
 }
