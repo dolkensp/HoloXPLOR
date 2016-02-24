@@ -129,7 +129,7 @@ namespace HoloXPLOR.Controllers
 
             lock (HoloTableController._lockMap[id])
             {
-                String filename = HttpContext.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
+                String filename = HttpContext.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", id));
 
                 if (System.IO.File.Exists(filename))
                 {
@@ -285,8 +285,6 @@ namespace HoloXPLOR.Controllers
                 {
                     handle = js_handle.Value;
                 }
-
-                String filename = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
 
                 // model.Player.Hangar.Owner = handle;
 

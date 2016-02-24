@@ -14,7 +14,7 @@ namespace HoloXPLOR.DataForge
 {
     public static class DataForgeSerializer
     {
-        public static XmlDocument ReadFile(String inFile)
+        public static XmlDocument ReadFile(String inFile, Boolean writeLog = false)
         {
             using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
             {
@@ -37,17 +37,23 @@ namespace HoloXPLOR.DataForge
                 var contentOffset = br.ReadInt32();
                 var contentLength = br.ReadInt32();
 
-                // Regex byteFormatter = new Regex("([0-9A-F]{8})");
-
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x00, fileLength);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x04, nodeTableOffset);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x08, nodeTableCount);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x12, referenceTableOffset);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x16, referenceTableCount);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x20, offset3);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x24, count3);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x28, contentOffset);
-                // Debug.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x32, contentLength);
+                if (writeLog)
+                {
+                    // Regex byteFormatter = new Regex("([0-9A-F]{8})");
+                    Console.WriteLine("Header");
+                    Console.WriteLine("0x{0:X6}: {1}", 0x00, header);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x00, fileLength);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x04, nodeTableOffset);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x08, nodeTableCount);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x12, referenceTableOffset);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x16, referenceTableCount);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x20, offset3);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x24, count3);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x28, contentOffset);
+                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x32, contentLength);
+                    Console.WriteLine("");
+                    Console.WriteLine("Node Table");
+                }
 
                 List<BinaryNode> nodeTable = new List<BinaryNode> { };
                 br.BaseStream.Seek(nodeTableOffset, SeekOrigin.Begin);
@@ -59,27 +65,36 @@ namespace HoloXPLOR.DataForge
                     {
                         NodeID = nodeID++,
                         NodeNameOffset = br.ReadInt32(),
-                        Item2 = br.ReadInt32(),
+                        ItemType = br.ReadInt32(),
                         AttributeCount = br.ReadInt16(),
                         ChildCount = br.ReadInt16(),
                         ParentNodeID = br.ReadInt32(),
-                        Item6 = br.ReadInt32(),
-                        Item7 = br.ReadInt32(),
-                        Item8 = br.ReadInt32(),
+                        FirstAttributeIndex = br.ReadInt32(),
+                        FirstChildIndex = br.ReadInt32(),
+                        Reserved = br.ReadInt32(),
                     };
 
                     nodeTable.Add(value);
-                    // Debug.WriteLine(
-                    //     "0x{0:X6}: {1:X8} {2:X8} {3:X4} {4:X4} {5:X8} {6:X8} {7:X8} {8:X8}",
-                    //     position,
-                    //     value.NodeNameOffset,
-                    //     value.Item2,
-                    //     value.AttributeCount,
-                    //     value.ChildCount,
-                    //     value.ParentNodeID,
-                    //     value.Item6,
-                    //     value.Item7,
-                    //     value.Item8);
+                    if (writeLog)
+                    {
+                        Console.WriteLine(
+                            "0x{0:X6}: {1:X8} {2:X8} {3:X4} {4:X4} {5:X8} {6:X8} {7:X8} {8:X8}",
+                            position,
+                            value.NodeNameOffset,
+                            value.ItemType,
+                            value.AttributeCount,
+                            value.ChildCount,
+                            value.ParentNodeID,
+                            value.FirstAttributeIndex,
+                            value.FirstChildIndex,
+                            value.Reserved);
+                    }
+                }
+
+                if (writeLog)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Reference Table");
                 }
 
                 List<BinaryReference> attributeTable = new List<BinaryReference> { };
@@ -94,7 +109,15 @@ namespace HoloXPLOR.DataForge
                     };
 
                     attributeTable.Add(value);
-                    // Debug.WriteLine("0x{0:X6}: {1:X8} {2:X8}", position, value.NameOffset, value.ValueOffset);
+                    if (writeLog)
+                    {
+                        Console.WriteLine("0x{0:X6}: {1:X8} {2:X8}", position, value.NameOffset, value.ValueOffset);
+                    }
+                }
+                if (writeLog)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Order Table");
                 }
 
                 List<Int32> table3 = new List<Int32> { };
@@ -105,7 +128,16 @@ namespace HoloXPLOR.DataForge
                     var value = br.ReadInt32();
 
                     table3.Add(value);
-                    // Debug.WriteLine("0x{0:X6}: {1:X8}", position, value);
+                    if (writeLog)
+                    {
+                        Console.WriteLine("0x{0:X6}: {1:X8}", position, value);
+                    }
+                }
+
+                if (writeLog)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Dynamic Dictionary");
                 }
 
                 List<BinaryValue> dataTable = new List<BinaryValue> { };
@@ -119,7 +151,10 @@ namespace HoloXPLOR.DataForge
                         Value = br.ReadCString(),
                     };
                     dataTable.Add(value);
-                    // Debug.WriteLine("0x{0:X6}: {1:X8} {2}", position, value.Offset, value.Value);
+                    if (writeLog)
+                    {
+                        Console.WriteLine("0x{0:X6}: {1:X8} {2}", position, value.Offset, value.Value);
+                    }
                 }
 
                 var dataMap = dataTable.ToDictionary(k => k.Offset, v => v.Value);

@@ -11,7 +11,7 @@ namespace HoloXPLOR.DataForge
     {
         public static void Main(params String[] args)
         {
-            if (args.Length != 1)
+            if (args.Length < 1 || args.Length > 2)
             {
                 Console.WriteLine("Usage: HoloXPLOR.DataForge.exe [infile]");
                 Console.WriteLine();
@@ -19,7 +19,7 @@ namespace HoloXPLOR.DataForge
                 return;
             }
 
-            var xml = DataForgeSerializer.ReadFile(args[0]);
+            var xml = DataForgeSerializer.ReadFile(args[0], args.Length == 2);
             xml.Save(Path.ChangeExtension(args[0], "raw"));
         }
     }
