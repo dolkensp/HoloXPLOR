@@ -14,6 +14,7 @@ using Xml = HoloXPLOR.Data.XML;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace HoloXPLOR.Controllers
 {
@@ -314,12 +315,21 @@ namespace HoloXPLOR.Controllers
 
             lock (HoloTableController._lockMap[id])
             {
+                var model = new DetailModel(id);
+
+                var js_handle = this.Request.Cookies["js_handle"];
+                var handle = id;
+
+                if (js_handle != null && !String.IsNullOrWhiteSpace(js_handle.Value))
+                {
+                    handle = js_handle.Value;
+                }
+
                 String filename = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", id));
 
-                if (!System.IO.File.Exists(filename))
-                    return RedirectToAction("NotFound");
+                // model.Player.Hangar.Owner = handle;
 
-                return File(filename, "application/xml", String.Format("{0}.xml", id));
+                return File(model.GetBytes(), "application/xml", String.Format("db_{0}.xml", handle));
             }
         }
 
@@ -336,7 +346,48 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
-                if (String.Equals("sample", Path.GetFileNameWithoutExtension(file.FileName), StringComparison.InvariantCultureIgnoreCase))
+                var shortName = Path.GetFileNameWithoutExtension(file.FileName);
+
+                if (file.ContentLength > 0x500000)
+                {
+                    this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
+                    return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
+                }
+
+                String tmpFile = Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.tmp", shortName));
+
+                if (System.IO.File.Exists(tmpFile))
+                {
+                    System.IO.File.Delete(tmpFile);
+                }
+
+                file.SaveAs(tmpFile);
+
+                var id = Guid.NewGuid().ToString().Replace("-", "");
+                
+                var js_handle = shortName.Replace("db_", "");
+
+                try
+                {
+                    var temp = System.IO.File.ReadAllText(tmpFile).FromXML<Inventory.Player>();
+                    
+                    if (temp.Hangar == null || temp.Hangar.Inventory == null || temp.Hangar.Inventory.Count == 0)
+                    {
+                        this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
+                        return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
+                    }
+
+                    id = new Regex("[^a-zA-Z0-9_-]").Replace(temp.Hangar.Owner, "-");
+                }
+                catch (Exception)
+                {
+                    System.IO.File.Delete(tmpFile);
+                    this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
+                    return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
+                }
+
+                // Protect Sample from being overwritten
+                if (String.Equals("sample", id, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return new JsonResult
                     {
@@ -348,42 +399,10 @@ namespace HoloXPLOR.Controllers
                     };
                 }
 
-                String xmlFile = Server.MapPath(String.Format(@"~/App_Data/{0}.xml", Path.GetFileNameWithoutExtension(file.FileName)));
-                String bakFile = Server.MapPath(String.Format(@"~/App_Data/{0}.bak", Path.GetFileNameWithoutExtension(file.FileName)));
-                String tmpFile = Server.MapPath(String.Format(@"~/App_Data/{0}.tmp", Path.GetFileNameWithoutExtension(file.FileName)));
-
-                if (file.ContentLength > 0x500000)
-                {
-                    this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
-                    return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
-                }
-
-                if (System.IO.File.Exists(tmpFile))
-                {
-                    System.IO.File.Delete(tmpFile);
-                }
-
-                file.SaveAs(tmpFile);
-
-                try
-                {
-                    var temp = System.IO.File.ReadAllText(tmpFile).FromXML<Inventory.Player>();
-                    if (temp.Hangar == null || temp.Hangar.Inventory == null || temp.Hangar.Inventory.Count == 0)
-                    {
-                        this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
-                        return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
-                    }
-                }
-                catch (Exception)
-                {
-                    System.IO.File.Delete(tmpFile);
-                    this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
-                    return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
-                }
-
-                String id = Path.GetFileNameWithoutExtension(xmlFile);
-
                 HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
+
+                String xmlFile = Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", id));
+                String bakFile = Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.bak", id));
 
                 lock (HoloTableController._lockMap[id])
                 {
@@ -405,6 +424,7 @@ namespace HoloXPLOR.Controllers
                         Data = new
                         {
                             Result = UploadResult.Success,
+                            Handle = js_handle,
                             UrlPath = Url.Action("Hangar", new { id = id })
                         }
                     };
