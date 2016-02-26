@@ -212,7 +212,8 @@ footer .cig-icon { margin-bottom: -12px; }
 .js-hardpoint[data-item-type='PowerPlant'] { background-position: 0px -192px; }
 .js-hardpoint[data-item-type='Paints'] { background-position: 0px -192px; }
 .js-hardpoint[data-item-sub-type='Cockpit_Audio'] { background-position: -32px -320px; }
-.js-hardpoint[data-item-type='Container'] { background: url(../images/icons8-ios-filled-empty-box.png) no-repeat; background-position: 3px 2px; } /* TODO: Add to sprite */
+.js-hardpoint[data-item-type='Cooler'] { background-position: -96px -353px; }
+.js-hardpoint[data-item-type='Container'] { background-position: 0px -352px; }
 .js-hardpoint[data-item-sub-type='Ammo_CounterMeasure'] { background-position: -96px -288px; }
 .js-hardpoint[data-item-sub-type='Missile'],
 .js-hardpoint[data-item-type='WeaponMissile'] { background-position: -32px -128px; }
@@ -387,7 +388,7 @@ footer a { color: #fff; }
     position: relative;
     margin-left: 5px;
     margin-bottom: 5px;
-    background: url(../images/icons8-ios-filled.png) no-repeat -1px -130px;
+    background: url(../images/icons8-ios-filled.png) no-repeat -32px -352px;
     display: block;
 }
 
