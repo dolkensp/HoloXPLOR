@@ -73,22 +73,23 @@
                 </button>
                 @Html.ActionLink("HoloXPLOR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @if (!String.IsNullOrWhiteSpace(ViewBag.ID))
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @if (ViewBag.Title != "Hangar")
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://holoxplor.space"><span class="glyphicon glyphicon-bell"></span> Live Version</a></li>
+                    @if (!String.IsNullOrWhiteSpace(ViewBag.ID))
+                    {
+                        if (ViewBag.Title != "Hangar")
                         { 
                             <li><a href="@Url.Action("Hangar", "HoloTable", new { id = ViewBag.ID })"><span class="glyphicon glyphicon-globe"></span> Hangar</a></li>
                         }
                         <li><a href="@Url.Action("Download", "HoloTable", new { id = ViewBag.ID })" class="js-download"><span class="glyphicon glyphicon-cloud-download"></span> Download</a></li>
-                        @if (!String.Equals(ViewBag.ID, "sample", StringComparison.InvariantCultureIgnoreCase))
+                        if (!String.Equals(ViewBag.ID, "sample", StringComparison.InvariantCultureIgnoreCase))
                         { 
                             <li><a href="@Url.Action("Delete", "HoloTable", new { id = ViewBag.ID })" class="js-delete"><span class="glyphicon glyphicon-cloud-delete"></span> Delete My Data</a></li>
                         }
-                    </ul>
-                </div>
-            }
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     <div class="container body-content">
