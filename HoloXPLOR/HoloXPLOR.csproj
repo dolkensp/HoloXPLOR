@@ -1667,9 +1667,6 @@
     <Content Include="Scripts\holoxplor.rating.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.js" />
     <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\BRRA\BRRA_HornetCanard_S2_Q1.bug" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Weapons\Greycat\Greycat_Industrial_Sure_Grip_Tractor.bug" />
-    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\RSI_Aurora.bug" />
     <None Include="Properties\PublishProfiles\holoxplor-ptu.pubxml" />
     <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
     <Content Include="Content\formstone.upload.css" />
