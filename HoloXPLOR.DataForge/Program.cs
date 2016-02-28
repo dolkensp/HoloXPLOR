@@ -9,230 +9,255 @@ namespace HoloXPLOR.DataForge
 {
     public static class Program
     {
-        public class GOSTEntityStateMachine : DataForgeSerializable
-        {
-            //[desc:"Array of GOSTs"]
-            public GOSTInstance[] GOSTs { get; set; }
+        //public class GOSTEntityStateMachine : DataForgeSerializable
+        //{
+        //    //[desc:"Array of GOSTs"]
+        //    public GOSTInstance[] GOSTs { get; set; }
 
-            public GOSTEntityStateMachine(BinaryReader br)
-                : base(br)
-            {
-                this.GOSTs = this.ReadArray<GOSTInstance>();
-            }
-        }
+        //    public GOSTEntityStateMachine(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.GOSTs = this.ReadArray<GOSTInstance>();
+        //    }
+        //}
 
-        public class GOSTInstance : DataForgeSerializable
-        {
-            //[desc:"Name of this GOST"]
-            public String Name { get; set; }
+        //public class GOSTInstance : DataForgeSerializable
+        //{
+        //    //[desc:"Name of this GOST"]
+        //    public String Name { get; set; }
 
-            //[desc:"Array of constants for this state group"]
-            public GOSTConstant[] Constants { get; set; }
+        //    //[desc:"Array of constants for this state group"]
+        //    public GOSTConstant[] Constants { get; set; }
 
-            //[desc:"Array of state groups within this GOST"]
-            public GOSTStateGroupImport[] StateGroups { get; set; }
+        //    //[desc:"Array of state groups within this GOST"]
+        //    public GOSTStateGroupImport[] StateGroups { get; set; }
 
-            public Int32 _NodeType { get; set; }
-            public Int32 _NodeIndex { get; set; }
+        //    public Int32 _NodeType { get; set; }
+        //    public Int32 _NodeIndex { get; set; }
 
-            public GOSTInstance(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
+        //    public GOSTInstance(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
 
-                var numConstants = br.ReadUInt32();
-                var numStateGroups = br.ReadUInt32();
+        //        var numConstants = br.ReadUInt32();
+        //        var numStateGroups = br.ReadUInt32();
 
-                if (numConstants < 0) numConstants = 0;
-                if (numStateGroups < 0) numStateGroups = 0;
+        //        if (numConstants < 0) numConstants = 0;
+        //        if (numStateGroups < 0) numStateGroups = 0;
 
-                this.Constants = this.ReadArray<GOSTConstant>(numConstants);
-                this.StateGroups = this.ReadArray<GOSTStateGroupImport>(numStateGroups);
+        //        this.Constants = this.ReadArray<GOSTConstant>(numConstants);
+        //        this.StateGroups = this.ReadArray<GOSTStateGroupImport>(numStateGroups);
 
-                this._NodeType = br.ReadInt32();
-                this._NodeIndex = br.ReadInt32();
-            }
-        }
+        //        this._NodeType = br.ReadInt32();
+        //        this._NodeIndex = br.ReadInt32();
+        //    }
+        //}
 
-        public class GOSTConstant : DataForgeSerializable
-        {
-            //[desc:"Constant name"]
-            public String Name { get; set; }
+        //public class GOSTConstant : DataForgeSerializable
+        //{
+        //    //[desc:"Constant name"]
+        //    public String Name { get; set; }
 
-            //[desc:"Constant type"]
-            public String Type { get; set; } // EGOSTVariableType
+        //    //[desc:"Constant type"]
+        //    public String Type { get; set; } // EGOSTVariableType
 
-            //[desc:"Constant value"]
-            public String Value { get; set; }
+        //    //[desc:"Constant value"]
+        //    public String Value { get; set; }
 
-            public GOSTConstant(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                this.Type = this.ReadString();
-                this.Value = this.ReadString();
-            }
-        }
+        //    public GOSTConstant(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        this.Type = this.ReadString();
+        //        this.Value = this.ReadString();
+        //    }
+        //}
 
-        public class GOSTStateGroupImport : DataForgeSerializable
-        {
-            //[desc:"State group name to use within this entity"]
-	        public String Name { get; set; }			
+        //public class GOSTStateGroupImport : DataForgeSerializable
+        //{
+        //    //[desc:"State group name to use within this entity"]
+        //    public String Name { get; set; }			
 	
-	        //[desc:"State group implementation from GOSTStateGroups.xml file"]
-            public Guid? Implementation { get; set; } // ?? GOSTStateGroup&	
+        //    //[desc:"State group implementation from GOSTStateGroups.xml file"]
+        //    public Guid? Implementation { get; set; } // ?? GOSTStateGroup&	
 
-            public GOSTStateGroupImport(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                // br.ReadInt32();
-                this.Implementation = this.ReadGuid();
-            }
-        }
+        //    public GOSTStateGroupImport(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        // br.ReadInt32();
+        //        this.Implementation = this.ReadGuid();
+        //    }
+        //}
 
-        public class GameMode : DataForgeSerializable
-        {
-            public String Name { get; set; }
-            public String DisplayName { get; set; }
-            public String Alias { get; set; }
-            public String ModuleType { get; set; }
-            public String PlayerToPlayerCollisionPolicy { get; set; }
-            public Boolean TeamGame { get; set; }
-            public Boolean UseReadOnlyDataStore { get; set; }
-            public Boolean SpawnInSpaceship { get; set; }
-            public Boolean DisableIFCSCruiseMode { get; set; }
-            public Boolean IsSurvivalMode { get; set; }
-            public Boolean UseEjectionPenalty { get; set; }
-            public Boolean DisableThirdPersonCamera { get; set; }
-            public Int16 Unknown { get; set; }
-            public String RulesPath { get; set; }
-            public String LevelLocation { get; set; }
-            public Guid? MusicSuite { get; set; }
-            public String AnnouncerGameModeName { get; set; }
-            public String AnnouncerGameModeTokenName { get; set; }
-            public Single AudioOcclusionMaDist { get; set; }
-            public Boolean RequiresVisorScoreboard { get; set; }
-            public Boolean RequiresRoundTimer { get; set; }
-            public Guid? LoadoutProbabilities { get; set; }
-            public Boolean AllowLoadoutCycling { get; set; }
-            public Guid? ShipArchetypeGroup { get; set; }
+        //public class GameMode : DataForgeSerializable
+        //{
+        //    public String Name { get; set; }
+        //    public String DisplayName { get; set; }
+        //    public String Alias { get; set; }
+        //    public String ModuleType { get; set; }
+        //    public String PlayerToPlayerCollisionPolicy { get; set; }
+        //    public Boolean TeamGame { get; set; }
+        //    public Boolean UseReadOnlyDataStore { get; set; }
+        //    public Boolean SpawnInSpaceship { get; set; }
+        //    public Boolean DisableIFCSCruiseMode { get; set; }
+        //    public Boolean IsSurvivalMode { get; set; }
+        //    public Boolean UseEjectionPenalty { get; set; }
+        //    public Boolean DisableThirdPersonCamera { get; set; }
+        //    public Int16 Unknown { get; set; }
+        //    public String RulesPath { get; set; }
+        //    public String LevelLocation { get; set; }
+        //    public Guid? MusicSuite { get; set; }
+        //    public String AnnouncerGameModeName { get; set; }
+        //    public String AnnouncerGameModeTokenName { get; set; }
+        //    public Single AudioOcclusionMaDist { get; set; }
+        //    public Boolean RequiresVisorScoreboard { get; set; }
+        //    public Boolean RequiresRoundTimer { get; set; }
+        //    public Guid? LoadoutProbabilities { get; set; }
+        //    public Boolean AllowLoadoutCycling { get; set; }
+        //    public Guid? ShipArchetypeGroup { get; set; }
 
-            public GameMode(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                this.DisplayName = this.ReadString();
-                this.Alias = this.ReadString();
-                this.ModuleType = this.ReadString();
-                this.PlayerToPlayerCollisionPolicy = this.ReadString();
-                this.TeamGame = br.ReadBoolean();
-                this.UseReadOnlyDataStore = br.ReadBoolean();
-                this.SpawnInSpaceship = br.ReadBoolean();
-                this.DisableIFCSCruiseMode = br.ReadBoolean();
-                this.IsSurvivalMode = br.ReadBoolean();
-                this.UseEjectionPenalty = br.ReadBoolean();
-                this.DisableThirdPersonCamera = br.ReadBoolean();
-                this.Unknown = br.ReadInt16();
-                this.RulesPath = this.ReadString();
-                this.LevelLocation = this.ReadString();
-                this.MusicSuite = this.ReadGuid();
-                this.AnnouncerGameModeName = this.ReadString();
-                this.AnnouncerGameModeTokenName = this.ReadString();
-                this.AudioOcclusionMaDist = br.ReadSingle();
-                this.RequiresVisorScoreboard = br.ReadBoolean();
-                this.RequiresRoundTimer = br.ReadBoolean();
-                this.LoadoutProbabilities = this.ReadGuid();
-                this.AllowLoadoutCycling = br.ReadBoolean();
-                this.ShipArchetypeGroup = this.ReadGuid();
-            }
-        }
+        //    public GameMode(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        this.DisplayName = this.ReadString();
+        //        this.Alias = this.ReadString();
+        //        this.ModuleType = this.ReadString();
+        //        this.PlayerToPlayerCollisionPolicy = this.ReadString();
+        //        this.TeamGame = br.ReadBoolean();
+        //        this.UseReadOnlyDataStore = br.ReadBoolean();
+        //        this.SpawnInSpaceship = br.ReadBoolean();
+        //        this.DisableIFCSCruiseMode = br.ReadBoolean();
+        //        this.IsSurvivalMode = br.ReadBoolean();
+        //        this.UseEjectionPenalty = br.ReadBoolean();
+        //        this.DisableThirdPersonCamera = br.ReadBoolean();
+        //        this.Unknown = br.ReadInt16();
+        //        this.RulesPath = this.ReadString();
+        //        this.LevelLocation = this.ReadString();
+        //        this.MusicSuite = this.ReadGuid();
+        //        this.AnnouncerGameModeName = this.ReadString();
+        //        this.AnnouncerGameModeTokenName = this.ReadString();
+        //        this.AudioOcclusionMaDist = br.ReadSingle();
+        //        this.RequiresVisorScoreboard = br.ReadBoolean();
+        //        this.RequiresRoundTimer = br.ReadBoolean();
+        //        this.LoadoutProbabilities = this.ReadGuid();
+        //        this.AllowLoadoutCycling = br.ReadBoolean();
+        //        this.ShipArchetypeGroup = this.ReadGuid();
+        //    }
+        //}
 
-        public class ForceFeedback : DataForgeSerializable
-        {
-            public ForceFeedbackPattern[] Patterns { get; set; }
-            public ForceFeedbackEnvelope[] Envelopes { get; set; }
-            public ForceFeedbackEffect[] Effects { get; set; }
+        //public class ForceFeedback : DataForgeSerializable
+        //{
+        //    public ForceFeedbackPattern[] Patterns { get; set; }
+        //    public ForceFeedbackEnvelope[] Envelopes { get; set; }
+        //    public ForceFeedbackEffect[] Effects { get; set; }
 
-            public ForceFeedback(BinaryReader br)
-                : base(br)
-            {
-                var numPatterns = br.ReadUInt32(); br.ReadUInt32();
-                var numEnvelopes = br.ReadUInt32(); br.ReadUInt32();
-                var numEffects = br.ReadUInt32(); br.ReadUInt32();
+        //    public ForceFeedback(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        var numPatterns = br.ReadUInt32(); br.ReadUInt32();
+        //        var numEnvelopes = br.ReadUInt32(); br.ReadUInt32();
+        //        var numEffects = br.ReadUInt32(); br.ReadUInt32();
 
-                this.Patterns = this.ReadArray<ForceFeedbackPattern>(numPatterns);
-                this.Envelopes = this.ReadArray<ForceFeedbackEnvelope>(numEnvelopes);
-                this.Effects = this.ReadArray<ForceFeedbackEffect>(numEffects);
-            }
-        }
+        //        this.Patterns = this.ReadArray<ForceFeedbackPattern>(numPatterns);
+        //        this.Envelopes = this.ReadArray<ForceFeedbackEnvelope>(numEnvelopes);
+        //        this.Effects = this.ReadArray<ForceFeedbackEffect>(numEffects);
+        //    }
+        //}
 
-        public class ForceFeedbackPattern : DataForgeSerializable
-        {
-            public String Name { get; set; }
-            public String Samples { get; set; }
+        //public class ForceFeedbackPattern : DataForgeSerializable
+        //{
+        //    public String Name { get; set; }
+        //    public String Samples { get; set; }
 
-            public ForceFeedbackPattern(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                this.Samples = this.ReadString();
-            }
-        }
+        //    public ForceFeedbackPattern(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        this.Samples = this.ReadString();
+        //    }
+        //}
 
-        public class ForceFeedbackEnvelope : DataForgeSerializable
-        {
-            public String Name { get; set; }
-            public String Samples { get; set; }
+        //public class ForceFeedbackEnvelope : DataForgeSerializable
+        //{
+        //    public String Name { get; set; }
+        //    public String Samples { get; set; }
             
-            public ForceFeedbackEnvelope(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                this.Samples = this.ReadString();
-            }
-        }
+        //    public ForceFeedbackEnvelope(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        this.Samples = this.ReadString();
+        //    }
+        //}
 
-        public class ForceFeedbackEffect : DataForgeSerializable
-        {
-            public String Name { get; set; }
-            public Single Time { get; set; }
+        //public class ForceFeedbackEffect : DataForgeSerializable
+        //{
+        //    public String Name { get; set; }
+        //    public Single Time { get; set; }
 
-            public ForceFeedbackMotor MotorA { get; set; }
-            public ForceFeedbackMotor MotorB { get; set; }
-            public ForceFeedbackMotor MotorAB { get; set; }
+        //    public ForceFeedbackMotor MotorA { get; set; }
+        //    public ForceFeedbackMotor MotorB { get; set; }
+        //    public ForceFeedbackMotor MotorAB { get; set; }
 
-            public ForceFeedbackEffect(BinaryReader br)
-                : base(br)
-            {
-                this.Name = this.ReadString();
-                this.Time = br.ReadSingle();
+        //    public ForceFeedbackEffect(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this.Name = this.ReadString();
+        //        this.Time = br.ReadSingle();
 
-                this.MotorAB = new ForceFeedbackMotor(br);
-                this.MotorA = new ForceFeedbackMotor(br);
-                this.MotorB = new ForceFeedbackMotor(br);
-            }
-        }
+        //        this.MotorAB = new ForceFeedbackMotor(br);
+        //        this.MotorA = new ForceFeedbackMotor(br);
+        //        this.MotorB = new ForceFeedbackMotor(br);
+        //    }
+        //}
 
-        // TODO: Figure out what the values here actually mean, as they don't map to the XML 1:1
-        public class ForceFeedbackMotor : DataForgeSerializable
-        {
-            public Int32 _NodeType { get; set; }
-            public Int32 _NodeIndex { get; set; }
+        //// TODO: Figure out what the values here actually mean, as they don't map to the XML 1:1
+        //public class ForceFeedbackMotor : DataForgeSerializable
+        //{
+        //    public Int32 _NodeType { get; set; }
+        //    public Int32 _NodeIndex { get; set; }
 
-            public ForceFeedbackMotor(BinaryReader br)
-                : base(br)
-            {
-                this._NodeType = br.ReadInt32();
-                this._NodeIndex = br.ReadInt32();
-            }
-        }
+        //    public ForceFeedbackMotor(BinaryReader br)
+        //        : base(br)
+        //    {
+        //        this._NodeType = br.ReadInt32();
+        //        this._NodeIndex = br.ReadInt32();
+        //    }
+        //}
+
+        // public static UInt64 var_string = 0x84;
+        // public static UInt64 var_byte   = 0x01;
+        // public static UInt64 var_int16  = 0x02;
+        // public static UInt64 var_int32  = 0x04;
+        // public static UInt64 var_int64  = 0x08;
+        // public static UInt64 var_guid   = 0x16;
+        // public static UInt64 var_nguid  = 0x26;
 
         public static void Main(params String[] args)
         {
             var inFile = "Game.dcb";
             using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
             {
+                var df = new DataForge(br, true);
+
+                // df.DumpFile();
+                // 
+                // File.WriteAllText("01-structs.js", df.StructDefinitionTable.ToJSON());
+                // File.WriteAllText("02-properties.js", df.PropertyDefinitionTable.ToJSON());
+                // File.WriteAllText("03-enums.js", df.EnumDefinitionTable.ToJSON());
+                // File.WriteAllText("04-records.js", df.RecordDefinitionTable.ToJSON());
+                // File.WriteAllText("05-enumvalues.js", df.EnumValueTable.ToJSON());
+                // File.WriteAllText("06-values.js", df.ValueTable.ToJSON());
+                // File.WriteAllText("07-structcount.js", df.DataMappingTable.ToJSON());
+                File.WriteAllText("dataforge.js", df.ToJSON());
+
+                // df.Serialize();
+
+                #region Definitions
+
                 var definitions = new List<Int64[]> {
                     new Int64[] { 0x00000000, 0x04 }, // Array Sizes
                     new Int64[] { 0x0000006c, 0x84, 0x04, 0x02, 0x02, 0x04 },
@@ -241,107 +266,39 @@ namespace HoloXPLOR.DataForge
                     new Int64[] { 0x000077c4, 0x02, 0x02 },
                     new Int64[] { 0x000077d0, 0x02, 0x02 },
                     new Int64[] { 0x00007cac, 0x84 /* Element Name */, 0x04 /* Type? */, 0x16 /* Hash */, 0x02 /* Index */, 0x02 /* Parent */ }, // 
-                    new Int64[] { 0x0001b678, 0x04, 0x04 },
-                    new Int64[] { 0x0001bab4, 0x04, 0x04 },
-                    new Int64[] { 0x0001bbf8, 0x84 },
+                    new Int64[] { 0x0001b678, 0x01 }, // int8   - 0x14
+                    new Int64[] { 0x0001B68C, 0x02 }, // int16  - 0x14
+                    new Int64[] { 0x0001B6B4, 0x04 }, // int32  - 0x24
+                    new Int64[] { 0x0001B744, 0x08 }, // int64  - 0x14
+                    new Int64[] { 0x0001B7E4, 0x01 }, // uint8  - 0x14
+                    new Int64[] { 0x0001B7F8, 0x02 }, // uint16 - 0x14 
+                    new Int64[] { 0x0001B820, 0x04 }, // uint32 - 0x14
+                    new Int64[] { 0x0001B870, 0x08 }, // uint64 - 0x14
+
+                    new Int64[] { 0x0001B910, 0x01 }, // Boolean - 0x14
+                    new Int64[] { 0x0001B924, 0x0108 }, // Single
+                    new Int64[] { 0x0001BA14, 0x0116 }, // Double -- 0x0001B9C4
+
+                    new Int64[] { 0x0001bab4, 0x16 }, // Guid Values
+                    new Int64[] { 0x0001bbf4, 0x84 }, // String Values
+                    new Int64[] { 0x0001bdcc, 0x84 }, // Locale Values
+                    new Int64[] { 0x0001be9c, 0x84 }, // Enum Values
                     new Int64[] { 0x0001c054, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x0002e4d4, 0x04, 0x04, 0x04, 0x04, 0x04 },
+                    new Int64[] { 0x0001c054, 0x04, 0x04, 0x04, 0x04 }, // , 0x04, 0x04, 0x04, 0x04 },
+
+                    new Int64[] { 0x00024814, 0x04, 0x04, 0x04, 0x04 },
+                    new Int64[] { 0x00029124, 0x04, 0x04 },
+                    new Int64[] { 0x0002e4d4, 0x04, 0x16 }, // Reference Values
                     new Int64[] { 0x0002e7cc, 0x84 },
                     new Int64[] { 0x0002f1dc, 0x80 }, // String Table
-                    new Int64[] { 0x00096027, 0x84, 0x84 },
-                    new Int64[] { 0x0009608b, 0x04, 0x04, }, // Somewhere here is a 0x04, 0x04, 0x04, 0x04, 0x04 struct
-                    new Int64[] { 0x00097433, 0x84, 0x84 },
-                    new Int64[] { 0x000977eb, 0x04 },
-                    new Int64[] { 0x0009781f, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x0009785f, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x00097e0b, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x00097f27, 0x04, 0x04 },
-                    new Int64[] { 0x000d2087, 0x01 },
-                    new Int64[] { 0x000d20e0, 0x84, 0x84 },
-                    new Int64[] { 0x000d21c0, 0x04, 0x04 },
-                    new Int64[] { 0x000d21d8, 0x84, 0x84 }, // ForceFeedback.ForceFeedbackEffects > Patterns > ForceFeedbackPattern
-                    new Int64[] { 0x000d2248, 0x84, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x000d2588, 0x04, 0x84, 0x84 },
-                    new Int64[] {
-                        0x000d2738, // GameRules.sch | 0x000001EF
-                        0x84, // string name
-                        0x84, // string displayName
-                        0x84, // string alias
-                        0x84, // EModuleType moduleType
-                        0x84, // EPlayerToPlayerCollisionPolicy playerToPlayerCollisionPolicy
-                        0x01, // bool teamGame
-                        0x01, // bool useReadOnlyDataStore
-                        0x01, // bool spawnInSpaceship
-                        0x01, // bool disableIFCSCruiseMode
-                        0x01, // bool isSurvivalMode
-                        0x01, // bool useEjectionPenalty
-                        0x01, // bool disableThirdPersonCamera
-                        0x02, // MusicSuite unknown1
-                        0x84, // string rulesPath
-                        0x84, // string levelLocation
-                        0x26, // guid musicSuite
-                        0x84, // string announcerGameModeName 
-                        0x84, // string announcerGameModeTokenName
-                        0x44, // float audioOcclusionMaxDist
-                        0x01, // bool requiresVisorScoreboard 
-                        0x01, // bool requiresRoundTimer
-                        0x26, // LoadoutProbabilities& loadoutProbabilities 
-                        0x01, // bool allowLoadoutCycling 
-                        0x26, // ShipArchetypeGroup& invalidShipGroup
-                    },
-                    // new Int64[] { 0x000d2738, 0x84, 0x84, 0x84, 0x84, 0x84, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x84, 0x84, 0x04, 0x04, 0x04, 0x04, 0x04, 0x84, 0x84, 0x01, 0x01, 0x04, 0x26, 0x01, 0x26 },
-                    new Int64[] { 0x000d2f88, 0x84, 0x84 },
-                    new Int64[] { 0x000d3410, 0x04 },
-                    new Int64[] { 0x000d3414, 0x84, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x000d3458, 0x84, 0x84 },
-                    
-                    // new Int64[] {
-                    //     0x000d3414, // GOSTEntity_Schema.sch | 0x00001F41
-                    //     0x84, // string name
-                    // 
-                    // },
-                    new Int64[] { 0x000d5a94, 0x02 },
-                    new Int64[] { 0x000d5aa2, 0x84, 0x84 },
-                    new Int64[] { 0x000d6412, 0x02 },
-                    new Int64[] { 0x000d6438, 0x84 },
-                    new Int64[] { 0x000df844, 0x84, 0x04, 0x04, 0x04, 0x04 },
-                    new Int64[] { 0x000df880, 0x84, 0x04 },
-                    new Int64[] { 0x000dfc58, 0x04, 0x04 },
-                    new Int64[] { 0x000E0018, 0x04, 0x04, 0x04 },
-                    // new Int64[] { 0x000D33FC, 0x04, 0x04 },
-                    new Int64[] { 0x000E0270, 0x04 },
-                    new Int64[] { 0x000e0280,
-                        0x84, // Name
-                        0x04, // Manufacturer Type
-                        0x04, // Manufacturer Offset
-                    }, // Manufacturers
-                    // new Int64[] { 0x000e02ec, 0x04 },
-                    new Int64[] { 0x000e0300, // HudColors
-                        0x84, // Name
-                        0x04, // Flash Color Type
-                        0x04, // Flash Color Index
-                        0x03, // Diffuse
-                        0x03, // Emmisive
-                        0x03, // RimColor
-                        0x03, // SilhouetteColor
-                        0x04, // Texture Type
-                        0x04  // Texture Index
-                    }, // ShipColorPalettes
-                    new Int64[] { 0x000E10E4,
-                        0x84, // 
-                        0x04, // 
-                    },
-                    new Int64[] { 0x000E1F04,
-                        0x84, // 
-                        0x04, // 
-                    },
-                    new Int64[] { br.BaseStream.Length },
                 };
 
-                var df = new DataForge(br);
+                #endregion
 
                 br.BaseStream.Seek(0x0001B678, SeekOrigin.Begin);
-                
+
+                // br.BaseStream.Seek(0, SeekOrigin.Begin);
+
                 for (Int32 i = 0, j = definitions.Count; i < j - 1; i++)
                 {
                     var k = 0;
@@ -368,6 +325,14 @@ namespace HoloXPLOR.DataForge
 
                             switch (width)
                             {
+                                case 0x0108:
+                                    format = "{0} ";
+                                    data = br.ReadSingle();
+                                    break;
+                                case 0x0116:
+                                    format = "{0} ";
+                                    data = br.ReadDouble();
+                                    break;
                                 case 0x00:
                                     format = "| ";
                                     data = "";

@@ -39,6 +39,14 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dolkens.Framework, Version=1.0.5648.17179, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dolkens.Framework.1.0.5648.17179\lib\net45\Dolkens.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,19 +60,42 @@
     <Compile Include="CryXmlReference.cs" />
     <Compile Include="CryXmlValue.cs" />
     <Compile Include="DataForge.cs" />
+    <Compile Include="DataForgeArrayInt.cs" />
+    <Compile Include="DataForgeArrayReference.cs" />
+    <Compile Include="DataForgeArrayEnum.cs" />
+    <Compile Include="DataForgeArrayLocale.cs" />
+    <Compile Include="DataForgeArrayString.cs" />
+    <Compile Include="DataForgeArrayGuid.cs" />
+    <Compile Include="DataForgeEnumDefinition.cs" />
+    <Compile Include="DataForgePropertyDefinition.cs" />
+    <Compile Include="DataForgeDataMapping.cs" />
+    <Compile Include="DataForgeRecord.cs" />
     <Compile Include="DataForgeSerializable.cs" />
+    <Compile Include="DataForgeStructDefinition.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Extensions.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CryXmlSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_DataForge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <Content Include="Game.dcb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="chunk.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="reverse.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="trailing.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

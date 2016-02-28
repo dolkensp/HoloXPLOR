@@ -3,410 +3,325 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForge : DataForgeSerializable
+    public class DataForge
     {
+        public static Regex NEWLINE = new Regex("\r\n\t", RegexOptions.Multiline);
+
+        internal BinaryReader _br;
+
         public Int64 FileVersion { get; set; }
-        public DataForgeTypeDefinition[] TypeDefinitionTable { get; set; }
+        
+        public DataForgeStructDefinition[] StructDefinitionTable { get; set; }
         public DataForgePropertyDefinition[] PropertyDefinitionTable { get; set; }
         public DataForgeEnumDefinition[] EnumDefinitionTable { get; set; }
-        public DataForgeRecord4[] RecordTable4 { get; set; }
-        public DataForgeSchema[] SchemaTable { get; set; }
-        public DataForgeStringLookup[] EnumValueTable { get; set; }
+        public DataForgeDataMapping[] DataMappingTable { get; set; }
+        public DataForgeRecord[] RecordDefinitionTable { get; set; }
+        public DataForgeArrayReference[] Array_ReferenceValues { get; set; }
+        public DataForgeStringLookup[] EnumOptionTable { get; set; }
         public DataForgeString[] ValueTable { get; set; }
+        public DataForgeArrayGuid[] Array_GuidValues { get; set; }
+        public DataForgeArrayString[] Array_StringValues { get; set; }
+        public DataForgeArrayLocale[] Array_LocaleValues { get; set; }
+        public DataForgeArrayEnum[] Array_EnumValues { get; set; }
+        public DataForgeArrayInt8[] Array_Int8Values { get; set; }
+        public DataForgeArrayInt16[] Array_Int16Values { get; set; }
+        public DataForgeArrayInt32[] Array_Int32Values { get; set; }
+        public DataForgeArrayInt64[] Array_Int64Values { get; set; }
+        public DataForgeArrayUInt8[] Array_UInt8Values { get; set; }
+        public DataForgeArrayUInt16[] Array_UInt16Values { get; set; }
+        public DataForgeArrayUInt32[] Array_UInt32Values { get; set; }
+        public DataForgeArrayUInt64[] Array_UInt64Values { get; set; }
+        public DataForgeArrayBoolean[] Array_BooleanValues { get; set; }
+        public DataForgeArraySingle[] Array_SingleValues { get; set; }
+        public DataForgeArrayDouble[] Array_DoubleValues { get; set; }
+        public List<XmlElement> DataTable { get; set; }
 
-        public DataForge(BinaryReader br)
-            : base(br)
+        public DataForge(BinaryReader br, Boolean loadData = true)
         {
-            this.FileVersion = br.ReadInt64();
+            this._br = br;
+            this.FileVersion = this._br.ReadInt64();
 
-            var numRecords1 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords2 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords3 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords4 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords5 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords6 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords7 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords8 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords9 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords10 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords11 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords12 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords13 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords14 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords15 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords16 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords17 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords18 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords19 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords20 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords21 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords22 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords23 = br.ReadUInt16(); br.ReadUInt16();
-            var numRecords24 = br.ReadUInt16(); br.ReadUInt16();
-            var totalLength25 = br.ReadUInt32();
+            var structDefinitionCount   = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x02d3
+            var propertyDefinitionCount = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0602
+            var enumDefinitionCount     = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0041 : 0x0002 ???
+            var dataMappingCount        = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x013c
+            var recordDefinitionCount   = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0b35
+                                                                                         
+            //  38 schemas                                                               
+            // 20a structs                                                               
+            //  41 enums                                                                 
+            #region Unmapped Tables                                                      
+                                                                                         
+            var int8ValueCount    = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? int8
+            var int16ValueCount   = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? int16
+            var int64ValueCount   = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? int32
+            var int32ValueCount   = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0024 - ??? int64
+            var uint8ValueCount   = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? uint8
+            var uint16ValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? uint16
+            var uint64ValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? uint32
+            var uint32ValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? uint64
+            var booleanValueCount = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - 0x0001b910 - Boolean
+            var singleValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x003c - ??? single
+            var doubleValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - ??? double
+            var guidValueCount    = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0014 - Guid Array Values
+            var stringValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0076 - String Array Values
+            var localeValueCount  = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x0034 - Locale Array Values
+            var enumValueCount    = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x006e - Enum Array Values
+            var numRecords21      = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x1cf3 - ??? Class Array Values
+            var numRecords22      = this._br.ReadUInt16(); this._br.ReadUInt16();        // 0x079d - ??? Pointer Array Values
 
-            br.BaseStream.Seek(0x0000006c, SeekOrigin.Begin);
+            #endregion
 
-            this.TypeDefinitionTable = this.ReadArray<DataForgeTypeDefinition>(numRecords1);
-            this.PropertyDefinitionTable = this.ReadArray<DataForgePropertyDefinition>(numRecords2);
-            this.EnumDefinitionTable = this.ReadArray<DataForgeEnumDefinition>(numRecords3);
-            this.RecordTable4 = this.ReadArray<DataForgeRecord4>(numRecords4);
-            this.SchemaTable = this.ReadArray<DataForgeSchema>(numRecords5);
+            var referenceValueCount = this._br.ReadUInt16(); this._br.ReadUInt16();     // 0x0026 - Reference Array Values
+            var enumOptionCount = this._br.ReadUInt16(); this._br.ReadUInt16();         // 0x0284 - Enum Options
+            var totalLength25  = this._br.ReadUInt32();                                 // 0x2e45 : 0x00066e4b
 
-            var temp6 = this.ReadArray<DataForgeRecord6>(numRecords6);
-            var temp7 = this.ReadArray<DataForgeRecord7>(numRecords7);
-            var temp8 = this.ReadArray<DataForgeRecord8>(numRecords8);
-            var temp9 = this.ReadArray<DataForgeRecord9>(numRecords9);
-            var temp10 = this.ReadArray<DataForgeTuple>(numRecords10);
-            var temp11 = this.ReadArray<DataForgeTuple>(numRecords11);
-            var temp12 = this.ReadArray<DataForgeTuple>(numRecords12);
-            var temp13 = this.ReadArray<DataForgeTuple>(numRecords13);
-            var temp14 = this.ReadArray<DataForgeTuple>(numRecords14);
-            var temp15 = this.ReadArray<DataForgeTuple>(numRecords15);
-            var temp16 = this.ReadArray<DataForgeTuple>(numRecords16);
-            var temp17 = this.ReadArray<DataForgeTuple>(numRecords17);
-            var temp18 = this.ReadArray<DataForgeTuple>(numRecords18);
-            var temp19 = this.ReadArray<DataForgeTuple>(numRecords19);
-            var temp20 = this.ReadArray<DataForgeTuple>(numRecords20);
-            var temp21 = this.ReadArray<DataForgeTuple>(numRecords21);
-            var temp22 = this.ReadArray<DataForgeTuple>(numRecords22);
+            this.StructDefinitionTable = this.ReadArray<DataForgeStructDefinition>(structDefinitionCount);
+            this.PropertyDefinitionTable = this.ReadArray<DataForgePropertyDefinition>(propertyDefinitionCount);
+            this.EnumDefinitionTable = this.ReadArray<DataForgeEnumDefinition>(enumDefinitionCount);
+            this.DataMappingTable = this.ReadArray<DataForgeDataMapping>(dataMappingCount);
+            this.RecordDefinitionTable = this.ReadArray<DataForgeRecord>(recordDefinitionCount);
 
-            var wrong = br.BaseStream.Position - 0x0002e4d4;
+            this.Array_Int8Values = this.ReadArray<DataForgeArrayInt8>(int8ValueCount);
+            this.Array_Int16Values = this.ReadArray<DataForgeArrayInt16>(int16ValueCount);
+            this.Array_Int32Values = this.ReadArray<DataForgeArrayInt32>(int32ValueCount);
+            this.Array_Int64Values = this.ReadArray<DataForgeArrayInt64>(int64ValueCount);
+            this.Array_UInt8Values = this.ReadArray<DataForgeArrayUInt8>(uint8ValueCount);
+            this.Array_UInt16Values = this.ReadArray<DataForgeArrayUInt16>(uint16ValueCount);
+            this.Array_UInt32Values = this.ReadArray<DataForgeArrayUInt32>(uint32ValueCount);
+            this.Array_UInt64Values = this.ReadArray<DataForgeArrayUInt64>(uint64ValueCount);
+            
+            this.Array_BooleanValues = this.ReadArray<DataForgeArrayBoolean>(booleanValueCount);
+            this.Array_SingleValues = this.ReadArray<DataForgeArraySingle>(singleValueCount);
+            this.Array_DoubleValues = this.ReadArray<DataForgeArrayDouble>(doubleValueCount);
+            this.Array_GuidValues = this.ReadArray<DataForgeArrayGuid>(guidValueCount);
+            this.Array_StringValues = this.ReadArray<DataForgeArrayString>(stringValueCount);
+            this.Array_LocaleValues = this.ReadArray<DataForgeArrayLocale>(localeValueCount);
+            this.Array_EnumValues = this.ReadArray<DataForgeArrayEnum>(enumValueCount);
 
             // HACK: Skip unknown tables at this stage
-            br.BaseStream.Seek(0x0002e4d4, SeekOrigin.Begin);
+            this._br.BaseStream.Seek(0x0002e4d4, SeekOrigin.Begin);
 
-            var temp23 = this.ReadArray<DataForgeRecord23>(numRecords23);
+            this.Array_ReferenceValues = this.ReadArray<DataForgeArrayReference>(referenceValueCount);
+            this.EnumOptionTable = this.ReadArray<DataForgeStringLookup>(enumOptionCount);
 
-            br.BaseStream.Seek(0x0002e7cc, SeekOrigin.Begin);
-
-            this.EnumValueTable = this.ReadArray<DataForgeStringLookup>(numRecords24);
-
+            Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
             var buffer = new List<DataForgeString> { };
-            var maxPosition = br.BaseStream.Position + totalLength25;
-            while (br.BaseStream.Position < maxPosition)
+            var maxPosition = this._br.BaseStream.Position + totalLength25;
+            while (this._br.BaseStream.Position < maxPosition)
             {
-                buffer.Add(new DataForgeString(br));
+                buffer.Add(new DataForgeString(this));
             }
             this.ValueTable = buffer.ToArray();
-        }
-    }
 
-    // TODO: Verify this
-    public class DataForgeTypeDefinition : DataForgeSerializable
-    {
-        public String Name { get; set; }
-        public UInt32 ParentTypeIndex { get; set; }
-        public UInt16 AttributeCount { get; set; }
-        public UInt16 FirstAttributeIndex { get; set; }
-        public UInt32 NodeType { get; set; }
+            if (loadData)
+            {
+                this.DataTable = new List<XmlElement> { };
+                foreach (var dataMapping in this.DataMappingTable)
+                {
+                    var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
 
-        public DataForgeTypeDefinition(BinaryReader br)
-            : base(br)
-        {
-            this.Name = this.ReadString();
-            this.ParentTypeIndex = br.ReadUInt32();
-            this.AttributeCount = br.ReadUInt16();
-            this.FirstAttributeIndex = br.ReadUInt16();
-            this.NodeType = br.ReadUInt32();
-        }
-    }
-
-    public enum EDataType : ushort
-    {
-        varString = 0x000A,
-        varInteger = 0x000B,
-        nodeRequired = 0x0010,
-        nodeOptional = 0x0110,
-    }
-
-    public enum EConversionType : ushort
-    {
-        varSingle = 0x6900,
-        varChild = 0x6901,
-        varArray = 0x6902,
-    }
-
-    // TODO: Verify this
-    public class DataForgePropertyDefinition : DataForgeSerializable
-    {
-        public String Name { get; set; }
-        public UInt16 ChildType { get; set; }
-        public EDataType DataType { get; set; }
-        public EConversionType ConversionType { get; set; }
-        public UInt16 Unknown { get; set; }
-
-        public DataForgePropertyDefinition(BinaryReader br)
-            : base(br)
-        {
-            this.Name = this.ReadString();
-            this.ChildType = br.ReadUInt16();
-            this.DataType = (EDataType)br.ReadUInt16();
-            this.ConversionType = (EConversionType)br.ReadUInt16();
-            this.Unknown = br.ReadUInt16();
-        }
-    }
-
-    public class DataForgeEnumDefinition : DataForgeSerializable
-    {
-        public String Name { get; set; }
-        public UInt16 ValueCount { get; set; }
-        public UInt16 FirstValueIndex { get; set; }
-
-        public DataForgeEnumDefinition(BinaryReader br)
-            : base(br)
-        {
-            this.Name = this.ReadString();
-            this.ValueCount = br.ReadUInt16();
-            this.FirstValueIndex = br.ReadUInt16();
-        }
-    }
-
-    public class DataForgeRecord4 : DataForgeSerializable
-    {
-        public UInt16 Item1 { get; set; }
-        public UInt16 Item2 { get; set; }
-
-        public DataForgeRecord4(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt16();
-            this.Item2 = br.ReadUInt16();
-        }
-    }
-
-    public class DataForgeSchema : DataForgeSerializable
-    {
-        public String Name { get; set; }
-        public UInt32 TypeIndex { get; set; }
-        public Guid? Hash { get; set; }
-
-        public UInt16 VariantIndex { get; set; }
-        public UInt16 Item1 { get; set; }
-
-        public DataForgeSchema(BinaryReader br)
-            : base(br)
-        {
-            this.Name = this.ReadString();
-            this.TypeIndex = br.ReadUInt32();
-            this.Hash = this.ReadGuid(false);
-
-            this.VariantIndex = br.ReadUInt16();
-            this.Item1 = br.ReadUInt16();
-        }
-    }
-
-    public class DataForgeRecord23 : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-        public UInt32 Item3 { get; set; }
-        public UInt32 Item4 { get; set; }
-        public UInt32 Item5 { get; set; }
-
-        public DataForgeRecord23(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
-            this.Item3 = br.ReadUInt32();
-            this.Item4 = br.ReadUInt32();
-            this.Item5 = br.ReadUInt32();
+                    for (Int32 i = 0; i < dataMapping.StructCount; i++)
+                    {
+                        var node = dataStruct.Read();
+                        Console.WriteLine(node.OuterXml);
+                        this.DataTable.Add(node);
+                    }
+                }
+            }
         }
 
-        public override String ToString()
+        private XmlDocument _xmlDocument = new XmlDocument();
+        public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
+        public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
+
+        public String ReadString()
         {
-            return String.Format("0x{0:X8} 0x{1:X8} 0x{2:X8} 0x{3:X8} 0x{4:X8}", this.Item1, this.Item2, this.Item3, this.Item4, this.Item5);
-        }
-    }
+            var stringOffset = this._br.ReadUInt32();
 
-    public class DataForgeStringLookup : DataForgeSerializable
-    {
-        public String Value { get; set; }
+            var oldPos = this._br.BaseStream.Position;
 
-        public DataForgeStringLookup(BinaryReader br)
-            : base(br)
-        {
-            this.Value = this.ReadString();
-        }
+            this._br.BaseStream.Seek(0x0002F1DC + stringOffset, SeekOrigin.Begin);
 
-        public override String ToString()
-        {
-            return this.Value;
-        }
-    }
+            String buffer = this._br.ReadCString();
 
-    public class DataForgeUInt32 : DataForgeSerializable
-    {
-        public UInt32 Value { get; set; }
+            this._br.BaseStream.Seek(oldPos, SeekOrigin.Begin);
 
-        public DataForgeUInt32(BinaryReader br)
-            : base(br)
-        {
-            this.Value = br.ReadUInt32();
+            return buffer;
         }
 
-        public override String ToString()
+        public Guid? ReadGuid(Boolean nullable = true)
         {
-            return String.Format("0x{0:X8}", this.Value);
-        }
-    }
+            var isNull = nullable && this._br.ReadInt32() == -1;
 
-    public class DataForgeString : DataForgeSerializable
-    {
-        public String Value { get; set; }
+            var c = this._br.ReadInt16();
+            var b = this._br.ReadInt16();
+            var a = this._br.ReadInt32();
+            var k = this._br.ReadByte();
+            var j = this._br.ReadByte();
+            var i = this._br.ReadByte();
+            var h = this._br.ReadByte();
+            var g = this._br.ReadByte();
+            var f = this._br.ReadByte();
+            var e = this._br.ReadByte();
+            var d = this._br.ReadByte();
 
-        public DataForgeString(BinaryReader br)
-            : base(br)
-        {
-            this.Value = br.ReadCString();
-        }
+            if (isNull) return null;
 
-        public override String ToString()
-        {
-            return this.Value;
-        }
-    }
-
-    public class DataForgeTuple : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-
-        public DataForgeTuple(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
+            return new Guid(a, b, c, d, e, f, g, h, i, j, k);
         }
 
-        public override String ToString()
+        public U[] ReadArray<U>(UInt32? arraySize = null) where U : DataForgeSerializable
         {
-            return String.Format("0x{0:X8} 0x{1:X8}", this.Item1, this.Item2);
+            if (!arraySize.HasValue)
+            {
+                // TODO: Check if this logic is correct - do we need to preprocess ALL arrays and pass an array size?
+                arraySize = this._br.ReadUInt32();
+            
+                if (arraySize == 0xFFFFFFFF)
+                {
+                    return null;
+                } 
+            }
+            
+            if (arraySize == 0xFFFFFFFF)
+            {
+                return null;
+            }
+
+            Console.WriteLine("0x{0:X8}: {2} 0x{1:X4}", this._br.BaseStream.Position, arraySize.Value, typeof(U).Name);
+
+            return (from i in Enumerable.Range(0, (Int32)arraySize.Value)
+                    let data = (U)Activator.CreateInstance(typeof(U), this)
+                    let hack = data._index = i
+                    select data).ToArray();
         }
-    }
-
-    public class DataForgeRecord6 : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-        public UInt32 Item3 { get; set; }
-        public UInt32 Item4 { get; set; }
-        public UInt32 Item5 { get; set; }
-        public UInt32 Item6 { get; set; }
-        public UInt32 Item7 { get; set; }
-        public UInt32 Item8 { get; set; }
-
-        public DataForgeRecord6(BinaryReader br)
-            : base(br)
+     
+        public void DumpFile()
         {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
-            this.Item3 = br.ReadUInt32();
-            this.Item4 = br.ReadUInt32();
-            this.Item5 = br.ReadUInt32();
-            this.Item6 = br.ReadUInt32();
-            this.Item7 = br.ReadUInt32();
-            this.Item8 = br.ReadUInt32();
-        }
+            return;
 
-        public override String ToString()
-        {
-            return String.Format("0x{0:X8} 0x{1:X8} 0x{2:X8} 0x{3:X8} 0x{4:X8} 0x{5:X8} 0x{6:X8} 0x{7:X8}", this.Item1, this.Item2, this.Item3, this.Item4, this.Item5, this.Item6, this.Item7, this.Item8);
-        }
-    }
+            String outFile = "definitionDump.txt";
 
-    public class DataForgeRecord7 : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-        public UInt32 Item3 { get; set; }
-        public UInt32 Item4 { get; set; }
-        public UInt32 Item5 { get; set; }
-        public UInt32 Item6 { get; set; }
-        public UInt32 Item7 { get; set; }
-        public UInt32 Item8 { get; set; }
+            Int32 i;
 
-        public DataForgeRecord7(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
-            this.Item3 = br.ReadUInt32();
-            this.Item4 = br.ReadUInt32();
-            this.Item5 = br.ReadUInt32();
-            this.Item6 = br.ReadUInt32();
-            this.Item7 = br.ReadUInt32();
-            this.Item8 = br.ReadUInt32();
-        }
+            File.WriteAllLines(outFile, new String[] { });
 
-        public override String ToString()
-        {
-            return String.Format("0x{0:X8} 0x{1:X8} 0x{2:X8} 0x{3:X8} 0x{4:X8} 0x{5:X8} 0x{6:X8} 0x{7:X8}", this.Item1, this.Item2, this.Item3, this.Item4, this.Item5, this.Item6, this.Item7, this.Item8);
-        }
-    }
+            File.AppendAllLines(outFile, new String[] { "", "FileDefinitionTable:" });
 
-    public class DataForgeRecord8 : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-        public UInt32 Item3 { get; set; }
-        public UInt32 Item4 { get; set; }
-        public UInt32 Item5 { get; set; }
-        public UInt32 Item6 { get; set; }
-        public UInt32 Item7 { get; set; }
-        public UInt32 Item8 { get; set; }
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.RecordDefinitionTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
 
-        public DataForgeRecord8(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
-            this.Item3 = br.ReadUInt32();
-            this.Item4 = br.ReadUInt32();
-            this.Item5 = br.ReadUInt32();
-            this.Item6 = br.ReadUInt32();
-            this.Item7 = br.ReadUInt32();
-            this.Item8 = br.ReadUInt32();
+            File.AppendAllLines(outFile, new String[] { "", "SchemaDefinitionTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.StructDefinitionTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
+
+            File.AppendAllLines(outFile, new String[] { "", "PropertyDefinitionTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.PropertyDefinitionTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
+
+            File.AppendAllLines(outFile, new String[] { "", "EnumDefinitionTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile, 
+                from node in this.EnumDefinitionTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
+
+            File.AppendAllLines(outFile, new String[] { "", "EnumValueTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.EnumOptionTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
+
+            File.AppendAllLines(outFile, new String[] { "", "SchemaCountTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.DataMappingTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
+
+            File.AppendAllLines(outFile, new String[] { "", "ValueTable:" });
+
+            i = 0;
+            File.AppendAllLines(outFile,
+                from node in this.ValueTable
+                select String.Format("0x{0:X8} 0x{1:X8}: {2}", i++, node._offset, node));
         }
 
-        public override String ToString()
+        public XmlDocument Serialize()
         {
-            return String.Format("0x{0:X8} 0x{1:X8} 0x{2:X8} 0x{3:X8} 0x{4:X8} 0x{5:X8} 0x{6:X8} 0x{7:X8}", this.Item1, this.Item2, this.Item3, this.Item4, this.Item5, this.Item6, this.Item7, this.Item8);
-        }
-    }
+            var xmlDocument = new XmlDocument();
 
-    public class DataForgeRecord9 : DataForgeSerializable
-    {
-        public UInt32 Item1 { get; set; }
-        public UInt32 Item2 { get; set; }
-        public UInt32 Item3 { get; set; }
-        public UInt32 Item4 { get; set; }
-        public UInt32 Item5 { get; set; }
-        public UInt32 Item6 { get; set; }
-        public UInt32 Item7 { get; set; }
-        public UInt32 Item8 { get; set; }
+            var element = xmlDocument.CreateElement("DataForge");
+            
+            xmlDocument.AppendChild(element);
 
-        public DataForgeRecord9(BinaryReader br)
-            : base(br)
-        {
-            this.Item1 = br.ReadUInt32();
-            this.Item2 = br.ReadUInt32();
-            this.Item3 = br.ReadUInt32();
-            this.Item4 = br.ReadUInt32();
-            this.Item5 = br.ReadUInt32();
-            this.Item6 = br.ReadUInt32();
-            this.Item7 = br.ReadUInt32();
-            this.Item8 = br.ReadUInt32();
-        }
+            List<Int64[]> signature = new List<Int64[]>
+            {
+                //            Offset      Index   IsFile
+                new Int64[] { 0xFFFFFFFF, 0x0000, 0x0000 },
+                new Int64[] { 0xFFFFFFFF, 0x0000, 0x0001 },
+                new Int64[] { 0xFFFFFFFF, 0x0002, 0x0001 },
+                // new Int64[] { 0x00097418, 0x0003, 0x0001 }
+            };
 
-        public override String ToString()
-        {
-            return String.Format("0x{0:X8} 0x{1:X8} 0x{2:X8} 0x{3:X8} 0x{4:X8} 0x{5:X8} 0x{6:X8} 0x{7:X8}", this.Item1, this.Item2, this.Item3, this.Item4, this.Item5, this.Item6, this.Item7, this.Item8);
+            foreach (var dataSpec in signature)
+            {
+                if (dataSpec[0] != 0xFFFFFFFF)
+                {
+                    this._br.BaseStream.Seek(dataSpec[0], SeekOrigin.Begin);
+                }
+
+                Console.WriteLine();
+
+                XmlNode node;
+
+                if (dataSpec[2] == 0x0001)
+                {
+                    var file = this.RecordDefinitionTable[dataSpec[1]];
+
+                    node = file.Serialize(xmlDocument);
+                } else {
+                    var schema = this.StructDefinitionTable[dataSpec[1]];
+
+                    node = schema.Serialize(xmlDocument);
+                }
+
+                Console.WriteLine(node.OuterXml);
+                element.AppendChild(node);
+            }
+
+            // var oldposition = this._br.BaseStream.Position;
+            // 
+            // foreach (var dataForgeStruct in this.StructDefinitionTable)
+            // {
+            //     try
+            //     {
+            //         this._br.BaseStream.Seek(oldposition, SeekOrigin.Begin);
+            //         var node = dataForgeStruct.Serialize(xmlDocument);
+            // 
+            //         Console.WriteLine("Success Schema {0}", dataForgeStruct.Name);
+            //         Console.WriteLine(node.OuterXml);
+            //     }
+            //     catch (Exception) { }
+            // }
+
+            return xmlDocument;
         }
     }
 }
