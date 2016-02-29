@@ -2066,20 +2066,20 @@
       <ChatFilter tagId="992" localizedString="@chat_filter_display_looking_for_group" __type="ChatFilter" />
     </options>
   </ChatFilterOptions>
-  <Collectible type="varReference:00000002 84277b5e-926a-4eaf-8ff3-3c118acefb37" name="Peter Placeholder" displayName="@LOC_UNINITIALIZED" reward="50" journalEntry="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="Audio-Log" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="Datapad" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="Collectible" />
-  <Collectible type="varReference:00000003 34f1e936-d45a-45cb-8c71-69f562fd1bb4" name="Placeholder Movie" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="Collectible" />
-  <Collectible type="varReference:00000004 b9916471-b993-4b1f-84c0-97884ab14f52" name="Datapad" displayName="@LOC_UNINITIALIZED" reward="100" journalEntry="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_01" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000003 4c3e22f2-b11c-4e04-be5c-1f5758f97a22" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_02" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000004 0a854b19-1465-4975-9836-892264e8d47c" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox03" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000005 48314030-bfb5-4be1-b67e-9e538699bca3" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_04" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000006 983557f0-8f20-46e8-ba67-00b094e2b995" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_05" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000007 f9859f42-590e-40d8-8bf5-442e2ea3b56b" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_06" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:00000008 7bc7826f-eeda-4534-8635-23e1e7289450" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_07" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:0000001C babcccab-cbe1-4761-a3a8-afc2b3aee969" __type="Collectible" />
-  <Collectible type="varReference:00000000 82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_08" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="varReference:0000001C babcccab-cbe1-4761-a3a8-afc2b3aee969" __type="Collectible" />
-  <Collectible type="varReference:00000001 16dd645e-6a6a-49f5-a991-e295fa369b27" name="" displayName="@mobiglas_Bravo_Backstory_Title" reward="0" journalEntry="varReference:0000001B 6b219576-b873-45f9-91dc-5df45d312ebb" __type="Collectible" />
+  <Collectible type="84277b5e-926a-4eaf-8ff3-3c118acefb37" name="Peter Placeholder" displayName="@LOC_UNINITIALIZED" reward="50" journalEntry="00000000-0000-0000-0000-000000000000" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="Audio-Log" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="00000000-0000-0000-0000-000000000000" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="Datapad" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="00000000-0000-0000-0000-000000000000" __type="Collectible" />
+  <Collectible type="34f1e936-d45a-45cb-8c71-69f562fd1bb4" name="Placeholder Movie" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="00000000-0000-0000-0000-000000000000" __type="Collectible" />
+  <Collectible type="b9916471-b993-4b1f-84c0-97884ab14f52" name="Datapad" displayName="@LOC_UNINITIALIZED" reward="100" journalEntry="00000000-0000-0000-0000-000000000000" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_01" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="4c3e22f2-b11c-4e04-be5c-1f5758f97a22" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_02" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="0a854b19-1465-4975-9836-892264e8d47c" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox03" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="48314030-bfb5-4be1-b67e-9e538699bca3" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_04" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="983557f0-8f20-46e8-ba67-00b094e2b995" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_05" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="f9859f42-590e-40d8-8bf5-442e2ea3b56b" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_06" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="7bc7826f-eeda-4534-8635-23e1e7289450" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_07" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="babcccab-cbe1-4761-a3a8-afc2b3aee969" __type="Collectible" />
+  <Collectible type="82a5c268-3fd0-44f0-abaf-72d219c4d856" name="BlackBox_08" displayName="@LOC_UNINITIALIZED" reward="0" journalEntry="babcccab-cbe1-4761-a3a8-afc2b3aee969" __type="Collectible" />
+  <Collectible type="16dd645e-6a6a-49f5-a991-e295fa369b27" name="" displayName="@mobiglas_Bravo_Backstory_Title" reward="0" journalEntry="6b219576-b873-45f9-91dc-5df45d312ebb" __type="Collectible" />
   <CollectibleType name="AudioLog" collectionMessage="@text_collectible_datapad_collect" __type="CollectibleType" />
   <CollectibleType name="Datapad" collectionMessage="@text_collectible_datapad_collect" __type="CollectibleType" />
   <CollectibleType name="Dogtags" collectionMessage="@text_collectible_datapad_collect" __type="CollectibleType" />
@@ -2088,108 +2088,108 @@
   <CommunicationATLConfig playTriggerPrefix="Play_" stopTriggerPrefix="Stop_" speakerVoiceSwitch="" speakerTypeSwitch="" __type="CommunicationATLConfig" />
   <CommunicationConfig name="Vixen" __type="CommunicationConfig">
     <communications>
-      <CommunicationEntry name="varReference:0000002D 4d5d65d5-51c6-4756-9fd5-6a006e7dd0c4" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="4d5d65d5-51c6-4756-9fd5-6a006e7dd0c4" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hostile down" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Gets_A_Kill_01" forceSubtitles="0" id="0d352e11-8cdc-45b2-a030-40cbc4185804" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hostile down" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Gets_A_Kill_01" forceSubtitles="0" id="0d352e11-8cdc-45b2-a030-40cbc4185804" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Got one" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="28e6a216-3d5c-496f-8465-2af23dce54f5" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Got one" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="28e6a216-3d5c-496f-8465-2af23dce54f5" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002A dfe94524-b5be-487d-a434-430c84b8adf1" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="dfe94524-b5be-487d-a434-430c84b8adf1" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Nice." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_01" forceSubtitles="0" id="2e676d9a-5f47-42c9-b4e8-a70f101874c4" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Nice." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_01" forceSubtitles="0" id="2e676d9a-5f47-42c9-b4e8-a70f101874c4" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Yeah!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="c4425d49-f785-4505-96d3-918cce28e3fd" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Yeah!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="c4425d49-f785-4505-96d3-918cce28e3fd" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002C 67d20874-70d1-4618-9fa3-a462c73ad810" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="67d20874-70d1-4618-9fa3-a462c73ad810" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="I'm back" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Rejoining_Battle" forceSubtitles="0" id="d18e54d9-a684-4e39-8888-2b74c5d63027" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="I'm back" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Rejoining_Battle" forceSubtitles="0" id="d18e54d9-a684-4e39-8888-2b74c5d63027" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:00000029 1810f7e6-d500-4d08-b010-ec1aaa0415a8" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="1810f7e6-d500-4d08-b010-ec1aaa0415a8" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Uh! We lost a friendly." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Friendly_Gets_Killed" forceSubtitles="0" id="ab5ebad2-55b8-45c5-ae3a-12784973872e" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Uh! We lost a friendly." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Friendly_Gets_Killed" forceSubtitles="0" id="ab5ebad2-55b8-45c5-ae3a-12784973872e" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:00000028 36bf9849-fb8c-4fe9-8ec1-23b26d605249" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="36bf9849-fb8c-4fe9-8ec1-23b26d605249" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="AAaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_01" forceSubtitles="0" id="080190ad-ff44-4c19-a7b6-117c65713a42" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="AAaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_01" forceSubtitles="0" id="080190ad-ff44-4c19-a7b6-117c65713a42" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Noo! NooooOOOOO!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_02" forceSubtitles="0" id="2e5c6119-d4e7-40c8-9726-d46c3b432225" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Noo! NooooOOOOO!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_02" forceSubtitles="0" id="2e5c6119-d4e7-40c8-9726-d46c3b432225" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Ahh AHHHHHH!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_03" forceSubtitles="0" id="0ee6b80a-606c-4be9-a0ce-1cc3158d3103" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Ahh AHHHHHH!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_03" forceSubtitles="0" id="0ee6b80a-606c-4be9-a0ce-1cc3158d3103" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="AAaaaaaAAAaaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_04" forceSubtitles="0" id="cf555f5d-6fd2-4ef3-b2da-7f85d02d0e78" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="AAaaaaaAAAaaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Death_04" forceSubtitles="0" id="cf555f5d-6fd2-4ef3-b2da-7f85d02d0e78" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002E c8ba4dbc-144a-4292-aa72-3a49c10d9055" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="c8ba4dbc-144a-4292-aa72-3a49c10d9055" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Taking fire" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Taking_Damage_01" forceSubtitles="0" id="f5639699-07d3-495a-87fb-4e3aed9034fb" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Taking fire" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Taking_Damage_01" forceSubtitles="0" id="f5639699-07d3-495a-87fb-4e3aed9034fb" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="I've got one on me" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Taking_Damage_02" forceSubtitles="0" id="84247764-9c0c-4b15-a3fc-3ee4c2c10487" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="I've got one on me" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Taking_Damage_02" forceSubtitles="0" id="84247764-9c0c-4b15-a3fc-3ee4c2c10487" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002F 7ca75173-b052-41c4-a88f-51fecf84182b" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="7ca75173-b052-41c4-a88f-51fecf84182b" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hey moron, I'm on your team." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Being_Hit_By_Friendly_Fire" forceSubtitles="0" id="bd6cbe40-72b5-4d21-b546-3e5d43741570" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hey moron, I'm on your team." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Being_Hit_By_Friendly_Fire" forceSubtitles="0" id="bd6cbe40-72b5-4d21-b546-3e5d43741570" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002B 19e945af-c653-4be0-9fd0-1dcef3463988" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="19e945af-c653-4be0-9fd0-1dcef3463988" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Incoming Enemy" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Incoming_Enemies_01" forceSubtitles="0" id="9fb4b0cf-d8cd-496a-a02b-35f1726687c7" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Incoming Enemy" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Incoming_Enemies_01" forceSubtitles="0" id="9fb4b0cf-d8cd-496a-a02b-35f1726687c7" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000011 9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hostiles inbound" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Incoming_Enemies_02" forceSubtitles="0" id="f3628033-79f7-4dd7-ae05-3ab11d43bafb" __type="Dialogue" />
+            <voice speaker="9af94dda-b375-4b65-82ed-1051af057e16" subtitleText="Hostiles inbound" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Vixen_Reaction_Incoming_Enemies_02" forceSubtitles="0" id="f3628033-79f7-4dd7-ae05-3ab11d43bafb" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
@@ -2199,108 +2199,108 @@
   </CommunicationConfig>
   <CommunicationConfig name="Warlord" __type="CommunicationConfig">
     <communications>
-      <CommunicationEntry name="varReference:0000002D 4d5d65d5-51c6-4756-9fd5-6a006e7dd0c4" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="4d5d65d5-51c6-4756-9fd5-6a006e7dd0c4" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostile eliminated" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Gets_A_Kill_01" forceSubtitles="0" id="0d352e11-8cdc-45b2-a030-40cbc4185804" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostile eliminated" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Gets_A_Kill_01" forceSubtitles="0" id="0d352e11-8cdc-45b2-a030-40cbc4185804" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostile down" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Gets_A_Kill_02" forceSubtitles="0" id="28e6a216-3d5c-496f-8465-2af23dce54f5" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostile down" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Gets_A_Kill_02" forceSubtitles="0" id="28e6a216-3d5c-496f-8465-2af23dce54f5" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002A dfe94524-b5be-487d-a434-430c84b8adf1" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="dfe94524-b5be-487d-a434-430c84b8adf1" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Nice kill" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Player_Gets_A_Kill_01" forceSubtitles="0" id="2e676d9a-5f47-42c9-b4e8-a70f101874c4" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Nice kill" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Player_Gets_A_Kill_01" forceSubtitles="0" id="2e676d9a-5f47-42c9-b4e8-a70f101874c4" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Nice shooting" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="c4425d49-f785-4505-96d3-918cce28e3fd" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Nice shooting" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Player_Gets_A_Kill_02" forceSubtitles="0" id="c4425d49-f785-4505-96d3-918cce28e3fd" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002C 67d20874-70d1-4618-9fa3-a462c73ad810" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="67d20874-70d1-4618-9fa3-a462c73ad810" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="I&amp;apos;m back in the mix" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Rejoining_Battle" forceSubtitles="0" id="d18e54d9-a684-4e39-8888-2b74c5d63027" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="I&amp;apos;m back in the mix" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Rejoining_Battle" forceSubtitles="0" id="d18e54d9-a684-4e39-8888-2b74c5d63027" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:00000029 1810f7e6-d500-4d08-b010-ec1aaa0415a8" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="1810f7e6-d500-4d08-b010-ec1aaa0415a8" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Friendly down" sound="" forceSubtitles="0" id="ab5ebad2-55b8-45c5-ae3a-12784973872e" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Friendly down" sound="" forceSubtitles="0" id="ab5ebad2-55b8-45c5-ae3a-12784973872e" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:00000028 36bf9849-fb8c-4fe9-8ec1-23b26d605249" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="36bf9849-fb8c-4fe9-8ec1-23b26d605249" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="AAaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_01" forceSubtitles="0" id="080190ad-ff44-4c19-a7b6-117c65713a42" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="AAaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_01" forceSubtitles="0" id="080190ad-ff44-4c19-a7b6-117c65713a42" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Noo! NooooOOOOO!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_02" forceSubtitles="0" id="2e5c6119-d4e7-40c8-9726-d46c3b432225" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Noo! NooooOOOOO!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_02" forceSubtitles="0" id="2e5c6119-d4e7-40c8-9726-d46c3b432225" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Ahh AHHHHHH!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_03" forceSubtitles="0" id="0ee6b80a-606c-4be9-a0ce-1cc3158d3103" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Ahh AHHHHHH!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_03" forceSubtitles="0" id="0ee6b80a-606c-4be9-a0ce-1cc3158d3103" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="AAaaaaaAAAaaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_04" forceSubtitles="0" id="cf555f5d-6fd2-4ef3-b2da-7f85d02d0e78" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="AAaaaaaAAAaaaarrrghhhhhhhh!!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Death_04" forceSubtitles="0" id="cf555f5d-6fd2-4ef3-b2da-7f85d02d0e78" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002E c8ba4dbc-144a-4292-aa72-3a49c10d9055" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="c8ba4dbc-144a-4292-aa72-3a49c10d9055" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Taking fire!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Taking_Damage_01" forceSubtitles="0" id="f5639699-07d3-495a-87fb-4e3aed9034fb" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Taking fire!" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Taking_Damage_01" forceSubtitles="0" id="f5639699-07d3-495a-87fb-4e3aed9034fb" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Need support." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Taking_Damage_02" forceSubtitles="0" id="84247764-9c0c-4b15-a3fc-3ee4c2c10487" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Need support." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Taking_Damage_02" forceSubtitles="0" id="84247764-9c0c-4b15-a3fc-3ee4c2c10487" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002F 7ca75173-b052-41c4-a88f-51fecf84182b" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="7ca75173-b052-41c4-a88f-51fecf84182b" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Stop shooting me, you idiot." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Being_Hit_By_Friendly_Fire" forceSubtitles="0" id="bd6cbe40-72b5-4d21-b546-3e5d43741570" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Stop shooting me, you idiot." sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Being_Hit_By_Friendly_Fire" forceSubtitles="0" id="bd6cbe40-72b5-4d21-b546-3e5d43741570" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
         </variations>
       </CommunicationEntry>
-      <CommunicationEntry name="varReference:0000002B 19e945af-c653-4be0-9fd0-1dcef3463988" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
+      <CommunicationEntry name="19e945af-c653-4be0-9fd0-1dcef3463988" method="RandomSequence" forceAnimation="0" __type="CommunicationEntry">
         <variations>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostiles inbound" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Incoming_Enemies_01" forceSubtitles="0" id="9fb4b0cf-d8cd-496a-a02b-35f1726687c7" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Hostiles inbound" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Incoming_Enemies_01" forceSubtitles="0" id="9fb4b0cf-d8cd-496a-a02b-35f1726687c7" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
           <CommunicationVariation animationName="" soundName="" __type="CommunicationVariation">
-            <voice speaker="varReference:00000012 c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Incoming hostiles" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Incoming_Enemies_02" forceSubtitles="0" id="f3628033-79f7-4dd7-ae05-3ab11d43bafb" __type="Dialogue" />
+            <voice speaker="c88dcaf3-414d-4eb0-a2d2-a226e5712c0c" subtitleText="Incoming hostiles" sound="Play_DXSH_MCCV_OSYS_AC_Wingman_Warlord_Reaction_Incoming_Enemies_02" forceSubtitles="0" id="f3628033-79f7-4dd7-ae05-3ab11d43bafb" __type="Dialogue" />
             <rules timeout="0" lookAtTarget="0" finishAnimation="1" finishSound="1" finishVoice="1" finishTimeout="1" blockMovement="0" blockFire="0" animationMethodAction="0" __type="CommunicationVariationRules" />
             <conditions expression="" __type="CommunicationVariationCondition" />
           </CommunicationVariation>
@@ -17170,25 +17170,25 @@
       <ForceFeedbackEffect name="WeaponFire_RapidSmall_Looped" time="-0.05" MotorAB="varStrongPointer:FFFFFFFF FFFFFFFF" MotorA="varStrongPointer:000001EE 00000023" MotorB="varStrongPointer:FFFFFFFF FFFFFFFF" __type="ForceFeedbackEffect" />
     </Effects>
   </ForceFeedback>
-  <GameMode name="DFM_BattleRoyale" displayName="Battle Royale" alias="BR" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="1" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_BattleRoyale.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000000 6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="BR" announcerGameModeTokenName="battle_royale" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_CaptureTheCore" displayName="Capture the Core" alias="CTC" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_CaptureTheCore.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000000 6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="CTC" announcerGameModeTokenName="capture_the_core" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_Conquest" displayName="Conquest" alias="CQ" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Conquest.xml" levelLocation="DogfightModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="CON" announcerGameModeTokenName="conquest" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_DeathRace" displayName="Death Race" alias="DR" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_DeathRace.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000001 58147e34-18f7-4328-834a-89ce17bf984c" announcerGameModeName="DRC" announcerGameModeTokenName="death_race_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_FreeFlight" displayName="Free Flight" alias="FF" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_FreeFlight.xml" levelLocation="DogfightModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="FF" announcerGameModeTokenName="free_flight_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_Race" displayName="Race" alias="RM" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Race.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000001 58147e34-18f7-4328-834a-89ce17bf984c" announcerGameModeName="RCE" announcerGameModeTokenName="race_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_SquadronBattle" displayName="Squadron Battle" alias="SB" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="1" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_SquadronBattle.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000000 6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SQB" announcerGameModeTokenName="squadron_battle" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_Survival" displayName="Vanduul Swarm" alias="VS" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="1" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Survival.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000000 6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SVL" announcerGameModeTokenName="survival_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_Survival_Coop" displayName="Vanduul Swarm Multiplayer" alias="VSM" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="1" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Survival_Coop.xml" levelLocation="DogfightModule/" musicSuite="varReference:00000000 6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SVL" announcerGameModeTokenName="survival_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:00000000 34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
-  <GameMode name="DFM_TestLayer" displayName="Test Layer - Not for release!" alias="TL" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_TestLayer.xml" levelLocation="DogfightModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="TL" announcerGameModeTokenName="" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="DFM_Tutorial" displayName="Tutorial" alias="TT" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Tutorial.xml" levelLocation="DogfightModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="TUT" announcerGameModeTokenName="tutorial_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="FPS_KingOfTheHill" displayName="King of the Hill" alias="KOTH" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="0" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_KingOfTheHill.xml" levelLocation="FPSModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="FPS_Practice" displayName="FPS Practice" alias="PR" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/FPS_Practice.xml" levelLocation="FPSModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="1" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="FPS_SATABall" displayName="SATA Ball" alias="SATA" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_SATABall.xml" levelLocation="FPSModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="FPS_TeamElimination" displayName="Team Elimination" alias="TE" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_TeamElimination.xml" levelLocation="FPSModule/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="S42_Default" displayName="Squadron 42" alias="S42" moduleType="Squadron42" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/S42_Default.xml" levelLocation="Squadron42/" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="S42" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="SC_Default" displayName="Star Citizen" alias="SC" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Default.xml" levelLocation="" musicSuite="varReference:00000002 b7280508-783f-41f0-aab7-7a73c203fb81" announcerGameModeName="SC" announcerGameModeTokenName="" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="SC_Hangar" displayName="Hangar" alias="HM" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="0" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="0" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Hangar.xml" levelLocation="" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="SC" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:00000000 0eb9e9df-3dff-4850-a42c-1b4df720b8b8" allowLoadoutCycling="1" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
-  <GameMode name="SC_Planetside" displayName="Planetside" alias="Pl" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnableAfterSpawn" teamGame="0" useReadOnlyDataStore="0" spawnInSpaceship="0" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Planetside.xml" levelLocation="" musicSuite="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" announcerGameModeName="" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="varReference:00000000 0eb9e9df-3dff-4850-a42c-1b4df720b8b8" allowLoadoutCycling="0" invalidShipGroup="varReference:FFFFFFFF 00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="DFM_BattleRoyale" displayName="Battle Royale" alias="BR" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="1" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_BattleRoyale.xml" levelLocation="DogfightModule/" musicSuite="6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="BR" announcerGameModeTokenName="battle_royale" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_CaptureTheCore" displayName="Capture the Core" alias="CTC" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_CaptureTheCore.xml" levelLocation="DogfightModule/" musicSuite="6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="CTC" announcerGameModeTokenName="capture_the_core" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_Conquest" displayName="Conquest" alias="CQ" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Conquest.xml" levelLocation="DogfightModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="CON" announcerGameModeTokenName="conquest" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_DeathRace" displayName="Death Race" alias="DR" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_DeathRace.xml" levelLocation="DogfightModule/" musicSuite="58147e34-18f7-4328-834a-89ce17bf984c" announcerGameModeName="DRC" announcerGameModeTokenName="death_race_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_FreeFlight" displayName="Free Flight" alias="FF" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_FreeFlight.xml" levelLocation="DogfightModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="FF" announcerGameModeTokenName="free_flight_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_Race" displayName="Race" alias="RM" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Race.xml" levelLocation="DogfightModule/" musicSuite="58147e34-18f7-4328-834a-89ce17bf984c" announcerGameModeName="RCE" announcerGameModeTokenName="race_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_SquadronBattle" displayName="Squadron Battle" alias="SB" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="1" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_SquadronBattle.xml" levelLocation="DogfightModule/" musicSuite="6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SQB" announcerGameModeTokenName="squadron_battle" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_Survival" displayName="Vanduul Swarm" alias="VS" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="1" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Survival.xml" levelLocation="DogfightModule/" musicSuite="6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SVL" announcerGameModeTokenName="survival_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_Survival_Coop" displayName="Vanduul Swarm Multiplayer" alias="VSM" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="1" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Survival_Coop.xml" levelLocation="DogfightModule/" musicSuite="6f047a24-9aa7-4a1e-8bf8-a62684303aef" announcerGameModeName="SVL" announcerGameModeTokenName="survival_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="34f0a677-81b6-4b5d-9450-8f65470f370b" __type="GameMode" />
+  <GameMode name="DFM_TestLayer" displayName="Test Layer - Not for release!" alias="TL" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_TestLayer.xml" levelLocation="DogfightModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="TL" announcerGameModeTokenName="" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="DFM_Tutorial" displayName="Tutorial" alias="TT" moduleType="ArenaCommander" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="0" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/DFM_Tutorial.xml" levelLocation="DogfightModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="TUT" announcerGameModeTokenName="tutorial_mode" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="FPS_KingOfTheHill" displayName="King of the Hill" alias="KOTH" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="0" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_KingOfTheHill.xml" levelLocation="FPSModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="FPS_Practice" displayName="FPS Practice" alias="PR" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/FPS_Practice.xml" levelLocation="FPSModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="1" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="FPS_SATABall" displayName="SATA Ball" alias="SATA" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_SATABall.xml" levelLocation="FPSModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="FPS_TeamElimination" displayName="Team Elimination" alias="TE" moduleType="StarMarine" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="1" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="1" rulesPath="Scripts/GameRules/FPS_TeamElimination.xml" levelLocation="FPSModule/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="FTE" announcerGameModeTokenName="fps_team_elimination" audioOcclusionMaxDist="500" requiresVisorScoreboard="1" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="S42_Default" displayName="Squadron 42" alias="S42" moduleType="Squadron42" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/S42_Default.xml" levelLocation="Squadron42/" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="S42" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="SC_Default" displayName="Star Citizen" alias="SC" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="1" spawnInSpaceship="0" disableIFCSCruiseMode="0" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Default.xml" levelLocation="" musicSuite="b7280508-783f-41f0-aab7-7a73c203fb81" announcerGameModeName="SC" announcerGameModeTokenName="" audioOcclusionMaxDist="0" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="00000000-0000-0000-0000-000000000000" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="SC_Hangar" displayName="Hangar" alias="HM" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnabledAlways" teamGame="0" useReadOnlyDataStore="0" spawnInSpaceship="1" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="0" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Hangar.xml" levelLocation="" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="SC" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="0eb9e9df-3dff-4850-a42c-1b4df720b8b8" allowLoadoutCycling="1" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
+  <GameMode name="SC_Planetside" displayName="Planetside" alias="Pl" moduleType="PersistentUniverse" playerToPlayerCollisionPolicy="EnableAfterSpawn" teamGame="0" useReadOnlyDataStore="0" spawnInSpaceship="0" disableIFCSCruiseMode="1" isSurvivalMode="0" useEjectionPenalty="0" allowShipToSpaceExit="1" maxUnattendedVehicleMarkers="2" disableThirdPersonCamera="0" rulesPath="Scripts/GameRules/SC_Planetside.xml" levelLocation="" musicSuite="00000000-0000-0000-0000-000000000000" announcerGameModeName="" announcerGameModeTokenName="" audioOcclusionMaxDist="500" requiresVisorScoreboard="0" requiresRoundTimer="0" loadoutProbabilities="0eb9e9df-3dff-4850-a42c-1b4df720b8b8" allowLoadoutCycling="0" invalidShipGroup="00000000-0000-0000-0000-000000000000" __type="GameMode" />
   <GOSTStateGroup name="VehiclePower" history="0" tags="" __type="GOSTStateGroup">
     <Variables />
     <States>
@@ -18148,59 +18148,59 @@
   <Item type="varStrongPointer:00000213 00000000" __type="Item" />
   <Item type="varStrongPointer:00000210 00000000" __type="Item" />
   <Item type="varStrongPointer:00000211 00000000" __type="Item" />
-  <JournalEntry Title="@mobiglas_Alpha_Aciedo_Contract_Title" SubHeading="@mobiglas_Author_Aciedo" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000000" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Alpha_Crusader_CommsWarning_Title" SubHeading="@mobiglas_Author_CrusaderIndustriesComms" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000001" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_AlphaStation_WelcomeMessage_Title" SubHeading="@mobiglas_AlphaStation_WelcomeMessage_SubHeading" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000002" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_01_title" SubHeading="@mobiglas_Blackbox_01_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000003" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_02_title" SubHeading="@mobiglas_Blackbox_02_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000004" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_03_title" SubHeading="@mobiglas_Blackbox_03_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000005" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_04_title" SubHeading="@mobiglas_Blackbox_04_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000006" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_05_title" SubHeading="@mobiglas_Blackbox_05_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000007" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Blackbox_06_title" SubHeading="@mobiglas_Blackbox_06_sub_title" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000008" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Darnell_Transcript_title" SubHeading="@mobiglas_CharlieStation_Darnell_Transcript_subtitle" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000000" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Guilty_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000001" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Guilty_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000002" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000003" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Epilogue_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000004" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Epilogue_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000005" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Insurance_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000009" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Intro_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000006" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Kiyomi_Datapad_title" SubHeading="@mobiglas_CharlieStation_Kiyomi_Datapad_subtitle" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000A" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Mel_Datapad_title" SubHeading="@mobiglas_CharlieStation_Mel_Datapad_subtitle" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000B" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Mel_Secret_Transcript_title" SubHeading="@mobiglas_CharlieStation_Mel_Secret_Transcript_subtitle" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000007" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Racine_Transcript_title" SubHeading="@mobiglas_CharlieStation_Racine_Transcript_subtitle" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000008" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Scott_Datapad_title" SubHeading="@mobiglas_CharlieStation_Scott_Datapad_subtitle" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000C" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Scott_Transcript_title" SubHeading="@mobiglas_CharlieStation_Scott_Datapad_subtitle" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000009" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CharlieStation_Server_Records_title" SubHeading="@mobiglas_CharlieStation_Server_Records_subtitle" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 0000000A" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_OutlawThanksPlayer_Title" SubHeading="@mobiglas_OutlawThanksPlayer_Sub_Title" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000D" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_CrusaderBountyReward_Title" SubHeading="@mobiglas_CrusaderBountyReward_Sub_Title" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000E" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Yela_Advisory_Title" SubHeading="@mobiglas_Author_CrusaderSecurity" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000F" __type="JournalEntry" />
-  <JournalEntry Title="@mobiglas_Bravo_Backstory_Title" SubHeading="@mobiglas_Author_PaulineNesso" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000010" __type="JournalEntry" />
-  <JournalEntry Title="@LOC_UNINITIALIZED" SubHeading="@LOC_UNINITIALIZED" Style="varReference:00000000 e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 0000000B" __type="JournalEntry" />
-  <JournalEntry Title="@dfm_crusader_AlphaStation" SubHeading="@dfm_crusader_CharlieStation" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000011" __type="JournalEntry" />
-  <JournalEntry Title="@item_NameDefibrillator" SubHeading="@item_NameBandage" Style="varReference:00000001 19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000012" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Alpha_Aciedo_Contract_Title" SubHeading="@mobiglas_Author_Aciedo" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000000" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Alpha_Crusader_CommsWarning_Title" SubHeading="@mobiglas_Author_CrusaderIndustriesComms" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000001" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_AlphaStation_WelcomeMessage_Title" SubHeading="@mobiglas_AlphaStation_WelcomeMessage_SubHeading" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000002" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_01_title" SubHeading="@mobiglas_Blackbox_01_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000003" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_02_title" SubHeading="@mobiglas_Blackbox_02_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000004" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_03_title" SubHeading="@mobiglas_Blackbox_03_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000005" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_04_title" SubHeading="@mobiglas_Blackbox_04_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000006" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_05_title" SubHeading="@mobiglas_Blackbox_05_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000007" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Blackbox_06_title" SubHeading="@mobiglas_Blackbox_06_sub_title" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022B 00000008" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Darnell_Transcript_title" SubHeading="@mobiglas_CharlieStation_Darnell_Transcript_subtitle" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000000" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Guilty_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000001" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Guilty_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000002" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Conclusion_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000003" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Epilogue_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000004" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Epilogue_Innocent_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000005" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Insurance_title" SubHeading="@mobiglas_Author_ElaineWard" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000009" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Elaine_Intro_Transcript_title" SubHeading="@mobiglas_Author_ElaineWard" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000006" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Kiyomi_Datapad_title" SubHeading="@mobiglas_CharlieStation_Kiyomi_Datapad_subtitle" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000A" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Mel_Datapad_title" SubHeading="@mobiglas_CharlieStation_Mel_Datapad_subtitle" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000B" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Mel_Secret_Transcript_title" SubHeading="@mobiglas_CharlieStation_Mel_Secret_Transcript_subtitle" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000007" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Racine_Transcript_title" SubHeading="@mobiglas_CharlieStation_Racine_Transcript_subtitle" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000008" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Scott_Datapad_title" SubHeading="@mobiglas_CharlieStation_Scott_Datapad_subtitle" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000C" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Scott_Transcript_title" SubHeading="@mobiglas_CharlieStation_Scott_Datapad_subtitle" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 00000009" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CharlieStation_Server_Records_title" SubHeading="@mobiglas_CharlieStation_Server_Records_subtitle" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 0000000A" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_OutlawThanksPlayer_Title" SubHeading="@mobiglas_OutlawThanksPlayer_Sub_Title" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000D" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_CrusaderBountyReward_Title" SubHeading="@mobiglas_CrusaderBountyReward_Sub_Title" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000E" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Yela_Advisory_Title" SubHeading="@mobiglas_Author_CrusaderSecurity" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 0000000F" __type="JournalEntry" />
+  <JournalEntry Title="@mobiglas_Bravo_Backstory_Title" SubHeading="@mobiglas_Author_PaulineNesso" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000010" __type="JournalEntry" />
+  <JournalEntry Title="@LOC_UNINITIALIZED" SubHeading="@LOC_UNINITIALIZED" Style="e77855cd-7ab3-4e85-ba6d-5f306b77bf07" type="varStrongPointer:0000022C 0000000B" __type="JournalEntry" />
+  <JournalEntry Title="@dfm_crusader_AlphaStation" SubHeading="@dfm_crusader_CharlieStation" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000011" __type="JournalEntry" />
+  <JournalEntry Title="@item_NameDefibrillator" SubHeading="@item_NameBandage" Style="19929f34-821c-47b7-a86a-c50a27defda8" type="varStrongPointer:0000022B 00000012" __type="JournalEntry" />
   <JournalEntryType DisplayName="@mobiGlas_ui_JournalEntryType_AudioLog" IconName="Audio_ico" __type="JournalEntryType" />
   <JournalEntryType DisplayName="@mobiGlas_ui_JournalEntryType_TextLog" IconName="Text_ico" __type="JournalEntryType" />
-  <Level displayName="Million Mile High Club" type="PersistentUniverse" filename="mmhc_sizeb" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="Million Mile High Club" type="PersistentUniverse" filename="mmhc_sizeb" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="../PNG/mmhc_LoadingImage.dds" primaryTitle="@text_level_info_subtitle_MMHC" secondaryTitle="@text_level_info_secondary_title_MMHC" subtitle="@text_level_info_subtitle_MMHC" description="@text_level_info_description_MMHC" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Derelict Encounter" type="ArenaCommander" filename="Broken_Moon_Derelict" loadout="" locationUniqueId="0" defaultGameRules="varReference:0000000E 0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
+  <Level displayName="Derelict Encounter" type="ArenaCommander" filename="Broken_Moon_Derelict" loadout="" locationUniqueId="0" defaultGameRules="0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
     <validGameRules>
       <Reference value="0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" />
       <Reference value="38b322ca-056e-427d-9496-f2ea52f6ecd2" />
     </validGameRules>
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="FabienTag" type="PersistentUniverse" filename="FabienTag" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="FabienTag" type="PersistentUniverse" filename="FabienTag" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="FrancoisBTest" type="PersistentUniverse" filename="FrancoisBTest" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="FrancoisBTest" type="PersistentUniverse" filename="FrancoisBTest" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Broken Moon" type="ArenaCommander" filename="DFM_BrokenMoon" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000004 38b322ca-056e-427d-9496-f2ea52f6ecd2" __type="Level">
+  <Level displayName="Broken Moon" type="ArenaCommander" filename="DFM_BrokenMoon" loadout="" locationUniqueId="0" defaultGameRules="38b322ca-056e-427d-9496-f2ea52f6ecd2" __type="Level">
     <validGameRules>
       <Reference value="9182f8d3-9cf1-4ea1-8ed2-fa9a886f34ed" />
       <Reference value="062b9b3b-879c-4609-8450-4049c6034554" />
@@ -18214,11 +18214,11 @@
     </validGameRules>
     <loadingScreenInfo loadingScreenType="eElectronicAccess" imagePath="../PNG/ArenaCommander_LoadingImage.dds" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Crusader" type="PersistentUniverse" filename="DFM_Crusader" loadout="" locationUniqueId="8465" defaultGameRules="varReference:00000010 330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
+  <Level displayName="Crusader" type="PersistentUniverse" filename="DFM_Crusader" loadout="" locationUniqueId="8465" defaultGameRules="330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@text_level_info_primary_title_Crusader" secondaryTitle="@text_level_info_secondary_title_Crusader" subtitle="@text_level_info_subtitle_Crusader" description="@text_level_info_description_Crusader" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Dying Star" type="ArenaCommander" filename="DFM_DyingStar" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000004 38b322ca-056e-427d-9496-f2ea52f6ecd2" __type="Level">
+  <Level displayName="Dying Star" type="ArenaCommander" filename="DFM_DyingStar" loadout="" locationUniqueId="0" defaultGameRules="38b322ca-056e-427d-9496-f2ea52f6ecd2" __type="Level">
     <validGameRules>
       <Reference value="9182f8d3-9cf1-4ea1-8ed2-fa9a886f34ed" />
       <Reference value="062b9b3b-879c-4609-8450-4049c6034554" />
@@ -18232,234 +18232,234 @@
     </validGameRules>
     <loadingScreenInfo loadingScreenType="eElectronicAccess" imagePath="../PNG/ArenaCommander_LoadingImage.dds" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="New Horizon Speedway" type="ArenaCommander" filename="DFM_NewHorizonSpeedway" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000005 cb6df867-fc91-487d-90dc-66a47d335e9e" __type="Level">
+  <Level displayName="New Horizon Speedway" type="ArenaCommander" filename="DFM_NewHorizonSpeedway" loadout="" locationUniqueId="0" defaultGameRules="cb6df867-fc91-487d-90dc-66a47d335e9e" __type="Level">
     <validGameRules>
       <Reference value="cb6df867-fc91-487d-90dc-66a47d335e9e" />
       <Reference value="e5ccfa2f-02d4-4227-b850-5a9ae42ef460" />
     </validGameRules>
     <loadingScreenInfo loadingScreenType="eElectronicAccess" imagePath="../PNG/ArenaCommander_LoadingImage.dds" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Levski" type="PersistentUniverse" filename="Levski" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="Levski" type="PersistentUniverse" filename="Levski" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@text_level_info_primary_title_Levski" secondaryTitle="@text_level_info_secondary_title_Levski" subtitle="@text_level_info_subtitle_Levski" description="@text_level_info_description_Levski" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Area18" type="PersistentUniverse" filename="Area18" loadout="" locationUniqueId="4369" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="Area18" type="PersistentUniverse" filename="Area18" loadout="" locationUniqueId="4369" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="../PNG/Area18_LoadingImage.dds" primaryTitle="@text_level_info_primary_title_Area18" secondaryTitle="@text_level_info_secondary_title_Area18" subtitle="@text_level_info_subtitle_Area18" description="@text_level_info_description_Area18" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Million Mile High Club" type="PersistentUniverse" filename="MMHC" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="Million Mile High Club" type="PersistentUniverse" filename="MMHC" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="../PNG/mmhc_LoadingImage.dds" primaryTitle="@text_level_info_subtitle_MMHC" secondaryTitle="@text_level_info_secondary_title_MMHC" subtitle="@text_level_info_subtitle_MMHC" description="@text_level_info_description_MMHC" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Hangar" type="PersistentUniverse" filename="HangarApp" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000011 d0611682-9bbf-459e-96f4-a73079005979" __type="Level">
+  <Level displayName="Hangar" type="PersistentUniverse" filename="HangarApp" loadout="" locationUniqueId="0" defaultGameRules="d0611682-9bbf-459e-96f4-a73079005979" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Hangar_Interactible_objects_test" type="PersistentUniverse" filename="Hangar_Interactible_objects_test" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000010 330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
+  <Level displayName="Hangar_Interactible_objects_test" type="PersistentUniverse" filename="Hangar_Interactible_objects_test" loadout="" locationUniqueId="0" defaultGameRules="330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Hangar Multiplayer" type="PersistentUniverse" filename="MultiplayerHangar" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000011 d0611682-9bbf-459e-96f4-a73079005979" __type="Level">
+  <Level displayName="Hangar Multiplayer" type="PersistentUniverse" filename="MultiplayerHangar" loadout="" locationUniqueId="0" defaultGameRules="d0611682-9bbf-459e-96f4-a73079005979" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="ShipSelector" type="PersistentUniverse" filename="ShipSelector" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="ShipSelector" type="PersistentUniverse" filename="ShipSelector" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Area18" type="PersistentUniverse" filename="TestConsole" loadout="" locationUniqueId="0" defaultGameRules="varReference:00000012 bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
+  <Level displayName="Area18" type="PersistentUniverse" filename="TestConsole" loadout="" locationUniqueId="0" defaultGameRules="bed8ceba-3efe-44a1-b0e6-6c87d3bd038a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="S42_Assault" type="Squadron42" filename="S42_Assault" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:00000010 330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
+  <Level displayName="S42_Assault" type="Squadron42" filename="S42_Assault" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="330ce5d3-fb01-4f82-8708-3154a3a4b78a" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Coil" type="Squadron42" filename="S42_Coil" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Coil" type="Squadron42" filename="S42_Coil" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Crash" type="Squadron42" filename="S42_Crash" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Crash" type="Squadron42" filename="S42_Crash" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="S42_Credits" type="Squadron42" filename="S42_E1C02_credits_senate" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="S42_Credits" type="Squadron42" filename="S42_E1C02_credits_senate" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Opening Recovery" type="Squadron42" filename="S42_E1C03_Recovery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Opening Recovery" type="Squadron42" filename="S42_E1C03_Recovery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Escort" type="Squadron42" filename="S42_Escort" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Escort" type="Squadron42" filename="S42_Escort" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Ghost" type="Squadron42" filename="\!Prefab_Libs\S03_R05_Ghost" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Ghost" type="Squadron42" filename="\!Prefab_Libs\S03_R05_Ghost" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Hunt" type="Squadron42" filename="S42_Hunt" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Hunt" type="Squadron42" filename="S42_Hunt" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Idris" type="Squadron42" filename="S42_IdrisInt" loadout="default_dfm_loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Idris" type="Squadron42" filename="S42_IdrisInt" loadout="default_dfm_loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="A Little Downtime" type="Squadron42" filename="S42_Interstitial03_ALittleDowntime" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="A Little Downtime" type="Squadron42" filename="S42_Interstitial03_ALittleDowntime" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Board the Banshee" type="Squadron42" filename="S42_Interstitial03_BoardBanshee" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Board the Banshee" type="Squadron42" filename="S42_Interstitial03_BoardBanshee" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Shubin Briefing" type="Squadron42" filename="S42_Interstitial05_ShubinBriefing" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Shubin Briefing" type="Squadron42" filename="S42_Interstitial05_ShubinBriefing" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="The Bigger Mystery" type="Squadron42" filename="S42_Interstitial05_TheBiggerMystery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="The Bigger Mystery" type="Squadron42" filename="S42_Interstitial05_TheBiggerMystery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Opening Battle" type="Squadron42" filename="S42_Intro" loadout="S42_Chapter01_OpeningBattle" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Opening Battle" type="Squadron42" filename="S42_Intro" loadout="S42_Chapter01_OpeningBattle" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Krugeri" type="Squadron42" filename="S42_KrugeriInt" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Krugeri" type="Squadron42" filename="S42_KrugeriInt" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Last Stand" type="Squadron42" filename="S42_LastStand" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Last Stand" type="Squadron42" filename="S42_LastStand" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="First Time Out" type="Squadron42" filename="S42_Mission02_1stTimeOut" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="First Time Out" type="Squadron42" filename="S42_Mission02_1stTimeOut" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Search and Destroy" type="Squadron42" filename="S42_Mission03_SearchAndDestroy" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Search and Destroy" type="Squadron42" filename="S42_Mission03_SearchAndDestroy" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="The Hunt Continues" type="Squadron42" filename="S42_Mission04_TheHuntContinues" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="The Hunt Continues" type="Squadron42" filename="S42_Mission04_TheHuntContinues" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Banshee Down" type="Squadron42" filename="S42_Mission06_BansheeDown" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Banshee Down" type="Squadron42" filename="S42_Mission06_BansheeDown" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Banshee Down" type="Squadron42" filename="Level.S42_Mission07_BansheeDown" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Banshee Down" type="Squadron42" filename="Level.S42_Mission07_BansheeDown" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Defending Fury" type="Squadron42" filename="S42_Mission08_DefendingFury" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Defending Fury" type="Squadron42" filename="S42_Mission08_DefendingFury" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Last Stand" type="Squadron42" filename="S42_Mission08_LastStand" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Last Stand" type="Squadron42" filename="S42_Mission08_LastStand" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Defending Fury" type="Squadron42" filename="S42_Mission09_DefendingFury" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Defending Fury" type="Squadron42" filename="S42_Mission09_DefendingFury" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Attack Karne's Base" type="Squadron42" filename="S42_Mission10_AttackKarnesBase" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Attack Karne's Base" type="Squadron42" filename="S42_Mission10_AttackKarnesBase" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Ghost Ship" type="Squadron42" filename="S42_Mission10_GhostShip" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Ghost Ship" type="Squadron42" filename="S42_Mission10_GhostShip" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Mission 1" type="Squadron42" filename="S42_Mission_01" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Mission 1" type="Squadron42" filename="S42_Mission_01" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Recovery" type="Squadron42" filename="S42_Recovery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Recovery" type="Squadron42" filename="S42_Recovery" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Search" type="Squadron42" filename="S42_Search" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Search" type="Squadron42" filename="S42_Search" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Trap" type="Squadron42" filename="S42_Trap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Trap" type="Squadron42" filename="S42_Trap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="AI_Benchmark_TestMap" type="Squadron42" filename="AI_Benchmark_TestMap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="AI_Benchmark_TestMap" type="Squadron42" filename="AI_Benchmark_TestMap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="asset_zoo" type="Squadron42" filename="asset_zoo" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="asset_zoo" type="Squadron42" filename="asset_zoo" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Ed_Shubin_Testmap" type="Squadron42" filename="Ed_Shubin_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Ed_Shubin_Testmap" type="Squadron42" filename="Ed_Shubin_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="FPS_Benchamark_Testmap" type="Squadron42" filename="FPS_Benchamark_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="FPS_Benchamark_Testmap" type="Squadron42" filename="FPS_Benchamark_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Ian_Testmap" type="Squadron42" filename="Ian_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Ian_Testmap" type="Squadron42" filename="Ian_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Jake_Testmap" type="Squadron42" filename="Jake_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Jake_Testmap" type="Squadron42" filename="Jake_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Mechanic_Collectibles" type="Squadron42" filename="Mechanic_Collectibles" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Mechanic_Collectibles" type="Squadron42" filename="Mechanic_Collectibles" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Mechanic_GameFlow" type="Squadron42" filename="S42_GameFlow_SaveLoad" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Mechanic_GameFlow" type="Squadron42" filename="S42_GameFlow_SaveLoad" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Mechanic_Looting" type="Squadron42" filename="Mechanic_Looting" loadout="" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Mechanic_Looting" type="Squadron42" filename="Mechanic_Looting" loadout="" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Metrics_Playground_Testmap" type="Squadron42" filename="Metrics_Playground_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Metrics_Playground_Testmap" type="Squadron42" filename="Metrics_Playground_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="naths_gladius_screenshots" type="Squadron42" filename="naths_gladius_screenshots" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="naths_gladius_screenshots" type="Squadron42" filename="naths_gladius_screenshots" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="pbs_reference" type="Squadron42" filename="pbs_reference" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="pbs_reference" type="Squadron42" filename="pbs_reference" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Pete_W_Test_Map" type="Squadron42" filename="Pete_W_Test_Map" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Pete_W_Test_Map" type="Squadron42" filename="Pete_W_Test_Map" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Robbie_Shubin_Testmap" type="Squadron42" filename="Robbie_Shubin_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Robbie_Shubin_Testmap" type="Squadron42" filename="Robbie_Shubin_Testmap" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="S42_Ghostship_vfxtest" type="Squadron42" filename="S42_Ghostship_vfxtest" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="S42_Ghostship_vfxtest" type="Squadron42" filename="S42_Ghostship_vfxtest" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="Large World Strike Team" type="Squadron42" filename="S42_LargeWorldStrikeTeam" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="varReference:0000000F 89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
+  <Level displayName="Large World Strike Team" type="Squadron42" filename="S42_LargeWorldStrikeTeam" loadout="Default_S42_Loadout" locationUniqueId="0" defaultGameRules="89b78bb7-fc05-4444-957d-8e139db84192" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="ePlanetSide" imagePath="" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="" type="PersistentUniverse" filename="TE_BattleArena" loadout="" locationUniqueId="0" defaultGameRules="varReference:0000000E 0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
+  <Level displayName="" type="PersistentUniverse" filename="TE_BattleArena" loadout="" locationUniqueId="0" defaultGameRules="0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
     <validGameRules />
     <loadingScreenInfo loadingScreenType="eElectronicAccess" imagePath="../PNG/Battle_Arena_LoadingImage.dds" primaryTitle="@LOC_EMPTY" secondaryTitle="@LOC_EMPTY" subtitle="@LOC_EMPTY" description="@LOC_EMPTY" __type="SLoadingScreenInformationDef" />
   </Level>
-  <Level displayName="" type="PersistentUniverse" filename="TE_GoldHorizon" loadout="" locationUniqueId="0" defaultGameRules="varReference:0000000E 0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
+  <Level displayName="" type="PersistentUniverse" filename="TE_GoldHorizon" loadout="" locationUniqueId="0" defaultGameRules="0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" __type="Level">
     <validGameRules>
       <Reference value="075fad9d-47fa-4c2a-89fe-c144f545ae41" />
       <Reference value="0ee15772-69d4-42c7-b1ce-d4cbb87b90ed" />
@@ -18683,22 +18683,22 @@
   </LoadoutItem>
   <LoadoutProbabilities __type="LoadoutProbabilities">
     <probabilities>
-      <RandomLoadoutProbability loadout="varReference:00000001 77299d0b-d636-425d-bb05-a7130b0f7b91" probabilityWeight="1" __type="RandomLoadoutProbability" />
-      <RandomLoadoutProbability loadout="varReference:00000002 1d937061-31f7-412d-be49-7267d4b2bcb6" probabilityWeight="1" __type="RandomLoadoutProbability" />
-      <RandomLoadoutProbability loadout="varReference:00000000 dc335536-4a32-4d4d-8360-7d334be1763a" probabilityWeight="1" __type="RandomLoadoutProbability" />
-      <RandomLoadoutProbability loadout="varReference:00000004 598dcf45-43f1-4ec9-88d7-bb29664477d6" probabilityWeight="1" __type="RandomLoadoutProbability" />
-      <RandomLoadoutProbability loadout="varReference:00000005 dd25998b-66f1-48db-8663-12f0511c9eba" probabilityWeight="1" __type="RandomLoadoutProbability" />
-      <RandomLoadoutProbability loadout="varReference:00000003 7cd0159f-6809-4503-af49-828b8bb14eda" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="77299d0b-d636-425d-bb05-a7130b0f7b91" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="1d937061-31f7-412d-be49-7267d4b2bcb6" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="dc335536-4a32-4d4d-8360-7d334be1763a" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="598dcf45-43f1-4ec9-88d7-bb29664477d6" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="dd25998b-66f1-48db-8663-12f0511c9eba" probabilityWeight="1" __type="RandomLoadoutProbability" />
+      <RandomLoadoutProbability loadout="7cd0159f-6809-4503-af49-828b8bb14eda" probabilityWeight="1" __type="RandomLoadoutProbability" />
     </probabilities>
   </LoadoutProbabilities>
-  <Mission Title="@missionManager_Charlie_Title" ShortTitle="@missionManager_Charlie_Title_Short" Description="@missionManager_Charlie_Description" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Charlie_Title" ShortTitle="@missionManager_Charlie_Title_Short" Description="@missionManager_Charlie_Description" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Charlie_Objective_01_ShortDescription" LongDescription="@missionManager_Charlie_Objective_01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Charlie_Objective_02_ShortDescription" LongDescription="@missionManager_Charlie_Objective_02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Charlie_Objective_03_ShortDescription" LongDescription="@missionManager_Charlie_Objective_03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective02_LongDescription" __type="MissionObjective" />
@@ -18710,7 +18710,7 @@
       <MissionObjective Name="Objective_08" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective08_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_CommsArrays_Disable_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Disable_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_CommsArrays_Disable_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Disable_Objective02_LongDescription" __type="MissionObjective" />
@@ -18722,119 +18722,119 @@
       <MissionObjective Name="Objective_08" ShortDesciption="@missionManager_CommsArrays_Disable_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Disable_Objective08_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_1_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_1_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective01_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_2_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_2_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective02_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_3_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_3_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_4_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_4_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_04" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective04_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_5_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_5_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_05" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective05_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_6_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_6_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_06" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective06_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_7_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_7_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_07" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective07_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_8_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CommsArrays_Mission_Title" ShortTitle="@missionManager_CommsArrays_Mission_8_Title_Short" Description="@missionManager_CommsArrays_Mission_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_08" ShortDesciption="@missionManager_CommsArrays_Objective01-08_ShortDescription" LongDescription="@missionManager_CommsArrays_Objective08_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CrusaderHunted_Title" ShortTitle="@missionManager_CrusaderHunted_Objective_01_Short" Description="@missionManager_CrusaderHunted_Description" Type="varReference:00000008 5a91990a-e059-4103-a43b-a26a07081310" Secondary="0" AutoTrack="1" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CrusaderHunted_Title" ShortTitle="@missionManager_CrusaderHunted_Objective_01_Short" Description="@missionManager_CrusaderHunted_Description" Type="5a91990a-e059-4103-a43b-a26a07081310" Secondary="0" AutoTrack="1" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_CrusaderHunted_Objective_01_Short" LongDescription="@missionManager_CrusaderHunted_Objective_01_Long" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_CrusaderHunted_Objective_02_Short" LongDescription="@missionManager_CrusaderHunted_Objective_02_Long" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CrusaderBounty_Title" ShortTitle="@missionManager_CrusaderBounty_Title_Short" Description="@missionManager_CrusaderBounty_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CrusaderBounty_Title" ShortTitle="@missionManager_CrusaderBounty_Title_Short" Description="@missionManager_CrusaderBounty_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_CrusaderBounty_Objective_01_Short" LongDescription="@missionManager_CrusaderBounty_Objective_01_Long" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_CrusaderWantedTutorial_Title" ShortTitle="@missionManager_CrusaderWantedTutorial_Title_Short" Description="@missionManager_CrusaderWantedTutorial_Description" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_CrusaderWantedTutorial_Title" ShortTitle="@missionManager_CrusaderWantedTutorial_Title_Short" Description="@missionManager_CrusaderWantedTutorial_Description" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Crusader Wanted Tutorial Name" ShortDesciption="@missionManager_CrusaderWantedTutorial_Objective_1_Short" LongDescription="@missionManager_CrusaderWantedTutorial_Objective_1_Long" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research01_Mission_Title" ShortTitle="@missionManager_Research01_Mission_Title_Short" Description="@missionManager_Research01_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research01_Mission_Title" ShortTitle="@missionManager_Research01_Mission_Title_Short" Description="@missionManager_Research01_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research01_Objective01_ShortDescription" LongDescription="@missionManager_Research01_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research01_Objective02_ShortDescription" LongDescription="@missionManager_Research01_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research01_Objective03_ShortDescription" LongDescription="@missionManager_Research01_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research02_Mission_Title" ShortTitle="@missionManager_Research02_Mission_Title_Short" Description="@missionManager_Research02_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research02_Mission_Title" ShortTitle="@missionManager_Research02_Mission_Title_Short" Description="@missionManager_Research02_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research02_Objective01_ShortDescription" LongDescription="@missionManager_Research03_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research02_Objective02_ShortDescription" LongDescription="@missionManager_Research02_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research02_Objective03_ShortDescription" LongDescription="@missionManager_Research02_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research03_Mission_Title" ShortTitle="@missionManager_Research03_Mission_Title_Short" Description="@missionManager_Research03_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research03_Mission_Title" ShortTitle="@missionManager_Research03_Mission_Title_Short" Description="@missionManager_Research03_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research03_Objective01_ShortDescription" LongDescription="@missionManager_Research03_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research03_Objective02_ShortDescription" LongDescription="@missionManager_Research03_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research03_Objective03_ShortDescription" LongDescription="@missionManager_Research03_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research04_Mission_Title" ShortTitle="@missionManager_Research04_Mission_Title_Short" Description="@missionManager_Research04_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research04_Mission_Title" ShortTitle="@missionManager_Research04_Mission_Title_Short" Description="@missionManager_Research04_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research04_Objective01_ShortDescription" LongDescription="@missionManager_Research04_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research04_Objective02_ShortDescription" LongDescription="@missionManager_Research04_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research04_Objective03_ShortDescription" LongDescription="@missionManager_Research04_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research05_Mission_Title" ShortTitle="@missionManager_Research05_Mission_Title_Short" Description="@missionManager_Research05_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research05_Mission_Title" ShortTitle="@missionManager_Research05_Mission_Title_Short" Description="@missionManager_Research05_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research05_Objective01_ShortDescription" LongDescription="@missionManager_Research05_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research05_Objective02_ShortDescription" LongDescription="@missionManager_Research05_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research05_Objective03_ShortDescription" LongDescription="@missionManager_Research05_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research06_Mission_Title" ShortTitle="@missionManager_Research06_Mission_Title_Short" Description="@missionManager_Research06_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research06_Mission_Title" ShortTitle="@missionManager_Research06_Mission_Title_Short" Description="@missionManager_Research06_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research06_Objective01_ShortDescription" LongDescription="@missionManager_Research06_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research06_Objective02_ShortDescription" LongDescription="@missionManager_Research06_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research06_Objective03_ShortDescription" LongDescription="@missionManager_Research06_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research07_Mission_Title" ShortTitle="@missionManager_Research07_Mission_Title_Short" Description="@missionManager_Research07_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research07_Mission_Title" ShortTitle="@missionManager_Research07_Mission_Title_Short" Description="@missionManager_Research07_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research07_Objective01_ShortDescription" LongDescription="@missionManager_Research07_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research07_Objective02_ShortDescription" LongDescription="@missionManager_Research07_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research07_Objective03_ShortDescription" LongDescription="@missionManager_Research07_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@missionManager_Research08_Mission_Title" ShortTitle="@missionManager_Research08_Mission_Title_Short" Description="@missionManager_Research08_Mission_Description" Type="varReference:00000006 6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@missionManager_Research08_Mission_Title" ShortTitle="@missionManager_Research08_Mission_Title_Short" Description="@missionManager_Research08_Mission_Description" Type="6371c758-63a2-4734-95e6-a098233f8b32" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@missionManager_Research08_Objective01_ShortDescription" LongDescription="@missionManager_Research08_Objective01_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@missionManager_Research08_Objective02_ShortDescription" LongDescription="@missionManager_Research08_Objective02_LongDescription" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@missionManager_Research08_Objective03_ShortDescription" LongDescription="@missionManager_Research08_Objective03_LongDescription" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@C05_FirstTimeOut_JumpToFortunesCross_ShortDesc" LongDescription="@C05_FirstTimeOut_JumpToFortunesCross_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@C05_FirstTimeOut_LandFortunesCross_ShortDesc" LongDescription="@C05_FirstTimeOut_LandFortunesCross_LongDesc" __type="MissionObjective" />
@@ -18852,7 +18852,7 @@
       <MissionObjective Name="Objective_14" ShortDesciption="@C05_FirstTimeOut_Day01ReturntoStanton_ShortDesc" LongDescription="@C05_FirstTimeOut_Day01ReturntoStanton_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="1" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@C05_FirstTimeOut_Day02NextPatrolPoint01_ShortDesc" LongDescription="@C05_FirstTimeOut_Day02NextPatrolPoint01_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@C05_FirstTimeOut_ScanExCon_ShortDesc" LongDescription="@C05_FirstTimeOut_ScanExCon_LongDesc" __type="MissionObjective" />
@@ -18867,7 +18867,7 @@
       <MissionObjective Name="Objective_11" ShortDesciption="@C05_FirstTimeOut_Day02ReturntoStanton_ShortDesc" LongDescription="@C05_FirstTimeOut_Day02ReturntoStanton_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C05_FirstTimeOut_Mission_Title" ShortTitle="@C05_FirstTimeOut_Mission_Title" Description="@C05_FirstTimeOut_Mission_Desc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@C05_FirstTimeOut_JumptoStingOp_ShortDesc" LongDescription="@C05_FirstTimeOut_JumptoStingOp_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@C05_FirstTimeOut_PrepStingOp_ShortDesc" LongDescription="@C05_FirstTimeOut_PrepStingOp_LongDesc" __type="MissionObjective" />
@@ -18884,7 +18884,7 @@
       <MissionObjective Name="Objective_13" ShortDesciption="@C05_FirstTimeOut_Day03ReturntoStanton_ShortDesc" LongDescription="@C05_FirstTimeOut_Day03ReturntoStanton_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C06_QuickTurnaround_Title" ShortTitle="@C06_QuickTurnaround_ShortDesc" Description="@C06_QuickTurnaround_LongDesc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C06_QuickTurnaround_Title" ShortTitle="@C06_QuickTurnaround_ShortDesc" Description="@C06_QuickTurnaround_LongDesc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="White Briefing" ShortDesciption="@C06_QuickTurnaround_WhiteBriefing_ShortDesc" LongDescription="@C06_QuickTurnaround_WhiteBriefing_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Visit Chakma" ShortDesciption="@C06_QuickTurnaround_VisitChakma_ShortDesc" LongDescription="@C06_QuickTurnaround_VisitChakma_LongDesc" __type="MissionObjective" />
@@ -18893,7 +18893,7 @@
       <MissionObjective Name="Board Ship" ShortDesciption="@C06_QuickTurnaround_BoardShip_ShortDesc" LongDescription="@C06_QuickTurnaround_BoardShip_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C07_SearchAndDestroy_Title" ShortTitle="@C07_SearchAndDestroy_ShortTitle" Description="@C07_SearchAndDestroy_Desc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C07_SearchAndDestroy_Title" ShortTitle="@C07_SearchAndDestroy_ShortTitle" Description="@C07_SearchAndDestroy_Desc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Return To Starfarer" ShortDesciption="@C07_SearchAndDestroy_ReturnToStarfarer_ShortDesc" LongDescription="@C07_SearchAndDestroy_ReturnToStarfarer_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Disable Herald" ShortDesciption="@C07_SearchAndDestroy_DisableHerald_ShortDesc" LongDescription="@C07_SearchAndDestroy_DisableHerald_LongDesc" __type="MissionObjective" />
@@ -18903,7 +18903,7 @@
       <MissionObjective Name="Report To Stanton" ShortDesciption="@C07_SearchAndDestroy_ReportToStanton_ShortDesc" LongDescription="@C07_SearchAndDestroy_ReportToStanton_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C08_ALittleDowntime_Title" ShortTitle="@C08_ALittleDowntime_ShortDesc" Description="@C08_ALittleDowntime_LongDesc" Type="varReference:00000001 8abbd704-6207-4ca4-9cd4-d9f0362cec64" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C08_ALittleDowntime_Title" ShortTitle="@C08_ALittleDowntime_ShortDesc" Description="@C08_ALittleDowntime_LongDesc" Type="8abbd704-6207-4ca4-9cd4-d9f0362cec64" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Talk to Old Man" ShortDesciption="@C08_ALittleDowntime_TalktoOldMan_ShortDesc" LongDescription="@C08_ALittleDowntime_TalktoOldMan_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Interrogate Prisoners" ShortDesciption="@C08_ALittleDowntime_InterrogatePrisoners_ShortDesc" LongDescription="@C08_ALittleDowntime_InterrogatePrisoners_LongDesc" __type="MissionObjective" />
@@ -18911,7 +18911,7 @@
       <MissionObjective Name="Board Ship" ShortDesciption="@C08_ALittleDowntime_BoardShip_ShortDesc" LongDescription="@C08_ALittleDowntime_BoardShip_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C11_Trap_Title" ShortTitle="@C11_Trap_ShortTitle" Description="@C11_Trap_Desc" Type="varReference:00000000 782e70e8-aae8-4959-97df-3de3de7591f8" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C11_Trap_Title" ShortTitle="@C11_Trap_ShortTitle" Description="@C11_Trap_Desc" Type="782e70e8-aae8-4959-97df-3de3de7591f8" Secondary="0" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Defend Shubin" ShortDesciption="@C11_Trap_Defend_ShortDesc" LongDescription="@C11_Trap_Defend_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Rescue Trapped Pilots" ShortDesciption="@C11_Trap_Rescue_ShortDesc" LongDescription="@C11_Trap_Rescue_LongDesc" __type="MissionObjective" />
@@ -18927,7 +18927,7 @@
       <MissionObjective Name="Secondary: Protect Shubin Shield Generator" ShortDesciption="@LOC_UNINITIALIZED" LongDescription="@LOC_UNINITIALIZED" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C13_LastStand_Title" ShortTitle="@C13_LastStand_ShortDesc" Description="@C13_LastStand_LongDesc" Type="varReference:00000000 782e70e8-aae8-4959-97df-3de3de7591f8" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C13_LastStand_Title" ShortTitle="@C13_LastStand_ShortDesc" Description="@C13_LastStand_LongDesc" Type="782e70e8-aae8-4959-97df-3de3de7591f8" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@C13_EnterShubin_ShortDesc" LongDescription="@C13_EnterShubin_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@C13_GoToFoyer_ShortDesc" LongDescription="@C13_EnterShubin_LongDesc" __type="MissionObjective" />
@@ -18939,7 +18939,7 @@
       <MissionObjective Name="Objective_08" ShortDesciption="@C13_StopWexler_ShortDesc" LongDescription="@C13_StopWexler_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C14_Transfer_Title" ShortTitle="@C14_Transfer_ShortDesc" Description="@C14_Transfer_LongDesc" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C14_Transfer_Title" ShortTitle="@C14_Transfer_ShortDesc" Description="@C14_Transfer_LongDesc" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Meet Captain Wade on the Bridge" ShortDesciption="@C14_Transfer_MeetWade_ShortDesc" LongDescription="@C14_Transfer_MeetWade_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Go to the Bunk Room" ShortDesciption="@C14_Transfer_GoToBunkRoom_ShortDesc" LongDescription="@C14_Transfer_GoToBunkRoom_LongDesc" __type="MissionObjective" />
@@ -18948,7 +18948,7 @@
       <MissionObjective Name="Board your ship and launch" ShortDesciption="@C14_Transfer_BoardShip_ShortDesc" LongDescription="@C14_Transfer_BoardShip_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C15_Coil_Title" ShortTitle="@C15_Coil_Title" Description="@C15_Coil_ShortDesc" Type="varReference:00000002 5fb4bfd0-7212-4920-aa17-84c6ef2aaf37" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C15_Coil_Title" ShortTitle="@C15_Coil_Title" Description="@C15_Coil_ShortDesc" Type="5fb4bfd0-7212-4920-aa17-84c6ef2aaf37" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Rendezvous" ShortDesciption="@C15_Coil_RendezVous_ShortDesc" LongDescription="@C15_Coil_RendezVous_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="SecureAlpha" ShortDesciption="@C15_Coil_SecureAlpha_ShortDesc" LongDescription="@C15_Coil_SecureAlpha_LongDesc" __type="MissionObjective" />
@@ -18967,7 +18967,7 @@
       <MissionObjective Name="ReturnToKrugeri" ShortDesciption="@C15_Coil_ReturnToKrugeri_ShortDesc" LongDescription="@C15_Coil_ReturnToKrugeri_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@C19_AssaultKarnesBase_Title" ShortTitle="@C19_AssaultKarnesBase_ShortDesc" Description="@C19_AssaultKarnesBase_LongDesc" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@C19_AssaultKarnesBase_Title" ShortTitle="@C19_AssaultKarnesBase_ShortDesc" Description="@C19_AssaultKarnesBase_LongDesc" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Report To Bradley" ShortDesciption="@C19_AssaultKarnesBase_ReportToBradley_ShortDesc" LongDescription="@C19_AssaultKarnesBase_ReportToBradley_LongDesc" __type="MissionObjective" />
       <MissionObjective Name="Clear All Bases Main" ShortDesciption="@C19_AssaultKarnesBase_ClearAllAsteroidBases_ShortDesc" LongDescription="@C19_AssaultKarnesBase_ClearAllAsteroidBases_LongDesc" __type="MissionObjective" />
@@ -18982,12 +18982,12 @@
       <MissionObjective Name="Defend The FOB" ShortDesciption="@C19_AssaultKarnesBase_DefendTheFOB_ShortDesc" LongDescription="@C19_AssaultKarnesBase_DefendTheFOB_LongDesc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@FPSPVEVS_Mission_Title" ShortTitle="@FPSPVEVS_Mission_Title" Description="@FPSPVEVS_Mission_Desc" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@FPSPVEVS_Mission_Title" ShortTitle="@FPSPVEVS_Mission_Title" Description="@FPSPVEVS_Mission_Desc" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@FPSPVEVS_EasyScenario_Objective01" LongDescription="@FPSPVEVS_EasyScenario_Objective01_Desc" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@dfm_ac_ui_ToolTipNextGameMode" ShortTitle="@hud_Lat" Description="@hud_ShieldsDown" Type="varReference:00000003 9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:00000238 00000000" __type="Mission">
+  <Mission Title="@dfm_ac_ui_ToolTipNextGameMode" ShortTitle="@hud_Lat" Description="@hud_ShieldsDown" Type="9ca0f6c7-36b3-49ab-8a70-9d54608e7d9e" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:00000238 00000000" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@item_NameMarine_Light_Armor" LongDescription="@item_descptv_paint_stealth" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@item_NameMarine_Heavy_Helmet" LongDescription="@item_DescBarpatron_m_torso_tshirt_jacket_black_AC" __type="MissionObjective" />
@@ -19003,19 +19003,19 @@
       <MissionObjective Name="Objective_12" ShortDesciption="@item_Namebehr_emp_grenade_01" LongDescription="@item_Descbehr_emp_grenade_01" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@item_DescACAS_HEFR_S3_Q4" ShortTitle="@item_nameANVL_S2_Rack_x2" Description="@item_DescACOM_AT_S1_Q2_Left" Type="varReference:00000004 da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@item_DescACAS_HEFR_S3_Q4" ShortTitle="@item_nameANVL_S2_Rack_x2" Description="@item_DescACOM_AT_S1_Q2_Left" Type="da636837-7db3-4ef6-8a9c-502b3d38a91b" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@item_NameVNCL_MissileRack_Blade" LongDescription="@Gamescom15_Red6" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@item_nameptv_paint_camo" ShortTitle="@dfm_RaceNewBestLap" Description="@item_DescFlair_Lamp_001" Type="varReference:00000007 730479ef-64de-42e5-9869-87bfb9a15c3e" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@item_nameptv_paint_camo" ShortTitle="@dfm_RaceNewBestLap" Description="@item_DescFlair_Lamp_001" Type="730479ef-64de-42e5-9869-87bfb9a15c3e" Secondary="1" AutoTrack="0" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="Objective_01" ShortDesciption="@item_NameFlair_Poster_001" LongDescription="@item_DescFlair_Poster_001" __type="MissionObjective" />
       <MissionObjective Name="Objective_02" ShortDesciption="@item_NameFlair_Lamp_001" LongDescription="@item_DescFlair_Lamp_001" __type="MissionObjective" />
       <MissionObjective Name="Objective_03" ShortDesciption="@item_NameFlair_Workbench" LongDescription="@item_DescFlair_Workbench" __type="MissionObjective" />
     </Objectives>
   </Mission>
-  <Mission Title="@LOC_UNINITIALIZED" ShortTitle="@LOC_UNINITIALIZED" Description="@LOC_UNINITIALIZED" Type="varReference:00000001 8abbd704-6207-4ca4-9cd4-d9f0362cec64" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
+  <Mission Title="@LOC_UNINITIALIZED" ShortTitle="@LOC_UNINITIALIZED" Description="@LOC_UNINITIALIZED" Type="8abbd704-6207-4ca4-9cd4-d9f0362cec64" Secondary="0" AutoTrack="1" Repeatable="0" Reward="varStrongPointer:FFFFFFFF FFFFFFFF" __type="Mission">
     <Objectives>
       <MissionObjective Name="SpeakToLeader" ShortDesciption="@hud_SpeakToLeader" LongDescription="@LOC_UNINITIALIZED" __type="MissionObjective" />
       <MissionObjective Name="EnterShip" ShortDesciption="@hud_EnterShip" LongDescription="@LOC_UNINITIALIZED" __type="MissionObjective" />
@@ -19256,7 +19256,7 @@
       <GOSTInstance name="Footlocker" __type="GOSTInstance">
         <Constants />
         <StateGroups>
-          <GOSTStateGroupImport name="ToggleItemStateGroup_Animation" impl="varReference:00000001 e72e3b0c-7aca-4298-9877-cf4df678cfae" __type="GOSTStateGroupImport" />
+          <GOSTStateGroupImport name="ToggleItemStateGroup_Animation" impl="e72e3b0c-7aca-4298-9877-cf4df678cfae" __type="GOSTStateGroupImport" />
         </StateGroups>
       </GOSTInstance>
     </GOSTs>
@@ -19266,7 +19266,7 @@
       <GOSTInstance name="Spaceglobe_Evade" __type="GOSTInstance">
         <Constants />
         <StateGroups>
-          <GOSTStateGroupImport name="ToggleItemStateGroup_Pfx" impl="varReference:00000003 3fa969a9-ea84-40f4-8b3a-e4bc10473d22" __type="GOSTStateGroupImport" />
+          <GOSTStateGroupImport name="ToggleItemStateGroup_Pfx" impl="3fa969a9-ea84-40f4-8b3a-e4bc10473d22" __type="GOSTStateGroupImport" />
         </StateGroups>
       </GOSTInstance>
     </GOSTs>
@@ -19276,7 +19276,7 @@
       <GOSTInstance name="Towel" __type="GOSTInstance">
         <Constants />
         <StateGroups>
-          <GOSTStateGroupImport name="ToggleItemStateGroup_MaterialChange" impl="varReference:00000002 050202d8-4885-4c08-a246-0cf76e5b71c3" __type="GOSTStateGroupImport" />
+          <GOSTStateGroupImport name="ToggleItemStateGroup_MaterialChange" impl="050202d8-4885-4c08-a246-0cf76e5b71c3" __type="GOSTStateGroupImport" />
         </StateGroups>
       </GOSTInstance>
     </GOSTs>
@@ -19721,7 +19721,7 @@
       <varStrongPointer __child="6857" __parent="611" />
     </Components>
   </SCItem>
-  <DisplayScreenTemplate name="Pilot_Display" description="" background_view="varReference:00000000 b441e334-8476-4fa3-824b-57610dd1e67c" __type="DisplayScreenTemplate">
+  <DisplayScreenTemplate name="Pilot_Display" description="" background_view="b441e334-8476-4fa3-824b-57610dd1e67c" __type="DisplayScreenTemplate">
     <default_views>
       <Reference value="edecae24-d11e-4425-9c89-45252f9b0266" />
       <Reference value="f0af9b99-8b9a-4d56-9dba-bb57307575bf" />
@@ -21055,11 +21055,11 @@
       </TPSOption>
     </Options>
   </TPSQuery>
-  <ConversationSystem_InnerThoughtConfig MinDistance="0.9" MaxDistance="1.4" Bone="Head" RotationRate="1" TranslationRate="2" InnerThought="varReference:00000000 7caa1a95-ce53-4eee-8c01-24fc8da94c9a" __type="ConversationSystem_InnerThoughtConfig">
+  <ConversationSystem_InnerThoughtConfig MinDistance="0.9" MaxDistance="1.4" Bone="Head" RotationRate="1" TranslationRate="2" InnerThought="7caa1a95-ce53-4eee-8c01-24fc8da94c9a" __type="ConversationSystem_InnerThoughtConfig">
     <Rotation x="0" y="0" z="180" __type="Deg3" />
     <BoneOffset x="0" y="0" z="0.2" __type="Vec3" />
   </ConversationSystem_InnerThoughtConfig>
-  <ConversationSystem_InnerThoughtConfig MinDistance="1.3" MaxDistance="1.5" Bone="Head" RotationRate="2" TranslationRate="5" InnerThought="varReference:00000001 1eedafd7-feab-4aa2-8e39-bdc521e14eca" __type="ConversationSystem_InnerThoughtConfig">
+  <ConversationSystem_InnerThoughtConfig MinDistance="1.3" MaxDistance="1.5" Bone="Head" RotationRate="2" TranslationRate="5" InnerThought="1eedafd7-feab-4aa2-8e39-bdc521e14eca" __type="ConversationSystem_InnerThoughtConfig">
     <Rotation x="9.45" y="0" z="180" __type="Deg3" />
     <BoneOffset x="0" y="0" z="0.3" __type="Vec3" />
   </ConversationSystem_InnerThoughtConfig>
@@ -21546,7 +21546,7 @@
   </CtxGraph>
   <InnerThought_Anim Type="varStrongPointer:00000201 00000000" __type="InnerThought_Anim" />
   <InnerThought_Anim Type="varStrongPointer:00000201 00000001" __type="InnerThought_Anim" />
-  <InnerThought_Params FontSize="0.05" Anim="varReference:00000000 84edb315-43f1-4e4e-bb69-e74c805c6ae1" __type="InnerThought_Params">
+  <InnerThought_Params FontSize="0.05" Anim="84edb315-43f1-4e4e-bb69-e74c805c6ae1" __type="InnerThought_Params">
     <States>
       <InnerThought_LayoutStates Name="Idle" Layout="varStrongPointer:00000204 00000000" __type="InnerThought_LayoutStates" />
       <InnerThought_LayoutStates Name="Intro" Layout="varStrongPointer:00000204 00000001" __type="InnerThought_LayoutStates" />
@@ -21554,7 +21554,7 @@
       <InnerThought_LayoutStates Name="Selected" Layout="varStrongPointer:00000204 00000003" __type="InnerThought_LayoutStates" />
     </States>
   </InnerThought_Params>
-  <InnerThought_Params FontSize="0.05" Anim="varReference:00000001 0a30db14-c5af-4bc5-b614-5bee57dd8a5e" __type="InnerThought_Params">
+  <InnerThought_Params FontSize="0.05" Anim="0a30db14-c5af-4bc5-b614-5bee57dd8a5e" __type="InnerThought_Params">
     <States>
       <InnerThought_LayoutStates Name="Idle" Layout="varStrongPointer:00000204 00000004" __type="InnerThought_LayoutStates" />
       <InnerThought_LayoutStates Name="Intro" Layout="varStrongPointer:00000204 00000005" __type="InnerThought_LayoutStates" />
@@ -21639,7 +21639,7 @@
       </rotationInterpolationModes>
     </transformationInterpolatorParams>
   </TransformationInterpolator>
-  <UIConfig ConversationConfig="varReference:00000001 94b7e5e3-279f-451e-a820-65aa965dbd28" QuantumPOICircleInterpFactor="0.8" __type="UIConfig">
+  <UIConfig ConversationConfig="94b7e5e3-279f-451e-a820-65aa965dbd28" QuantumPOICircleInterpFactor="0.8" __type="UIConfig">
     <VisorCurvature HorizontalFOV="45" VerticalFOV="45" ProjectDistance="0.24" __type="Visor_Curvature">
       <Scale x="0.5" y="0.5" __type="Vec2" />
     </VisorCurvature>
@@ -21748,7 +21748,7 @@
       </LetterNodes>
     </InnerThought>
   </UIConfig>
-  <UnitTest reference="varReference:00000000 385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:000002C1 000002C1" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 00000005" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="65ee4931-d0ee-498e-bf89-7f5de59a12ea" locale="@LOC_DEBUG" __type="UnitTest">
+  <UnitTest reference="385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:000002C1 000002C1" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 00000005" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="65ee4931-d0ee-498e-bf89-7f5de59a12ea" locale="@LOC_DEBUG" __type="UnitTest">
     <atomics myString="my Test String" myEnum="Second" myInt8="-8" myInt16="-16" myInt32="-32" myInt64="-64" myUInt8="8" myUInt16="16" myUInt32="32" myUInt64="64" myBooleanTrue="1" myFloat="1.12345" myDouble="1.123456789" __type="TestAtomics" />
     <arrays __type="TestArrays">
       <myStringArray>
@@ -21886,7 +21886,7 @@
       </baseArray>
     </inheritance>
   </UnitTest>
-  <UnitTest reference="varReference:00000000 385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:FFFFFFFF FFFFFFFF" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="d18fbb87-1785-48b9-8c2d-efc98037d3b6" locale="@LOC_DEBUG" __type="UnitTest">
+  <UnitTest reference="385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:FFFFFFFF FFFFFFFF" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="d18fbb87-1785-48b9-8c2d-efc98037d3b6" locale="@LOC_DEBUG" __type="UnitTest">
     <atomics myString="ABC" myEnum="First" myInt8="3" myInt16="1" myInt32="1" myInt64="1" myUInt8="1" myUInt16="5" myUInt32="10" myUInt64="15" myBooleanTrue="1" myFloat="999.123" myDouble="0" __type="TestAtomics" />
     <arrays __type="TestArrays">
       <myStringArray>
@@ -22494,7 +22494,7 @@
     <AttachmentDef Type="HumanWear_Head" SubType="Light" Size="1" Grade="1" Tags="" RequiredTags="" DisplayType="" __type="SItemPortAttachmentDef" />
     <Components />
   </SCItem>
-  <UnitTest reference="varReference:00000000 385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 0000000D" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="dfcf766a-dc14-4d81-a92a-cc3a06b16fa9" locale="@LOC_DEBUG" __type="UnitTest">
+  <UnitTest reference="385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 0000000D" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="dfcf766a-dc14-4d81-a92a-cc3a06b16fa9" locale="@LOC_DEBUG" __type="UnitTest">
     <atomics myString="Spreadsheet String A" myEnum="Second" myInt8="-8" myInt16="-16" myInt32="-32" myInt64="-64" myUInt8="8" myUInt16="16" myUInt32="32" myUInt64="64" myBooleanTrue="1" myFloat="0.123" myDouble="1.123456789" __type="TestAtomics" />
     <arrays __type="TestArrays">
       <myStringArray>
@@ -22626,7 +22626,7 @@
       </baseArray>
     </inheritance>
   </UnitTest>
-  <UnitTest reference="varReference:00000000 385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 00000013" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="a481b712-1208-4533-aadb-9d7bae12ffc1" locale="@LOC_DEBUG" __type="UnitTest">
+  <UnitTest reference="385d8003-fed9-4545-97dc-f3c978685bce" weakptr="varWeakPointer:FFFFFFFF FFFFFFFF" weakptrnull="varWeakPointer:FFFFFFFF FFFFFFFF" strongptr="varStrongPointer:000002C1 00000013" strongptrnull="varStrongPointer:FFFFFFFF FFFFFFFF" guid="a481b712-1208-4533-aadb-9d7bae12ffc1" locale="@LOC_DEBUG" __type="UnitTest">
     <atomics myString="Spreadsheet String B" myEnum="Second" myInt8="-8" myInt16="-16" myInt32="-32" myInt64="-64" myUInt8="8" myUInt16="16" myUInt32="32" myUInt64="64" myBooleanTrue="1" myFloat="0.321" myDouble="1.123456789" __type="TestAtomics" />
     <arrays __type="TestArrays">
       <myStringArray>
