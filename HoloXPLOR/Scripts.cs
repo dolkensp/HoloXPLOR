@@ -59,7 +59,7 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var item = DataForgeSerializer.Deserialize<XML.Spaceships.Item>(file.FullName);
+                                    var item = CryXmlSerializer.Deserialize<XML.Spaceships.Item>(file.FullName);
                                     // var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
 
                                     if (item == null)
@@ -235,7 +235,7 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var ammo = DataForgeSerializer.Deserialize<XML.Spaceships.Ammo>(file.FullName);
+                                    var ammo = CryXmlSerializer.Deserialize<XML.Spaceships.Ammo>(file.FullName);
                                     // var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
 
                                     if (ammo == null)
@@ -297,7 +297,7 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var loadout = DataForgeSerializer.Deserialize<XML.Spaceships.Loadout>(file.FullName);
+                                    var loadout = CryXmlSerializer.Deserialize<XML.Spaceships.Loadout>(file.FullName);
                                     // var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
 
                                     if (loadout == null)
@@ -352,7 +352,7 @@ namespace HoloXPLOR.Data
                         try
                         {
 #endif
-                                var vehicle = DataForgeSerializer.Deserialize<Ships.Vehicle>(file.FullName);
+                                var vehicle = CryXmlSerializer.Deserialize<Ships.Vehicle>(file.FullName);
                                 // var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
 
                                 if (vehicle == null)
@@ -391,7 +391,7 @@ namespace HoloXPLOR.Data
 
                                         if (!String.IsNullOrWhiteSpace(modification.PatchFile))
                                         {
-                                            var patch = DataForgeSerializer.Deserialize<Ships.Modification>(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile)));
+                                            var patch = CryXmlSerializer.Deserialize<Ships.Modification>(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile)));
                                             // var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
 
                                             if (patch.Parts != null && patch.Parts.Length > 0)

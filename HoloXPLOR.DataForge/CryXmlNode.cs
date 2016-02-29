@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HoloXPLOR.DataForge
 {
-    public class BinaryNode
+    public class CryXmlNode
     {
         public Int32 NodeID { get; set; }
         public Int32 NodeNameOffset { get; set; }

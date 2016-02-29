@@ -14,6 +14,7 @@ using System.Xml.Serialization;
 using DDRIT = Dolkens.Framework.BinaryExtensions.ExtensionMethods;
 using System.Security.Cryptography;
 using Dolkens.Framework.BinaryExtensions;
+using System.Xml.XPath;
 
 namespace Dolkens.Framework.BinaryExtensions
 {
@@ -94,7 +95,7 @@ namespace Dolkens.Framework.BinaryExtensions
         {
             Int32 stringLength = 0;
 
-            while (binaryReader.ReadChar() != 0 && binaryReader.BaseStream.Position < binaryReader.BaseStream.Length)
+            while (binaryReader.BaseStream.Position < binaryReader.BaseStream.Length && binaryReader.ReadChar() != 0)
                 stringLength++;
 
             Int64 nul = binaryReader.BaseStream.Position;
@@ -148,6 +149,86 @@ namespace Dolkens.Framework.BinaryExtensions
         }
 
         #endregion
+
+        public static String SuperGetPath(this XmlElement element)
+        {
+            string path = "/" + element.Name;
+
+            XmlElement parentElement = element.ParentNode as XmlElement;
+            if (parentElement != null)
+            {
+                XmlNodeList siblings = parentElement.SelectNodes(element.Name);
+                if (siblings != null && siblings.Count > 1) // There's more than 1 element with the same name
+                {
+                    int position = 0;
+                    foreach (XmlElement sibling in siblings)
+                    {
+                        if (sibling == element)
+                            break;
+
+                        position++;
+                    }
+
+                    path = path + "[" + position + "]";
+                }
+
+                // Climbing up to the parent elements:
+                path = parentElement.GetPath() + path;
+            }
+
+            return path;
+        }
+
+        public static XmlElement Rename(this XmlElement element, String name)
+        {
+            var buffer = element.OwnerDocument.CreateElement(name);
+
+            foreach (XmlNode node in element.ChildNodes)
+            {
+                buffer.AppendChild(node);
+            }
+
+            while (element.Attributes.Count > 0)
+            {
+                XmlAttribute attribute = element.Attributes[0];
+                buffer.Attributes.Append(attribute);
+            }
+
+            return buffer;
+        }
+
+        public static String GetPath(this XmlNode target)
+        {
+            List<KeyValuePair<String, Int32?>> path = new List<KeyValuePair<String, Int32?>> { };
+
+            while (target.ParentNode != null)
+            {
+                var siblings = target.ParentNode.SelectNodes(target.Name);
+                if (siblings.Count > 1)
+                {
+                    var siblingIndex = 0;
+                    foreach (var sibling in siblings)
+                    {
+                        if (sibling == target)
+                        {
+                            path.Add(new KeyValuePair<String, Int32?>(target.ParentNode.Name, siblingIndex));
+                        }
+
+                        siblingIndex++;
+                    }
+                }
+                else
+                {
+                    path.Add(new KeyValuePair<String, Int32?>(target.ParentNode.Name, null));
+                }
+
+                target = target.ParentNode;
+            }
+
+            path.Reverse();
+
+            return String.Join(".", path.Skip(3).Select(p => p.Value.HasValue ? String.Format("{0}[{1}]", p.Key, p.Value) : p.Key));
+        }
     }
 }
 
@@ -179,6 +260,15 @@ namespace System
         /// <param name="stringLength">Size of the String</param>
         /// <returns></returns>
         public static String ReadFString(this BinaryReader binaryReader, Int32 stringLength) { return DDRIT.ReadFString(binaryReader, stringLength); }
+    }
+}
+
+namespace System.Xml
+{
+    public static class _Proxy
+    {
+        public static XmlElement Rename(this XmlElement element, String name) { return DDRIT.Rename(element, name); }
+        public static String GetPath(this XmlElement element) { return DDRIT.GetPath(element); }
     }
 }
 
