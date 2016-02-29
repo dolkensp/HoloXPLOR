@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,20 +10,14 @@ namespace HoloXPLOR.DataForge
 {
     public abstract class DataForgeSerializable
     {
-        [JsonIgnore]
         public DataForge DocumentRoot { get; private set; }
         
-        [JsonIgnore]
         internal BinaryReader _br;
         
-        [JsonProperty("__offset")]
         public String __offset { get { return String.Format("{0:X8}", this._offset); } }
-        [JsonIgnore]
         public Int64 _offset;
 
-        [JsonProperty("__index")]
         public String __index { get { return String.Format("{0:X8}", this._index); } }
-        [JsonIgnore]
         public Int32 _index;
 
         public DataForgeSerializable(DataForge documentRoot)

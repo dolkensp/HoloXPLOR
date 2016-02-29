@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,24 +12,16 @@ namespace HoloXPLOR.DataForge
         public UInt32 NameOffset { get; set; }
         public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
 
-        [JsonProperty("ParentTypeIndex")]
         public String __parentTypeIndex { get { return String.Format("{0:X4}", this.ParentTypeIndex); } }
-        [JsonIgnore]
         public UInt32 ParentTypeIndex { get; set; }
 
-        [JsonProperty("AttributeCount")]
         public String __attributeCount { get { return String.Format("{0:X4}", this.AttributeCount); } }
-        [JsonIgnore]
         public UInt16 AttributeCount { get; set; }
 
-        [JsonProperty("FirstAttributeIndex")]
         public String __firstAttributeIndex { get { return String.Format("{0:X4}", this.FirstAttributeIndex); } }
-        [JsonIgnore]
         public UInt16 FirstAttributeIndex { get; set; }
 
-        [JsonProperty("NodeType")]
         public String __nodeType { get { return String.Format("{0:X4}", this.NodeType); } }
-        [JsonIgnore]
         public UInt32 NodeType { get; set; }
 
         public DataForgeStructDefinition(DataForge documentRoot)
@@ -149,11 +140,19 @@ namespace HoloXPLOR.DataForge
                             case EDataType.varUInt8:
                                 child.AppendChild(this.DocumentRoot.Array_UInt8Values[firstIndex + i].Read());
                                 break;
+                            case EDataType.varClass:
+                                var empty = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
+                                child.AppendChild(empty);
+                                this.DocumentRoot.NeedsMapping.Add(new Tuple<XmlElement, UInt16, Int32>(empty, node.StructIndex, (Int32)firstIndex + i));
+                                break;
                             default:
                                 var tempe = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
                                 var tempa = this.DocumentRoot.CreateAttribute("__index");
                                 tempa.Value = (firstIndex + i).ToString();
                                 tempe.Attributes.Append(tempa);
+                                var tempb = this.DocumentRoot.CreateAttribute("__struct");
+                                tempb.Value = node.StructIndex.ToString();
+                                tempe.Attributes.Append(tempb);
                                 child.AppendChild(tempe);
                                 break;
                         }

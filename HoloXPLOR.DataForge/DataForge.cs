@@ -38,6 +38,9 @@ namespace HoloXPLOR.DataForge
         public DataForgeArrayBoolean[] Array_BooleanValues { get; set; }
         public DataForgeArraySingle[] Array_SingleValues { get; set; }
         public DataForgeArrayDouble[] Array_DoubleValues { get; set; }
+
+        public Dictionary<UInt32, List<XmlElement>> DataMap { get; set; }
+        public List<Tuple<XmlElement, UInt16, Int32>> NeedsMapping { get; set; }
         public List<XmlElement> DataTable { get; set; }
 
         private Dictionary<UInt32, String> _valueMap;
@@ -47,6 +50,7 @@ namespace HoloXPLOR.DataForge
         {
             this._br = br;
             this.FileVersion = this._br.ReadInt64();
+            this.NeedsMapping = new List<Tuple<XmlElement, UInt16, Int32>> { };
 
             var structDefinitionCount   = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x02d3
             var propertyDefinitionCount = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0602
@@ -112,7 +116,7 @@ namespace HoloXPLOR.DataForge
             this.Array_ReferenceValues = this.ReadArray<DataForgeArrayReference>(referenceValueCount);
             this.EnumOptionTable = this.ReadArray<DataForgeStringLookup>(enumOptionCount);
 
-            Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
+            // Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
             var buffer = new List<DataForgeString> { };
             var maxPosition = this._br.BaseStream.Position + totalLength25;
             var index = 0;
@@ -127,60 +131,45 @@ namespace HoloXPLOR.DataForge
                 });
             }
             this.ValueTable = buffer.ToArray();
+            
+            this.DataTable = new List<XmlElement> { };
+            this.DataMap = new Dictionary<UInt32, List<XmlElement>> { };
 
-            if (loadData)
+            foreach (var dataMapping in this.DataMappingTable)
             {
-                var patch = false;
+                this.DataMap[dataMapping.StructIndex] = new List<XmlElement> { };
 
-                this.DataTable = new List<XmlElement> { };
-                foreach (var dataMapping in this.DataMappingTable)
+                var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
+
+                for (Int32 i = 0; i < dataMapping.StructCount; i++)
                 {
-                    var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
+                    var node = dataStruct.Read();
 
-                    if (patch)
-                    {
-                        if (dataStruct.Name == "CommunicationVariation")
-                        {
-                            Console.WriteLine("Padded by 12 x {0:X4}", dataMapping.StructCount);
-                        }
-                        else if (dataStruct.Name == "ConversationNode_Dialogue")
-                        {
-                            Console.WriteLine("Padded by 12 x {0:X4}", dataMapping.StructCount);
-                        }
-                    }
-
-                    for (Int32 i = 0; i < dataMapping.StructCount; i++)
-                    {
-                        var node = dataStruct.Read();
-
-                        if (patch)
-                        {
-                            if (dataStruct.Name == "CommunicationVariation")
-                            {
-                                for (Int32 k = 0, j = 12; k < j; k++)
-                                {
-                                    this._br.ReadBoolean();
-                                }
-                            }
-                            else if (dataStruct.Name == "ConversationNode_Dialogue")
-                            {
-                                for (Int32 k = 0, j = 12; k < j; k++)
-                                {
-                                    this._br.ReadBoolean();
-                                }
-                            }
-                        }
-
-                        Console.WriteLine(node.OuterXml);
-                        this.DataTable.Add(node);
-                    }
+                    this.DataMap[dataMapping.StructIndex].Add(node);
+                    this.DataTable.Add(node);
                 }
+            }
+
+            foreach (var dataMapping in this.NeedsMapping)
+            {
+                dataMapping.Item1.ParentNode.ReplaceChild(
+                    this.DataMap[dataMapping.Item2][dataMapping.Item3],
+                    dataMapping.Item1);
+            }
+
+            var root = this._xmlDocument.CreateElement("DataForge");
+            this._xmlDocument.AppendChild(root);
+            foreach (var record in this.RecordDefinitionTable)
+            {
+                root.AppendChild(this.DataMap[record.StructIndex][record.VariantIndex]);
             }
         }
 
         private XmlDocument _xmlDocument = new XmlDocument();
         public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
         public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
+        public void Save(String filename) { this._xmlDocument.Save(filename); }
+        public String OuterXML { get { return this._xmlDocument.OuterXml; } }
 
         public U[] ReadArray<U>(UInt32? arraySize = null) where U : DataForgeSerializable
         {
@@ -200,7 +189,7 @@ namespace HoloXPLOR.DataForge
                 return null;
             }
 
-            Console.WriteLine("0x{0:X8}: {2} 0x{1:X4}", this._br.BaseStream.Position, arraySize.Value, typeof(U).Name);
+            // Console.WriteLine("0x{0:X8}: {2} 0x{1:X4}", this._br.BaseStream.Position, arraySize.Value, typeof(U).Name);
 
             return (from i in Enumerable.Range(0, (Int32)arraySize.Value)
                     let data = (U)Activator.CreateInstance(typeof(U), this)

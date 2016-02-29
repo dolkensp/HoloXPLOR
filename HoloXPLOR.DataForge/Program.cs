@@ -241,10 +241,14 @@ namespace HoloXPLOR.DataForge
             var inFile = "Game.dcb";
             using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
             {
-                var df = new DataForge(br, true);
+                var df = new DataForge(br);
 
-                // df.DumpFile();
-                // 
+                df.Save("dataforge.xml");
+                
+                // File.WriteAllLines("dataforge.xml", new String[] { "<DataForge>" });
+                // File.AppendAllLines("dataforge.xml", df.DataTable.Select(n => n.OuterXml));
+                // File.AppendAllLines("dataforge.xml", new String[] { "</DataForge>" });
+                
                 // File.WriteAllText("01-structs.js", df.StructDefinitionTable.ToJSON());
                 // File.WriteAllText("02-properties.js", df.PropertyDefinitionTable.ToJSON());
                 // File.WriteAllText("03-enums.js", df.EnumDefinitionTable.ToJSON());
@@ -252,10 +256,16 @@ namespace HoloXPLOR.DataForge
                 // File.WriteAllText("05-enumvalues.js", df.EnumValueTable.ToJSON());
                 // File.WriteAllText("06-values.js", df.ValueTable.ToJSON());
                 // File.WriteAllText("07-structcount.js", df.DataMappingTable.ToJSON());
-                File.WriteAllText("dataforge.js", df.ToJSON());
 
-                // df.Serialize();
+                // File.WriteAllText("dataforge.js", df.ToJSON());
+            }
+        }
 
+        public static void Scanner(params String[] args)
+        {
+            var inFile = "Game.dcb";
+            using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
+            {
                 #region Definitions
 
                 var definitions = new List<Int64[]> {
@@ -342,12 +352,12 @@ namespace HoloXPLOR.DataForge
                                     data = (br.ReadCString() ?? String.Empty).Replace("\r", "\\r").Replace("\n", "\\n");
                                     break;
                                 case 0x81:
-                                case 0x01: 
+                                case 0x01:
                                     format = "0x{0:X2} ";
                                     data = br.ReadByte();
                                     break;
                                 case 0x82:
-                                case 0x02: 
+                                case 0x02:
                                     format = "0x{0:X4} ";
                                     data = br.ReadInt16();
                                     break;
@@ -356,7 +366,7 @@ namespace HoloXPLOR.DataForge
                                     data = String.Format("{0:X2}{1:X2}{2:X2}", br.ReadByte(), br.ReadByte(), br.ReadByte());
                                     break;
                                 case 0x84:
-                                case 0x04: 
+                                case 0x04:
                                     format = "0x{0:X8} ";
                                     data = br.ReadInt32();
                                     break;
@@ -365,7 +375,7 @@ namespace HoloXPLOR.DataForge
                                     data = br.ReadSingle();
                                     break;
                                 case 0x88:
-                                case 0x08: 
+                                case 0x08:
                                     format = "0x{0:X16} ";
                                     data = br.ReadInt64();
                                     break;
@@ -429,8 +439,6 @@ namespace HoloXPLOR.DataForge
                     Console.WriteLine();
                 }
             }
-
-            // Console.ReadKey();
         }
 
         public static void XmlBin(params String[] args)
