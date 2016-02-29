@@ -55,6 +55,7 @@
     <Compile Include="DataForgeArrayBoolean.cs" />
     <Compile Include="DataForgeArrayInt32.cs" />
     <Compile Include="DataForgeArrayInt64.cs" />
+    <Compile Include="DataForgeArrayPointer.cs" />
     <Compile Include="DataForgeArraySingle.cs" />
     <Compile Include="DataForgeArrayDouble.cs" />
     <Compile Include="DataForgeArrayUInt32.cs" />
@@ -85,9 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Game.dcb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

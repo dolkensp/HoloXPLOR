@@ -37,7 +37,6 @@ namespace HoloXPLOR.DataForge
         public XmlElement Read(String name = null)
         {
             XmlAttribute attribute;
-            var element = this.DocumentRoot.CreateElement(name ?? this.Name);
 
             var baseStruct = this;
             var properties = new List<DataForgePropertyDefinition> { };
@@ -61,6 +60,9 @@ namespace HoloXPLOR.DataForge
                     select property);
             }
 
+            var element = this.DocumentRoot.CreateElement(name ?? baseStruct.Name);
+
+
             var globalOffset = this._br.BaseStream.Position;
             var localOffset = this._br.BaseStream.Position - 0x00096027;
 
@@ -75,6 +77,14 @@ namespace HoloXPLOR.DataForge
                         var child = dataStruct.Read(node.Name);
 
                         element.AppendChild(child);
+                    }
+                    else if (node.DataType == EDataType.varStrongPointer)
+                    {
+                        var parentSP = this.DocumentRoot.CreateElement(node.Name);
+                        var emptySP = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
+                        parentSP.AppendChild(emptySP);
+                        element.AppendChild(parentSP);
+                        this.DocumentRoot.Require_ClassMapping.Add(new Tuple<XmlElement, UInt16, Int32>(emptySP, (UInt16)this._br.ReadUInt32(), (Int32)this._br.ReadUInt32()));
                     }
                     else
                     {
@@ -141,20 +151,36 @@ namespace HoloXPLOR.DataForge
                                 child.AppendChild(this.DocumentRoot.Array_UInt8Values[firstIndex + i].Read());
                                 break;
                             case EDataType.varClass:
-                                var empty = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
-                                child.AppendChild(empty);
-                                this.DocumentRoot.NeedsMapping.Add(new Tuple<XmlElement, UInt16, Int32>(empty, node.StructIndex, (Int32)firstIndex + i));
+                                var emptyC = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
+                                child.AppendChild(emptyC);
+                                this.DocumentRoot.Require_ClassMapping.Add(new Tuple<XmlElement, UInt16, Int32>(emptyC, node.StructIndex, (Int32)firstIndex + i));
+                                break;
+                            case EDataType.varStrongPointer:
+                                var emptySP = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
+                                child.AppendChild(emptySP);
+                                this.DocumentRoot.Require_StrongMapping.Add(new Tuple<XmlElement, UInt16, Int32>(emptySP, node.StructIndex, (Int32)firstIndex + i));
+                                break;
+                            case EDataType.varWeakPointer:
+                                var weakPointerElement = this.DocumentRoot.CreateElement("WeakPointer");
+                                var weakPointerAttribute = this.DocumentRoot.CreateAttribute(node.Name);
+
+                                weakPointerElement.Attributes.Append(weakPointerAttribute);
+                                child.AppendChild(weakPointerElement);
+
+                                this.DocumentRoot.Require_WeakMapping1.Add(new Tuple<XmlAttribute, UInt16, Int32>(weakPointerAttribute, node.StructIndex, (Int32)firstIndex + i));
                                 break;
                             default:
-                                var tempe = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
-                                var tempa = this.DocumentRoot.CreateAttribute("__index");
-                                tempa.Value = (firstIndex + i).ToString();
-                                tempe.Attributes.Append(tempa);
-                                var tempb = this.DocumentRoot.CreateAttribute("__struct");
-                                tempb.Value = node.StructIndex.ToString();
-                                tempe.Attributes.Append(tempb);
-                                child.AppendChild(tempe);
-                                break;
+                                throw new NotImplementedException();
+
+                                // var tempe = this.DocumentRoot.CreateElement(String.Format("{0}", node.DataType));
+                                // var tempa = this.DocumentRoot.CreateAttribute("__child");
+                                // tempa.Value = (firstIndex + i).ToString();
+                                // tempe.Attributes.Append(tempa);
+                                // var tempb = this.DocumentRoot.CreateAttribute("__parent");
+                                // tempb.Value = node.StructIndex.ToString();
+                                // tempe.Attributes.Append(tempb);
+                                // child.AppendChild(tempe);
+                                // break;
                         }
                     }
 
