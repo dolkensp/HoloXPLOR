@@ -7,24 +7,24 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayGuid : DataForgeSerializable
+    public class DataForgeArrayUInt8 : DataForgeSerializable
     {
-        public Guid Value { get; set; }
+        public Byte Value { get; set; }
 
-        public DataForgeArrayGuid(DataForge documentRoot)
+        public DataForgeArrayUInt8(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this.ReadGuid(false).Value;
+            this.Value = this._br.ReadByte();
         }
 
         public override String ToString()
         {
-            return this.Value.ToString();
+            return String.Format("{0}", this.Value);
         }
 
         public XmlElement Read()
         {
-            var element = this.DocumentRoot.CreateElement("Guid");
+            var element = this.DocumentRoot.CreateElement("UInt8");
             var attribute = this.DocumentRoot.CreateAttribute("value");
             attribute.Value = this.Value.ToString();
             element.Attributes.Append(attribute);

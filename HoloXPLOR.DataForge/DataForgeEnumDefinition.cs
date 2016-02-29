@@ -8,14 +8,15 @@ namespace HoloXPLOR.DataForge
 {
     public class DataForgeEnumDefinition : DataForgeSerializable
     {
-        public String Name { get; set; }
+        public UInt32 NameOffset { get; set; }
+        public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
         public UInt16 ValueCount { get; set; }
         public UInt16 FirstValueIndex { get; set; }
 
         public DataForgeEnumDefinition(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Name = this.ReadString();
+            this.NameOffset = this._br.ReadUInt32();
             this.ValueCount = this._br.ReadUInt16();
             this.FirstValueIndex = this._br.ReadUInt16();
         }

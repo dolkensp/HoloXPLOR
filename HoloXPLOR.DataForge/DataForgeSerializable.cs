@@ -13,40 +13,25 @@ namespace HoloXPLOR.DataForge
     {
         [JsonIgnore]
         public DataForge DocumentRoot { get; private set; }
+        
         [JsonIgnore]
         internal BinaryReader _br;
-        [JsonIgnore]
-        internal Int64 _offset;
-
-        [JsonIgnore]
-        internal Int64 _index;
-
-        [JsonProperty("Offset")]
+        
+        [JsonProperty("__offset")]
         public String __offset { get { return String.Format("{0:X8}", this._offset); } }
+        [JsonIgnore]
+        public Int64 _offset;
 
-        [JsonProperty("Index")]
+        [JsonProperty("__index")]
         public String __index { get { return String.Format("{0:X8}", this._index); } }
+        [JsonIgnore]
+        public Int32 _index;
 
         public DataForgeSerializable(DataForge documentRoot)
         {
             this.DocumentRoot = documentRoot;
             this._br = documentRoot._br;
             this._offset = this._br.BaseStream.Position;
-        }
-
-        public String ReadString()
-        {
-            var stringOffset = this._br.ReadUInt32();
-
-            var oldPos = this._br.BaseStream.Position;
-
-            this._br.BaseStream.Seek(0x0002F1DC + stringOffset, SeekOrigin.Begin);
-
-            String buffer = this._br.ReadCString();
-
-            this._br.BaseStream.Seek(oldPos, SeekOrigin.Begin);
-
-            return buffer;
         }
 
         public Guid? ReadGuid(Boolean nullable = true)
@@ -68,30 +53,6 @@ namespace HoloXPLOR.DataForge
             if (isNull) return null;
 
             return new Guid(a, b, c, d, e, f, g, h, i, j, k);
-        }
-
-        public U[] ReadArray<U>(UInt32? arraySize = null) where U : DataForgeSerializable
-        {
-            if (!arraySize.HasValue)
-            {
-                // TODO: Check if this logic is correct - do we need to preprocess ALL arrays and pass an array size?
-                arraySize = this._br.ReadUInt32();
-
-                if (arraySize == 0xFFFFFFFF)
-                {
-                    return null;
-                }
-            }
-
-            if (arraySize == 0xFFFFFFFF)
-            {
-                return null;
-            }
-
-            return (from i in Enumerable.Range(0, (Int32)arraySize.Value)
-                    let data = (U)Activator.CreateInstance(typeof(U), this.DocumentRoot)
-                    let hack = data._index = i
-                    select data).ToArray();
         }
     }
 }

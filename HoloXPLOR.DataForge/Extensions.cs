@@ -94,7 +94,7 @@ namespace Dolkens.Framework.BinaryExtensions
         {
             Int32 stringLength = 0;
 
-            while (binaryReader.ReadChar() != 0 && binaryReader.BaseStream.Position < binaryReader.BaseStream.Length)
+            while (binaryReader.BaseStream.Position < binaryReader.BaseStream.Length && binaryReader.ReadChar() != 0)
                 stringLength++;
 
             Int64 nul = binaryReader.BaseStream.Position;

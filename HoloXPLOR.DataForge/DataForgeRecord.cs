@@ -10,7 +10,8 @@ namespace HoloXPLOR.DataForge
 {
     public class DataForgeRecord : DataForgeSerializable
     {
-        public String Name { get; set; }
+        public UInt32 NameOffset { get; set; }
+        public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
 
         [JsonProperty("StructIndex")]
         public String __structIndex { get { return String.Format("{0:X4}", this.StructIndex); } }
@@ -32,40 +33,12 @@ namespace HoloXPLOR.DataForge
         public DataForgeRecord(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Name = this.ReadString();
+            this.NameOffset = this._br.ReadUInt32();
             this.StructIndex = this._br.ReadUInt32();
             this.Hash = this.ReadGuid(false);
 
             this.VariantIndex = this._br.ReadUInt16();
             this.Item1 = this._br.ReadUInt16();
-        }
-
-        public XmlNode Serialize(XmlDocument xmlDocument, String name = null)
-        {
-            var element = xmlDocument.CreateElement(name ?? this.Name);
-
-            var schema = this.DocumentRoot.StructDefinitionTable[this.StructIndex];
-
-            var attribute = xmlDocument.CreateAttribute("__hash");
-            attribute.Value = this.Hash.ToString();
-            element.Attributes.Append(attribute);
-
-            var properties = (from index in Enumerable.Range(schema.FirstAttributeIndex, schema.AttributeCount)
-                              select this.DocumentRoot.PropertyDefinitionTable[index]);
-
-            foreach (var node in properties)
-            {
-                if (node.ConversionType == EConversionType.varAttribute)
-                {
-                    element.Attributes.Append(node.Serialize(xmlDocument) as XmlAttribute);
-                }
-                else
-                {
-                    element.AppendChild(node.Serialize(xmlDocument));
-                }
-            }
-
-            return element;
         }
 
         public override String ToString()

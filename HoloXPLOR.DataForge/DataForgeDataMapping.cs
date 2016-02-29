@@ -10,14 +10,15 @@ namespace HoloXPLOR.DataForge
     {
         public UInt16 StructIndex { get; set; }
         public UInt16 StructCount { get; set; }
-        public String Name { get; set; }
+        public UInt32 NameOffset { get; set; }
+        public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
 
         public DataForgeDataMapping(DataForge documentRoot)
             : base(documentRoot)
         {
             this.StructCount = this._br.ReadUInt16();
             this.StructIndex = this._br.ReadUInt16();
-            this.Name = documentRoot.StructDefinitionTable[this.StructIndex].Name;
+            this.NameOffset = documentRoot.StructDefinitionTable[this.StructIndex].NameOffset;
         }
 
         public override String ToString()

@@ -8,12 +8,13 @@ namespace HoloXPLOR.DataForge
 {
     public class DataForgeStringLookup : DataForgeSerializable
     {
-        public String Value { get; set; }
+        private UInt32 _value;
+        public String Value { get { return this.DocumentRoot.ValueMap[this._value]; } }
 
         public DataForgeStringLookup(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this.ReadString();
+            this._value = this._br.ReadUInt32();
         }
 
         public override String ToString()
