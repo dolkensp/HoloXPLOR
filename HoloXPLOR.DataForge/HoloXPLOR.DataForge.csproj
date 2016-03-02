@@ -48,15 +48,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryNode.cs" />
-    <Compile Include="BinaryReference.cs" />
-    <Compile Include="BinaryValue.cs" />
+    <Compile Include="CryXmlNode.cs" />
+    <Compile Include="CryXmlReference.cs" />
+    <Compile Include="CryXmlValue.cs" />
+    <Compile Include="DataForge.cs" />
+    <Compile Include="DataForgeArrayBoolean.cs" />
+    <Compile Include="DataForgeArrayInt32.cs" />
+    <Compile Include="DataForgeArrayInt64.cs" />
+    <Compile Include="DataForgeArrayPointer.cs" />
+    <Compile Include="DataForgeArraySingle.cs" />
+    <Compile Include="DataForgeArrayDouble.cs" />
+    <Compile Include="DataForgeArrayUInt32.cs" />
+    <Compile Include="DataForgeArrayUInt64.cs" />
+    <Compile Include="DataForgeArrayUInt16.cs" />
+    <Compile Include="DataForgeArrayUInt8.cs" />
+    <Compile Include="DataForgeArrayInt16.cs" />
+    <Compile Include="DataForgeArrayInt8.cs" />
+    <Compile Include="DataForgeArrayReference.cs" />
+    <Compile Include="DataForgeArrayEnum.cs" />
+    <Compile Include="DataForgeArrayLocale.cs" />
+    <Compile Include="DataForgeArrayString.cs" />
+    <Compile Include="DataForgeArrayGuid.cs" />
+    <Compile Include="DataForgeEnumDefinition.cs" />
+    <Compile Include="DataForgePropertyDefinition.cs" />
+    <Compile Include="DataForgeDataMapping.cs" />
+    <Compile Include="DataForgeRecord.cs" />
+    <Compile Include="DataForgeSerializable.cs" />
+    <Compile Include="DataForgeStructDefinition.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Extensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataForge.cs" />
+    <Compile Include="CryXmlSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_DataForge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

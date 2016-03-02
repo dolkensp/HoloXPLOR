@@ -1,214 +1,263 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using System.Xml.XPath;
 
 namespace HoloXPLOR.DataForge
 {
-    public static class DataForgeSerializer
+    public class DataForge
     {
-        public static XmlDocument ReadFile(String inFile, Boolean writeLog = false)
+        internal BinaryReader _br;
+
+        public Int64 FileVersion { get; set; }
+        
+        public DataForgeStructDefinition[] StructDefinitionTable { get; set; }
+        public DataForgePropertyDefinition[] PropertyDefinitionTable { get; set; }
+        public DataForgeEnumDefinition[] EnumDefinitionTable { get; set; }
+        public DataForgeDataMapping[] DataMappingTable { get; set; }
+        public DataForgeRecord[] RecordDefinitionTable { get; set; }
+        public DataForgeStringLookup[] EnumOptionTable { get; set; }
+        public DataForgeString[] ValueTable { get; set; }
+
+        public DataForgeArrayReference[] Array_ReferenceValues { get; set; }
+        public DataForgeArrayGuid[] Array_GuidValues { get; set; }
+        public DataForgeArrayString[] Array_StringValues { get; set; }
+        public DataForgeArrayLocale[] Array_LocaleValues { get; set; }
+        public DataForgeArrayEnum[] Array_EnumValues { get; set; }
+        public DataForgeArrayInt8[] Array_Int8Values { get; set; }
+        public DataForgeArrayInt16[] Array_Int16Values { get; set; }
+        public DataForgeArrayInt32[] Array_Int32Values { get; set; }
+        public DataForgeArrayInt64[] Array_Int64Values { get; set; }
+        public DataForgeArrayUInt8[] Array_UInt8Values { get; set; }
+        public DataForgeArrayUInt16[] Array_UInt16Values { get; set; }
+        public DataForgeArrayUInt32[] Array_UInt32Values { get; set; }
+        public DataForgeArrayUInt64[] Array_UInt64Values { get; set; }
+        public DataForgeArrayBoolean[] Array_BooleanValues { get; set; }
+        public DataForgeArraySingle[] Array_SingleValues { get; set; }
+        public DataForgeArrayDouble[] Array_DoubleValues { get; set; }
+        public DataForgeArrayPointer[] Array_StrongValues { get; set; }
+        public DataForgeArrayPointer[] Array_WeakValues { get; set; }
+
+        public Dictionary<UInt32, List<XmlElement>> DataMap { get; set; }
+
+        public List<Tuple<XmlElement, UInt16, Int32>> Require_ClassMapping { get; set; }
+        public List<Tuple<XmlElement, UInt16, Int32>> Require_StrongMapping { get; set; }
+        public List<Tuple<XmlAttribute, UInt16, Int32>> Require_WeakMapping1 { get; set; }
+        public List<Tuple<XmlAttribute, UInt16, Int32>> Require_WeakMapping2 { get; set; }
+        public List<XmlElement> DataTable { get; set; }
+
+        private Dictionary<UInt32, String> _valueMap;
+        public Dictionary<UInt32, String> ValueMap { get { return this._valueMap = this._valueMap ?? this.ValueTable.ToDictionary(k => (UInt32)k._offset, v => v.Value); } }
+
+        public DataForge(BinaryReader br, Boolean loadData = true)
         {
-            using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
+            this._br = br;
+            this.FileVersion = this._br.ReadInt64();
+            this.Require_ClassMapping    = new List<Tuple<XmlElement, UInt16, Int32>> { };
+            this.Require_StrongMapping   = new List<Tuple<XmlElement, UInt16, Int32>> { };
+            this.Require_WeakMapping1    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
+            this.Require_WeakMapping2    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
+
+            var structDefinitionCount    = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x02d3
+            var propertyDefinitionCount  = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0602
+            var enumDefinitionCount      = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0041 : 0x0002 ???
+            var dataMappingCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x013c
+            var recordDefinitionCount    = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0b35
+                                         
+            var int8ValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int8
+            var int16ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int16
+            var int64ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int32
+            var int32ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0024 - Int64
+            var uint8ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt8
+            var uint16ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt16
+            var uint64ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt32
+            var uint32ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt64
+            var booleanValueCount        = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Boolean
+            var singleValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x003c - Single
+            var doubleValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Double
+            var guidValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Guid Array Values
+            var stringValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0076 - String Array Values
+            var localeValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0034 - Locale Array Values
+            var enumValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x006e - Enum Array Values
+            var numRecords21             = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x1cf3 - ??? Class Array Values
+            var numRecords22             = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x079d - ??? Pointer Array Values
+                                         
+            var referenceValueCount      = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0026 - Reference Array Values
+            var enumOptionCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0284 - Enum Options
+            var textLength               = this._br.ReadUInt32();                         // 0x2e45 : 0x00066e4b
+
+            this.StructDefinitionTable   = this.ReadArray<DataForgeStructDefinition>(structDefinitionCount);
+            this.PropertyDefinitionTable = this.ReadArray<DataForgePropertyDefinition>(propertyDefinitionCount);
+            this.EnumDefinitionTable     = this.ReadArray<DataForgeEnumDefinition>(enumDefinitionCount);
+            this.DataMappingTable        = this.ReadArray<DataForgeDataMapping>(dataMappingCount);
+            this.RecordDefinitionTable   = this.ReadArray<DataForgeRecord>(recordDefinitionCount);
+
+            this.Array_Int8Values        = this.ReadArray<DataForgeArrayInt8>(int8ValueCount);
+            this.Array_Int16Values       = this.ReadArray<DataForgeArrayInt16>(int16ValueCount);
+            this.Array_Int32Values       = this.ReadArray<DataForgeArrayInt32>(int32ValueCount);
+            this.Array_Int64Values       = this.ReadArray<DataForgeArrayInt64>(int64ValueCount);
+            this.Array_UInt8Values       = this.ReadArray<DataForgeArrayUInt8>(uint8ValueCount);
+            this.Array_UInt16Values      = this.ReadArray<DataForgeArrayUInt16>(uint16ValueCount);
+            this.Array_UInt32Values      = this.ReadArray<DataForgeArrayUInt32>(uint32ValueCount);
+            this.Array_UInt64Values      = this.ReadArray<DataForgeArrayUInt64>(uint64ValueCount);
+            this.Array_BooleanValues     = this.ReadArray<DataForgeArrayBoolean>(booleanValueCount);
+            this.Array_SingleValues      = this.ReadArray<DataForgeArraySingle>(singleValueCount);
+            this.Array_DoubleValues      = this.ReadArray<DataForgeArrayDouble>(doubleValueCount);
+            this.Array_GuidValues        = this.ReadArray<DataForgeArrayGuid>(guidValueCount);
+            this.Array_StringValues      = this.ReadArray<DataForgeArrayString>(stringValueCount);
+            this.Array_LocaleValues      = this.ReadArray<DataForgeArrayLocale>(localeValueCount);
+            this.Array_EnumValues        = this.ReadArray<DataForgeArrayEnum>(enumValueCount);
+            this.Array_StrongValues      = this.ReadArray<DataForgeArrayPointer>(numRecords21);
+            this.Array_WeakValues        = this.ReadArray<DataForgeArrayPointer>(numRecords22);
+
+            this.Array_ReferenceValues = this.ReadArray<DataForgeArrayReference>(referenceValueCount);
+            this.EnumOptionTable = this.ReadArray<DataForgeStringLookup>(enumOptionCount);
+
+            // Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
+            var buffer = new List<DataForgeString> { };
+            var maxPosition = this._br.BaseStream.Position + textLength;
+            var index = 0;
+            var startPosition = this._br.BaseStream.Position;
+            while (this._br.BaseStream.Position < maxPosition)
             {
-                String header = br.ReadCString();
-                var headerLength = br.BaseStream.Position;
-                var fileLength = br.ReadInt32();
-
-                var nodeTableOffset = br.ReadInt32();
-                var nodeTableCount = br.ReadInt32();
-                var nodeTableSize = 28;
-
-                var referenceTableOffset = br.ReadInt32();
-                var referenceTableCount = br.ReadInt32();
-                var referenceTableSize = 8;
-
-                var offset3 = br.ReadInt32();
-                var count3 = br.ReadInt32();
-                var length3 = 4;
-
-                var contentOffset = br.ReadInt32();
-                var contentLength = br.ReadInt32();
-
-                if (writeLog)
+                var offset = this._br.BaseStream.Position - startPosition;
+                buffer.Add(new DataForgeString(this)
                 {
-                    // Regex byteFormatter = new Regex("([0-9A-F]{8})");
-                    Console.WriteLine("Header");
-                    Console.WriteLine("0x{0:X6}: {1}", 0x00, header);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x00, fileLength);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x04, nodeTableOffset);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x08, nodeTableCount);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x12, referenceTableOffset);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x16, referenceTableCount);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x20, offset3);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x24, count3);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x28, contentOffset);
-                    Console.WriteLine("0x{0:X6}: {1:X8} (Dec: {1:D8})", headerLength + 0x32, contentLength);
-                    Console.WriteLine("");
-                    Console.WriteLine("Node Table");
-                }
+                    _index = index++,
+                    _offset = offset,
+                });
+            }
+            this.ValueTable = buffer.ToArray();
+            
+            this.DataTable = new List<XmlElement> { };
+            this.DataMap = new Dictionary<UInt32, List<XmlElement>> { };
 
-                List<BinaryNode> nodeTable = new List<BinaryNode> { };
-                br.BaseStream.Seek(nodeTableOffset, SeekOrigin.Begin);
-                Int32 nodeID = 0;
-                while (br.BaseStream.Position < nodeTableOffset + nodeTableCount * nodeTableSize)
+            foreach (var dataMapping in this.DataMappingTable)
+            {
+                this.DataMap[dataMapping.StructIndex] = new List<XmlElement> { };
+
+                var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
+
+                for (Int32 i = 0; i < dataMapping.StructCount; i++)
                 {
-                    var position = br.BaseStream.Position;
-                    var value = new BinaryNode
-                    {
-                        NodeID = nodeID++,
-                        NodeNameOffset = br.ReadInt32(),
-                        ItemType = br.ReadInt32(),
-                        AttributeCount = br.ReadInt16(),
-                        ChildCount = br.ReadInt16(),
-                        ParentNodeID = br.ReadInt32(),
-                        FirstAttributeIndex = br.ReadInt32(),
-                        FirstChildIndex = br.ReadInt32(),
-                        Reserved = br.ReadInt32(),
-                    };
+                    var node = dataStruct.Read(dataMapping.Name);
 
-                    nodeTable.Add(value);
-                    if (writeLog)
-                    {
-                        Console.WriteLine(
-                            "0x{0:X6}: {1:X8} {2:X8} {3:X4} {4:X4} {5:X8} {6:X8} {7:X8} {8:X8}",
-                            position,
-                            value.NodeNameOffset,
-                            value.ItemType,
-                            value.AttributeCount,
-                            value.ChildCount,
-                            value.ParentNodeID,
-                            value.FirstAttributeIndex,
-                            value.FirstChildIndex,
-                            value.Reserved);
-                    }
+                    this.DataMap[dataMapping.StructIndex].Add(node);
+                    this.DataTable.Add(node);
                 }
+            }
 
-                if (writeLog)
+            foreach (var dataMapping in this.Require_ClassMapping)
+            {
+                if (dataMapping.Item2 == 0xFFFF)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("Reference Table");
+                    dataMapping.Item1.ParentNode.ReplaceChild(
+                        this._xmlDocument.CreateElement("null"),
+                        dataMapping.Item1);
                 }
-
-                List<BinaryReference> attributeTable = new List<BinaryReference> { };
-                br.BaseStream.Seek(referenceTableOffset, SeekOrigin.Begin);
-                while (br.BaseStream.Position < referenceTableOffset + referenceTableCount * referenceTableSize)
+                else
                 {
-                    var position = br.BaseStream.Position;
-                    var value = new BinaryReference
-                    {
-                        NameOffset = br.ReadInt32(),
-                        ValueOffset = br.ReadInt32()
-                    };
-
-                    attributeTable.Add(value);
-                    if (writeLog)
-                    {
-                        Console.WriteLine("0x{0:X6}: {1:X8} {2:X8}", position, value.NameOffset, value.ValueOffset);
-                    }
+                    dataMapping.Item1.ParentNode.ReplaceChild(
+                        this.DataMap[dataMapping.Item2][dataMapping.Item3],
+                        dataMapping.Item1);
                 }
-                if (writeLog)
+            }
+
+            var root = this._xmlDocument.CreateElement("DataForge");
+            this._xmlDocument.AppendChild(root);
+            foreach (var record in this.RecordDefinitionTable)
+            {
+                root.AppendChild(this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name));
+            }
+
+            foreach (var dataMapping in this.Require_StrongMapping)
+            {
+                var strong = this.Array_StrongValues[dataMapping.Item3];
+
+                if (strong.Index == 0xFFFFFFFF)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("Order Table");
+                    dataMapping.Item1.ParentNode.ReplaceChild(
+                        this._xmlDocument.CreateElement("null"),
+                        dataMapping.Item1);
                 }
-
-                List<Int32> table3 = new List<Int32> { };
-                br.BaseStream.Seek(offset3, SeekOrigin.Begin);
-                while (br.BaseStream.Position < offset3 + count3 * length3)
+                else
                 {
-                    var position = br.BaseStream.Position;
-                    var value = br.ReadInt32();
-
-                    table3.Add(value);
-                    if (writeLog)
-                    {
-                        Console.WriteLine("0x{0:X6}: {1:X8}", position, value);
-                    }
+                    dataMapping.Item1.ParentNode.ReplaceChild(
+                        this.DataMap[strong.StructType][(Int32)strong.Index],
+                        dataMapping.Item1);
                 }
+            }
 
-                if (writeLog)
+            foreach (var dataMapping in this.Require_WeakMapping1)
+            {
+                var weak = this.Array_WeakValues[dataMapping.Item3];
+
+                var weakAttribute = dataMapping.Item1;
+
+                if (weak.Index == 0xFFFFFFFF)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("Dynamic Dictionary");
+                    weakAttribute.Value = String.Format("0");
                 }
-
-                List<BinaryValue> dataTable = new List<BinaryValue> { };
-                br.BaseStream.Seek(contentOffset, SeekOrigin.Begin);
-                while (br.BaseStream.Position < br.BaseStream.Length)
+                else
                 {
-                    var position = br.BaseStream.Position;
-                    var value = new BinaryValue
-                    {
-                        Offset = (Int32)position - contentOffset,
-                        Value = br.ReadCString(),
-                    };
-                    dataTable.Add(value);
-                    if (writeLog)
-                    {
-                        Console.WriteLine("0x{0:X6}: {1:X8} {2}", position, value.Offset, value.Value);
-                    }
+                    var targetElement = this.DataMap[weak.StructType][(Int32)weak.Index];
+
+                    weakAttribute.Value = targetElement.GetPath();
                 }
+            }
 
-                var dataMap = dataTable.ToDictionary(k => k.Offset, v => v.Value);
+            foreach (var dataMapping in this.Require_WeakMapping2)
+            {
+                var weakAttribute = dataMapping.Item1;
 
-                var attributeIndex = 0;
-
-                var xmlDoc = new XmlDocument();
-
-                var bugged = false;
-
-                Dictionary<Int32, XmlElement> xmlMap = new Dictionary<Int32, XmlElement> { };
-                foreach (var node in nodeTable)
+                if (dataMapping.Item2 == 0xFFFF)
                 {
-                    XmlElement element = xmlDoc.CreateElement(dataMap[node.NodeNameOffset]);
-
-                    for (Int32 i = 0, j = node.AttributeCount; i < j; i++)
-                    {
-                        if (dataMap.ContainsKey(attributeTable[attributeIndex].ValueOffset))
-                        {
-                            element.SetAttribute(dataMap[attributeTable[attributeIndex].NameOffset], dataMap[attributeTable[attributeIndex].ValueOffset]);
-                        }
-                        else
-                        {
-                            bugged = true;
-                            element.SetAttribute(dataMap[attributeTable[attributeIndex].NameOffset], "BUGGED");
-                        }
-                        attributeIndex++;
-                    }
-
-                    xmlMap[node.NodeID] = element;
-                    if (xmlMap.ContainsKey(node.ParentNodeID))
-                        xmlMap[node.ParentNodeID].AppendChild(element);
-                    else
-                        xmlDoc.AppendChild(element);
+                    weakAttribute.Value = String.Format("0");
                 }
+                else
+                {
+                    var targetElement = this.DataMap[dataMapping.Item2][dataMapping.Item3];
 
-                return xmlDoc;
+                    weakAttribute.Value = targetElement.GetPath();
+                }
             }
         }
 
-        public static TObject Deserialize<TObject>(String inFile) where TObject : class
+        private XmlDocument _xmlDocument = new XmlDocument();
+        public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
+        public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
+        public void Save(String filename) { this._xmlDocument.Save(filename); }
+        public String OuterXML { get { return this._xmlDocument.OuterXml; } }
+
+        public U[] ReadArray<U>(UInt32? arraySize = null) where U : DataForgeSerializable
         {
-            using (MemoryStream ms = new MemoryStream())
+            if (!arraySize.HasValue)
             {
-                var xmlDoc = DataForgeSerializer.ReadFile(inFile);
-
-                xmlDoc.Save(ms);
-
-                ms.Seek(0, SeekOrigin.Begin);
-
-                XmlSerializer xs = new XmlSerializer(typeof(TObject));
-
-                return xs.Deserialize(ms) as TObject;
+                // TODO: Check if this logic is correct - do we need to preprocess ALL arrays and pass an array size?
+                arraySize = this._br.ReadUInt32();
+            
+                if (arraySize == 0xFFFFFFFF)
+                {
+                    return null;
+                } 
             }
+            
+            if (arraySize == 0xFFFFFFFF)
+            {
+                return null;
+            }
+
+            // Console.WriteLine("0x{0:X8}: {2} 0x{1:X4}", this._br.BaseStream.Position, arraySize.Value, typeof(U).Name);
+
+            return (from i in Enumerable.Range(0, (Int32)arraySize.Value)
+                    let data = (U)Activator.CreateInstance(typeof(U), this)
+                    let hack = data._index = i
+                    select data).ToArray();
         }
     }
 }

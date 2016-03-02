@@ -202,5 +202,6 @@ publish
 *.xpi
 *.crx
 
+*.dcb
 App_Data
 smtp.config
