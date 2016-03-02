@@ -32,6 +32,9 @@ namespace HoloXPLOR.Controllers
 
             #region Force new URLs
 
+            if (String.Equals(hostname, "www.holoxplor.space", StringComparison.InvariantCultureIgnoreCase))
+                filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
+
             if (String.Equals(hostname, "holoxplor.azurewebsites.net", StringComparison.InvariantCultureIgnoreCase))
                 filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
 
