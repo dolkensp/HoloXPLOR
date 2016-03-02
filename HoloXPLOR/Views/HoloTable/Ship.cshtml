@@ -44,7 +44,7 @@
 
                                             <li class="js-hardpoint js-item @(isEquipped_Self ? "js-equipped" : "js-available")" @item.HTML_Attributes title="@item.Item_DisplayName" data-droppable>
                                                 <span class="cig-count">@(grouping.Count())x</span>
-                                                <label>@item.Item_DisplayName.ToLocalized()</label>
+                                                <label>@item.Item_DisplayName</label>
                                             </li>
                                         }
                                     </ul>
@@ -134,7 +134,7 @@
                     <div class="ui-header">
                         <img class="cig-back"   src="/Images/bg-header.png" />
                         <img class="cig-logo" src="@Model.ShipJson.Manufacturer.Media[0].SourceURL.Replace("/source/", "/84x62/")" alt="@Html.Raw(Model.ShipJson.Manufacturer.Name)" title="@Html.Raw(Model.ShipJson.Manufacturer.Name)" />
-                        <h3 data-ship-name="@Model.GameData_Ship.Name">@Html.Raw(Model.ShipJson.Name)</h3>
+                        <h3 data-ship-name="@Model.GameData_Ship.Name">@Model.ShipJson.Name</h3>
                         <small>@Html.Raw(Model.ShipJson.Focus)</small>
                         <cite>@Html.Raw(Model.ShipJson.Manufacturer.Name)</cite>
                     </div>
@@ -143,7 +143,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="ui-thumbnail">
-                        <img src="@Model.ShipJson.Media[0].SourceURL.Replace("/source/", "/540x400/")" alt="@Html.Raw(Model.ShipJson.Name)" title="@Html.Raw(Model.ShipJson.Name)" />
+                        <img src="@Model.ShipJson.Media[0].SourceURL.Replace("/source/", "/540x400/")" alt="@Model.ShipJson.Name" title="@Model.ShipJson.Name" />
                     </div>
                 </div>
             </div>

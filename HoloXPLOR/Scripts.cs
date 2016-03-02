@@ -15,14 +15,7 @@ using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
 using HoloXPLOR.Models;
 using HoloXPLOR.DataForge;
-
-namespace System
-{
-    public static class __Proxy
-    {
-        public static String ToLocalized(this String input) { return HoloXPLOR.Data.Scripts.Localization.GetValue(input ?? String.Empty, input); }
-    }
-}
+using System.Text.RegularExpressions;
 
 namespace HoloXPLOR.Data
 {
@@ -95,11 +88,11 @@ namespace HoloXPLOR.Data
                 switch (item.AmmoBox["ammo_name"])
                 {
                     case "BEHR_Flare":
-                        item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]);
+                        // item.DisplayName = String.Format("{0} Flares", item.AmmoBox["max_ammo_count"]);
                         item.Params["itemSubType"] = "Ammo_CounterMeasure";
                         break;
                     case "TALN_Chaff":
-                        item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
+                        // item.DisplayName = String.Format("{0} Chaff", item.AmmoBox["max_ammo_count"]);
                         item.Params["itemSubType"] = "Ammo_CounterMeasure";
                         break;
                     case "20mm_AMMO": item.DisplayName = String.Format("{0} 20mm Shells", item.AmmoBox["max_ammo_count"]); break;
@@ -134,69 +127,69 @@ namespace HoloXPLOR.Data
             switch (item.Name)
             {
                 case "GODI_Retaliator_Shield_S3": item.Params["requiredPortTags"] = "AEGS_Retaliator_Base"; break;
-                case "Class_2_KRIG_BG_S3_Q3_Mount": item.DisplayName = "Kruger S3 Gattling Nose Mount"; break;
-                case "Class_2_GATS_BG_S2_Mount": item.DisplayName = "Gallenson Tactical S2 Gattling Mount"; break;
-                case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
-                case "ANVL_Gladiator_Turret_Ball_S2_Q2": item.DisplayName = "Gladiator S4 Ball Turret"; break;
-                case "DRAK_Cutlass_Turret": item.DisplayName = "Cutlass Manned Turret"; break;
-                case "MISC_Freelancer_Turret": item.DisplayName = "Freelancer Manned Turret"; break;
-                case "AEGS_Vanguard_Turret": item.DisplayName = "Vanguard Manned Turret"; break;
-                case "AEGS_Retaliator_Turret": item.DisplayName = "Retaliator Manned Turret"; break;
-                case "BRRA_HornetCanard_S2_Q1": item.DisplayName = "Hornet S3 Canard Mount"; break;
-                case "BRRA_HornetBall_S2_Q1": item.DisplayName = "Hornet S5 Ball Turret"; break;
-                case "CNOU_Mustang_S1_Q2": item.DisplayName = "Consolidated Outland Ball Turret"; break;
+                // case "Class_2_KRIG_BG_S3_Q3_Mount": item.DisplayName = "Kruger S3 Gattling Nose Mount"; break;
+                // case "Class_2_GATS_BG_S2_Mount": item.DisplayName = "Gallenson Tactical S2 Gattling Mount"; break;
+                // case "BEHR_PC2_Dual_S3": item.DisplayName = "Behring Dual Side Turret"; break;
+                // case "ANVL_Gladiator_Turret_Ball_S2_Q2": item.DisplayName = "Gladiator S4 Ball Turret"; break;
+                // case "DRAK_Cutlass_Turret": item.DisplayName = "Cutlass Manned Turret"; break;
+                // case "MISC_Freelancer_Turret": item.DisplayName = "Freelancer Manned Turret"; break;
+                // case "AEGS_Vanguard_Turret": item.DisplayName = "Vanguard Manned Turret"; break;
+                // case "AEGS_Retaliator_Turret": item.DisplayName = "Retaliator Manned Turret"; break;
+                // case "BRRA_HornetCanard_S2_Q1": item.DisplayName = "Hornet S3 Canard Mount"; break;
+                // case "BRRA_HornetBall_S2_Q1": item.DisplayName = "Hornet S5 Ball Turret"; break;
+                // case "CNOU_Mustang_S1_Q2": item.DisplayName = "Consolidated Outland Ball Turret"; break;
                 // case "BRRA_HornetBall_160f_S1_Q2": item.DisplayName = "Hornet S5 Ball Turret"; break;
-                case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S4 Fixed Mount"; break;
-                case "DRAK_Fixed_Mount_S4": item.DisplayName = "Cutlass S4 Fixed Mount"; break;
-                case "BEHR_PC2_Dual_S4_Fixed": item.DisplayName = "Behring S4 Twin Rack"; break;
-                case "AEGS_S2_Rack_x4": item.DisplayName = "Aegis S2 Quad Rack"; break;
-                case "ANVL_S5_Rack_x2": item.DisplayName = "Anvil S5 Twin Rack"; break;
-                case "Talon_Stalker_Twin": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
-                case "Talon_Stalker_Quad": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
-                case "Talon_Stalker_Platform_x2": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
-                case "Talon_Stalker_Platform_x4": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
-                case "VNCL_Mark_Platform_x4": item.DisplayName = "Vanduul S1 Quad Rack"; break;
+                // case "ANVL_Fixed_Mount_Hornet_Ball_S4": item.DisplayName = "Hornet S4 Fixed Mount"; break;
+                // case "DRAK_Fixed_Mount_S4": item.DisplayName = "Cutlass S4 Fixed Mount"; break;
+                // case "BEHR_PC2_Dual_S4_Fixed": item.DisplayName = "Behring S4 Twin Rack"; break;
+                // case "AEGS_S2_Rack_x4": item.DisplayName = "Aegis S2 Quad Rack"; break;
+                // case "ANVL_S5_Rack_x2": item.DisplayName = "Anvil S5 Twin Rack"; break;
+                // case "Talon_Stalker_Twin": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
+                // case "Talon_Stalker_Quad": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
+                // case "Talon_Stalker_Platform_x2": item.DisplayName = "Talon Stalker S2 Twin Rack"; break;
+                // case "Talon_Stalker_Platform_x4": item.DisplayName = "Talon Stalker S1 Quad Rack"; break;
+                // case "VNCL_Mark_Platform_x4": item.DisplayName = "Vanduul S1 Quad Rack"; break;
 
-                case "Mount_Gimbal_S1": item.DisplayName = "S1 Gimbal Mount"; break;
-                case "Mount_Gimbal_S2": item.DisplayName = "S2 Gimbal Mount"; break;
-                case "Mount_Gimbal_S3": item.DisplayName = "S3 Gimbal Mount"; break;
-                case "Mount_Gimbal_S4": item.DisplayName = "S4 Gimbal Mount"; break;
-                case "Mount_Gimbal_S5": item.DisplayName = "S5 Gimbal Mount"; break;
+                // case "Mount_Gimbal_S1": item.DisplayName = "S1 Gimbal Mount"; break;
+                // case "Mount_Gimbal_S2": item.DisplayName = "S2 Gimbal Mount"; break;
+                // case "Mount_Gimbal_S3": item.DisplayName = "S3 Gimbal Mount"; break;
+                // case "Mount_Gimbal_S4": item.DisplayName = "S4 Gimbal Mount"; break;
+                // case "Mount_Gimbal_S5": item.DisplayName = "S5 Gimbal Mount"; break;
 
-                case "JOKR_DistortionCannon_S1": item.DisplayName = "\"Suckerpunch\" Distortion Cannon"; break;
-                case "VNCL_Weak_LC_S1": item.DisplayName = "'Weak' Laser Cannon"; break;
-                case "KBAR_BallisticCannon_S1": item.DisplayName = "9-Series Longsword"; break;
-                case "KBAR_BallisticCannon_S3": item.DisplayName = "11-Series Broadsword"; break;
-                case "GATS_BallisticGatling_S2": item.DisplayName = "Scorpion GT-215"; break;
-                case "GATS_BallisticGatling_S3": item.DisplayName = "Mantis GT-220"; break;
-                case "GATS_BallisticCannon_S2": item.DisplayName = "Tarantula GT-870"; break;
-                case "GATS_BallisticCannon_S3": item.DisplayName = "Tarantula GT-870 Mark 3"; break;
-                case "KLWE_LaserRepeater_S3": item.DisplayName = "CF-227 Panther Repeater"; break;
-                case "KLWE_LaserRepeater_S2": item.DisplayName = "CF-117 Badger Repeater"; break;
-                case "KLWE_LaserRepeater_S1": item.DisplayName = "CF-007 Bulldog Repeater"; break;
-                case "KLWE_MassDriverCannon_S1": item.DisplayName = "Sledge II Mass Driver Cannon"; break;
-                case "KRIG_BallisticGatling_S3": item.DisplayName = "Kruger Tigerstreik T-21"; break;
-                case "KRIG_BallisticGatling_S2_Parasite": item.DisplayName = "Kruger Tigerstreik T-19P"; break;
-                case "APAR_MassDriver_S2": item.DisplayName = "Strife Mass Driver"; break;
-                case "APAR_BallisticGatling_S4": item.DisplayName = "Death Ballistic Gattling"; break;
-                case "AEGS_EMP_Device": item.DisplayName = "REP-8 EMP Generator"; break;
-                case "BEHR_LaserCannon_S1": item.DisplayName = "M3A Laser Cannon"; break;
-                case "BEHR_LaserCannon_S2": item.DisplayName = "M4A Laser Cannon"; break;
-                case "BEHR_LaserCannon_Vanguard_S2": item.DisplayName = "M4A Laser Cannon - Vanguard"; break;
-                case "BEHR_LaserCannon_S3": item.DisplayName = "M5A Laser Cannon"; break;
-                case "BEHR_LaserCannon_S4": item.DisplayName = "M6A Laser Cannon"; break;
-                case "BEHR_BallisticCannon_S4": item.DisplayName = "C-788 \"Combine\" Ballistic Cannon"; break;
-                case "BEHR_BallisticRepeater_S2": item.DisplayName = "SW16BR2 \"Sawbuck\""; break;
-                case "MXOX_NeutronCannon_S1": item.DisplayName = "Maxox NN-13 Neutron Cannon"; break;
-                case "MXOX_NeutronCannon_S2": item.DisplayName = "Maxox NN-14 Neutron Cannon"; break;
-                case "AMRS_LaserCannon_S1": item.DisplayName = "Omnisky III Laser Cannon"; break;
-                case "AMRS_LaserCannon_S2": item.DisplayName = "Omnisky VI Laser Cannon"; break;
-                case "CNOU_Delta_RocketPod_x18": item.DisplayName = "R-18 rocket pod"; break;
+                // case "JOKR_DistortionCannon_S1": item.DisplayName = "\"Suckerpunch\" Distortion Cannon"; break;
+                // case "VNCL_Weak_LC_S1": item.DisplayName = "'Weak' Laser Cannon"; break;
+                // case "KBAR_BallisticCannon_S1": item.DisplayName = "9-Series Longsword"; break;
+                // case "KBAR_BallisticCannon_S3": item.DisplayName = "11-Series Broadsword"; break;
+                // case "GATS_BallisticGatling_S2": item.DisplayName = "Scorpion GT-215"; break;
+                // case "GATS_BallisticGatling_S3": item.DisplayName = "Mantis GT-220"; break;
+                // case "GATS_BallisticCannon_S2": item.DisplayName = "Tarantula GT-870"; break;
+                // case "GATS_BallisticCannon_S3": item.DisplayName = "Tarantula GT-870 Mark 3"; break;
+                // case "KLWE_LaserRepeater_S3": item.DisplayName = "CF-227 Panther Repeater"; break;
+                // case "KLWE_LaserRepeater_S2": item.DisplayName = "CF-117 Badger Repeater"; break;
+                // case "KLWE_LaserRepeater_S1": item.DisplayName = "CF-007 Bulldog Repeater"; break;
+                // case "KLWE_MassDriverCannon_S1": item.DisplayName = "Sledge II Mass Driver Cannon"; break;
+                // case "KRIG_BallisticGatling_S3": item.DisplayName = "Kruger Tigerstreik T-21"; break;
+                // case "KRIG_BallisticGatling_S2_Parasite": item.DisplayName = "Kruger Tigerstreik T-19P"; break;
+                // case "APAR_MassDriver_S2": item.DisplayName = "Strife Mass Driver"; break;
+                // case "APAR_BallisticGatling_S4": item.DisplayName = "Death Ballistic Gattling"; break;
+                // case "AEGS_EMP_Device": item.DisplayName = "REP-8 EMP Generator"; break;
+                // case "BEHR_LaserCannon_S1": item.DisplayName = "M3A Laser Cannon"; break;
+                // case "BEHR_LaserCannon_S2": item.DisplayName = "M4A Laser Cannon"; break;
+                // case "BEHR_LaserCannon_Vanguard_S2": item.DisplayName = "M4A Laser Cannon - Vanguard"; break;
+                // case "BEHR_LaserCannon_S3": item.DisplayName = "M5A Laser Cannon"; break;
+                // case "BEHR_LaserCannon_S4": item.DisplayName = "M6A Laser Cannon"; break;
+                // case "BEHR_BallisticCannon_S4": item.DisplayName = "C-788 \"Combine\" Ballistic Cannon"; break;
+                // case "BEHR_BallisticRepeater_S2": item.DisplayName = "SW16BR2 \"Sawbuck\""; break;
+                // case "MXOX_NeutronCannon_S1": item.DisplayName = "Maxox NN-13 Neutron Cannon"; break;
+                // case "MXOX_NeutronCannon_S2": item.DisplayName = "Maxox NN-14 Neutron Cannon"; break;
+                // case "AMRS_LaserCannon_S1": item.DisplayName = "Omnisky III Laser Cannon"; break;
+                // case "AMRS_LaserCannon_S2": item.DisplayName = "Omnisky VI Laser Cannon"; break;
+                // case "CNOU_Delta_RocketPod_x18": item.DisplayName = "R-18 rocket pod"; break;
 
-                case "VNCL_MissileRack_Blade": item.DisplayName = "Vanduul Blade"; break;
-                case "RSI_Constellation_Turret": item.DisplayName = "Constellation Turret"; break;
-                case "RSI_Constellation_MissilePod_S2_x3": item.DisplayName = "Constellation S2 Triple Rack"; break;
-                case "RSI_Constellation_MissilePod_S1_x7": item.DisplayName = "Constellation S1 Heavy Rack"; break;
+                // case "VNCL_MissileRack_Blade": item.DisplayName = "Vanduul Blade"; break;
+                // case "RSI_Constellation_Turret": item.DisplayName = "Constellation Turret"; break;
+                // case "RSI_Constellation_MissilePod_S2_x3": item.DisplayName = "Constellation S2 Triple Rack"; break;
+                // case "RSI_Constellation_MissilePod_S1_x7": item.DisplayName = "Constellation S1 Heavy Rack"; break;
             }
 
             #endregion
@@ -365,16 +358,8 @@ namespace HoloXPLOR.Data
                                 if (vehicle.Name == "CNOU_Mustang")
                                     buffer["CNOU_Mustang_Alpha"] = vehicle;
 
-                                if (vehicle.Name == "ORIG")
-                                    buffer["ORIG_300i"] = vehicle;
-
-                                if (vehicle.Name == "AEGS_Avenger")
-                                    buffer["AEGS_Avenger_Stalker"] = vehicle;
-
-                                // if (vehicle.Name == "AEGS_Avenger_Stalker_Warlock")
-                                //     buffer["AEGS_Avenger_Warlock"] = vehicle;
-                                // if (vehicle.Name == "AEGS_Avenger_Stalker_Titan")
-                                //     buffer["AEGS_Avenger_Titan"] = vehicle;
+                                if (vehicle.Name == "RSI_Constellation")
+                                    buffer["RSI_Constellation_Andromeda"] = vehicle;
 
                                 #region Variant Support
 
@@ -415,6 +400,10 @@ namespace HoloXPLOR.Data
                                                     }
                                                     attribute.Value = difference.Value;
                                                 }
+                                                else
+                                                {
+                                                    Debug.WriteLine("Missing node: {0}", difference.IDRef);
+                                                }
                                             }
                                         }
 
@@ -436,6 +425,10 @@ namespace HoloXPLOR.Data
                                                 }
                                                 attribute.Value = difference.Value;
                                             }
+                                            else
+                                            {
+                                                Debug.WriteLine("Missing node: {0}", difference.IDRef);
+                                            }
                                         }
 
                                         var variant = variantXML.InnerXml.FromXML<XML.Vehicles.Implementations.Vehicle>();
@@ -443,10 +436,18 @@ namespace HoloXPLOR.Data
                                         if (replacementParts != null && replacementParts.Length > 0)
                                             variant.Parts = replacementParts;
 
-                                        if (vehicle.Name.Split('_')[0] == modification.Name.Split('_')[0])
+                                        if (modification.Name.StartsWith(vehicle.Name))
+                                        {
                                             variant.Name = modification.Name;
+                                        }
+                                        else if (!String.IsNullOrWhiteSpace(Path.GetFileNameWithoutExtension(modification.PatchFile)) && variant.Name != "ORIG_300i")
+                                        {
+                                            variant.Name = Path.GetFileNameWithoutExtension(modification.PatchFile);
+                                        }
                                         else
-                                            variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
+                                        {
+                                            variant.Name = String.Format("{0}_{1}", vehicle.Name.Replace("_300i", ""), modification.Name);
+                                        }
 
                                         variant = Scripts._CleanEdgeCases(variant);
 
@@ -480,64 +481,7 @@ namespace HoloXPLOR.Data
 
         private static Ships.Vehicle _CleanEdgeCases(XML.Vehicles.Implementations.Vehicle vehicle)
         {
-            #region Edge Case Support
-
-            switch (vehicle.Name)
-            {
-                case "GRIN_PTV":
-                    vehicle.DisplayName = "Greycat Industries PTV";
-                    break;
-                case "RSI_Constellation":
-                    vehicle.Name = "RSI_Constellation_Andromeda";
-                    vehicle.DisplayName = "RSI Constellation Andromeda";
-                    break;
-                case "ORIG_300i":
-                    vehicle.Name = "ORIG";
-                    break;
-                case "VNCL_Scythe":
-                    vehicle.DisplayName = "Vanduul Scythe";
-                    break;
-                case "VNCL_Glaive_Glaive_Swarm":
-                    vehicle.DisplayName = "Vanduul Glaive";
-                    vehicle.Name = "VNCL_Glaive";
-                    break;
-                case "VNCL_Glaive_Glaive_Tutorial":
-                    vehicle.DisplayName = "Vanduul Glaive";
-                    vehicle.Name = "VNCL_Glaive_Tutorial";
-                    break;
-                case "AEGS_Avenger_Titan":
-                case "AEGS_Avenger_Stalker_Titan":
-                    vehicle.Name = "AEGS_Avenger_Titan";
-                    vehicle.DisplayName = "Aegis Avenger Titan";
-                    break;
-                case "AEGS_Avenger_Warlock":
-                case "AEGS_Avenger_Stalker_Warlock":
-                    vehicle.Name = "AEGS_Avenger_Warlock";
-                    vehicle.DisplayName = "Aegis Avenger Warlock";
-                    break;
-                case "AEGS_Avenger_Stalker":
-                    vehicle.Name = "AEGS_Avenger";
-                    vehicle.DisplayName = "Aegis Avenger Stalker";
-                    break;
-                case "AEGS_Retaliator":
-                    vehicle.DisplayName = "Aegis Retaliator";
-                    break;
-                case "AEGS_Gladius":
-                    vehicle.DisplayName = "Aegis Gladius";
-                    break;
-                case "AEGS_Gladiator":
-                    vehicle.DisplayName = "Aegis Gladiator";
-                    break;
-                case "AEGS_Redeemer":
-                    vehicle.DisplayName = "Aegis Redeemer";
-                    break;
-                default:
-                    if (String.IsNullOrWhiteSpace(vehicle.DisplayName))
-                        vehicle.DisplayName = vehicle.Name;
-                    break;
-            }
-
-            #endregion
+            if (vehicle.Name == "ANVL_F7CM") vehicle.Name = "ANVL_Hornet_F7CM";
 
             return vehicle;
         }
@@ -562,163 +506,6 @@ namespace HoloXPLOR.Data
         }
 
         #endregion
-
-        private static Dictionary<String, String> _localization;
-        public static Dictionary<String, String> Localization
-        {
-            get
-            {
-                if (Scripts._localization == null)
-                {
-                    Scripts._localization = new Dictionary<String, String>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        #region Turret Port Names
-
-                        { "Countermeasure Launcher", "CounterMeasure Launcher" },
-                        { "turrethelper", "Manned Turret" },
-                        { "RSI_Constellation_Turret_Base", "Constellation Turret"},
-                        { "MISC_Freelancer_Turret_Base", "Freelancer Turret"},
-                        { "item_Descdrak_cutlass_s1_q2", "Cutlass Turret" },
-
-                        { "turret_left", "Left Turret Slot"},
-                        { "turret_right", "Right Turret Slot"},
-
-                        { "hardpoint_class_1_left", "Left Turret Slot"},
-                        { "hardpoint_class_1_right", "Right Turret Slot"},
-
-                        { "hardpoint_turret_backtop", "Back Top Turret" },
-                        { "hardpoint_turret_backtopleft", "Back Top Left Turret" },
-                        { "hardpoint_turret_backtopright", "Back Top Right Turret" },
-                        { "hardpoint_turret_backbottom", "Back Bottom Turret" },
-                        { "hardpoint_turret_fronttop", "Front Top Turret" },
-                        { "hardpoint_turret_fronttopleft", "Front Top Left Turret" },
-                        { "hardpoint_turret_fronttopright", "Front Top Right Turret" },
-                        { "hardpoint_turret_frontbottom", "Front Bottom Turret" },
-                        
-                        { "right wing Class 1 Slot", "Right Wing Class 1 Slot" },
-
-                        #endregion
-
-                        #region Shield Port Names
-
-                        { "hardpoint_shield_generator", "Shield Generator" },
-                        { "hardpoint_shield_generator_01", "Shield Generator" },
-                        { "hardpoint_shield_generator_02", "Shield Generator" },
-                        { "hardpoint_shield_generator_03", "Shield Generator" },
-                        { "hardpoint_shieldgenerator_left", "Left Shield" },
-                        { "hardpoint_shieldgenerator_right", "Right Shield" },
-
-                        #endregion
-
-                        #region Power Plant Port Names
-
-                        { "hardpoint_powerplant", "Power Plant" },
-                        { "hardpoint_powerplant_left", "Left Power Plant" },
-                        { "hardpoint_powerplant_Right", "Right Power Plant" },
-                        { "hardpoint_power_plant_attach", "Power Plant" },
-                        { "hardpoint_power_plant_attach_01", "Power Plant" },
-                        { "hardpoint_power_plant_attach_02", "Power Plant" },
-
-                        #endregion
-
-                        #region Thruster Port Names
-
-                        { "hardpoint_engine_left_attach", "Main Thruster Left" },
-                        { "hardpoint_engine_right_attach", "Main Thruster Right" },
-                        { "hardpoint_engine_mid_attach", "Main Thruster" },
-
-                        { "hardpoint_thruster_front_left_bottom", "Lower Front Left Thruster" },
-                        { "hardpoint_thruster_front_right_bottom", "Lower Front Right Thruster" },
-                        { "hardpoint_thruster_rear_left_bottom", "Lower Rear Left Thruster" },
-                        { "hardpoint_thruster_rear_right_bottom", "Lower Rear Right Thruster" },
-                        { "hardpoint_thruster_front_left_top", "Upper Front Left Thruster" },
-                        { "hardpoint_thruster_front_right_top", "Upper Front Right Thruster" },
-                        { "hardpoint_thruster_rear_left_top", "Upper Rear Left Thruster" },
-                        { "hardpoint_thruster_rear_right_top", "Upper Rear Right Thruster" },
-                        { "hardpoint_thruster_front_left_mid", "Front Left Thruster" },
-                        { "hardpoint_thruster_front_right_mid", "Front Right Thruster" },
-                        { "hardpoint_thruster_rear_left_mid", "Rear Left Thruster" },
-                        { "hardpoint_thruster_rear_right_mid", "Rear Right Thruster" },
-
-                        { "hardpoint_thruster_mid_front_bottom", "Lower Front Thruster" },
-                        { "hardpoint_thruster_mid_back_bottom", "Lower Rear Thruster" },
-                        { "hardpoint_thruster_mid_front_top", "Upper Front Thruster" },
-                        { "hardpoint_thruster_mid_back_top", "Upper Rear Thruster" },
-                        { "hardpoint_thruster_mid_front_mid", "Front Thruster" },
-                        { "hardpoint_thruster_mid_back_mid", "Rear Thruster" },
-                        { "hardpoint_thruster_left_front_bottom", "Lower Front Left Thruster" },
-                        { "hardpoint_thruster_left_back_bottom", "Lower Rear Left Thruster" },
-                        { "hardpoint_thruster_left_front_top", "Upper Front Left Thruster" },
-                        { "hardpoint_thruster_left_back_top", "Upper Rear Left Thruster" },
-                        { "hardpoint_thruster_left_front_mid", "Front Left Thruster" },
-                        { "hardpoint_thruster_left_back_mid", "Rear Left Thruster" },
-                        { "hardpoint_thruster_right_front_bottom", "Lower Front Right Thruster" },
-                        { "hardpoint_thruster_right_back_bottom", "Lower Rear Right Thruster" },
-                        { "hardpoint_thruster_right_front_top", "Upper Front Right Thruster" },
-                        { "hardpoint_thruster_right_back_top", "Upper Rear Right Thruster" },
-                        { "hardpoint_thruster_right_front_mid", "Front Right Thruster" },
-                        { "hardpoint_thruster_right_back_mid", "Rear Right Thruster" },
-                        
-                        { "hardpoint_thruster_front_left_lower", "Lower Front Left Thruster" },
-                        { "hardpoint_thruster_front_right_lower", "Lower Front Right Thruster" },
-                        { "hardpoint_thruster_rear_left_lower", "Lower Rear Left Thruster" },
-                        { "hardpoint_thruster_rear_right_lower", "Lower Rear Right Thruster" },
-                        { "hardpoint_thruster_front_left_upper", "Upper Front Left Thruster" },
-                        { "hardpoint_thruster_front_right_upper", "Upper Front Right Thruster" },
-                        { "hardpoint_thruster_rear_left_upper", "Upper Rear Left Thruster" },
-                        { "hardpoint_thruster_rear_right_upper", "Upper Rear Right Thruster" },
-
-                        { "hardpoint_engine_left", "Main Thruster Left" },
-                        { "hardpoint_engine_right", "Main Thruster Right" },
-                        { "hardpoint_thruster_retro_left", "Left Retro Thruster" },
-                        { "hardpoint_thruster_retro_right", "Right Retro Thruster" },
-                        { "hardpoint_thruster_bottomFL", "Lower Front Left Thruster" },
-                        { "hardpoint_thruster_bottomFR", "Lower Front Right Thruster" },
-                        { "hardpoint_thruster_bottomRL", "Lower Rear Left Thruster" },
-                        { "hardpoint_thruster_bottomRR", "Lower Rear Right Thruster" },
-                        { "hardpoint_thruster_topFL", "Upper Front Left Thruster" },
-                        { "hardpoint_thruster_topFR", "Upper Front Right Thruster" },
-                        { "hardpoint_thruster_topRL", "Upper Rear Left Thruster" },
-                        { "hardpoint_thruster_topRR", "Upper Rear Right Thruster" },
-                        
-                        { "hardpoint_thruster_intake_left_retro", "Left Intake Retro Thruster" },
-                        { "hardpoint_thruster_intake_right_retro", "Right Intake Retro Thruster" },
-
-                        { "hardpoint_thruster_front_left_side", "Front Left Side Thruster" },
-                        { "hardpoint_thruster_front_right_side", "Front Right Side Thruster" },
-                        { "hardpoint_thruster_rear_left_side", "Rear Left Side Thruster" },
-                        { "hardpoint_thruster_rear_right_side", "Rear Right Side Thruster" },
-                        { "hardpoint_thruster_wing_left_bottom", "Lower Wing Left Thruster" },
-                        { "hardpoint_thruster_wing_right_bottom", "Lower Wing Right Thruster" },
-                        { "hardpoint_thruster_wing_left_top", "Upper Wing Left Thruster" },
-                        { "hardpoint_thruster_wing_right_top", "Upper Wing Right Thruster" },
-
-                        { "hardpoint_thruster_left_retro", "Left Retro Thruster" },
-                        { "hardpoint_thruster_right_retro", "Right Retro Thruster" },
-
-                        { "hardpoint_thruster_engine", "Main Thruster" },
-                        { "hardpoint_thruster_retro_bottom_left", "Lower Left Retro Thruster" },
-                        { "hardpoint_thruster_retro_bottom_right", "Lower Right Retro Thruster" },
-                        { "hardpoint_thruster_retro_top_left", "Upper Left Retro Thruster" },
-                        { "hardpoint_thruster_retro_top_right", "Upper Right Retro Thruster" },
-
-                        { "hardpoint_engine_attach", "Main Thruster" },
-                        { "hardpoint_thruster_left_lower_front", "Lower Front Left Thruster" },
-                        { "hardpoint_thruster_right_lower_front", "Lower Front Right Thruster" },
-                        { "hardpoint_thruster_left_lower_rear", "Lower Rear Left Thruster" },
-                        { "hardpoint_thruster_right_lower_rear", "Lower Rear Right Thruster" },
-                        { "hardpoint_thruster_left_upper_front", "Upper Front Left Thruster" },
-                        { "hardpoint_thruster_right_upper_front", "Upper Front Right Thruster" },
-                        { "hardpoint_thruster_left_upper_rear", "Upper Rear Left Thruster" },
-                        { "hardpoint_thruster_right_upper_rear", "Upper Rear Right Thruster" },
-
-                        #endregion
-                    };
-                }
-
-                return Scripts._localization;
-            }
-        }
 
         private static Dictionary<Int32, ShipMatrixJson> _shipJsonMap;
         public static Dictionary<Int32, ShipMatrixJson> ShipJsonMap

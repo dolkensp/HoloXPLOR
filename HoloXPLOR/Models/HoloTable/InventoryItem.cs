@@ -51,7 +51,7 @@ namespace HoloXPLOR.Models.HoloTable
                     sb.Append(this.GameData_EquippedPort.HTML_Attributes);
 
                     if (!String.IsNullOrWhiteSpace(this.GameData_EquippedPort.DisplayName))
-                        sb.AppendFormat(@" data-port-name=""{0}""", Scripts.Localization.GetValue(this.GameData_EquippedPort.DisplayName, this.GameData_EquippedPort.DisplayName));
+                        sb.AppendFormat(@" data-port-name=""{0}""", this.GameData_EquippedPort.DisplayName);
                 }
                 if (this.Inventory_EquippedItem != null)
                 {
@@ -60,7 +60,7 @@ namespace HoloXPLOR.Models.HoloTable
                 if (this.GameData_EquippedItem != null)
                 {
                     sb.Append(this.GameData_EquippedItem.HTML_Attributes.Replace("data-item-", "data-parent-"));
-                    sb.AppendFormat(@" data-parent-name=""{0}""", Scripts.Localization.GetValue(this.GameData_EquippedItem.DisplayName, this.GameData_EquippedItem.DisplayName));
+                    sb.AppendFormat(@" data-parent-name=""{0}""", this.GameData_EquippedItem.DisplayName);
                 }
 
                 return new HtmlString(sb.ToString().Trim());
@@ -68,8 +68,8 @@ namespace HoloXPLOR.Models.HoloTable
         }
 
         public String Item_Type { get { return this.GameData_Item == null ? null : String.Format("{0}:{1}", this.GameData_Item.Params["itemType"], this.GameData_Item.Params["itemSubType"]); } }
-        public String Port_DisplayName { get { return this.GameData_EquippedPort == null ? null : this.GameData_EquippedPort.DisplayName.ToLocalized(); } }
-        public String Item_DisplayName { get { return this.GameData_Item == null ? null : this.GameData_Item.DisplayName.ToLocalized(); } }
+        public String Port_DisplayName { get { return this.GameData_EquippedPort == null ? null : this.GameData_EquippedPort.DisplayName; } }
+        public String Item_DisplayName { get { return this.GameData_Item == null ? null : this.GameData_Item.DisplayName; } }
         public Int32? MaxSize { get { return this.GameData_EquippedPort == null ? (Int32?)null : this.GameData_EquippedPort.MaxSize; } }
         public Int32? MinSize { get { return this.GameData_EquippedPort == null ? (Int32?)null : this.GameData_EquippedPort.MinSize; } }
         public Int32? ItemSize { get { return this.GameData_Item == null ? (Int32?)null : this.GameData_Item.ItemSize; } }

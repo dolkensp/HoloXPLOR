@@ -21,6 +21,31 @@ namespace HoloXPLOR.Data.XML.Vehicles.Implementations
         [XmlAttribute(AttributeName = "displayname")]
         public String DisplayName { get; set; }
 
+        //private String _displayName;
+
+        //[XmlIgnore]
+        //public String DisplayName
+        //{
+        //    get { return this._displayName = this._displayName ?? this._shipKey.ToLocalized(); }
+        //    set { this._displayName = value; }
+        //}
+
+        //private String _shipKey
+        //{
+        //    get
+        //    {
+        //        String key = this.Name;
+
+        //        switch (key)
+        //        {
+        //            case "AEGS_Avenger_Warlock": return "AEGS_Avenger_Stalker_Warlock";
+        //            case "AEGS_Avenger_Titan": return "AEGS_Avenger_Stalker_Titan";
+        //        }
+
+        //        return key;
+        //    }
+        //}
+
         [XmlAttribute(AttributeName = "classname")]
         public String ClassName { get; set; }
 

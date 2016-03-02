@@ -401,11 +401,13 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult NotFound()
         {
+            this.Response.StatusCode = 404;
             return View();
         }
 
         public ActionResult NotAllowed()
         {
+            this.Response.StatusCode = 401;
             return View();
         }
     }

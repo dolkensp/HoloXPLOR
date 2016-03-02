@@ -331,16 +331,6 @@ namespace HoloXPLOR.Models.HoloTable
 
                     this._view_LoadoutMap = (from shipPort in shipPorts
                                              from port in this._GetAttachedItems(shipPort)
-
-                                             #region Cleanup
-
-                                             let hack0 = port.GameData_EquippedPort.DisplayName = DetailModel._invalidNames.Contains(port.GameData_EquippedPort.DisplayName) ? port.GameData_EquippedPort.Name : port.GameData_EquippedPort.DisplayName
-                                             let hack1 = port.GameData_EquippedPort.Name = port.GameData_EquippedPort.Name ?? port.Inventory_EquippedPort.PortName
-                                             let hack2 = port.GameData_EquippedPort.DisplayName = String.IsNullOrWhiteSpace(port.GameData_EquippedPort.DisplayName) ? port.GameData_EquippedPort.Name.ToLocalized() : port.GameData_EquippedPort.DisplayName
-                                             let hack3 = (port.GameData_Item != null) && (port.GameData_Item.DisplayName = String.IsNullOrWhiteSpace(port.GameData_Item.DisplayName) ? port.GameData_Item.Name.ToLocalized() : port.GameData_Item.DisplayName) == String.Empty
-
-                                             #endregion
-
                                              where port.GameData_EquippedPort.Types != null
                                              where DetailModel._validTypes.Intersect(port.GameData_EquippedPort.Types.Select(t => t.Type)).Any()
                                              group port by port.Inventory_Ship.ID into ship
@@ -364,7 +354,7 @@ namespace HoloXPLOR.Models.HoloTable
                         (from item in this.View_ItemMap.Values
                          let part = Scripts.Items.GetValue(item.Inventory_Item.Class, null)
                          where part != null
-                         orderby part.DisplayName.ToLocalized()
+                         orderby part.DisplayName
                          let lookup = new
                          {
                              ID = item.Inventory_Item.ID,
@@ -536,18 +526,13 @@ namespace HoloXPLOR.Models.HoloTable
             {
                 return this._gameData_ShipMap = this._gameData_ShipMap ??
                     (from ship in this.Inventory_ShipMap.Values
-                     let shipName = ship.Class.Split('.').Last()
-                     let vehicle = Scripts.Vehicles.GetValue(shipName, null)
-                     let parts = shipName.Split('_')
-                     let shipBase = String.Join("_", parts.Take(Math.Min(parts.Length - 1, 1)))
-                     let vehicle2 = vehicle ?? Scripts.Vehicles.GetValue(shipBase, null)
-                     where vehicle2 != null
-                     where vehicle2.Name != "GRIN_PTV"
-                     orderby vehicle2.DisplayName
+                     let vehicle = Scripts.Vehicles.GetValue(ship.Class.Split('.').Last(), null)
+                     where vehicle.Name != "GRIN_PTV"
+                     orderby vehicle.DisplayName
                      select new
                      {
                          Key = ship.ID,
-                         Value = vehicle2
+                         Value = vehicle
                      }).ToDictionary(k => k.Key, v => v.Value);
             }
         }
@@ -561,7 +546,7 @@ namespace HoloXPLOR.Models.HoloTable
                     (from item in this.Inventory_ItemMap.Values
                      let part = Scripts.Items.GetValue(item.Class, null)
                      where part != null
-                     orderby part.DisplayName.ToLocalized()
+                     orderby part.DisplayName
                      select new
                      {
                          Key = item.ID,
@@ -583,7 +568,7 @@ namespace HoloXPLOR.Models.HoloTable
                         (from item in this.Inventory_ItemMap.Values
                          let part = Scripts.Items.GetValue(item.Class, null)
                          where part != null
-                         orderby part.DisplayName.ToLocalized()
+                         orderby part.DisplayName
                          let lookup = new
                          {
                              ID = item.ID,
@@ -616,9 +601,8 @@ namespace HoloXPLOR.Models.HoloTable
                      where parts != null
                      from part in parts
                      from port in part.ItemPorts
-                     orderby port.DisplayName.ToLocalized()
-                     orderby port.Name.ToLocalized()
-                     orderby part.Name.ToLocalized()
+                     orderby port.DisplayName
+                     orderby part.Name
                      select new
                      {
                          Key = item.ID,

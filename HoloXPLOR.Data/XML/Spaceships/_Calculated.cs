@@ -37,8 +37,15 @@ namespace HoloXPLOR.Data.XML.Spaceships
         [XmlIgnore]
         public String DisplayName
         {
-            get { return this._displayName = this._displayName ?? this.Params["display_name", this.Name].Replace("itemName_", "").Replace("item_Name", "").Replace("Item_Name", ""); }
+            get { return this._displayName = this._displayName ?? String.Format("item_Name{0}", this.Name).ToLocalized(); }
             set { this._displayName = value; }
+        }
+
+        [XmlIgnore]
+        public String Description
+        {
+            get { return String.Format("item_Desc{0}", this.Name).ToLocalized("[ REDACTED ]"); }
+            set { this.Params["itemDescription"] = value; }
         }
 
         public Int32? ItemSize

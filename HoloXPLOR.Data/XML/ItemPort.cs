@@ -16,7 +16,14 @@ namespace HoloXPLOR.Data.XML
         public String Name { get; set; }
 
         [XmlAttribute(AttributeName = "display_name")]
-        public String DisplayName { get; set; }
+        public String _displayName { get; set; }
+
+        [XmlIgnore]
+        public String DisplayName
+        {
+            get { return this._displayName.ToLocalized(this.Name); }
+            set { this._displayName = value; }
+        }
 
         [XmlAttribute(AttributeName = "flags")]
         public String Flags { get; set; }
