@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace HoloXPLOR.Controllers
 {
@@ -245,6 +246,7 @@ namespace HoloXPLOR.Controllers
             catch (FileNotFoundException)
             {
                 this.Response.StatusCode = 500;
+                this.Response.TrySkipIisCustomErrors = true;
 
                 return new JsonResult
                 {
@@ -259,6 +261,7 @@ namespace HoloXPLOR.Controllers
                 Elmah.ErrorLog.GetDefault(System.Web.HttpContext.Current).Log(new Elmah.Error(ex));
 
                 this.Response.StatusCode = 500;
+                this.Response.TrySkipIisCustomErrors = true;
 
                 return new JsonResult
                 {
@@ -288,7 +291,7 @@ namespace HoloXPLOR.Controllers
 
                 // model.Player.Hangar.Owner = handle;
 
-                return File(model.GetBytes(), "application/xml", String.Format("db_{0}.xml", handle));
+                return File(model.GetBytes(), "application/xml", String.Format("{0}.xml", handle));
             }
         }
 
@@ -310,6 +313,7 @@ namespace HoloXPLOR.Controllers
                 if (file.ContentLength > 0x500000)
                 {
                     this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
+                    this.Response.TrySkipIisCustomErrors = true;
                     return new JsonResult { Data = new { Result = UploadResult.FileTooLarge } };
                 }
 
@@ -333,6 +337,7 @@ namespace HoloXPLOR.Controllers
                     if (temp.Hangar == null || temp.Hangar.Inventory == null || temp.Hangar.Inventory.Count == 0)
                     {
                         this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
+                        this.Response.TrySkipIisCustomErrors = true;
                         return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
                     }
 
@@ -342,6 +347,7 @@ namespace HoloXPLOR.Controllers
                 {
                     System.IO.File.Delete(tmpFile);
                     this.Response.StatusCode = (Int32)UploadResult.InvalidFileFormat;
+                    this.Response.TrySkipIisCustomErrors = true;
                     return new JsonResult { Data = new { Result = UploadResult.InvalidFileFormat } };
                 }
 
@@ -394,18 +400,22 @@ namespace HoloXPLOR.Controllers
                 Elmah.ErrorLog.GetDefault(System.Web.HttpContext.Current).Log(new Elmah.Error(ex));
 
                 this.Response.StatusCode = (Int32)UploadResult.ServerError;
-
+                this.Response.TrySkipIisCustomErrors = true;
                 return new JsonResult { Data = new { Result = UploadResult.ServerError } };
             }
         }
 
         public ActionResult NotFound()
         {
+            this.Response.StatusCode = (Int32)HttpStatusCode.NotFound;
+            this.Response.TrySkipIisCustomErrors = true;
             return View();
         }
 
         public ActionResult NotAllowed()
         {
+            this.Response.StatusCode = (Int32)HttpStatusCode.Unauthorized;
+            this.Response.TrySkipIisCustomErrors = true;
             return View();
         }
     }
