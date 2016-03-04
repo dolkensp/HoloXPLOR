@@ -288,7 +288,7 @@ namespace HoloXPLOR.Controllers
 
                 // model.Player.Hangar.Owner = handle;
 
-                return File(model.GetBytes(), "application/xml", String.Format("db_{0}.xml", handle));
+                return File(model.GetBytes(), "application/xml", String.Format("{0}.xml", handle));
             }
         }
 
