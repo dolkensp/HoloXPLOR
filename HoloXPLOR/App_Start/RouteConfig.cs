@@ -32,15 +32,9 @@ namespace HoloXPLOR
             );
 
             routes.MapRoute(
-                name: "NotFound",
-                url: "HoloTable/NotFound",
-                defaults: new { controller = "HoloTable", action = "NotFound" }
-            );
-
-            routes.MapRoute(
                 name: "NotAllowed",
-                url: "HoloTable/NotAllowed",
-                defaults: new { controller = "HoloTable", action = "NotAllowed" }
+                url: "NotAllowed",
+                defaults: new { controller = "Error", action = "NotAllowed" }
             );
 
             routes.MapRoute(
@@ -87,8 +81,14 @@ namespace HoloXPLOR
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "NotFound",
+                url: "{url}",
+                defaults: new { controller = "Error", action = "NotFound" }
             );
         }
     }

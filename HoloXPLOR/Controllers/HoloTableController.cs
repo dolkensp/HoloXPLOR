@@ -46,7 +46,7 @@ namespace HoloXPLOR.Controllers
             }
             catch (FileNotFoundException)
             {
-                return RedirectToAction("NotFound");
+                return RedirectToRoute("NotFound", new { url = "NotFound" });
             }
         }
 
@@ -67,7 +67,7 @@ namespace HoloXPLOR.Controllers
             }
             catch (FileNotFoundException)
             {
-                return RedirectToAction("NotFound");
+                return RedirectToRoute("NotFound", new { url = "NotFound" });
             }
         }
 
@@ -123,7 +123,7 @@ namespace HoloXPLOR.Controllers
         {
             if (String.Equals("sample", id, StringComparison.InvariantCultureIgnoreCase))
             {
-                return RedirectToAction("NotAllowed");
+                return RedirectToRoute("NotAllowed");
             }
 
             HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
@@ -403,20 +403,6 @@ namespace HoloXPLOR.Controllers
                 this.Response.TrySkipIisCustomErrors = true;
                 return new JsonResult { Data = new { Result = UploadResult.ServerError } };
             }
-        }
-
-        public ActionResult NotFound()
-        {
-            this.Response.StatusCode = (Int32)HttpStatusCode.NotFound;
-            this.Response.TrySkipIisCustomErrors = true;
-            return View();
-        }
-
-        public ActionResult NotAllowed()
-        {
-            this.Response.StatusCode = (Int32)HttpStatusCode.Unauthorized;
-            this.Response.TrySkipIisCustomErrors = true;
-            return View();
         }
     }
 }

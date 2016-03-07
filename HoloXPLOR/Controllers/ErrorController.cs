@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,6 +38,25 @@ namespace HoloXPLOR.Controllers
             }, message, stack, name, url);
 
             return new EmptyResult { };
+        }
+
+        public ActionResult NotFound(String url)
+        {
+            if (!String.Equals(url, "NotFound", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return RedirectToAction("NotFound", new { url = "NotFound" });
+            }
+
+            this.Response.StatusCode = (Int32)HttpStatusCode.Gone;
+            this.Response.TrySkipIisCustomErrors = true;
+            return View();
+        }
+
+        public ActionResult NotAllowed()
+        {
+            this.Response.StatusCode = (Int32)HttpStatusCode.Forbidden;
+            this.Response.TrySkipIisCustomErrors = true;
+            return View();
         }
     }
 }

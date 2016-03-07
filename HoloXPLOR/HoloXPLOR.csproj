@@ -1733,7 +1733,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HoloTable\Hangar.cshtml" />
     <Content Include="Views\HoloTable\Ship.cshtml" />
-    <Content Include="Views\HoloTable\NotFound.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\Thanks.cshtml" />
     <Content Include="Views\HoloTable\Index.cshtml" />
     <Content Include="Views\Shared\_Support.cshtml" />
@@ -1745,11 +1745,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\HoloTable\Delete.cshtml" />
-    <Content Include="Views\HoloTable\NotAllowed.cshtml" />
+    <Content Include="Views\Error\NotAllowed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\media\" />
-    <Folder Include="Views\Error\" />
     <Folder Include="Views\Media\" />
   </ItemGroup>
   <ItemGroup>

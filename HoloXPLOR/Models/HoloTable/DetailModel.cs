@@ -34,6 +34,11 @@ namespace HoloXPLOR.Models.HoloTable
                 this.Player = System.IO.File.ReadAllText(filename).FromXML<Inventory.Player>();
                 this.ShipID = shipID ?? Guid.Empty;
 
+                if (shipID.HasValue && !this.Player.Ships.Where(s => s.ID == this.ShipID).Any())
+                {
+                    throw new FileNotFoundException("Unable to load specified ship from xml", String.Format("{0}.xml", id));
+                }
+
                 var shipItemIDs = new HashSet<Guid>(this.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
 
                 this.Player.Inventory = new Inventory.Inventory
