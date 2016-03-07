@@ -310,7 +310,7 @@ namespace HoloXPLOR.Controllers
             {
                 var shortName = Path.GetFileNameWithoutExtension(file.FileName);
 
-                if (file.ContentLength > 0x500000)
+                if (file.ContentLength > 0x1000000)
                 {
                     this.Response.StatusCode = (Int32)UploadResult.FileTooLarge;
                     this.Response.TrySkipIisCustomErrors = true;
