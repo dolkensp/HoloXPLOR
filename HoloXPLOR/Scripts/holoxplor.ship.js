@@ -1,4 +1,6 @@
 ﻿
+var checkRating = checkRating || function () { };
+
 $(document).ready(function () {
     var debug = false;
     var $form = $('#form-ship');
@@ -342,8 +344,12 @@ $(document).ready(function () {
                             equippedData.AmmoType = equippedData.AmmoType || [];
                             availableData.AmmoType = availableData.AmmoType || [];
 
-                            equippedData.Ammo = ammoMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || ammoMap[(inventoryMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
-                            availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] || {};
+                            equippedData.Ammo  = ammoMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] ||
+                                                 ammoMap[(inventoryMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] ||
+                                                 ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
+                            availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] ||
+                                                 ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] ||
+                                                 ammoMap[(availableData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
 
                             equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
                             availableData.Ammo.Explosion = availableData.Ammo.Explosion || {};
@@ -613,7 +619,7 @@ $(document).ready(function () {
 
     var bindAll = function (parent) {
 
-        $('#cig-rating').on('change', checkRating);
+        $('#cig-rating').on('change', HoloXPLOR.Rating.Compare);
 
         $("[data-draggable]:not(.js-equipped):not(.js-draggable)").addClass('js-draggable').draggable({
             helper: "clone",

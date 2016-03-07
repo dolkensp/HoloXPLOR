@@ -41,6 +41,10 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
+                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    this.Response.Cache.SetExpires(DateTime.Now);
+                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                     return View(model);
                 }
             }
@@ -62,6 +66,10 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
+                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    this.Response.Cache.SetExpires(DateTime.Now);
+                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                     return View(model);
                 }
             }
@@ -80,6 +88,10 @@ namespace HoloXPLOR.Controllers
                 DetailModel model = new DetailModel(id);
                 HashSet<String> currentItems = new HashSet<String>(model.GameData_ItemMap.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).Select(k => k.Name).Distinct());
 
+                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                this.Response.Cache.SetExpires(DateTime.Now);
+                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                 return new ContentResult
                 {
 
@@ -87,7 +99,7 @@ namespace HoloXPLOR.Controllers
                     {
                         Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
                         Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v),
-                        Loadouts = Scripts.Loadout.ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
+                        Loadouts = Scripts.Loadout.Where(l => Scripts.Vehicles.GetValue(l.Key, null) != null).ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
                         // Ship = Scripts.Vehicles.Values.GroupBy(g => g.Name).ToDictionary(k => k.Key, v => v.FirstOrDefault().DisplayName)
                     }.ToJSON(),
                     ContentType = "application/json"
@@ -95,28 +107,42 @@ namespace HoloXPLOR.Controllers
             }
         }
 
-        // http://holoxplor.ddrit.com/HoloTable/Rating/sample/00fa8108-001c-bff0-0000-000000000000/ANVL_Hornet_F7CM
-        public ActionResult Rating(String id, Guid shipID, String targetShip)
+        // http://holoxplor.ddrit.com/HoloTable/Rating/sample/00fa8108-001c-bff0-0000-000000000000
+        // http://holoxplor.ddrit.com/HoloTable/Rating/sample/ANVL_Hornet_F7CM
+        public ActionResult Rating(String id, String shipID)
         {
-            HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
+            Guid shipGuid = Guid.Empty;
+            ShipLoadout loadout;
 
-            lock (HoloTableController._lockMap[id])
+            if (Guid.TryParse(shipID, out shipGuid))
             {
-                DetailModel model = new DetailModel(id, shipID);
+                HoloTableController._lockMap[id] = HoloTableController._lockMap.GetValue(id, new Object());
 
-                ShipLoadout selfLoadout = new ShipLoadout(model);
-                ShipLoadout enemyLoadout = new ShipLoadout(targetShip);
-
-                return new ContentResult
+                lock (HoloTableController._lockMap[id])
                 {
-                    Content = new
-                    {
-                        Self = selfLoadout,
-                        Enemy = enemyLoadout,
-                    }.ToJSON(),
-                    ContentType = "application/json"
-                };
+                    DetailModel model = new DetailModel(id, shipGuid);
+
+                    loadout = new ShipLoadout(model);
+                }
+
+                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                this.Response.Cache.SetExpires(DateTime.Now);
+                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
             }
+            else
+            {
+                this.Response.Cache.SetCacheability(HttpCacheability.Public);
+                this.Response.Cache.SetExpires(DateTime.Today.AddDays(7));
+                this.Response.Cache.SetMaxAge(TimeSpan.FromHours(168));
+
+                loadout = new ShipLoadout(id);
+            }
+
+            return new ContentResult
+            {
+                Content = loadout.ToJSON(),
+                ContentType = "application/json"
+            };
         }
 
         public ActionResult Delete(String id)
@@ -137,6 +163,10 @@ namespace HoloXPLOR.Controllers
                     System.IO.File.Delete(filename);
                 }
             }
+
+            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            this.Response.Cache.SetExpires(DateTime.Now);
+            this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
 
             return View();
         }
@@ -240,6 +270,10 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
+                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    this.Response.Cache.SetExpires(DateTime.Now);
+                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                     return View(model);
                 }
             }
@@ -291,6 +325,10 @@ namespace HoloXPLOR.Controllers
 
                 // model.Player.Hangar.Owner = handle;
 
+                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                this.Response.Cache.SetExpires(DateTime.Now);
+                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                 return File(model.GetBytes(), "application/xml", String.Format("{0}.xml", handle));
             }
         }
@@ -308,6 +346,11 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
+
+                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                this.Response.Cache.SetExpires(DateTime.Now);
+                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
                 var shortName = Path.GetFileNameWithoutExtension(file.FileName);
 
                 if (file.ContentLength > 0x1000000)

@@ -122,7 +122,7 @@
 @using (Html.BeginForm("Inventory", "HoloTable", new { id = Model.CurrentXML }, FormMethod.Post, new { id = "form-inventory" }))
 { }
 
-@using (Html.BeginForm("Rating", "HoloTable", new { id = Model.CurrentXML, shipID = Model.ShipID }, FormMethod.Post, new { id = "form-rating" }))
+@using (Html.BeginForm("Rating", "HoloTable", new { id = Model.CurrentXML, shipid = String.Empty }, FormMethod.Post, new { id = "form-rating", data_ship_id = Model.ShipID }))
 { }
 
 <div class="ui-container gutter-5">
@@ -132,7 +132,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="ui-header">
-                        <img class="cig-back"   src="/Images/bg-header.png" />
+                        <img class="cig-back" src="/Images/bg-header.png" />
                         <img class="cig-logo" src="@Model.ShipJson.Manufacturer.Media[0].SourceURL.Replace("/source/", "/84x62/")" alt="@Html.Raw(Model.ShipJson.Manufacturer.Name)" title="@Html.Raw(Model.ShipJson.Manufacturer.Name)" />
                         <h3 data-ship-name="@Model.GameData_Ship.Name">@Html.Raw(Model.ShipJson.Name)</h3>
                         <small>@Html.Raw(Model.ShipJson.Focus)</small>
@@ -231,42 +231,50 @@
                             <div class="panel-body cig-content">
                                 <p>
                                     <select class="form-control" id="cig-rating">
-                                        <option value="ANVL_Hornet_F7A">F7A Military Hornet (Stock)</option>
-                                        <option value="ANVL_Hornet_F7C">F7C Hornet/Ghost/Tracker (Stock)</option>
-                                        <option value="ANVL_Hornet_F7CM" selected="selected">F7C-M Super Hornet (Stock)</option>
-                                        <option value="ANVL_Gladiator">Gladiator (Stock)</option>
-                                        <option value="AEGS_Avenger_Stalker">Avenger Stalker/Warlock (Stock)</option>
-                                        <option value="AEGS_Avenger_Titan">Avenger Titan (Stock)</option>
-                                        <option value="AEGS_Retaliator">Retaliator Bomber (Stock)</option>
-                                        <option value="AEGS_Sabre">Sabre (Stock)</option>
-                                        <option value="AEGS_Vanguard">Vanguard Warden (Stock)</option>
-                                        <option value="CNOU_Mustang_Alpha">Mustang Alpha (Stock)</option>
-                                        <option value="CNOU_Mustang_Beta">Mustang Beta (Stock)</option>
-                                        <option value="CNOU_Mustang_Delta">Mustang Delta (Stock)</option>
-                                        <option value="CNOU_Mustang_Gamma">Mustang Gamma/Omega (Stock)</option>
-                                        <!--<option value="DRAK_Caterpillar">Caterpillar (Stock)</option>-->
-                                        <option value="DRAK_Cutlass_Black">Cutlass Black (Stock)</option>
-                                        <option value="DRAK_Cutlass_Red">Cutlass Red (Stock)</option>
-                                        <option value="DRAK_Cutlass_Blue">Cutlass Blue (Stock)</option>
-                                        <option value="KRIG_P52_Merlin">P52 Merlin (Stock)</option>
-                                        <option value="MISC_Freelancer_Base">Freelancer (Stock)</option>
-                                        <!--<option value="MISC_Reliant">Reliant (Stock)</option>-->
-                                        <option value="ORIG_300i">300i/315p (Stock)</option>
-                                        <option value="ORIG_325a">325a (Stock)</option>
-                                        <option value="ORIG_350r">350r (Stock)</option>
-                                        <option value="RSI_Aurora_CL">Aurora CL/ES (Stock)</option>
-                                        <option value="RSI_Aurora_LN">Aurora LN (Stock)</option>
-                                        <option value="RSI_Aurora_LX">Aurora LX (Stock)</option>
-                                        <option value="RSI_Aurora_MR">Aurora MR (Stock)</option>
-                                        <option value="RSI_Constellation_Andromeda">Constellation Andromeda (Stock)</option>
-                                        <!--<option value="RSI_Constellation_Aquila">Constellation Aquila (Stock)</option>-->
-                                        <!--<option value="RSI_Constellation_Phoenix">Constellation Phoenix (Stock)</option>-->
-                                        <!--<option value="RSI_Constellation_Taurus">Constellation Taurus (Stock)</option>-->
-                                        <option value="VNCL_Glaive">Glaive (Stock)</option>
-                                        <!--<option value="VNCL_Stinger">Stinger (Stock)</option>-->
-                                        <option value="VNCL_Scythe">Scythe (Stock)</option>
-                                        <!--<option value="VNCL_Void">Void (Stock)</option>-->
-                                        <!--<option value="XIAN_Scour">Khartu-Al (Stock)</option>-->
+                                        <optgroup label="Stock">
+                                            <option value="ANVL_Hornet_F7A">F7A Military Hornet (Stock)</option>
+                                            <option value="ANVL_Hornet_F7C">F7C Hornet/Ghost/Tracker (Stock)</option>
+                                            <option value="ANVL_Hornet_F7CM" selected="selected">F7C-M Super Hornet (Stock)</option>
+                                            <option value="ANVL_Gladiator">Gladiator (Stock)</option>
+                                            <option value="AEGS_Avenger_Stalker">Avenger Stalker/Warlock (Stock)</option>
+                                            <option value="AEGS_Avenger_Titan">Avenger Titan (Stock)</option>
+                                            <option value="AEGS_Retaliator">Retaliator Bomber (Stock)</option>
+                                            <option value="AEGS_Sabre">Sabre (Stock)</option>
+                                            <option value="AEGS_Vanguard">Vanguard Warden (Stock)</option>
+                                            <option value="CNOU_Mustang_Alpha">Mustang Alpha (Stock)</option>
+                                            <option value="CNOU_Mustang_Beta">Mustang Beta (Stock)</option>
+                                            <option value="CNOU_Mustang_Delta">Mustang Delta (Stock)</option>
+                                            <option value="CNOU_Mustang_Gamma">Mustang Gamma/Omega (Stock)</option>
+                                            <!--<option value="DRAK_Caterpillar">Caterpillar (Stock)</option>-->
+                                            <option value="DRAK_Cutlass_Black">Cutlass Black (Stock)</option>
+                                            <option value="DRAK_Cutlass_Red">Cutlass Red (Stock)</option>
+                                            <option value="DRAK_Cutlass_Blue">Cutlass Blue (Stock)</option>
+                                            <option value="KRIG_P52_Merlin">P52 Merlin (Stock)</option>
+                                            <option value="MISC_Freelancer_Base">Freelancer (Stock)</option>
+                                            <!--<option value="MISC_Reliant">Reliant (Stock)</option>-->
+                                            <option value="ORIG_300i">300i/315p (Stock)</option>
+                                            <option value="ORIG_325a">325a (Stock)</option>
+                                            <option value="ORIG_350r">350r (Stock)</option>
+                                            <option value="RSI_Aurora_CL">Aurora CL/ES (Stock)</option>
+                                            <option value="RSI_Aurora_LN">Aurora LN (Stock)</option>
+                                            <option value="RSI_Aurora_LX">Aurora LX (Stock)</option>
+                                            <option value="RSI_Aurora_MR">Aurora MR (Stock)</option>
+                                            <option value="RSI_Constellation_Andromeda">Constellation Andromeda (Stock)</option>
+                                            <!--<option value="RSI_Constellation_Aquila">Constellation Aquila (Stock)</option>-->
+                                            <!--<option value="RSI_Constellation_Phoenix">Constellation Phoenix (Stock)</option>-->
+                                            <!--<option value="RSI_Constellation_Taurus">Constellation Taurus (Stock)</option>-->
+                                            <option value="VNCL_Glaive">Glaive (Stock)</option>
+                                            <!--<option value="VNCL_Stinger">Stinger (Stock)</option>-->
+                                            <option value="VNCL_Scythe">Scythe (Stock)</option>
+                                            <!--<option value="VNCL_Void">Void (Stock)</option>-->
+                                            <!--<option value="XIAN_Scour">Khartu-Al (Stock)</option>-->
+                                        </optgroup>
+                                        <optgroup label="Hangar">
+                                            @foreach (var ship in Model.GameData_ShipMap)
+                                            {
+                                                <option value="@Model.CurrentXML/@ship.Key">@ship.Value.DisplayName</option>
+                                            }
+                                        </optgroup>
                                     </select>
                                 </p>
 
@@ -376,5 +384,10 @@
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        var HoloXPLOR = HoloXPLOR || {};
+        HoloXPLOR.ShipID = '@Model.ShipID';
+        HoloXPLOR.HangarID = '@Model.CurrentXML';
+    </script>
     <script src="//d3js.org/d3.v3.min.js" type="text/javascript"></script>
 }

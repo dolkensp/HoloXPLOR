@@ -69,8 +69,8 @@ namespace HoloXPLOR
 
             routes.MapRoute(
                 name: "HangarRating",
-                url: "HoloTable/{id}/{shipid}/Rating/{targetship}",
-                defaults: new { controller = "HoloTable", action = "Rating", targetship = "ANVL_Hornet_F7CM" }
+                url: "Rating/{id}/{shipid}",
+                defaults: new { controller = "HoloTable", action = "Rating", id = "ANVL_Hornet_F7CM", shipid = UrlParameter.Optional }
             );
 
             routes.MapRoute(

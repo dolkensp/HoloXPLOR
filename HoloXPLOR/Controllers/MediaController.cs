@@ -73,6 +73,10 @@ namespace HoloXPLOR.Controllers
 
             String contentType = MimeMapping.GetMimeMapping(cacheFilename);
 
+            this.Response.Cache.SetCacheability(HttpCacheability.Public);
+            this.Response.Cache.SetExpires(DateTime.Today.AddDays(7));
+            this.Response.Cache.SetMaxAge(TimeSpan.FromHours(168));
+
             return File(cacheFilename, contentType);
         }
     }
