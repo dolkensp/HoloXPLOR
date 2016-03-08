@@ -644,63 +644,7 @@ $(document).ready(function () {
             if ($source == null) hideInfo(500)
         });
 
-        var $panecontainer = $('#primary-pane');
-        var isscrolling = false;
-        var $currscrollbar = $('#primary-pane-scrollbar');
-        var scrollbarpos;
-        var $currcontent;
-        var $infocontent;
-
-        // Scrolling
-        $currscrollbar.on('mousedown', function (e) {
-            isscrolling = true;
-            $currcontent = $('.active .js-scrollable');
-            scrollbarpos = e.pageY - $currscrollbar.offset().top;
-            $('body').addClass('shipcatalogue_scrollingcursor');
-            $currscrollbar.find('span').addClass('shipcatalogue_descscrollbarglow');
-            return false;
-        });
-        $(document).bind('mouseup', function () {
-            if (isscrolling) {
-                isscrolling = false;
-                $('body').removeClass('shipcatalogue_scrollingcursor');
-                $currscrollbar.find('span').removeClass('shipcatalogue_descscrollbarglow');
-            }
-        });
-        $(document).bind('mousemove', function (e) {
-            if (isscrolling) {
-                var newpos = $currscrollbar.position().top - (scrollbarpos - (e.pageY - $currscrollbar.offset().top));
-                var parentH = $panecontainer.height();
-                if (newpos < 15) {
-                    newpos = 15;
-                } else if (newpos > 390) {
-                    newpos = 390;
-                }
-                $currscrollbar.css('top', newpos);
-                if ($currcontent.height() > parentH) {
-                    $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
-                }
-            }
-        });
-        $panecontainer.on('mousewheel', function (e) {
-            if (!isscrolling) {
-                $currcontent = $('.active .js-scrollable');
-                if ($currcontent.length == 0) return;
-
-                var parentH = $panecontainer.height();
-                var offset = (e.originalEvent.wheelDelta / 120 > 0 ? -50 : 50);
-                var newpos = $currscrollbar.position().top + (e.originalEvent.wheelDelta / 120 > 0 ? -50 : 50);
-                if (newpos < 15) {
-                    newpos = 15;
-                } else if (newpos > 390) {
-                    newpos = 390;
-                }
-                $currscrollbar.css('top', newpos);
-                if ($currcontent.height() > parentH) {
-                    $currcontent.css('top', Math.round((((newpos - 15) / 411) * ($currcontent.height() - parentH)) * -1));
-                }
-            }
-        });
+        $(".nav-tabs a").on('shown.bs.tab', function () { ga('send', 'event', 'HoloXPLOR.Ship', 'Tab', this.textContent || this.innerText) });
     }
 
     var dropItem = function (event, ui) {

@@ -32,9 +32,13 @@
         }, 200);
     }).on("filestart.upload", function (e, file) {
 
+        ga('send', 'event', 'HoloXPLOR.Hangar', 'Upload Start', file.name);
+
         $('#upload .modal-body').html('<p>Now uploading...</p>');
 
     }).on("fileerror.upload", function (e, file, response) {
+
+        ga('send', 'event', 'HoloXPLOR.Hangar', 'Upload Error: ' + response, file.name);
 
         switch (response) {
             case "size":
@@ -62,6 +66,8 @@
         $('#upload .modal-body').html('<p>Now uploading (' + percent + '%)...</p>');
 
     }).on("filecomplete.upload", function (e, file, response) {
+
+        ga('send', 'event', 'HoloXPLOR.Hangar', 'Upload Complete', file.name);
 
         $.cookie('js_handle', response.Handle);
 

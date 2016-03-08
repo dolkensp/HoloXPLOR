@@ -7,6 +7,8 @@ $(document).ready(function () {
     HoloXPLOR.Rating = (function () {
 
         var baseUrl = '/Rating/';
+        var trackRating = false;
+        var trackLoad = true;
 
         var shieldWeapon = function (shield, aggregate) {
             if (shield.HitPoints > 0) {
@@ -148,6 +150,7 @@ $(document).ready(function () {
         }
 
         var checkRating = function () {
+
             $.ajax({
                 url: baseUrl + $('#cig-rating').val(),
                 method: 'GET',
@@ -155,6 +158,11 @@ $(document).ready(function () {
                 success: function (data) {
 
                     HoloXPLOR.Rating.Enemy = data;
+
+                    if (trackRating) {
+                        ga('send', 'event', 'HoloXPLOR.Rating.Compare', HoloXPLOR.Rating.Self.DisplayName, HoloXPLOR.Rating.Enemy.DisplayName);
+                    }
+                    trackRating = true;
 
                     var maxSelf = $.extend(true, { Health: HoloXPLOR.Rating.Self.MaxHealth }, HoloXPLOR.Rating.Self);
                     var minSelf = $.extend(true, { Health: HoloXPLOR.Rating.Self.MinHealth }, HoloXPLOR.Rating.Self);
@@ -279,6 +287,14 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (data) {
                     HoloXPLOR.Rating.Self = data;
+
+                    if (trackLoad) {
+                        ga('send', 'event', 'HoloXPLOR.Ship', 'Load', HoloXPLOR.Rating.Self.DisplayName);
+                        trackLoad = false;
+                    }
+
+                    trackRating = false;
+
                     checkRating();
                 }
             });
