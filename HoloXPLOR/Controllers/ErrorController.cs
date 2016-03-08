@@ -37,10 +37,6 @@ namespace HoloXPLOR.Controllers
                 );
             }, message, stack, name, url);
 
-            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            this.Response.Cache.SetExpires(DateTime.Now);
-            this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
             return new EmptyResult { };
         }
 
@@ -54,10 +50,6 @@ namespace HoloXPLOR.Controllers
             this.Response.StatusCode = (Int32)HttpStatusCode.Gone;
             this.Response.TrySkipIisCustomErrors = true;
 
-            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            this.Response.Cache.SetExpires(DateTime.Now);
-            this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
             return View();
         }
 
@@ -65,10 +57,6 @@ namespace HoloXPLOR.Controllers
         {
             this.Response.StatusCode = (Int32)HttpStatusCode.Forbidden;
             this.Response.TrySkipIisCustomErrors = true;
-
-            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            this.Response.Cache.SetExpires(DateTime.Now);
-            this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
 
             return View();
         }

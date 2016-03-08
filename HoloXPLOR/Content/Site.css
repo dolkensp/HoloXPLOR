@@ -401,7 +401,7 @@ footer a { color: #fff; }
     display: block;
 }
 
-.fs-upload-input { display: none !important; }
+#form-upload input { line-height: 23px; width: 100%; }
 
 .cig-count0 { display: none; }
 .js-info strong { width: 100px; display: inline-block; padding-right: 5px; text-align: right; }

@@ -119,8 +119,11 @@
     </div>
 
     @Html.Partial("_Modal.Download")
-    @Html.Partial("_Modal.Upload")
 
+    @if (ViewBag.NoUpload == null) {
+        @:@Html.Partial("_Modal.Upload")
+    }
+    
     @Scripts.Render("~/Content/jquery")
     @Scripts.Render("~/Content/jqueryui")
     @Scripts.Render("~/Content/bootstrap")

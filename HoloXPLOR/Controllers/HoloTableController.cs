@@ -41,10 +41,6 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
-                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                    this.Response.Cache.SetExpires(DateTime.Now);
-                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
                     return View(model);
                 }
             }
@@ -66,10 +62,6 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
-                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                    this.Response.Cache.SetExpires(DateTime.Now);
-                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
                     return View(model);
                 }
             }
@@ -87,10 +79,6 @@ namespace HoloXPLOR.Controllers
             {
                 DetailModel model = new DetailModel(id);
                 HashSet<String> currentItems = new HashSet<String>(model.GameData_ItemMap.Values.Where(i => i.ItemCategory != Items.CategoryEnum.__Unknown__).Select(k => k.Name).Distinct());
-
-                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                this.Response.Cache.SetExpires(DateTime.Now);
-                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
 
                 return new ContentResult
                 {
@@ -124,17 +112,9 @@ namespace HoloXPLOR.Controllers
 
                     loadout = new ShipLoadout(model);
                 }
-
-                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                this.Response.Cache.SetExpires(DateTime.Now);
-                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
             }
             else
             {
-                this.Response.Cache.SetCacheability(HttpCacheability.Public);
-                this.Response.Cache.SetExpires(DateTime.Today.AddDays(7));
-                this.Response.Cache.SetMaxAge(TimeSpan.FromHours(168));
-
                 loadout = new ShipLoadout(id);
             }
 
@@ -163,10 +143,6 @@ namespace HoloXPLOR.Controllers
                     System.IO.File.Delete(filename);
                 }
             }
-
-            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            this.Response.Cache.SetExpires(DateTime.Now);
-            this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
 
             return View();
         }
@@ -270,10 +246,6 @@ namespace HoloXPLOR.Controllers
 
                     ViewBag.ID = id;
 
-                    this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                    this.Response.Cache.SetExpires(DateTime.Now);
-                    this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
                     return View(model);
                 }
             }
@@ -323,12 +295,6 @@ namespace HoloXPLOR.Controllers
                     handle = js_handle.Value;
                 }
 
-                // model.Player.Hangar.Owner = handle;
-
-                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                this.Response.Cache.SetExpires(DateTime.Now);
-                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
                 return File(model.GetBytes(), "application/xml", String.Format("{0}.xml", handle));
             }
         }
@@ -346,11 +312,6 @@ namespace HoloXPLOR.Controllers
         {
             try
             {
-
-                this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                this.Response.Cache.SetExpires(DateTime.Now);
-                this.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
-
                 var shortName = Path.GetFileNameWithoutExtension(file.FileName);
 
                 if (file.ContentLength > 0x1000000)

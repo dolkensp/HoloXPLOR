@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+
+    if ((location.host || location.hostname) == "holoxplor.azurewebsites.net" || /http:\/\/holoxplor.space/.test(location.href)) {
+        window.location.replace("https://holoxplor.space/"); return;
+    }
+
     var $form = $('#form-upload');
 
     if ($form.length == 0) return;
@@ -31,8 +36,7 @@
 
     }).on("fileerror.upload", function (e, file, response) {
 
-        switch(response)
-        {
+        switch (response) {
             case "size":
             case "Request Entity Too Large":
                 $('#upload .modal-body').html('<p>The selected file is too large.</p>' +
@@ -63,5 +67,15 @@
 
         window.location.href = response.UrlPath;
 
-    })
+    });
+
+    var $upload = $('input[type=file]');
+    var $left = $('<span class="col-xs-6" />');
+
+    $upload.addClass('btn btn-default');
+    $left.append($upload);
+
+    $form.addClass('row');
+    $form.append($left);
+    $form.append($('<span class="col-xs-6"><input type="submit" value="Manual Upload" class="btn btn-default" /></span>'));
 });

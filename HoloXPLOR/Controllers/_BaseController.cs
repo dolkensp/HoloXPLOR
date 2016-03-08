@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,6 +12,15 @@ namespace HoloXPLOR.Controllers
         private HashSet<String> _secureHosts = new HashSet<String>(StringComparer.InvariantCultureIgnoreCase) {
             "holoxplor.space",
             "ptu.holoxplor.space",
+        };
+
+        private List<Regex> _pageRules = new List<Regex>
+        {
+            new Regex("^/?$", RegexOptions.IgnoreCase),
+            new Regex("^/HoloTable/Sample/?$", RegexOptions.IgnoreCase),
+            new Regex("^/Thanks/?$", RegexOptions.IgnoreCase),
+            new Regex("^/Media/", RegexOptions.IgnoreCase),
+            new Regex("^/Rating/[a-z0-9_]+/?$", RegexOptions.IgnoreCase),
         };
 
         protected override void OnAuthorization(AuthorizationContext filterContext)
@@ -30,7 +40,7 @@ namespace HoloXPLOR.Controllers
 
             #endregion
 
-            #region Force new URLs
+            #region Force live URLs
 
             if (String.Equals(hostname, "www.holoxplor.space", StringComparison.InvariantCultureIgnoreCase))
                 filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
@@ -42,6 +52,33 @@ namespace HoloXPLOR.Controllers
                 filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "ptu.holoxplor.space", path));
 
             #endregion
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            this.SetCaching(filterContext);
+
+            base.OnActionExecuting(filterContext);
+        }
+
+        private void SetCaching(ActionExecutingContext filterContext)
+        {
+            foreach (var rule in this._pageRules)
+            {
+                if (rule.IsMatch(filterContext.HttpContext.Request.Url.PathAndQuery))
+                {
+                    filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+                    filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Today.AddDays(7));
+                    filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromHours(168));
+                    filterContext.HttpContext.Response.DisableKernelCache();
+
+                    return;
+                }
+            }
+
+            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Now);
+            filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
         }
     }
 }

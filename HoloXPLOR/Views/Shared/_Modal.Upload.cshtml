@@ -11,7 +11,7 @@
                         <h4 class="modal-title">Upload Inventory XML</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Drop your XML file here.</p>
+                        <p>Drop your XML file here, or use the browse button below to select your XML file.</p>
                         <p>You can locate the inventory XML file in your Star Citizen USER directory.</p>
                         <ol>
                             <li>Browse to your Star Citizen installation directory</li>
@@ -21,6 +21,10 @@
                             <li>Drag the <em>[HASH].xml</em> file onto this page</li>
                             <li>Confirm the <em>url</em> matches your handle (e.g. holoxplor.space/HoloTable/alluran)</li>
                         </ol>
+
+                        @using (Html.BeginForm("Upload", "HoloTable", FormMethod.Post, new { id = "form-upload" }))
+                        { }
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
