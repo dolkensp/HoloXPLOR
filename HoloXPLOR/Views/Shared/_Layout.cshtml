@@ -130,6 +130,10 @@
     @Scripts.Render("~/Content/holoxplor")
     @Scripts.Render("~/Content/formstone")
 
+    <script>
+        var ga_page = location.pathname;
+    </script>
+
     @RenderSection("scripts", required: false)
 
     <script>
@@ -139,6 +143,7 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-29781027-3', 'auto');
+      ga('set', 'page', ga_page);
       ga('send', 'pageview');
 
     </script>

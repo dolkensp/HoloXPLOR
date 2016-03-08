@@ -389,6 +389,8 @@
         var HoloXPLOR = HoloXPLOR || {};
         HoloXPLOR.ShipID = '@Model.ShipID';
         HoloXPLOR.HangarID = '@Model.CurrentXML';
+
+        ga_page = '/HoloTable/__HANDLE__/@Model.GameData_Ship.DisplayName.Replace(' ', '_')';
     </script>
     <script src="//d3js.org/d3.v3.min.js" type="text/javascript"></script>
 }
