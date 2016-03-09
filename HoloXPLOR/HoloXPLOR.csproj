@@ -183,9 +183,6 @@
     <Content Include="App_Data\Logs\placeholder.txt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Scripts\Entities\Items\DamageMultipliers.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\HitTypes.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\ItemPackages.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\AIModule\RSI_DefaultPilotAIModule.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\AIModule\RSI_DefaultTurretAIModule.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Ballistic\AmmoBox_Ballistic_1000rd_20mm.xml" />
@@ -476,9 +473,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_ACOM_S01_IcePlunge.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S01_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S02_Boreal.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S02_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S04_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S01_CryoStar.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S01_FrostStar.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S02_CryoStar.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S02_CryoStarEX.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JUST_S01_EcoFlow.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_LPLT_S01_FlashFreeze.xml" />
@@ -489,6 +488,7 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_VNCL_S01_Void.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S01_Berian.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S01_Endo.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S02_Berian.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S02_Graupel.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Countermeasures\AEGS\AEGS_Avenger_CML.xml">
       <SubType>Designer</SubType>
@@ -668,9 +668,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_UEE.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_ACOM_S01_StarHeart.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S01_Charger.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S02_Charger.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S02_Vortex.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S01_HyperGen.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S02_ExoGen.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S02_HyperGen.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_JUST_S01_Endurance.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_JUST_S03_Endurance.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_LPLT_S01_IonBurst.xml" />
@@ -867,6 +869,8 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_Interface\Interface_SHLD_SECO_MEDI_PL01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_Interface\Interface_SHLD_SECO_SMAL_PL01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Merlin.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Mustang.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Survival.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F4_DD.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F4_SD.xml" />
@@ -1667,8 +1671,7 @@
     <Content Include="Scripts\holoxplor.rating.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.js" />
     <Content Include="Scripts\jquery.ui.touch-punch-0.2.3.js" />
-    <None Include="Properties\PublishProfiles\holoxplor-ptu.pubxml" />
-    <None Include="Properties\PublishProfiles\holoxplor.azurewebsites.net.pubxml" />
+    <None Include="Properties\PublishProfiles\holoxplor.space.pubxml" />
     <Content Include="Content\formstone.upload.css" />
     <Content Include="Images\anvilaerospace_logo.png" />
     <Content Include="Images\bg-header.png" />
@@ -1704,6 +1707,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\ptu.holoxplor.space.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\formstone.core-0.8.37.js" />
