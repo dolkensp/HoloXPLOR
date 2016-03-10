@@ -12,43 +12,55 @@ using Xml = HoloXPLOR.Data.XML;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
+using Dolkens.Framework.Caching;
 
 namespace HoloXPLOR.Models.HoloTable
 {
     public class DetailModel
     {
+        public String CacheKey { get { return CacheUtils.BuildCacheKey("DetailModel.Player", this._currentXML.ToLowerInvariant()); } }
+
         public DetailModel(String id, Guid? shipID = null)
         {
             this._currentXML = id;
 
-            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+            this.Player = CacheUtils.Cache.Get(this.CacheKey) as Inventory.Player;
 
-            // Special locatio for samples
-            if (Path.GetFileNameWithoutExtension(filename) == "sample")
+            if (this.Player == null)
             {
-                filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+                String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+
+                // Special locatio for samples
+                if (Path.GetFileNameWithoutExtension(filename) == "sample")
+                {
+                    filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/{0}.xml", this.CurrentXML));
+                }
+
+                if (File.Exists(filename))
+                {
+                    this.Player = System.IO.File.ReadAllText(filename).FromXML<Inventory.Player>();
+                }
+                else
+                {
+                    throw new FileNotFoundException("Unable to load specified xml", String.Format("{0}.xml", id));
+                }
             }
 
-            if (File.Exists(filename))
+            if (this.Player != null)
             {
-                this.Player = System.IO.File.ReadAllText(filename).FromXML<Inventory.Player>();
                 this.ShipID = shipID ?? Guid.Empty;
-
                 if (shipID.HasValue && !this.Player.Ships.Where(s => s.ID == this.ShipID).Any())
                 {
                     throw new FileNotFoundException("Unable to load specified ship from xml", String.Format("{0}.xml", id));
                 }
-
                 var shipItemIDs = new HashSet<Guid>(this.Player.Ships.Where(s => s.Inventory != null).Where(s => s.Inventory.Items != null).SelectMany(s => s.Inventory.Items).Select(i => i.ID));
 
                 this.Player.Inventory = new Inventory.Inventory
                 {
                     Items = this.Player.Items.Where(i => !shipItemIDs.Contains(i.ID)).Select(i => new Inventory.InventoryItem { ID = i.ID }).ToArray()
                 };
-            }
-            else
-            {
-                throw new FileNotFoundException("Unable to load specified xml", String.Format("{0}.xml", id));
+
+                CacheUtils.Cache.Add(this.CacheKey, this.Player, DateTime.Now.AddMinutes(15));
             }
         }
 
@@ -84,6 +96,8 @@ namespace HoloXPLOR.Models.HoloTable
                     xw.Close();
                 }
             }
+
+            CacheUtils.Cache.Add(this.CacheKey, this.Player, DateTime.Now.AddMinutes(15));
         }
 
         public Byte[] GetBytes()

@@ -51,8 +51,8 @@
       <HintPath>..\packages\Dolkens.Framework.1.0.5648.17179\lib\net45\Dolkens.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dolkens.Framework.Caching, Version=0.1.5560.19205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dolkens.Framework.Caching.0.1.5560.19205\lib\net45\Dolkens.Framework.Caching.dll</HintPath>
+    <Reference Include="Dolkens.Framework.Caching, Version=0.1.5617.32687, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dolkens.Framework.Caching.0.1.5617.32687\lib\net45\Dolkens.Framework.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dolkens.Framework.Caching.Memory, Version=0.1.5560.19476, Culture=neutral, processorArchitecture=MSIL">
@@ -87,6 +87,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
