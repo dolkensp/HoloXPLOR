@@ -346,9 +346,11 @@ $(document).ready(function () {
 
                             equippedData.Ammo  = ammoMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] ||
                                                  ammoMap[(inventoryMap[equippedData.FireMode.Fire.AmmoType || equippedData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] ||
+                                                 ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_Rail_', '') + '_Rail_AMMO'] ||
                                                  ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
                             availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] ||
                                                  ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] ||
+                                                 ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_Rail_', '') + '_Rail_AMMO'] ||
                                                  ammoMap[(availableData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
 
                             equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
