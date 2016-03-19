@@ -149,6 +149,9 @@
         var HoloXPLOR = HoloXPLOR || {};
         HoloXPLOR.HangarID = '@Model.CurrentXML';
 
-        ga_page = '/HoloTable/__HANDLE__';
+        @if (!String.Equals(Model.CurrentXML, "sample", StringComparison.InvariantCultureIgnoreCase))
+        {
+            @:ga_page = '/HoloTable/__HANDLE__';
+        }
     </script>
 }
