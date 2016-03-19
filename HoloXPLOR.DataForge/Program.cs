@@ -11,7 +11,7 @@ namespace HoloXPLOR.DataForge
     {
         public static void Main(params String[] args)
         {
-            // args = new String[] { "game.dcb" };
+            args = new String[] { "game.dcb" };
 
             if (args.Length < 1 || args.Length > 2)
             {
