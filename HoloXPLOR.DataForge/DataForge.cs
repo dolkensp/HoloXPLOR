@@ -95,7 +95,7 @@ namespace HoloXPLOR.DataForge
             var enumOptionCount          = this._br.ReadUInt16(); var temp26 = this._br.ReadUInt16();  // 0x0284 - Enum Options
             var textLength               = this._br.ReadUInt32(); var temp27 = this._br.ReadUInt32();  // 0x2e45 : 0x00066e4b
 
-            this.StructDefinitionTable = this.ReadArray<DataForgeStructDefinition>(structDefinitionCount);
+            this.StructDefinitionTable   = this.ReadArray<DataForgeStructDefinition>(structDefinitionCount);
             this.PropertyDefinitionTable = this.ReadArray<DataForgePropertyDefinition>(propertyDefinitionCount);
             this.EnumDefinitionTable     = this.ReadArray<DataForgeEnumDefinition>(enumDefinitionCount);
             this.DataMappingTable        = this.ReadArray<DataForgeDataMapping>(dataMappingCount);
@@ -122,8 +122,8 @@ namespace HoloXPLOR.DataForge
             this.Array_ReferenceValues = this.ReadArray<DataForgeArrayReference>(referenceValueCount);
             this.EnumOptionTable = this.ReadArray<DataForgeStringLookup>(enumOptionCount);
 
-            Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
-            this._br.BaseStream.Seek(0x4c484, SeekOrigin.Begin);
+            // Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
+            // this._br.BaseStream.Seek(0x4c484, SeekOrigin.Begin);
             var buffer = new List<DataForgeString> { };
             var maxPosition = this._br.BaseStream.Position + textLength;
             var index = 0;
@@ -147,6 +147,7 @@ namespace HoloXPLOR.DataForge
                 this.DataMap[dataMapping.StructIndex] = new List<XmlElement> { };
 
                 var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
+                dataStruct.IsCovered = true;
 
                 for (Int32 i = 0; i < dataMapping.StructCount; i++)
                 {
@@ -177,7 +178,12 @@ namespace HoloXPLOR.DataForge
             this._xmlDocument.AppendChild(root);
             foreach (var record in this.RecordDefinitionTable)
             {
-                root.AppendChild(this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name));
+                var recordXml = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
+                var fileNameAttribute = this._xmlDocument.CreateAttribute("path");
+                fileNameAttribute.Value = record.FileName;
+                recordXml.Attributes.Append(fileNameAttribute);
+                root.AppendChild(recordXml);
+
             }
 
             foreach (var dataMapping in this.Require_StrongMapping)

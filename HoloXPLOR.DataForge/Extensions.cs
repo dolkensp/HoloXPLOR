@@ -183,9 +183,9 @@ namespace Dolkens.Framework.BinaryExtensions
         {
             var buffer = element.OwnerDocument.CreateElement(name);
 
-            foreach (XmlNode node in element.ChildNodes)
+            while (element.ChildNodes.Count > 0)
             {
-                buffer.AppendChild(node);
+                buffer.AppendChild(element.ChildNodes[0]);
             }
 
             while (element.Attributes.Count > 0)

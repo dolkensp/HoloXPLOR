@@ -300,77 +300,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\AmmoBoxes\Rockets\AmmoBox_Rocket.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\1000mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\1000mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\106mm_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\20mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\24mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\25mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\30mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\35mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\40mm_5km_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\40mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\40mm_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\50mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\60mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\60mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\80mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_1000mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_1000mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_106mm_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_20mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_24mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_25mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_30mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_35mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_40mm_5km_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_40mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_40mm_exp_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_50mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_60mm_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_60mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Ballistic_Ammo\AMMO_Interface\Interface_80mm_Rail_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\AEGS\AEGS_Chaff.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\AEGS\AEGS_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\ANVL\ANVL_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\ANVL\ANVL_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\BEHR\BEHR_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\CNOU\CNOU_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\CNOU\CNOU_Flare.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\ORIG\ORIG_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\ORIG\ORIG_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\RSI\RSI_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\RSI\RSI_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\TALN\TALN_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\VNCL\VNCL_Chaff.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Countermeasures\VNCL\VNCL_Flare.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\AMRS_LaserCannon_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\AMRS_LaserCannon_S2_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\AMRS_LaserCannon_S3_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\AMRS_LaserCannon_S4_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\BEHR_LaserCannon_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\BEHR_LaserCannon_S2_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\BEHR_LaserCannon_S3_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\BEHR_LaserCannon_S4_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\JOKR_DistortionCannon_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\KLWE_LaserRepeater_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\KLWE_LaserRepeater_S2_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\KLWE_LaserRepeater_S3_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\MXOX_LaserGatling_S5_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\MXOX_NeutronCannon_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\MXOX_NeutronCannon_S2_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_Blade_LaserRepeater_S3_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_Blade_PC_Bolt.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_HeliconPlasmaCannon_S5_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_LaserCannon_S1_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_LC_S1_Q1_BOLT.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_NC_S5_Q1_BOLT.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_NeutronCannon_S5_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Laser_Bolts\VNCL_Scythe_PC_Bolt.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\BEHR\BEHR_Marksman_S1_Proximity_FaF_IR.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\FSKI\FSKI_Arrester_S3_Proximity_TL_CS.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\FSKI\FSKI_Ignite_S2_Strike_FaF_CS_Tutorial.xml" />
@@ -394,8 +323,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\VNCL_EM_MARK_TUTORIAL.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\VNCL_HS_MARK.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Missiles\VNCL_HS_MARK_TUTORIAL.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Rocket_Ammo\106mm_Explosive_AMMO.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\Rocket_Ammo\Rocket_AMMO.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\TEMP\TEMP_Ammo_S1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\TEMP\TEMP_Ammo_S2.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Ammo\TEMP\TEMP_Ammo_S3.xml" />
@@ -408,13 +335,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Armor\RSI_AwesomeArmor.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Armor\TLSM\TLSM_Armor_R5_S1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_ADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_Motherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_TC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\AEGS\AEGS_Test_WC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\ANVL\ANVL_Test_ADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\ANVL\ANVL_Test_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\ANVL\ANVL_Test_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\ANVL\ANVL_Test_Motherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\ANVL\ANVL_Test_TC.xml" />
@@ -423,13 +348,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DEVTEST\DEVTEST_Med_Motherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DEVTEST\DEVTEST_QDrive.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_ADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_Motherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_TC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\DRAK\DRAK_Test_WC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_ADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_Motherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_TC.xml">
@@ -437,7 +360,6 @@
     </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\MISC\MISC_Test_WC.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultAutopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultCPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultMotherboard.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\RSI\RSI_DefaultTargetSelector.xml" />
@@ -445,7 +367,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\TEMP\TEMP_Avionics_S1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\TEMP\TEMP_Avionics_S2.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\VNCL\VNCL_Scythe_ADS.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\VNCL\VNCL_Scythe_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\VNCL\VNCL_Scythe_CPU.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\VNCL\VNCL_Scythe_MB.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Avionics\VNCL\VNCL_Scythe_TC.xml" />
@@ -474,11 +395,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_ACOM_S01_IcePlunge.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S01_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S02_Boreal.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S02_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_AEGS_S04_Tundra.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S01_CryoStar.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S01_FrostStar.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S02_CryoStar.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JSPN_S02_CryoStarEX.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_JUST_S01_EcoFlow.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_LPLT_S01_FlashFreeze.xml" />
@@ -489,7 +408,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_VNCL_S01_Void.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S01_Berian.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S01_Endo.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S02_Berian.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Coolers\COOL_WCPR_S02_Graupel.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Countermeasures\AEGS\AEGS_Avenger_CML.xml">
       <SubType>Designer</SubType>
@@ -511,7 +429,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Debris\Vehicle_Debris.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\DEBUG\Debug_Autopilot.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\DEBUG\Debug_EnergyControl.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\DEBUG\Debug_ItemControl.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\DEBUG\Debug_ShieldControl.xml" />
@@ -530,6 +447,8 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Intakes\Default\DRAK_FuelIntake.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Intakes\Default\RSI_Intakes_Aurora.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Intakes\Default\XFRG_Intakes_Aurora.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Intakes\MISC\MISC_Interface\Interface_MISC_Starfarer_FuelIntake.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Intakes\MISC\MISC_Starfarer_FuelIntake.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Tanks\Default\Default_DoubleFuelTank.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Tanks\Default\Default_FuelTank.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Fuel_Tanks\Default\Default_Interface\Interface_Default_DoubleFuelTank.xml" />
@@ -669,11 +588,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Paints\Aurora_paint_UEE.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_ACOM_S01_StarHeart.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S01_Charger.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S02_Charger.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S01_Regulus.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AEGS_S02_Vortex.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S01_HyperGen.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S01_OverDrive.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S02_ExoGen.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_AMRS_S02_HyperGen.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_JUST_S01_Endurance.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_JUST_S03_Endurance.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_LPLT_S01_IonBurst.xml" />
@@ -685,6 +604,7 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_VNCL_S01_Scythe.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_VNCL_S01_Stinger.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\PowerPlants\POWR_VNCL_S01_Void.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Quantum_Drives\QDRV_XIAN_S01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Quantum_Fuel_Tanks\AEGS\AEGS_Interface\Interface_QFT_AEGS_MEDI_PL01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Quantum_Fuel_Tanks\AEGS\AEGS_Interface\Interface_QFT_AEGS_MEDI_PL02.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Quantum_Fuel_Tanks\AEGS\AEGS_Interface\Interface_QFT_AEGS_SMAL_PL01.xml" />
@@ -772,6 +692,14 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Freelancer\MISC_Freelancer_Turret_Seat.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\MISC_Reliant_Copilot_Seat.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\MISC_Reliant_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\MISC_Starfarer_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Bridge_Rear_Left_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Bridge_Rear_Right_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Captains_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_CoPilot_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Front_Turret_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Pilot_Seat.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\MISC\Starfarer\MISC_Starfarer_Rear_Turret_Seat.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\ORIG\300i\ORIG_300i_Ejection_Seat.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\ORIG\M50\ORIG_M50_Ejection_Seat.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Seats\ORIG_300i_Pilot_Seat.xml" />
@@ -870,8 +798,6 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_Interface\Interface_SHLD_SECO_MEDI_PL01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_Interface\Interface_SHLD_SECO_SMAL_PL01.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Merlin.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Mustang.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F1_Q1_Survival.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F4_DD.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Shields\SECO\SECO_S1_F4_SD.xml" />
@@ -1130,15 +1056,11 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Cleaver_Retro.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Interface\interface_VNCL_Blade_S1_TR4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Interface\interface_VNCL_Blade_S2_TR4.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Interface\interface_VNCL_Stinger_Engine.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Interface\interface_VNCL_Stinger_Engine_Wing.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Interface\interface_VNCL_Throw_S3_TR4.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Scythe_TR1_Fixed.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Scythe_TR1_Joint.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Scythe_TR2_Fixed.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Scythe_TR4_Engine.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Stinger_Engine.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Stinger_Engine_Wing.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Stinger_TR1_Joint.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Stinger_TR2_Retro.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\VNCL\VNCL_Throw_S3_TR4.xml" />
@@ -1159,9 +1081,9 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XFRG\XFRG_P_HEI_S6_Q1.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XFRG\XFRG_Vanguard_D_S4_320_Aux.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XFRG\XFRG_Vanguard_D_S4_320_Main.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XIAN\ENGN_XIAN_Scout_S3_Engine.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XIAN\XIAN_Scout_Maneuvering.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XIAN\XIAN_Scout_TR3_Engine.xml" />
-    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XIAN\XIAN_Scout_TR3_Retro.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Thrusters\XIAN\XIAN_Scout_Retro.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\AEGS\AEGS_Retaliator_Turret.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1188,6 +1110,10 @@
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\DRAK\DRAK_Cutlass_Turret_Base.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Freelancer_Turret.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Freelancer_Turret_Base.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Starfarer_Front_Turret.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Starfarer_Front_Turret_Base.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Starfarer_Rear_Turret.xml" />
+    <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\MISC\MISC_Starfarer_Rear_Turret_Base.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\RSI\RSI_Constellation_Turret.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\RSI\RSI_Constellation_Turret_Base_Lower.xml" />
     <Content Include="App_Data\Scripts\Entities\Items\XML\Spaceships\Turrets\RSI\RSI_Constellation_Turret_Base_Upper.xml" />
@@ -1548,6 +1474,7 @@
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\MISC_Freelancer_Base.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\MISC_Starfarer.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\MITE_SimPod.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\AEGS_Avenger_Titan.xml" />
     <Content Include="App_Data\Scripts\Entities\Vehicles\Implementations\Xml\Modifications\AEGS_Avenger_Warlock.xml" />

@@ -255,16 +255,19 @@ namespace HoloXPLOR.Models.HoloTable
             get
             {
                 var itemPorts = (from item in this.Player.Items
+                                 where item.Ports != null
                                  where item.Ports.Items != null
                                  from port in item.Ports.Items
                                  select new { Item = item, Port = port });
 
                 var shipPorts = (from ship in this.Player.Ships
+                                 where ship.Ports != null
                                  where ship.Ports.Items != null
                                  from port in ship.Ports.Items
                                  select new { Ship = ship, Port = port });
 
                 var itemShips = (from ship in this.Player.Ships
+                                 where ship.Inventory != null
                                  where ship.Inventory.Items != null
                                  from item in ship.Inventory.Items
                                  select new { Ship = ship, Item = item });
