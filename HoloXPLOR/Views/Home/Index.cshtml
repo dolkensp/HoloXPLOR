@@ -2,9 +2,22 @@
     ViewBag.Title = "Home Page";
 }
 
-<!--<div class="alert alert-danger" role="alert">
-    <strong>IMPORTANT:</strong> If you're playing on the live server, you need to use <a href="https://holoxplor.space" class="alert-link">holoxplor.space</a>
-</div>-->
+@if ((Boolean)ViewContext.RouteData.Values["HasPTU"])
+{ 
+    if ((Boolean)ViewContext.RouteData.Values["IsPTU"])
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>IMPORTANT:</strong> If you're playing on the live server, you need to use <a href="https://holoxplor.space" class="alert-link">holoxplor.space</a>
+        </div>
+    }
+    
+    if ((Boolean)ViewContext.RouteData.Values["IsLive"])
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>IMPORTANT:</strong> If you're playing on the PTU server, you need to use <a href="https://ptu.holoxplor.space" class="alert-link">ptu.holoxplor.space</a>
+        </div>
+    }
+}          
 
 <div class="jumbotron js-upload-inventory">
     <h1>HoloXPLOR - 2.2.1</h1>

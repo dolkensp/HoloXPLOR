@@ -15,6 +15,8 @@ using Items = HoloXPLOR.Data.XML.Spaceships;
 using Xml = HoloXPLOR.Data.XML;
 using HoloXPLOR.Models;
 using HoloXPLOR.DataForge;
+using System.Net;
+using System.Configuration;
 
 namespace System
 {

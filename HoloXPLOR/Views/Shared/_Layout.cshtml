@@ -76,7 +76,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!--<li><a href="https://holoxplor.space"><span class="glyphicon glyphicon-bell"></span> Live Version</a></li>-->
+                    @if ((Boolean?)ViewContext.RouteData.Values["HasPTU"] == true)
+                    {
+                        if ((Boolean?)ViewContext.RouteData.Values["IsPTU"] == true)
+                        {
+                            <li><a href="https://holoxplor.space"><span class="glyphicon glyphicon-bell"></span> Live Version</a></li>
+                        }
+                        if ((Boolean?)ViewContext.RouteData.Values["IsLive"] == true)
+                        {
+                            <li><a href="https://ptu.holoxplor.space"><span class="glyphicon glyphicon-bell"></span> PTU Version</a></li>
+                        }
+                    }
                     @if (!String.IsNullOrWhiteSpace(ViewBag.ID))
                     {
                         if (ViewBag.Title != "Hangar")

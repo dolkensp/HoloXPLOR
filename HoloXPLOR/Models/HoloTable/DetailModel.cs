@@ -100,6 +100,18 @@ namespace HoloXPLOR.Models.HoloTable
             CacheUtils.Cache.Add(this.CacheKey, this.Player, DateTime.Now.AddMinutes(15));
         }
 
+        public void Delete()
+        {
+            CacheUtils.Cache.Remove(this.CacheKey);
+
+            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+
+            if (System.IO.File.Exists(filename))
+            {
+                System.IO.File.Delete(filename);
+            }
+        }
+
         public Byte[] GetBytes()
         {
             using (MemoryStream ms = new MemoryStream())
