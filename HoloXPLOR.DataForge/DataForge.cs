@@ -14,7 +14,8 @@ namespace HoloXPLOR.DataForge
     {
         internal BinaryReader _br;
 
-        public Int64 FileVersion { get; set; }
+        public Int32 FileVersion { get; set; }
+        public Boolean Legacy { get; set; }
         
         public DataForgeStructDefinition[] StructDefinitionTable { get; set; }
         public DataForgePropertyDefinition[] PropertyDefinitionTable { get; set; }
@@ -54,42 +55,53 @@ namespace HoloXPLOR.DataForge
         private Dictionary<UInt32, String> _valueMap;
         public Dictionary<UInt32, String> ValueMap { get { return this._valueMap = this._valueMap ?? this.ValueTable.ToDictionary(k => (UInt32)k._offset, v => v.Value); } }
 
-        public DataForge(BinaryReader br, Boolean loadData = true)
+        public DataForge(BinaryReader br, Boolean legacy = false)
         {
             this._br = br;
-            this.FileVersion = this._br.ReadInt64();
+            var temp00 = this._br.ReadInt32();
+            this.FileVersion = this._br.ReadInt32();
+            this.Legacy = legacy;
+
             this.Require_ClassMapping    = new List<Tuple<XmlElement, UInt16, Int32>> { };
             this.Require_StrongMapping   = new List<Tuple<XmlElement, UInt16, Int32>> { };
             this.Require_WeakMapping1    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
             this.Require_WeakMapping2    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
 
-            var structDefinitionCount    = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x02d3
-            var propertyDefinitionCount  = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0602
-            var enumDefinitionCount      = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0041 : 0x0002 ???
-            var dataMappingCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x013c
-            var recordDefinitionCount    = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0b35
-                                         
-            var int8ValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int8
-            var int16ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int16
-            var int64ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Int32
-            var int32ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0024 - Int64
-            var uint8ValueCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt8
-            var uint16ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt16
-            var uint64ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt32
-            var uint32ValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - UInt64
-            var booleanValueCount        = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Boolean
-            var singleValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x003c - Single
-            var doubleValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Double
-            var guidValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0014 - Guid Array Values
-            var stringValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0076 - String Array Values
-            var localeValueCount         = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0034 - Locale Array Values
-            var enumValueCount           = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x006e - Enum Array Values
-            var numRecords21             = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x1cf3 - ??? Class Array Values
-            var numRecords22             = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x079d - ??? Pointer Array Values
-                                         
-            var referenceValueCount      = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0026 - Reference Array Values
-            var enumOptionCount          = this._br.ReadUInt16(); this._br.ReadUInt16();  // 0x0284 - Enum Options
-            var textLength               = this._br.ReadUInt32();                         // 0x2e45 : 0x00066e4b
+            if (!this.Legacy)
+            {
+                var atemp1 = this._br.ReadUInt16();
+                var atemp2 = this._br.ReadUInt16();
+                var atemp3 = this._br.ReadUInt16();
+                var atemp4 = this._br.ReadUInt16();
+            }
+
+            var structDefinitionCount    = this._br.ReadUInt16(); var temp03 = this._br.ReadUInt16();  // 0x02d3
+            var propertyDefinitionCount  = this._br.ReadUInt16(); var temp04 = this._br.ReadUInt16();  // 0x0602
+            var enumDefinitionCount      = this._br.ReadUInt16(); var temp05 = this._br.ReadUInt16();  // 0x0041 : 0x0002 ??? 0xbbad
+            var dataMappingCount         = this._br.ReadUInt16(); var temp06 = this._br.ReadUInt16();  // 0x013c
+            var recordDefinitionCount    = this._br.ReadUInt16(); var temp07 = this._br.ReadUInt16();  // 0x0b35
+
+            var int8ValueCount           = this._br.ReadUInt16(); var temp08 = this._br.ReadUInt16();  // 0x0014 - Int8
+            var int16ValueCount          = this._br.ReadUInt16(); var temp09 = this._br.ReadUInt16();  // 0x0014 - Int16
+            var int64ValueCount          = this._br.ReadUInt16(); var temp10 = this._br.ReadUInt16();  // 0x0014 - Int32
+            var int32ValueCount          = this._br.ReadUInt16(); var temp11 = this._br.ReadUInt16();  // 0x0024 - Int64
+            var uint8ValueCount          = this._br.ReadUInt16(); var temp12 = this._br.ReadUInt16();  // 0x0014 - UInt8
+            var uint16ValueCount         = this._br.ReadUInt16(); var temp13 = this._br.ReadUInt16();  // 0x0014 - UInt16
+            var uint64ValueCount         = this._br.ReadUInt16(); var temp14 = this._br.ReadUInt16();  // 0x0014 - UInt32
+            var uint32ValueCount         = this._br.ReadUInt16(); var temp15 = this._br.ReadUInt16();  // 0x0014 - UInt64
+            var booleanValueCount        = this._br.ReadUInt16(); var temp16 = this._br.ReadUInt16();  // 0x0014 - Boolean
+            var singleValueCount         = this._br.ReadUInt16(); var temp17 = this._br.ReadUInt16();  // 0x003c - Single
+            var doubleValueCount         = this._br.ReadUInt16(); var temp18 = this._br.ReadUInt16();  // 0x0014 - Double
+            var guidValueCount           = this._br.ReadUInt16(); var temp19 = this._br.ReadUInt16();  // 0x0014 - Guid Array Values
+            var stringValueCount         = this._br.ReadUInt16(); var temp20 = this._br.ReadUInt16();  // 0x0076 - String Array Values
+            var localeValueCount         = this._br.ReadUInt16(); var temp21 = this._br.ReadUInt16();  // 0x0034 - Locale Array Values
+            var enumValueCount           = this._br.ReadUInt16(); var temp22 = this._br.ReadUInt16();  // 0x006e - Enum Array Values
+            var strongValueCount         = this._br.ReadUInt16(); var temp23 = this._br.ReadUInt16();  // 0x1cf3 - ??? Class Array Values
+            var weakValueCount           = this._br.ReadUInt16(); var temp24 = this._br.ReadUInt16();  // 0x079d - ??? Pointer Array Values
+
+            var referenceValueCount      = this._br.ReadUInt16(); var temp25 = this._br.ReadUInt16();  // 0x0026 - Reference Array Values
+            var enumOptionCount          = this._br.ReadUInt16(); var temp26 = this._br.ReadUInt16();  // 0x0284 - Enum Options
+            var textLength               = this._br.ReadUInt32(); var temp27 = this._br.ReadUInt32();  // 0x2e45 : 0x00066e4b
 
             this.StructDefinitionTable   = this.ReadArray<DataForgeStructDefinition>(structDefinitionCount);
             this.PropertyDefinitionTable = this.ReadArray<DataForgePropertyDefinition>(propertyDefinitionCount);
@@ -112,13 +124,14 @@ namespace HoloXPLOR.DataForge
             this.Array_StringValues      = this.ReadArray<DataForgeArrayString>(stringValueCount);
             this.Array_LocaleValues      = this.ReadArray<DataForgeArrayLocale>(localeValueCount);
             this.Array_EnumValues        = this.ReadArray<DataForgeArrayEnum>(enumValueCount);
-            this.Array_StrongValues      = this.ReadArray<DataForgeArrayPointer>(numRecords21);
-            this.Array_WeakValues        = this.ReadArray<DataForgeArrayPointer>(numRecords22);
+            this.Array_StrongValues      = this.ReadArray<DataForgeArrayPointer>(strongValueCount);
+            this.Array_WeakValues        = this.ReadArray<DataForgeArrayPointer>(weakValueCount);
 
             this.Array_ReferenceValues = this.ReadArray<DataForgeArrayReference>(referenceValueCount);
             this.EnumOptionTable = this.ReadArray<DataForgeStringLookup>(enumOptionCount);
 
             // Console.WriteLine("0x{0:X8}: Text", this._br.BaseStream.Position);
+            // this._br.BaseStream.Seek(0x4c484, SeekOrigin.Begin);
             var buffer = new List<DataForgeString> { };
             var maxPosition = this._br.BaseStream.Position + textLength;
             var index = 0;
@@ -142,6 +155,7 @@ namespace HoloXPLOR.DataForge
                 this.DataMap[dataMapping.StructIndex] = new List<XmlElement> { };
 
                 var dataStruct = this.StructDefinitionTable[dataMapping.StructIndex];
+                dataStruct.IsCovered = true;
 
                 for (Int32 i = 0; i < dataMapping.StructCount; i++)
                 {
@@ -172,7 +186,12 @@ namespace HoloXPLOR.DataForge
             this._xmlDocument.AppendChild(root);
             foreach (var record in this.RecordDefinitionTable)
             {
-                root.AppendChild(this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name));
+                var recordXml = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
+                var fileNameAttribute = this._xmlDocument.CreateAttribute("path");
+                fileNameAttribute.Value = record.FileName;
+                recordXml.Attributes.Append(fileNameAttribute);
+                root.AppendChild(recordXml);
+
             }
 
             foreach (var dataMapping in this.Require_StrongMapping)
@@ -231,34 +250,31 @@ namespace HoloXPLOR.DataForge
         private XmlDocument _xmlDocument = new XmlDocument();
         public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
         public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
-        public void Save(String filename, Boolean split)
+        public void Save(String filename)
         {
-            if (!split)
+            foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
             {
-                this._xmlDocument.Save(filename);
-            }
-            else
-            {
-                foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
+                if (node is XmlElement)
                 {
-                    if (node is XmlElement)
+                    var element = node as XmlElement;
+
+                    if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
                     {
-                        var element = node as XmlElement;
-                        if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
+                        var newFile = element.Attributes["path"].Value;
+                        var newPath = Path.Combine(Path.GetDirectoryName(filename), newFile);
+                        if (!Directory.Exists(Path.GetDirectoryName(newPath)))
                         {
-                            if (!Directory.Exists(Path.GetDirectoryName(element.Attributes["path"].Value)))
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(element.Attributes["path"].Value));
-                            }
-                            File.WriteAllText(element.Attributes["path"].Value, element.OuterXml);
+                            Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                         }
-                        else
-                        {
-                            File.WriteAllText(String.Format("{0}.xml", element.Name), element.OuterXml);
-                        }
+                        File.WriteAllText(newPath, element.OuterXml);
+                    }
+                    else
+                    {
+                        File.WriteAllText(String.Format("{0}.xml", element.Name), element.OuterXml);
                     }
                 }
             }
+            this._xmlDocument.Save(filename);
         }
         public String OuterXML { get { return this._xmlDocument.OuterXml; } }
 

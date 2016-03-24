@@ -11,6 +11,8 @@ namespace HoloXPLOR.DataForge
     public abstract class DataForgeSerializable
     {
         public DataForge DocumentRoot { get; private set; }
+
+        public Boolean IsCovered { get; set; }
         
         internal BinaryReader _br;
         

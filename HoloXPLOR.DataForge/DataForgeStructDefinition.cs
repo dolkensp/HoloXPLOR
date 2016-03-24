@@ -68,7 +68,7 @@ namespace HoloXPLOR.DataForge
 
             foreach (var node in properties)
             {
-
+                node.IsCovered = true;
                 node.ConversionType = (EConversionType)((Int32)node.ConversionType | 0x6900);
 
                 if (node.ConversionType == EConversionType.varAttribute)
@@ -76,6 +76,7 @@ namespace HoloXPLOR.DataForge
                     if (node.DataType == EDataType.varClass)
                     {
                         var dataStruct = this.DocumentRoot.StructDefinitionTable[node.StructIndex];
+                        dataStruct.IsCovered = true;
                         
                         var child = dataStruct.Read(node.Name);
 
@@ -91,7 +92,8 @@ namespace HoloXPLOR.DataForge
                     }
                     else
                     {
-                        element.Attributes.Append(node.Read());
+                        var childAttribute = node.Read();
+                        element.Attributes.Append(childAttribute);
                     }
                 }
                 else
