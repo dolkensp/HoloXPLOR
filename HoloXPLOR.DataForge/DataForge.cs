@@ -231,7 +231,35 @@ namespace HoloXPLOR.DataForge
         private XmlDocument _xmlDocument = new XmlDocument();
         public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
         public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
-        public void Save(String filename) { this._xmlDocument.Save(filename); }
+        public void Save(String filename, Boolean split)
+        {
+            if (!split)
+            {
+                this._xmlDocument.Save(filename);
+            }
+            else
+            {
+                foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
+                {
+                    if (node is XmlElement)
+                    {
+                        var element = node as XmlElement;
+                        if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
+                        {
+                            if (!Directory.Exists(Path.GetDirectoryName(element.Attributes["path"].Value)))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(element.Attributes["path"].Value));
+                            }
+                            File.WriteAllText(element.Attributes["path"].Value, element.OuterXml);
+                        }
+                        else
+                        {
+                            File.WriteAllText(String.Format("{0}.xml", element.Name), element.OuterXml);
+                        }
+                    }
+                }
+            }
+        }
         public String OuterXML { get { return this._xmlDocument.OuterXml; } }
 
         public U[] ReadArray<U>(UInt32? arraySize = null) where U : DataForgeSerializable
