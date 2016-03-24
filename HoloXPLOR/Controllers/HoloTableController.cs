@@ -136,11 +136,11 @@ namespace HoloXPLOR.Controllers
 
             lock (HoloTableController._lockMap[id])
             {
-                String filename = HttpContext.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", id));
+                var model = new DetailModel(id);
 
-                if (System.IO.File.Exists(filename))
+                if (model != null)
                 {
-                    System.IO.File.Delete(filename);
+                    model.Delete();
                 }
             }
 

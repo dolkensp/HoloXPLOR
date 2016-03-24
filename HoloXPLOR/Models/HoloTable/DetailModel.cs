@@ -100,6 +100,18 @@ namespace HoloXPLOR.Models.HoloTable
             CacheUtils.Cache.Add(this.CacheKey, this.Player, DateTime.Now.AddMinutes(15));
         }
 
+        public void Delete()
+        {
+            CacheUtils.Cache.Remove(this.CacheKey);
+
+            String filename = HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Inventory/{0}.xml", this.CurrentXML));
+
+            if (System.IO.File.Exists(filename))
+            {
+                System.IO.File.Delete(filename);
+            }
+        }
+
         public Byte[] GetBytes()
         {
             using (MemoryStream ms = new MemoryStream())
@@ -255,16 +267,19 @@ namespace HoloXPLOR.Models.HoloTable
             get
             {
                 var itemPorts = (from item in this.Player.Items
+                                 where item.Ports != null
                                  where item.Ports.Items != null
                                  from port in item.Ports.Items
                                  select new { Item = item, Port = port });
 
                 var shipPorts = (from ship in this.Player.Ships
+                                 where ship.Ports != null
                                  where ship.Ports.Items != null
                                  from port in ship.Ports.Items
                                  select new { Ship = ship, Port = port });
 
                 var itemShips = (from ship in this.Player.Ships
+                                 where ship.Inventory != null
                                  where ship.Inventory.Items != null
                                  from item in ship.Inventory.Items
                                  select new { Ship = ship, Item = item });
