@@ -18,6 +18,17 @@ namespace HoloXPLOR.DataForge
         {
             using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
             {
+                var peek = br.PeekChar();
+
+                if (peek == '<')
+                {
+                    return null; // File is already XML
+                }
+                else if (peek != 'C')
+                {
+                    throw new Exception("Unknown File Format"); // Unknown file format
+                }
+
                 String header = br.ReadCString();
 
                 if (header != "CryXmlB")

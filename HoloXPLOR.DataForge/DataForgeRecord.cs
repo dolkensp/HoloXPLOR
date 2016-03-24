@@ -30,7 +30,12 @@ namespace HoloXPLOR.DataForge
             : base(documentRoot)
         {
             this.NameOffset = this._br.ReadUInt32();
-            this.FileNameOffset = this._br.ReadUInt32();
+            
+            if (!this.DocumentRoot.Legacy)
+            {
+                this.FileNameOffset = this._br.ReadUInt32();
+            }
+
             this.StructIndex = this._br.ReadUInt32();
             this.Hash = this.ReadGuid(false);
 

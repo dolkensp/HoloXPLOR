@@ -9,9 +9,38 @@ namespace HoloXPLOR.DataForge
 {
     public static class Program
     {
+        private static Boolean _overwrite = false;
+
         public static void Main(params String[] args)
         {
-            // args = new String[] { "game.dcb" };
+            // args = new String[] { "Game-2.2.3.dcb" };
+            args = new String[] { @"O:\Mods\BuildXPLOR\_manifest\333246\Data\Game.dcb" };
+
+            if ((args.Length > 0) && Directory.Exists(args[0]))
+            {
+                _overwrite = true;
+
+                foreach (var file in Directory.GetFiles(args[0], "*.*", SearchOption.AllDirectories))
+                {
+                    if (new String[] { "ini", "txt" }.Contains(Path.GetExtension(file), StringComparer.InvariantCultureIgnoreCase)) continue;
+
+                    try
+                    {
+                        Console.WriteLine("Converting {0}", file.Replace(args[0], ""));
+
+                        Program.Process(file);
+                    }
+                    catch (Exception) { }
+                }
+            }
+            else
+            {
+                Program.Process(args);
+            }
+        }
+
+        public static void Process(params String[] args)
+        {
 
             if (args.Length < 1 || args.Length > 2)
             {
@@ -31,13 +60,32 @@ namespace HoloXPLOR.DataForge
                     {
                         using (BinaryReader br = new BinaryReader(File.OpenRead(args[0])))
                         {
-                            var df = new DataForge(br);
+                            var legacy = new FileInfo(args[0]).Length < 0x0e2e00;
+                            
+                            var df = new DataForge(br, legacy);
 
                             df.Save(Path.ChangeExtension(args[0], "xml"));
                         }
-                    } else {
-                        var xml = CryXmlSerializer.ReadFile(args[0], args.Length == 2);
-                        xml.Save(Path.ChangeExtension(args[0], "raw"));
+                    }
+                    else
+                    {
+                        var xml = CryXmlSerializer.ReadFile(args[0]);
+
+                        if (xml != null)
+                        {
+                            if (_overwrite)
+                            {
+                                xml.Save(args[0]);
+                            }
+                            else
+                            {
+                                xml.Save(Path.ChangeExtension(args[0], "raw"));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("{0} already in XML format", args[0]);
+                        }
                     }
                 }
             }

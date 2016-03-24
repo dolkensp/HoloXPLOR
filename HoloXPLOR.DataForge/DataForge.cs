@@ -14,7 +14,8 @@ namespace HoloXPLOR.DataForge
     {
         internal BinaryReader _br;
 
-        public Int64 FileVersion { get; set; }
+        public Int32 FileVersion { get; set; }
+        public Boolean Legacy { get; set; }
         
         public DataForgeStructDefinition[] StructDefinitionTable { get; set; }
         public DataForgePropertyDefinition[] PropertyDefinitionTable { get; set; }
@@ -54,19 +55,26 @@ namespace HoloXPLOR.DataForge
         private Dictionary<UInt32, String> _valueMap;
         public Dictionary<UInt32, String> ValueMap { get { return this._valueMap = this._valueMap ?? this.ValueTable.ToDictionary(k => (UInt32)k._offset, v => v.Value); } }
 
-        public DataForge(BinaryReader br, Boolean loadData = true)
+        public DataForge(BinaryReader br, Boolean legacy = false)
         {
             this._br = br;
-            this.FileVersion = this._br.ReadInt64();
+            var temp00 = this._br.ReadInt32();
+            this.FileVersion = this._br.ReadInt32();
+            this.Legacy = legacy;
+
             this.Require_ClassMapping    = new List<Tuple<XmlElement, UInt16, Int32>> { };
             this.Require_StrongMapping   = new List<Tuple<XmlElement, UInt16, Int32>> { };
             this.Require_WeakMapping1    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
             this.Require_WeakMapping2    = new List<Tuple<XmlAttribute, UInt16, Int32>> { };
 
-            var atemp1 = this._br.ReadUInt16();
-            var atemp2 = this._br.ReadUInt16();
-            var atemp3 = this._br.ReadUInt16();
-            var atemp4 = this._br.ReadUInt16();
+            if (!this.Legacy)
+            {
+                var atemp1 = this._br.ReadUInt16();
+                var atemp2 = this._br.ReadUInt16();
+                var atemp3 = this._br.ReadUInt16();
+                var atemp4 = this._br.ReadUInt16();
+            }
+
             var structDefinitionCount    = this._br.ReadUInt16(); var temp03 = this._br.ReadUInt16();  // 0x02d3
             var propertyDefinitionCount  = this._br.ReadUInt16(); var temp04 = this._br.ReadUInt16();  // 0x0602
             var enumDefinitionCount      = this._br.ReadUInt16(); var temp05 = this._br.ReadUInt16();  // 0x0041 : 0x0002 ??? 0xbbad
@@ -242,34 +250,31 @@ namespace HoloXPLOR.DataForge
         private XmlDocument _xmlDocument = new XmlDocument();
         public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
         public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
-        public void Save(String filename, Boolean split)
+        public void Save(String filename)
         {
-            if (!split)
+            foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
             {
-                this._xmlDocument.Save(filename);
-            }
-            else
-            {
-                foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
+                if (node is XmlElement)
                 {
-                    if (node is XmlElement)
+                    var element = node as XmlElement;
+
+                    if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
                     {
-                        var element = node as XmlElement;
-                        if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
+                        var newFile = element.Attributes["path"].Value;
+                        var newPath = Path.Combine(Path.GetDirectoryName(filename), newFile);
+                        if (!Directory.Exists(Path.GetDirectoryName(newPath)))
                         {
-                            if (!Directory.Exists(Path.GetDirectoryName(element.Attributes["path"].Value)))
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(element.Attributes["path"].Value));
-                            }
-                            File.WriteAllText(element.Attributes["path"].Value, element.OuterXml);
+                            Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                         }
-                        else
-                        {
-                            File.WriteAllText(String.Format("{0}.xml", element.Name), element.OuterXml);
-                        }
+                        File.WriteAllText(newPath, element.OuterXml);
+                    }
+                    else
+                    {
+                        File.WriteAllText(String.Format("{0}.xml", element.Name), element.OuterXml);
                     }
                 }
             }
+            this._xmlDocument.Save(filename);
         }
         public String OuterXML { get { return this._xmlDocument.OuterXml; } }
 
