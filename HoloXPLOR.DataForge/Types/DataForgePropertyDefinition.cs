@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgePropertyDefinition : DataForgeSerializable
+    public class DataForgePropertyDefinition : _DataForgeSerializable
     {
         public UInt32 NameOffset { get; set; }
         public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }

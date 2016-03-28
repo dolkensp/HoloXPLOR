@@ -8,12 +8,10 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public abstract class DataForgeSerializable
+    public abstract class _DataForgeSerializable
     {
         public DataForge DocumentRoot { get; private set; }
 
-        public Boolean IsCovered { get; set; }
-        
         internal BinaryReader _br;
         
         public String __offset { get { return String.Format("{0:X8}", this._offset); } }
@@ -22,7 +20,7 @@ namespace HoloXPLOR.DataForge
         public String __index { get { return String.Format("{0:X8}", this._index); } }
         public Int32 _index;
 
-        public DataForgeSerializable(DataForge documentRoot)
+        public _DataForgeSerializable(DataForge documentRoot)
         {
             this.DocumentRoot = documentRoot;
             this._br = documentRoot._br;

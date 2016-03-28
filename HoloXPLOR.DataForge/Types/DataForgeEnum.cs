@@ -7,26 +7,27 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayInt64 : DataForgeSerializable
+    public class DataForgeEnum : _DataForgeSerializable
     {
-        public Int64 Value { get; set; }
+        private UInt32 _value;
+        public String Value { get { return this.DocumentRoot.ValueMap[this._value]; } }
 
-        public DataForgeArrayInt64(DataForge documentRoot)
+        public DataForgeEnum(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this._br.ReadInt64();
+            this._value = this._br.ReadUInt32();
         }
 
         public override String ToString()
         {
-            return String.Format("{0}", this.Value);
+            return this.Value;
         }
 
         public XmlElement Read()
         {
-            var element = this.DocumentRoot.CreateElement("Int64");
+            var element = this.DocumentRoot.CreateElement("Enum");
             var attribute = this.DocumentRoot.CreateAttribute("value");
-            attribute.Value = this.Value.ToString();
+            attribute.Value = this.Value;
             element.Attributes.Append(attribute);
             return element;
         }

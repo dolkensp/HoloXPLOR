@@ -130,7 +130,7 @@ namespace HoloXPLOR.Controllers
                                         }
                                         else if (parts[0] == "Test_version")
                                         {
-                                            testVersion = parts[1];
+                                            testVersion = parts[1].Replace(" - PTU", "");
                                         }
                                     }
                                 }

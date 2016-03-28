@@ -15,16 +15,10 @@ using DDRIT = Dolkens.Framework.BinaryExtensions.ExtensionMethods;
 using System.Security.Cryptography;
 using Dolkens.Framework.BinaryExtensions;
 using System.Xml.XPath;
+using HoloXPLOR.DataForge;
 
 namespace Dolkens.Framework.BinaryExtensions
 {
-    public enum StringSizeEnum
-    {
-        Int8 = 1,
-        Int16 = 2,
-        Int32 = 4,
-    }
-
     /// <summary>
     /// The MIT License (MIT)
     /// 
@@ -150,34 +144,7 @@ namespace Dolkens.Framework.BinaryExtensions
 
         #endregion
 
-        public static String SuperGetPath(this XmlElement element)
-        {
-            string path = "/" + element.Name;
-
-            XmlElement parentElement = element.ParentNode as XmlElement;
-            if (parentElement != null)
-            {
-                XmlNodeList siblings = parentElement.SelectNodes(element.Name);
-                if (siblings != null && siblings.Count > 1) // There's more than 1 element with the same name
-                {
-                    int position = 0;
-                    foreach (XmlElement sibling in siblings)
-                    {
-                        if (sibling == element)
-                            break;
-
-                        position++;
-                    }
-
-                    path = path + "[" + position + "]";
-                }
-
-                // Climbing up to the parent elements:
-                path = parentElement.GetPath() + path;
-            }
-
-            return path;
-        }
+        #region Xml Extensions
 
         public static XmlElement Rename(this XmlElement element, String name)
         {
@@ -229,6 +196,8 @@ namespace Dolkens.Framework.BinaryExtensions
 
             return String.Join(".", path.Skip(3).Select(p => p.Value.HasValue ? String.Format("{0}[{1}]", p.Key, p.Value) : p.Key));
         }
+
+        #endregion
     }
 }
 

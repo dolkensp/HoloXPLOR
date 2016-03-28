@@ -7,26 +7,26 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayInt16 : DataForgeSerializable
+    public class DataForgeBoolean : _DataForgeSerializable
     {
-        public Int16 Value { get; set; }
+        public Boolean Value { get; set; }
 
-        public DataForgeArrayInt16(DataForge documentRoot)
+        public DataForgeBoolean(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this._br.ReadInt16();
+            this.Value = this._br.ReadBoolean();
         }
 
         public override String ToString()
         {
-            return String.Format("{0}", this.Value);
+            return String.Format("{0}", this.Value ? "1" : "0");
         }
 
         public XmlElement Read()
         {
-            var element = this.DocumentRoot.CreateElement("Int16");
+            var element = this.DocumentRoot.CreateElement("Bool");
             var attribute = this.DocumentRoot.CreateAttribute("value");
-            attribute.Value = this.Value.ToString();
+            attribute.Value = this.Value ? "1" : "0";
             element.Attributes.Append(attribute);
             return element;
         }

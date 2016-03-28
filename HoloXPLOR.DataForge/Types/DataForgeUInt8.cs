@@ -7,14 +7,14 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayDouble : DataForgeSerializable
+    public class DataForgeUInt8 : _DataForgeSerializable
     {
-        public Double Value { get; set; }
+        public Byte Value { get; set; }
 
-        public DataForgeArrayDouble(DataForge documentRoot)
+        public DataForgeUInt8(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this._br.ReadDouble();
+            this.Value = this._br.ReadByte();
         }
 
         public override String ToString()
@@ -24,7 +24,7 @@ namespace HoloXPLOR.DataForge
 
         public XmlElement Read()
         {
-            var element = this.DocumentRoot.CreateElement("Double");
+            var element = this.DocumentRoot.CreateElement("UInt8");
             var attribute = this.DocumentRoot.CreateAttribute("value");
             attribute.Value = this.Value.ToString();
             element.Attributes.Append(attribute);

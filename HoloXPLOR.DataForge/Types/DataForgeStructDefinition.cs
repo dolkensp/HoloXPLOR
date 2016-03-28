@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeStructDefinition : DataForgeSerializable
+    public class DataForgeStructDefinition : _DataForgeSerializable
     {
         public UInt32 NameOffset { get; set; }
         public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
@@ -68,7 +68,6 @@ namespace HoloXPLOR.DataForge
 
             foreach (var node in properties)
             {
-                node.IsCovered = true;
                 node.ConversionType = (EConversionType)((Int32)node.ConversionType | 0x6900);
 
                 if (node.ConversionType == EConversionType.varAttribute)
@@ -76,7 +75,6 @@ namespace HoloXPLOR.DataForge
                     if (node.DataType == EDataType.varClass)
                     {
                         var dataStruct = this.DocumentRoot.StructDefinitionTable[node.StructIndex];
-                        dataStruct.IsCovered = true;
                         
                         var child = dataStruct.Read(node.Name);
 

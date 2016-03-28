@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeRecord : DataForgeSerializable
+    public class DataForgeRecord : _DataForgeSerializable
     {
         public UInt32 NameOffset { get; set; }
         public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
@@ -31,7 +31,7 @@ namespace HoloXPLOR.DataForge
         {
             this.NameOffset = this._br.ReadUInt32();
             
-            if (!this.DocumentRoot.Legacy)
+            if (!this.DocumentRoot.IsLegacy)
             {
                 this.FileNameOffset = this._br.ReadUInt32();
             }

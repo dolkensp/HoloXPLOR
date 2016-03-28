@@ -7,12 +7,12 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayLocale : DataForgeSerializable
+    public class DataForgeLocale : _DataForgeSerializable
     {
         private UInt32 _value;
         public String Value { get { return this.DocumentRoot.ValueMap[this._value]; } }
 
-        public DataForgeArrayLocale(DataForge documentRoot)
+        public DataForgeLocale(DataForge documentRoot)
             : base(documentRoot)
         {
             this._value = this._br.ReadUInt32();

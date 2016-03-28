@@ -7,26 +7,27 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayInt32 : DataForgeSerializable
+    public class DataForgeStringLookup : _DataForgeSerializable
     {
-        public Int32 Value { get; set; }
+        private UInt32 _value;
+        public String Value { get { return this.DocumentRoot.ValueMap[this._value]; } }
 
-        public DataForgeArrayInt32(DataForge documentRoot)
+        public DataForgeStringLookup(DataForge documentRoot)
             : base(documentRoot)
         {
-            this.Value = this._br.ReadInt32();
+            this._value = this._br.ReadUInt32();
         }
 
         public override String ToString()
         {
-            return String.Format("{0}", this.Value);
+            return this.Value;
         }
 
         public XmlElement Read()
         {
-            var element = this.DocumentRoot.CreateElement("Int32");
+            var element = this.DocumentRoot.CreateElement("String");
             var attribute = this.DocumentRoot.CreateAttribute("value");
-            attribute.Value = this.Value.ToString();
+            attribute.Value = this.Value;
             element.Attributes.Append(attribute);
             return element;
         }

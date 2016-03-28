@@ -35,4 +35,11 @@ namespace HoloXPLOR.DataForge
         varComplexArray = 0x6901,
         varSimpleArray = 0x6902,
     }
+
+    public enum StringSizeEnum
+    {
+        Int8 = 1,
+        Int16 = 2,
+        Int32 = 4,
+    }
 }

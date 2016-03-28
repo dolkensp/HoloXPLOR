@@ -7,12 +7,12 @@ using System.Xml;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeArrayPointer : DataForgeSerializable
+    public class DataForgePointer : _DataForgeSerializable
     {
         public UInt32 StructType { get; set; }
         public UInt32 Index { get; set; }
 
-        public DataForgeArrayPointer(DataForge documentRoot)
+        public DataForgePointer(DataForge documentRoot)
             : base(documentRoot)
         {
             this.StructType = this._br.ReadUInt32();

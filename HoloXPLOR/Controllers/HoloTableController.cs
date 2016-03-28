@@ -46,6 +46,8 @@ namespace HoloXPLOR.Controllers
             }
             catch (FileNotFoundException)
             {
+                Server.TransferRequest("/NotFound", true);
+                return new EmptyResult { };
                 return RedirectToRoute("NotFound", new { url = "NotFound" });
             }
         }
@@ -67,6 +69,8 @@ namespace HoloXPLOR.Controllers
             }
             catch (FileNotFoundException)
             {
+                Server.TransferRequest("/NotFound", true);
+                return new EmptyResult { };
                 return RedirectToRoute("NotFound", new { url = "NotFound" });
             }
         }

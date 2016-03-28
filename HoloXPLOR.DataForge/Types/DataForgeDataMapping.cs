@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeDataMapping : DataForgeSerializable
+    public class DataForgeDataMapping : _DataForgeSerializable
     {
         public UInt16 StructIndex { get; set; }
         public UInt16 StructCount { get; set; }

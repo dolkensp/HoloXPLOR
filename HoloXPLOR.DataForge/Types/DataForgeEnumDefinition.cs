@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HoloXPLOR.DataForge
 {
-    public class DataForgeEnumDefinition : DataForgeSerializable
+    public class DataForgeEnumDefinition : _DataForgeSerializable
     {
         public UInt32 NameOffset { get; set; }
         public String Name { get { return this.DocumentRoot.ValueMap[this.NameOffset]; } }
