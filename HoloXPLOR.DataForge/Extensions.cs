@@ -142,6 +142,27 @@ namespace Dolkens.Framework.BinaryExtensions
             }
         }
 
+        public static Guid? ReadGuid(this BinaryReader reader, Boolean nullable = true)
+        {
+            var isNull = nullable && reader.ReadInt32() == -1;
+
+            var c = reader.ReadInt16();
+            var b = reader.ReadInt16();
+            var a = reader.ReadInt32();
+            var k = reader.ReadByte();
+            var j = reader.ReadByte();
+            var i = reader.ReadByte();
+            var h = reader.ReadByte();
+            var g = reader.ReadByte();
+            var f = reader.ReadByte();
+            var e = reader.ReadByte();
+            var d = reader.ReadByte();
+
+            if (isNull) return null;
+
+            return new Guid(a, b, c, d, e, f, g, h, i, j, k);
+        }
+
         #endregion
 
         #region Xml Extensions
@@ -229,6 +250,15 @@ namespace System
         /// <param name="stringLength">Size of the String</param>
         /// <returns></returns>
         public static String ReadFString(this BinaryReader binaryReader, Int32 stringLength) { return DDRIT.ReadFString(binaryReader, stringLength); }
+    }
+}
+
+namespace System.IO
+{
+    public static class _Proxy
+    {
+        public static Byte[] ReadAllBytes(this Stream stream) { return DDRIT.ReadAllBytes(stream); }
+        public static Guid? ReadGuid(this BinaryReader reader, Boolean nullable = true) { return DDRIT.ReadGuid(reader, nullable); }
     }
 }
 

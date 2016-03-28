@@ -21,11 +21,11 @@ namespace HoloXPLOR.DataForge
         varUInt64 = 0x0009,
         varUInt32 = 0x0008,
         varUInt16 = 0x0007,
-        varUInt8 = 0x0006,
+        varByte = 0x0006,
         varInt64 = 0x0005,
         varInt32 = 0x0004,
         varInt16 = 0x0003,
-        varInt8 = 0x0002,
+        varSByte = 0x0002,
         varBoolean = 0x0001,
     }
 

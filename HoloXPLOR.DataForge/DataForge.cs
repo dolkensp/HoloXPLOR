@@ -1,9 +1,15 @@
-﻿using System;
+﻿#define NONULL
+
+using Microsoft.CSharp;
+using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
@@ -44,20 +50,13 @@ namespace HoloXPLOR.DataForge
         public DataForgePointer[] Array_StrongValues { get; set; }
         public DataForgePointer[] Array_WeakValues { get; set; }
 
+        public Dictionary<UInt32, String> ValueMap { get; set; }
         public Dictionary<UInt32, List<XmlElement>> DataMap { get; set; }
         public List<Tuple<XmlElement, UInt16, Int32>> Require_ClassMapping { get; set; }
         public List<Tuple<XmlElement, UInt16, Int32>> Require_StrongMapping { get; set; }
         public List<Tuple<XmlAttribute, UInt16, Int32>> Require_WeakMapping1 { get; set; }
         public List<Tuple<XmlAttribute, UInt16, Int32>> Require_WeakMapping2 { get; set; }
         public List<XmlElement> DataTable { get; set; }
-
-        private Dictionary<UInt32, String> _valueMap;
-        public Dictionary<UInt32, String> ValueMap { get { return this._valueMap = this._valueMap ?? this.ValueTable.ToDictionary(k => (UInt32)k._offset, v => v.Value); } }
-
-        private XmlDocument _xmlDocument = new XmlDocument();
-        public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
-        public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
-        public String OuterXML { get { return this._xmlDocument.OuterXml; } }
 
         public U[] ReadArray<U>(Int32 arraySize) where U : _DataForgeSerializable
         {
@@ -68,9 +67,10 @@ namespace HoloXPLOR.DataForge
 
             return (from i in Enumerable.Range(0, arraySize)
                     let data = (U)Activator.CreateInstance(typeof(U), this)
-                    let hack = data._index = i
+                    // let hack = data._index = i
                     select data).ToArray();
         }
+
         public DataForge(BinaryReader br, Boolean legacy = false)
         {
             this._br = br;
@@ -148,16 +148,14 @@ namespace HoloXPLOR.DataForge
 
             var buffer = new List<DataForgeString> { };
             var maxPosition = this._br.BaseStream.Position + textLength;
-            var index = 0;
             var startPosition = this._br.BaseStream.Position;
+            this.ValueMap = new Dictionary<UInt32,String> { };
             while (this._br.BaseStream.Position < maxPosition)
             {
                 var offset = this._br.BaseStream.Position - startPosition;
-                buffer.Add(new DataForgeString(this)
-                {
-                    _index = index++,
-                    _offset = offset,
-                });
+                var dfString = new DataForgeString(this);
+                buffer.Add(dfString);
+                this.ValueMap[(UInt32)offset] = dfString.Value;
             }
             this.ValueTable = buffer.ToArray();
             
@@ -173,7 +171,7 @@ namespace HoloXPLOR.DataForge
                 for (Int32 i = 0; i < dataMapping.StructCount; i++)
                 {
                     var node = dataStruct.Read(dataMapping.Name);
-
+                    
                     this.DataMap[dataMapping.StructIndex].Add(node);
                     this.DataTable.Add(node);
                 }
@@ -183,9 +181,13 @@ namespace HoloXPLOR.DataForge
             {
                 if (dataMapping.Item2 == 0xFFFF)
                 {
+#if NONULL
+                    dataMapping.Item1.ParentNode.RemoveChild(dataMapping.Item1);
+#else
                     dataMapping.Item1.ParentNode.ReplaceChild(
                         this._xmlDocument.CreateElement("null"),
                         dataMapping.Item1);
+#endif
                 }
                 else
                 {
@@ -195,11 +197,22 @@ namespace HoloXPLOR.DataForge
                 }
             }
 
+        }
+
+        private XmlDocument _xmlDocument = new XmlDocument();
+        public XmlElement CreateElement(String name) { return this._xmlDocument.CreateElement(name); }
+        public XmlAttribute CreateAttribute(String name) { return this._xmlDocument.CreateAttribute(name); }
+        public String OuterXML { get { return this._xmlDocument.OuterXml; } }
+        public XmlNodeList ChildNodes { get { return this._xmlDocument.DocumentElement.ChildNodes; } }
+
+        public void GenerateXML()
+        {
             var root = this._xmlDocument.CreateElement("DataForge");
             this._xmlDocument.AppendChild(root);
             foreach (var record in this.RecordDefinitionTable)
             {
-                var recordXml = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
+                this.DataMap[record.StructIndex][record.VariantIndex] = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
+                var recordXml = this.DataMap[record.StructIndex][record.VariantIndex];
                 if (!this.IsLegacy)
                 {
                     var fileNameAttribute = this._xmlDocument.CreateAttribute("path");
@@ -207,7 +220,6 @@ namespace HoloXPLOR.DataForge
                     recordXml.Attributes.Append(fileNameAttribute);
                 }
                 root.AppendChild(recordXml);
-
             }
 
             foreach (var dataMapping in this.Require_StrongMapping)
@@ -216,9 +228,13 @@ namespace HoloXPLOR.DataForge
 
                 if (strong.Index == 0xFFFFFFFF)
                 {
+#if NONULL
+                    dataMapping.Item1.ParentNode.RemoveChild(dataMapping.Item1);
+#else
                     dataMapping.Item1.ParentNode.ReplaceChild(
                         this._xmlDocument.CreateElement("null"),
                         dataMapping.Item1);
+#endif
                 }
                 else
                 {
@@ -265,6 +281,8 @@ namespace HoloXPLOR.DataForge
 
         public void Save(String filename)
         {
+            this.GenerateXML();
+
             foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
             {
                 if (node is XmlElement)
@@ -293,6 +311,86 @@ namespace HoloXPLOR.DataForge
                 }
             }
             this._xmlDocument.Save(filename);
+        }
+
+        public void GenerateSerializationClasses(String path = "AutoGen", String assemblyName = "HoloXPLOR.Data.DataForge")
+        {
+            path = new DirectoryInfo(path).FullName;
+
+            if (Directory.Exists(path) && path != new DirectoryInfo(".").FullName)
+            {
+                Directory.Delete(path, true);
+                while (Directory.Exists(path))
+                {
+                    Thread.Sleep(100);
+                }
+            }
+
+            Directory.CreateDirectory(path);
+            while (!Directory.Exists(path))
+            {
+                Thread.Sleep(100);
+            }
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine(@"using System.Xml.Serialization;");
+            sb.AppendLine();
+            sb.AppendFormat(@"namespace {0}", assemblyName);
+            sb.AppendLine();
+            sb.AppendLine(@"{");
+            foreach (var enumDefinition in this.EnumDefinitionTable)
+            {
+                sb.Append(enumDefinition.Export());
+            }
+            sb.AppendLine(@"}");
+            
+            File.WriteAllText(Path.Combine(path, "Enums.cs"), sb.ToString());
+
+            foreach (var structDefinition in this.StructDefinitionTable)
+            {
+                var code = structDefinition.Export(assemblyName);
+                File.WriteAllText(Path.Combine(path, String.Format("{0}.cs", structDefinition.Name)), code);
+            }
+        }
+
+        public void CompileSerializationAssembly(String assemblyName = "HoloXPLOR.Data.DataForge")
+        {
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CompilerParameters parameters = new CompilerParameters
+            {
+                GenerateExecutable = false,
+                GenerateInMemory = false,
+                OutputAssembly = String.Format("{0}.dll", assemblyName),
+            };
+
+            parameters.ReferencedAssemblies.Add("System.dll");
+            parameters.ReferencedAssemblies.Add("System.Xml.dll");
+
+            List<String> source = new List<String> { };
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine(@"using System.Xml.Serialization;");
+            sb.AppendLine();
+            sb.AppendFormat(@"namespace {0}", assemblyName);
+            sb.AppendLine();
+            sb.AppendLine(@"{");
+            foreach (var enumDefinition in this.EnumDefinitionTable)
+            {
+                sb.Append(enumDefinition.Export());
+            }
+            sb.AppendLine(@"}");
+
+            source.Add(sb.ToString());
+
+            foreach (var structDefinition in this.StructDefinitionTable)
+            {
+                var code = structDefinition.Export(assemblyName);
+                source.Add(code);
+            }
+
+            var result = provider.CompileAssemblyFromSource(parameters, source.ToArray());
         }
     }
 }

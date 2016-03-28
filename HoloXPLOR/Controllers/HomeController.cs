@@ -18,6 +18,24 @@ namespace HoloXPLOR.Controllers
 
         public ActionResult Index()
         {
+            using (var fs = System.IO.File.OpenRead(Server.MapPath(@"~/App_Data/Game.dcb")))
+            {
+                using (var br = new BinaryReader(fs))
+                {
+                    var df = new DataForge.DataForge(br);
+
+                    foreach (var record in df.RecordDefinitionTable)
+                    {
+                        var structDefinition = df.StructDefinitionTable[record.StructIndex];
+                        if (structDefinition.Name == "AmmoParams")
+                        {
+                            var xml = df.DataMap[record.StructIndex][record.VariantIndex].Rename(structDefinition.Name).OuterXml;
+                            // var test = xml.FromXML<HoloXPLOR.Data.DataForge.AmmoParams>();
+                        }
+                    }
+                }
+            }
+
             try
             {
                 FileInfo sample = new FileInfo(Server.MapPath("~/App_Data/sample.xml"));

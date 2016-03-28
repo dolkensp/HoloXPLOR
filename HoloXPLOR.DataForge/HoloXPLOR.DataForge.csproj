@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,44 +63,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CryXmlNode.cs" />
-    <Compile Include="CryXmlReference.cs" />
-    <Compile Include="CryXmlValue.cs" />
+    <Compile Include="CryXmlB\CryXmlNode.cs" />
+    <Compile Include="CryXmlB\CryXmlReference.cs" />
+    <Compile Include="CryXmlB\CryXmlValue.cs" />
     <Compile Include="DataForge.cs" />
-    <Compile Include="Types\DataForgeBoolean.cs" />
-    <Compile Include="Types\DataForgeInt32.cs" />
-    <Compile Include="Types\DataForgeInt64.cs" />
-    <Compile Include="Types\DataForgePointer.cs" />
-    <Compile Include="Types\DataForgeSingle.cs" />
-    <Compile Include="Types\DataForgeDouble.cs" />
-    <Compile Include="Types\DataForgeUInt32.cs" />
-    <Compile Include="Types\DataForgeUInt64.cs" />
-    <Compile Include="Types\DataForgeUInt16.cs" />
-    <Compile Include="Types\DataForgeUInt8.cs" />
-    <Compile Include="Types\DataForgeInt16.cs" />
-    <Compile Include="Types\DataForgeInt8.cs" />
-    <Compile Include="Types\DataForgeReference.cs" />
-    <Compile Include="Types\DataForgeEnum.cs" />
-    <Compile Include="Types\DataForgeLocale.cs" />
-    <Compile Include="Types\DataForgeGuid.cs" />
-    <Compile Include="Types\DataForgeEnumDefinition.cs" />
-    <Compile Include="Types\DataForgePropertyDefinition.cs" />
-    <Compile Include="Types\DataForgeDataMapping.cs" />
-    <Compile Include="Types\DataForgeRecord.cs" />
-    <Compile Include="Types\_DataForgeSerializable.cs" />
-    <Compile Include="Types\DataForgeStringLookup.cs" />
-    <Compile Include="Types\DataForgeStructDefinition.cs" />
+    <Compile Include="SimpleTypes\DataForgeBoolean.cs" />
+    <Compile Include="SimpleTypes\DataForgeInt32.cs" />
+    <Compile Include="SimpleTypes\DataForgeInt64.cs" />
+    <Compile Include="SimpleTypes\DataForgePointer.cs" />
+    <Compile Include="SimpleTypes\DataForgeSingle.cs" />
+    <Compile Include="SimpleTypes\DataForgeDouble.cs" />
+    <Compile Include="SimpleTypes\DataForgeUInt32.cs" />
+    <Compile Include="SimpleTypes\DataForgeUInt64.cs" />
+    <Compile Include="SimpleTypes\DataForgeUInt16.cs" />
+    <Compile Include="SimpleTypes\DataForgeUInt8.cs" />
+    <Compile Include="SimpleTypes\DataForgeInt16.cs" />
+    <Compile Include="SimpleTypes\DataForgeInt8.cs" />
+    <Compile Include="SimpleTypes\DataForgeReference.cs" />
+    <Compile Include="SimpleTypes\DataForgeEnum.cs" />
+    <Compile Include="SimpleTypes\DataForgeLocale.cs" />
+    <Compile Include="SimpleTypes\DataForgeGuid.cs" />
+    <Compile Include="ComplexTypes\DataForgeEnumDefinition.cs" />
+    <Compile Include="ComplexTypes\DataForgePropertyDefinition.cs" />
+    <Compile Include="ComplexTypes\DataForgeDataMapping.cs" />
+    <Compile Include="ComplexTypes\DataForgeRecord.cs" />
+    <Compile Include="_DataForgeSerializable.cs" />
+    <Compile Include="SimpleTypes\DataForgeStringLookup.cs" />
+    <Compile Include="ComplexTypes\DataForgeStructDefinition.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CryXmlSerializer.cs" />
+    <Compile Include="CryXmlB\CryXmlSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\DataForgeString.cs" />
+    <Compile Include="SimpleTypes\DataForgeString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

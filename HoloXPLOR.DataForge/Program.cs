@@ -13,10 +13,7 @@ namespace HoloXPLOR.DataForge
 
         public static void Main(params String[] args)
         {
-            UInt32 test = 0xFFFFFFFF;
-            Int32 test2 = (Int32)test;
-            Boolean test3 = test2 == 0xFFFFFFFF;
-            // args = new String[] { "Game-2.2.3.dcb" };
+            args = new String[] { "Game-2.3.0.dcb" };
             // args = new String[] { @"O:\Mods\BuildXPLOR\_manifest\333246" };
 
             if ((args.Length > 0) && Directory.Exists(args[0]))
@@ -44,7 +41,6 @@ namespace HoloXPLOR.DataForge
 
         public static void Process(params String[] args)
         {
-
             if (args.Length < 1 || args.Length > 2)
             {
                 Console.WriteLine("Usage: HoloXPLOR.DataForge.exe [infile]");
@@ -66,6 +62,8 @@ namespace HoloXPLOR.DataForge
                             var legacy = new FileInfo(args[0]).Length < 0x0e2e00;
                             
                             var df = new DataForge(br, legacy);
+
+                            df.GenerateSerializationClasses();
 
                             df.Save(Path.ChangeExtension(args[0], "xml"));
                         }
