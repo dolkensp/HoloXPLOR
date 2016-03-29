@@ -14,9 +14,15 @@ namespace HoloXPLOR.DataForge
 {
     public static class CryXmlSerializer
     {
+
         public static XmlDocument ReadFile(String inFile, Boolean writeLog = false)
         {
-            using (BinaryReader br = new BinaryReader(File.OpenRead(inFile)))
+            return CryXmlSerializer.ReadStream(File.OpenRead(inFile), writeLog);
+        }
+
+        public static XmlDocument ReadStream(Stream inStream, Boolean writeLog = false)
+        {
+            using (BinaryReader br = new BinaryReader(inStream))
             {
                 var peek = br.PeekChar();
 

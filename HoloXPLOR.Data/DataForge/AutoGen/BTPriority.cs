@@ -7,10 +7,8 @@ namespace HoloXPLOR.Data.DataForge
     public partial class BTPriority : BTNode
     {
         [XmlArray(ElementName = "children")]
-        [XmlArrayItem(Type = typeof(BTPriorityChild))]
-        [XmlArrayItem(Type = typeof(BTPriorityCondition))]
-        [XmlArrayItem(Type = typeof(BTPriorityDefault))]
-        public String[] Children { get; set; }
+        [XmlArrayItem(ElementName = "WeakPointer", Type=typeof(_WeakPointer))]
+        public _WeakPointer[] Children { get; set; }
 
     }
 }

@@ -16,8 +16,8 @@ namespace HoloXPLOR.Data.DataForge
         public String Description { get; set; }
 
         [XmlArray(ElementName = "providers")]
-        [XmlArrayItem(Type = typeof(BTInputGenericIdVar))]
-        public DockProvider[] Providers { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_DockProvider))]
+        public _DockProvider[] Providers { get; set; }
 
     }
 }

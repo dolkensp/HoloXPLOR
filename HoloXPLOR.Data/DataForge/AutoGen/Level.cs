@@ -25,8 +25,8 @@ namespace HoloXPLOR.Data.DataForge
         public Guid DefaultGameRules { get; set; }
 
         [XmlArray(ElementName = "validGameRules")]
-        [XmlArrayItem(Type = typeof(GameMode))]
-        public Guid[] ValidGameRules { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] ValidGameRules { get; set; }
 
         [XmlElement(ElementName = "loadingScreenInfo")]
         public SLoadingScreenInformationDef LoadingScreenInfo { get; set; }

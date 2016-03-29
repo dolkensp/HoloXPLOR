@@ -7,10 +7,8 @@ namespace HoloXPLOR.Data.DataForge
     public partial class CtxGraph
     {
         [XmlArray(ElementName = "groups")]
-        [XmlArrayItem(Type = typeof(CtxGraph_Group))]
-        [XmlArrayItem(Type = typeof(UIGraph_Group))]
-        [XmlArrayItem(Type = typeof(UIGraph_DockingGroup))]
-        public String[] Groups { get; set; }
+        [XmlArrayItem(ElementName = "WeakPointer", Type=typeof(_WeakPointer))]
+        public _WeakPointer[] Groups { get; set; }
 
         [XmlArray(ElementName = "nodes")]
         [XmlArrayItem(Type = typeof(CtxGraph_Node))]

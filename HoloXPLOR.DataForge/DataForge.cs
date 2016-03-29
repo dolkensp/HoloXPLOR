@@ -205,23 +205,11 @@ namespace HoloXPLOR.DataForge
         public String OuterXML { get { return this._xmlDocument.OuterXml; } }
         public XmlNodeList ChildNodes { get { return this._xmlDocument.DocumentElement.ChildNodes; } }
 
-        public void GenerateXML()
+        public void Save(String filename)
         {
             var root = this._xmlDocument.CreateElement("DataForge");
             this._xmlDocument.AppendChild(root);
-            foreach (var record in this.RecordDefinitionTable)
-            {
-                this.DataMap[record.StructIndex][record.VariantIndex] = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
-                var recordXml = this.DataMap[record.StructIndex][record.VariantIndex];
-                if (!this.IsLegacy)
-                {
-                    var fileNameAttribute = this._xmlDocument.CreateAttribute("path");
-                    fileNameAttribute.Value = record.FileName;
-                    recordXml.Attributes.Append(fileNameAttribute);
-                }
-                root.AppendChild(recordXml);
-            }
-
+            
             foreach (var dataMapping in this.Require_StrongMapping)
             {
                 var strong = this.Array_StrongValues[dataMapping.Item3];
@@ -277,39 +265,22 @@ namespace HoloXPLOR.DataForge
                     weakAttribute.Value = targetElement.GetPath();
                 }
             }
-        }
 
-        public void Save(String filename)
-        {
-            this.GenerateXML();
-
-            foreach (var node in this._xmlDocument.DocumentElement.ChildNodes)
+            foreach (var record in this.RecordDefinitionTable)
             {
-                if (node is XmlElement)
+                var newPath = Path.Combine(Path.GetDirectoryName(filename), record.FileName);
+                if (!Directory.Exists(Path.GetDirectoryName(newPath)))
                 {
-                    var element = node as XmlElement;
-
-                    var newFile = String.Empty;
-
-                    if (element.Attributes["path"] != null && !String.IsNullOrWhiteSpace(element.Attributes["path"].Value))
-                    {
-                        newFile = element.Attributes["path"].Value;
-                    }
-                    else
-                    {
-                        newFile = String.Format(@"{1}\{0}.xml", element.Name, Path.GetFileNameWithoutExtension(filename));
-                    }
-
-                    var newPath = Path.Combine(Path.GetDirectoryName(filename), newFile);
-                    if (!Directory.Exists(Path.GetDirectoryName(newPath)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(newPath));
-                    }
-                    XmlDocument doc = new XmlDocument { };
-                    doc.LoadXml(element.OuterXml);
-                    doc.Save(newPath);
+                    Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                 }
+                XmlDocument doc = new XmlDocument { };
+                doc.LoadXml(this.DataMap[record.StructIndex][record.VariantIndex].OuterXml);
+                doc.Save(newPath);
+
+                this.DataMap[record.StructIndex][record.VariantIndex] = this.DataMap[record.StructIndex][record.VariantIndex].Rename(record.Name);
+                root.AppendChild(this.DataMap[record.StructIndex][record.VariantIndex]);
             }
+
             this._xmlDocument.Save(filename);
         }
 
@@ -347,6 +318,50 @@ namespace HoloXPLOR.DataForge
             
             File.WriteAllText(Path.Combine(path, "Enums.cs"), sb.ToString());
 
+            sb = new StringBuilder();
+
+            sb.AppendLine(@"using System;");
+            sb.AppendLine(@"using System.Xml.Serialization;");
+            sb.AppendLine();
+            sb.AppendFormat(@"namespace {0}", assemblyName);
+            sb.AppendLine();
+            sb.AppendLine(@"{");
+            foreach (EDataType typeDefinition in Enum.GetValues(typeof(EDataType)))
+            {
+                var typeName = typeDefinition.ToString().Replace("var", "");
+                switch (typeDefinition)
+                {
+                    case EDataType.varStrongPointer:
+                    case EDataType.varClass: break;
+                    case EDataType.varLocale:
+                    case EDataType.varWeakPointer:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public String Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    case EDataType.varReference:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public Guid Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    default:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendFormat(@"        public {0} Value {{ get; set; }}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    }");
+                        break;
+                }
+            }
+            sb.AppendLine(@"}");
+
+            File.WriteAllText(Path.Combine(path, "Arrays.cs"), sb.ToString());
+
             foreach (var structDefinition in this.StructDefinitionTable)
             {
                 var code = structDefinition.Export(assemblyName);
@@ -379,6 +394,66 @@ namespace HoloXPLOR.DataForge
             foreach (var enumDefinition in this.EnumDefinitionTable)
             {
                 sb.Append(enumDefinition.Export());
+            }
+            sb.AppendLine(@"}");
+
+            source.Add(sb.ToString());
+
+            sb = new StringBuilder();
+
+            sb.AppendLine(@"using System;");
+            sb.AppendLine(@"using System.Xml.Serialization;");
+            sb.AppendLine();
+            sb.AppendFormat(@"namespace {0}", assemblyName);
+            sb.AppendLine();
+            sb.AppendLine(@"{");
+            foreach (EDataType typeDefinition in Enum.GetValues(typeof(EDataType)))
+            {
+                var typeName = typeDefinition.ToString().Replace("var", "");
+                switch (typeDefinition)
+                {
+                    case EDataType.varStrongPointer:
+                    case EDataType.varClass: break;
+                    case EDataType.varByte:
+                        typeName = "UInt8";
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public Byte Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    case EDataType.varSByte:
+                        typeName = "Int8";
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public SByte Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    case EDataType.varLocale:
+                    case EDataType.varWeakPointer:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public String Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    case EDataType.varReference:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendLine(@"        public Guid Value { get; set; }");
+                        sb.AppendLine(@"    }");
+                        break;
+                    default:
+                        sb.AppendFormat(@"    public class _{0}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    {");
+                        sb.AppendFormat(@"        public {0} Value {{ get; set; }}", typeName);
+                        sb.AppendLine();
+                        sb.AppendLine(@"    }");
+                        break;
+                }
             }
             sb.AppendLine(@"}");
 

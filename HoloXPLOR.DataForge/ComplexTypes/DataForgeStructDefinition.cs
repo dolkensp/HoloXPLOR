@@ -221,7 +221,6 @@ namespace HoloXPLOR.DataForge
             sb.AppendLine();
             sb.AppendLine(@"    {");
 
-
             for (UInt32 i = this.FirstAttributeIndex, j = (UInt32)(this.FirstAttributeIndex + this.AttributeCount); i < j; i++)
             {
                 var property = this.DocumentRoot.PropertyDefinitionTable[i];
@@ -255,9 +254,38 @@ namespace HoloXPLOR.DataForge
 
                 sb.AppendLine();
 
+                var arrayPrefix = "";
+
                 if (arraySuffix == "[]")
                 {
-                    sb.Append(property.Export());
+                    if (property.DataType == EDataType.varClass || property.DataType == EDataType.varStrongPointer)
+                    {
+                        sb.Append(property.Export());
+                    }
+                    else if (property.DataType == EDataType.varEnum)
+                    {
+                        arrayPrefix = "_";
+                        sb.AppendFormat(@"        [XmlArrayItem(ElementName = ""Enum"", Type=typeof(_{0}))]", this.DocumentRoot.EnumDefinitionTable[property.StructIndex].Name);
+                        sb.AppendLine();
+                    }
+                    else if (property.DataType == EDataType.varSByte)
+                    {
+                        arrayPrefix = "_";
+                        sb.AppendFormat(@"        [XmlArrayItem(ElementName = ""Int8"", Type=typeof(_{0}))]", property.DataType.ToString().Replace("var", ""));
+                        sb.AppendLine();
+                    }
+                    else if (property.DataType == EDataType.varByte)
+                    {
+                        arrayPrefix = "_";
+                        sb.AppendFormat(@"        [XmlArrayItem(ElementName = ""UInt8"", Type=typeof(_{0}))]", property.DataType.ToString().Replace("var", ""));
+                        sb.AppendLine();
+                    }
+                    else
+                    {
+                        arrayPrefix = "_";
+                        sb.AppendFormat(@"        [XmlArrayItem(ElementName = ""{0}"", Type=typeof(_{0}))]", property.DataType.ToString().Replace("var", ""));
+                        sb.AppendLine();
+                    }
                 }
 
                 var keywords = new HashSet<String>
@@ -288,17 +316,31 @@ namespace HoloXPLOR.DataForge
                         sb.AppendFormat("        public {0}{2} {1} {{ get; set; }}", this.DocumentRoot.StructDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
                         break;
                     case EDataType.varEnum:
-                        sb.AppendFormat("        public {0}{2} {1} {{ get; set; }}", this.DocumentRoot.EnumDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
+                        sb.AppendFormat("        public {3}{0}{2} {1} {{ get; set; }}", this.DocumentRoot.EnumDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix, arrayPrefix);
                         break;
                     case EDataType.varReference:
-                        sb.AppendFormat("        public Guid{2} {1} {{ get; set; }}", this.DocumentRoot.StructDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
+                        if (arraySuffix == "[]")
+                        {
+                            sb.AppendFormat("        public {3}{0}{2} {1} {{ get; set; }}", property.DataType.ToString().Replace("var", ""), propertyName, arraySuffix, arrayPrefix);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("        public Guid{2} {1} {{ get; set; }}", this.DocumentRoot.StructDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
+                        }
                         break;
                     case EDataType.varLocale:
                     case EDataType.varWeakPointer:
-                        sb.AppendFormat("        public String{2} {1} {{ get; set; }}", this.DocumentRoot.StructDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
+                        if (arraySuffix == "[]")
+                        {
+                            sb.AppendFormat("        public {3}{0}{2} {1} {{ get; set; }}", property.DataType.ToString().Replace("var", ""), propertyName, arraySuffix, arrayPrefix);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("        public String{2} {1} {{ get; set; }}", this.DocumentRoot.StructDefinitionTable[property.StructIndex].Name, propertyName, arraySuffix);
+                        }
                         break;
                     default:
-                        sb.AppendFormat("        public {0}{2} {1} {{ get; set; }}", property.DataType.ToString().Replace("var", ""), propertyName, arraySuffix);
+                        sb.AppendFormat("        public {3}{0}{2} {1} {{ get; set; }}", property.DataType.ToString().Replace("var", ""), propertyName, arraySuffix, arrayPrefix);
                         break;
                 }
                 sb.AppendLine();

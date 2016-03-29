@@ -37,8 +37,8 @@ namespace HoloXPLOR.Data.DataForge
         public String Rtpc { get; set; }
 
         [XmlArray(ElementName = "contributors")]
-        [XmlArrayItem(Type = typeof(MusicLogicParameter))]
-        public Guid[] Contributors { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] Contributors { get; set; }
 
     }
 }

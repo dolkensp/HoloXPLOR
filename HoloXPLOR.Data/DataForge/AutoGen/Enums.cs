@@ -41,12 +41,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Camera")]
         _Camera,
     }
+
+    public class _ActorBone
+    {
+        public ActorBone Value { get; set; }
+    }
     public enum AmmoSpawnType
     {
         [XmlEnum(Name = "AllClients")]
         _AllClients,
         [XmlEnum(Name = "ServerReplicated")]
         _ServerReplicated,
+    }
+
+    public class _AmmoSpawnType
+    {
+        public AmmoSpawnType Value { get; set; }
     }
     public enum BehaviorTree_GroupCategory
     {
@@ -59,12 +69,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "MySquad")]
         _MySquad,
     }
+
+    public class _BehaviorTree_GroupCategory
+    {
+        public BehaviorTree_GroupCategory Value { get; set; }
+    }
     public enum BehaviorTree_GroupSignal
     {
         [XmlEnum(Name = "OnGroupMemberEnteredCombat")]
         _OnGroupMemberEnteredCombat,
         [XmlEnum(Name = "OnNoThreatFoundAtDangerousSoundLocation")]
         _OnNoThreatFoundAtDangerousSoundLocation,
+    }
+
+    public class _BehaviorTree_GroupSignal
+    {
+        public BehaviorTree_GroupSignal Value { get; set; }
     }
     public enum BehaviorTree_CharacterSpeed
     {
@@ -76,6 +96,11 @@ namespace HoloXPLOR.Data.DataForge
         _Run,
         [XmlEnum(Name = "Sprint")]
         _Sprint,
+    }
+
+    public class _BehaviorTree_CharacterSpeed
+    {
+        public BehaviorTree_CharacterSpeed Value { get; set; }
     }
     public enum BehaviorTree_CharacterStance
     {
@@ -106,6 +131,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "BodyDrag")]
         _BodyDrag,
     }
+
+    public class _BehaviorTree_CharacterStance
+    {
+        public BehaviorTree_CharacterStance Value { get; set; }
+    }
     public enum BehaviorTree_SignalResponse
     {
         [XmlEnum(Name = "Success")]
@@ -119,6 +149,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Unhandled")]
         _Unhandled,
     }
+
+    public class _BehaviorTree_SignalResponse
+    {
+        public BehaviorTree_SignalResponse Value { get; set; }
+    }
     public enum eCommunicationChoiceMethod
     {
         [XmlEnum(Name = "Random")]
@@ -128,6 +163,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "RandomSequence")]
         _RandomSequence,
     }
+
+    public class _eCommunicationChoiceMethod
+    {
+        public eCommunicationChoiceMethod Value { get; set; }
+    }
     public enum eCommunicationChannelType
     {
         [XmlEnum(Name = "Global")]
@@ -136,6 +176,11 @@ namespace HoloXPLOR.Data.DataForge
         _Group,
         [XmlEnum(Name = "Personal")]
         _Personal,
+    }
+
+    public class _eCommunicationChannelType
+    {
+        public eCommunicationChannelType Value { get; set; }
     }
     public enum eContextualCommunicationConcept
     {
@@ -176,6 +221,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "OnResponseFinished")]
         _OnResponseFinished,
     }
+
+    public class _eContextualCommunicationConcept
+    {
+        public eContextualCommunicationConcept Value { get; set; }
+    }
     public enum eCommunicationCriteriaOperant
     {
         [XmlEnum(Name = "None")]
@@ -190,6 +240,11 @@ namespace HoloXPLOR.Data.DataForge
         _GreaterThan,
         [XmlEnum(Name = "GreaterThanOrEquals")]
         _GreaterThanOrEquals,
+    }
+
+    public class _eCommunicationCriteriaOperant
+    {
+        public eCommunicationCriteriaOperant Value { get; set; }
     }
     public enum eContextualCommunicationCriteria
     {
@@ -288,6 +343,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Target_IsFriendly")]
         _Target_IsFriendly,
     }
+
+    public class _eContextualCommunicationCriteria
+    {
+        public eContextualCommunicationCriteria Value { get; set; }
+    }
     public enum CtxGraph_ContextActionType
     {
         [XmlEnum(Name = "Load")]
@@ -303,6 +363,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Focus")]
         _Focus,
     }
+
+    public class _CtxGraph_ContextActionType
+    {
+        public CtxGraph_ContextActionType Value { get; set; }
+    }
     public enum EReputation
     {
         [XmlEnum(Name = "Good")]
@@ -312,10 +377,20 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Poor")]
         _Poor,
     }
+
+    public class _EReputation
+    {
+        public EReputation Value { get; set; }
+    }
     public enum EReputationType
     {
         [XmlEnum(Name = "Military")]
         _Military,
+    }
+
+    public class _EReputationType
+    {
+        public EReputationType Value { get; set; }
     }
     public enum EConversationFragmentID
     {
@@ -325,6 +400,11 @@ namespace HoloXPLOR.Data.DataForge
         _ConversationFacial,
         [XmlEnum(Name = "story_e1c04")]
         _story_e1c04,
+    }
+
+    public class _EConversationFragmentID
+    {
+        public EConversationFragmentID Value { get; set; }
     }
     public enum EFacialAnim
     {
@@ -341,12 +421,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Interested")]
         _Interested,
     }
+
+    public class _EFacialAnim
+    {
+        public EFacialAnim Value { get; set; }
+    }
     public enum EGestureAnim
     {
         [XmlEnum(Name = "NodHead")]
         _NodHead,
         [XmlEnum(Name = "ShakeHead")]
         _ShakeHead,
+    }
+
+    public class _EGestureAnim
+    {
+        public EGestureAnim Value { get; set; }
     }
     public enum EConversationHubLinkType
     {
@@ -357,6 +447,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "RandomCanRepeat")]
         _RandomCanRepeat,
     }
+
+    public class _EConversationHubLinkType
+    {
+        public EConversationHubLinkType Value { get; set; }
+    }
     public enum FriendyFireType
     {
         [XmlEnum(Name = "None")]
@@ -365,6 +460,11 @@ namespace HoloXPLOR.Data.DataForge
         _Self,
         [XmlEnum(Name = "Team")]
         _Team,
+    }
+
+    public class _FriendyFireType
+    {
+        public FriendyFireType Value { get; set; }
     }
     public enum EDynamicCameraEffectsContext
     {
@@ -378,6 +478,11 @@ namespace HoloXPLOR.Data.DataForge
         _MobiGlass,
         [XmlEnum(Name = "HintActive")]
         _HintActive,
+    }
+
+    public class _EDynamicCameraEffectsContext
+    {
+        public EDynamicCameraEffectsContext Value { get; set; }
     }
     public enum EDynamicCameraEffectsSubContext
     {
@@ -394,12 +499,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "ScreenFocus")]
         _ScreenFocus,
     }
+
+    public class _EDynamicCameraEffectsSubContext
+    {
+        public EDynamicCameraEffectsSubContext Value { get; set; }
+    }
     public enum EDynamicCameraEffectsFocusMode
     {
         [XmlEnum(Name = "UsingMinMax")]
         _UsingMinMax,
         [XmlEnum(Name = "NotUsingMinMax")]
         _NotUsingMinMax,
+    }
+
+    public class _EDynamicCameraEffectsFocusMode
+    {
+        public EDynamicCameraEffectsFocusMode Value { get; set; }
     }
     public enum EParticleInputs
     {
@@ -424,6 +539,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
     }
+
+    public class _EParticleInputs
+    {
+        public EParticleInputs Value { get; set; }
+    }
     public enum ELightInputs
     {
         [XmlEnum(Name = "Radius")]
@@ -435,6 +555,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
     }
+
+    public class _ELightInputs
+    {
+        public ELightInputs Value { get; set; }
+    }
     public enum EMaterialInputs
     {
         [XmlEnum(Name = "FloatParam")]
@@ -443,6 +568,11 @@ namespace HoloXPLOR.Data.DataForge
         _VecParam,
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
+    }
+
+    public class _EMaterialInputs
+    {
+        public EMaterialInputs Value { get; set; }
     }
     public enum ESoundInputs
     {
@@ -455,6 +585,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
     }
+
+    public class _ESoundInputs
+    {
+        public ESoundInputs Value { get; set; }
+    }
     public enum EJointInputs
     {
         [XmlEnum(Name = "Rotation")]
@@ -463,6 +598,11 @@ namespace HoloXPLOR.Data.DataForge
         _Offset,
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
+    }
+
+    public class _EJointInputs
+    {
+        public EJointInputs Value { get; set; }
     }
     public enum EPipePriorityGroup
     {
@@ -475,6 +615,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Other")]
         _Other,
     }
+
+    public class _EPipePriorityGroup
+    {
+        public EPipePriorityGroup Value { get; set; }
+    }
     public enum EPipePriorityType
     {
         [XmlEnum(Name = "Critical")]
@@ -483,6 +628,11 @@ namespace HoloXPLOR.Data.DataForge
         _Aux,
         [XmlEnum(Name = "Manageable")]
         _Manageable,
+    }
+
+    public class _EPipePriorityType
+    {
+        public EPipePriorityType Value { get; set; }
     }
     public enum EPipeClass
     {
@@ -511,6 +661,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
     }
+
+    public class _EPipeClass
+    {
+        public EPipeClass Value { get; set; }
+    }
     public enum EPipeValueType
     {
         [XmlEnum(Name = "Pool")]
@@ -522,12 +677,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Critical")]
         _Critical,
     }
+
+    public class _EPipeValueType
+    {
+        public EPipeValueType Value { get; set; }
+    }
     public enum EPipeStateValType
     {
         [XmlEnum(Name = "Normal")]
         _Normal,
         [XmlEnum(Name = "OtherPipe")]
         _OtherPipe,
+    }
+
+    public class _EPipeStateValType
+    {
+        public EPipeStateValType Value { get; set; }
     }
     public enum EModuleType
     {
@@ -540,6 +705,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Squadron42")]
         _Squadron42,
     }
+
+    public class _EModuleType
+    {
+        public EModuleType Value { get; set; }
+    }
     public enum EPlayerToPlayerCollisionPolicy
     {
         [XmlEnum(Name = "EnabledAlways")]
@@ -548,6 +718,11 @@ namespace HoloXPLOR.Data.DataForge
         _DisableAlways,
         [XmlEnum(Name = "EnableAfterSpawn")]
         _EnableAfterSpawn,
+    }
+
+    public class _EPlayerToPlayerCollisionPolicy
+    {
+        public EPlayerToPlayerCollisionPolicy Value { get; set; }
     }
     public enum EGOSTVariableType
     {
@@ -564,10 +739,20 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "bool")]
         _bool,
     }
+
+    public class _EGOSTVariableType
+    {
+        public EGOSTVariableType Value { get; set; }
+    }
     public enum HUDSilhouetteMode
     {
         [XmlEnum(Name = "ARLabel")]
         _ARLabel,
+    }
+
+    public class _HUDSilhouetteMode
+    {
+        public HUDSilhouetteMode Value { get; set; }
     }
     public enum EItemPortAttachImplType
     {
@@ -578,12 +763,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Face")]
         _Face,
     }
+
+    public class _EItemPortAttachImplType
+    {
+        public EItemPortAttachImplType Value { get; set; }
+    }
     public enum EItemPipeType
     {
         [XmlEnum(Name = "Dynamic")]
         _Dynamic,
         [XmlEnum(Name = "Binary")]
         _Binary,
+    }
+
+    public class _EItemPipeType
+    {
+        public EItemPipeType Value { get; set; }
     }
     public enum EItemType
     {
@@ -739,6 +934,11 @@ namespace HoloXPLOR.Data.DataForge
         _QuantumFuelTank,
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
+    }
+
+    public class _EItemType
+    {
+        public EItemType Value { get; set; }
     }
     public enum EItemSubType
     {
@@ -921,6 +1121,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
     }
+
+    public class _EItemSubType
+    {
+        public EItemSubType Value { get; set; }
+    }
     public enum ELoadingScreenType
     {
         [XmlEnum(Name = "ePlanetSide")]
@@ -928,12 +1133,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "eElectronicAccess")]
         _eElectronicAccess,
     }
+
+    public class _ELoadingScreenType
+    {
+        public ELoadingScreenType Value { get; set; }
+    }
     public enum StarMarineTeam
     {
         [XmlEnum(Name = "Marines")]
         _Marines,
         [XmlEnum(Name = "Outlaws")]
         _Outlaws,
+    }
+
+    public class _StarMarineTeam
+    {
+        public StarMarineTeam Value { get; set; }
     }
     public enum ArmorType
     {
@@ -943,6 +1158,11 @@ namespace HoloXPLOR.Data.DataForge
         _Medium,
         [XmlEnum(Name = "Heavy")]
         _Heavy,
+    }
+
+    public class _ArmorType
+    {
+        public ArmorType Value { get; set; }
     }
     public enum SlotType
     {
@@ -956,6 +1176,11 @@ namespace HoloXPLOR.Data.DataForge
         _Gadget,
         [XmlEnum(Name = "Grenade")]
         _Grenade,
+    }
+
+    public class _SlotType
+    {
+        public SlotType Value { get; set; }
     }
     public enum StarMarineLoadoutBadges
     {
@@ -986,6 +1211,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "EMPClaymore")]
         _EMPClaymore,
     }
+
+    public class _StarMarineLoadoutBadges
+    {
+        public StarMarineLoadoutBadges Value { get; set; }
+    }
     public enum ARModePrototypeMode
     {
         [XmlEnum(Name = "Off")]
@@ -994,6 +1224,11 @@ namespace HoloXPLOR.Data.DataForge
         _FloatingDynamic,
         [XmlEnum(Name = "FloatingStatic")]
         _FloatingStatic,
+    }
+
+    public class _ARModePrototypeMode
+    {
+        public ARModePrototypeMode Value { get; set; }
     }
     public enum PostureType
     {
@@ -1005,6 +1240,11 @@ namespace HoloXPLOR.Data.DataForge
         _Aim,
         [XmlEnum(Name = "Hide")]
         _Hide,
+    }
+
+    public class _PostureType
+    {
+        public PostureType Value { get; set; }
     }
     public enum AgentStance
     {
@@ -1037,6 +1277,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "STANCE_LAST")]
         _STANCE_LAST,
     }
+
+    public class _AgentStance
+    {
+        public AgentStance Value { get; set; }
+    }
     public enum ESignalTypes
     {
         [XmlEnum(Name = "Infrared")]
@@ -1049,6 +1294,11 @@ namespace HoloXPLOR.Data.DataForge
         _Decibel,
         [XmlEnum(Name = "UNDEFINED")]
         _UNDEFINED,
+    }
+
+    public class _ESignalTypes
+    {
+        public ESignalTypes Value { get; set; }
     }
     public enum ERadarEntityType
     {
@@ -1076,6 +1326,11 @@ namespace HoloXPLOR.Data.DataForge
         _Hud_QTravelNavPoint,
         [XmlEnum(Name = "Unknown")]
         _Unknown,
+    }
+
+    public class _ERadarEntityType
+    {
+        public ERadarEntityType Value { get; set; }
     }
     public enum ScanningComponent
     {
@@ -1108,6 +1363,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Cockpit")]
         _Cockpit,
     }
+
+    public class _ScanningComponent
+    {
+        public ScanningComponent Value { get; set; }
+    }
     public enum ScanningChannel
     {
         [XmlEnum(Name = "A")]
@@ -1116,6 +1376,11 @@ namespace HoloXPLOR.Data.DataForge
         _B,
         [XmlEnum(Name = "C")]
         _C,
+    }
+
+    public class _ScanningChannel
+    {
+        public ScanningChannel Value { get; set; }
     }
     public enum ScanningItemType
     {
@@ -1216,6 +1481,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "CargoHealth")]
         _CargoHealth,
     }
+
+    public class _ScanningItemType
+    {
+        public ScanningItemType Value { get; set; }
+    }
     public enum ScanningItemInformation
     {
         [XmlEnum(Name = "Position")]
@@ -1293,6 +1563,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "CargoHealth")]
         _CargoHealth,
     }
+
+    public class _ScanningItemInformation
+    {
+        public ScanningItemInformation Value { get; set; }
+    }
     public enum ScanningItemInfoDisplay
     {
         [XmlEnum(Name = "Normal")]
@@ -1301,6 +1576,11 @@ namespace HoloXPLOR.Data.DataForge
         _Distance,
         [XmlEnum(Name = "Time")]
         _Time,
+    }
+
+    public class _ScanningItemInfoDisplay
+    {
+        public ScanningItemInfoDisplay Value { get; set; }
     }
     public enum EFaceType
     {
@@ -1313,6 +1593,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Box")]
         _Box,
     }
+
+    public class _EFaceType
+    {
+        public EFaceType Value { get; set; }
+    }
     public enum SeatScreensType
     {
         [XmlEnum(Name = "Pilot")]
@@ -1323,6 +1608,11 @@ namespace HoloXPLOR.Data.DataForge
         _Console,
         [XmlEnum(Name = "Copilot")]
         _Copilot,
+    }
+
+    public class _SeatScreensType
+    {
+        public SeatScreensType Value { get; set; }
     }
     public enum DockProvider
     {
@@ -1371,6 +1661,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Seat_Display_Screen_Info")]
         _Seat_Display_Screen_Info,
     }
+
+    public class _DockProvider
+    {
+        public DockProvider Value { get; set; }
+    }
     public enum InterpolationMode
     {
         [XmlEnum(Name = "Linear")]
@@ -1387,6 +1682,11 @@ namespace HoloXPLOR.Data.DataForge
         _EaseOutCubic,
         [XmlEnum(Name = "EaseInOutCubic")]
         _EaseInOutCubic,
+    }
+
+    public class _InterpolationMode
+    {
+        public InterpolationMode Value { get; set; }
     }
     public enum HUDPalleteEntry
     {
@@ -1406,6 +1706,11 @@ namespace HoloXPLOR.Data.DataForge
         _Highlight,
         [XmlEnum(Name = "Friendly")]
         _Friendly,
+    }
+
+    public class _HUDPalleteEntry
+    {
+        public HUDPalleteEntry Value { get; set; }
     }
     public enum UIGraph_SimpleComponentType
     {
@@ -1472,6 +1777,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "GGUNotificationScreen")]
         _GGUNotificationScreen,
     }
+
+    public class _UIGraph_SimpleComponentType
+    {
+        public UIGraph_SimpleComponentType Value { get; set; }
+    }
     public enum UIGraph_BackBehavior
     {
         [XmlEnum(Name = "Unsuported")]
@@ -1487,12 +1797,22 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "LastCustomCallback")]
         _LastCustomCallback,
     }
+
+    public class _UIGraph_BackBehavior
+    {
+        public UIGraph_BackBehavior Value { get; set; }
+    }
     public enum UIGraph_BlockingMessagePopUpProvider
     {
         [XmlEnum(Name = "GlobalGame")]
         _GlobalGame,
         [XmlEnum(Name = "ElectronicAccess")]
         _ElectronicAccess,
+    }
+
+    public class _UIGraph_BlockingMessagePopUpProvider
+    {
+        public UIGraph_BlockingMessagePopUpProvider Value { get; set; }
     }
     public enum EMyEnum
     {
@@ -1503,6 +1823,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Third")]
         _Third,
     }
+
+    public class _EMyEnum
+    {
+        public EMyEnum Value { get; set; }
+    }
     public enum WeaponMotionState
     {
         [XmlEnum(Name = "Any")]
@@ -1512,6 +1837,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Movement")]
         _Movement,
     }
+
+    public class _WeaponMotionState
+    {
+        public WeaponMotionState Value { get; set; }
+    }
     public enum WeaponAimStance
     {
         [XmlEnum(Name = "Any")]
@@ -1520,6 +1850,11 @@ namespace HoloXPLOR.Data.DataForge
         _Ready,
         [XmlEnum(Name = "ADS")]
         _ADS,
+    }
+
+    public class _WeaponAimStance
+    {
+        public WeaponAimStance Value { get; set; }
     }
     public enum WeaponMotionStance
     {
@@ -1531,6 +1866,11 @@ namespace HoloXPLOR.Data.DataForge
         _Crouch,
         [XmlEnum(Name = "Prone")]
         _Prone,
+    }
+
+    public class _WeaponMotionStance
+    {
+        public WeaponMotionStance Value { get; set; }
     }
     public enum WeaponCoverStance
     {
@@ -1545,6 +1885,11 @@ namespace HoloXPLOR.Data.DataForge
         [XmlEnum(Name = "Top")]
         _Top,
     }
+
+    public class _WeaponCoverStance
+    {
+        public WeaponCoverStance Value { get; set; }
+    }
     public enum WeaponPoseType
     {
         [XmlEnum(Name = "RightHand")]
@@ -1553,5 +1898,10 @@ namespace HoloXPLOR.Data.DataForge
         _Zoom,
         [XmlEnum(Name = "LeftHand")]
         _LeftHand,
+    }
+
+    public class _WeaponPoseType
+    {
+        public WeaponPoseType Value { get; set; }
     }
 }

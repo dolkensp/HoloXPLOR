@@ -1,4 +1,4 @@
-﻿using HoloXPLOR.Data.XML.Spaceships;
+﻿using HoloXPLOR.Data.Xml.Spaceships;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML
+namespace HoloXPLOR.Data.Xml
 {
     [XmlRoot(ElementName = "ItemPort")]
     public partial class ItemPort

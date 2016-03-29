@@ -13,7 +13,7 @@ namespace HoloXPLOR.DataForge
 
         public static void Main(params String[] args)
         {
-            args = new String[] { "Game-2.3.0.dcb" };
+            args = new String[] { "Game.dcb" };
             // args = new String[] { @"O:\Mods\BuildXPLOR\_manifest\333246" };
 
             if ((args.Length > 0) && Directory.Exists(args[0]))

@@ -40,6 +40,13 @@ namespace HoloXPLOR.DataForge
                 sb.AppendLine();
             }
             sb.AppendLine(@"    }");
+            sb.AppendLine();
+            sb.AppendFormat(@"    public class _{0}", this.Name);
+            sb.AppendLine();
+            sb.AppendLine(@"    {");
+            sb.AppendFormat(@"        public {0} Value {{ get; set; }}", this.Name);
+            sb.AppendLine();
+            sb.AppendLine(@"    }");
             return sb.ToString();
         }
     }

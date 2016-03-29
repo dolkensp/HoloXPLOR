@@ -10,10 +10,8 @@ namespace HoloXPLOR.Data.DataForge
         public EItemType Type { get; set; }
 
         [XmlArray(ElementName = "SubTypes")]
-        [XmlArrayItem(Type = typeof(BTInputVelocity))]
-        [XmlArrayItem(Type = typeof(BTInputVelocityVar))]
-        [XmlArrayItem(Type = typeof(BTInputVelocityBB))]
-        public EItemSubType[] SubTypes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_EItemSubType))]
+        public _EItemSubType[] SubTypes { get; set; }
 
     }
 }

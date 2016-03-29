@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Inventory = HoloXPLOR.Data.XML.Inventory;
-using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
-using Items = HoloXPLOR.Data.XML.Spaceships;
-using Xml = HoloXPLOR.Data.XML;
+using Inventory = HoloXPLOR.Data.Xml.Inventory;
+using Ships = HoloXPLOR.Data.Xml.Vehicles.Implementations;
+using Items = HoloXPLOR.Data.Xml.Spaceships;
+using Xml = HoloXPLOR.Data.Xml;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
@@ -396,7 +396,7 @@ namespace HoloXPLOR.Models.HoloTable
 
                     this._view_CategoryMap = this._view_CategoryMap ??
                         (from item in this.View_ItemMap.Values
-                         let part = Scripts.Items.GetValue(item.Inventory_Item.Class, null)
+                         let part = HoloXPLOR_App.Scripts.Items.GetValue(item.Inventory_Item.Class, null)
                          where part != null
                          orderby part.DisplayName.ToLocalized()
                          let lookup = new
@@ -460,7 +460,7 @@ namespace HoloXPLOR.Models.HoloTable
         {
             get
             {
-                return Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0), new ShipMatrixJson
+                return HoloXPLOR_App.Scripts.ShipJsonMap.GetValue(HoloXPLOR_App.Scripts.ShipJsonLookup.GetValue(this.GameData_Ship.Name, 0), new ShipMatrixJson
                     {
                         Name = this.GameData_Ship.DisplayName,
                         Description = "[REDACTED]",
@@ -521,7 +521,7 @@ namespace HoloXPLOR.Models.HoloTable
         {
             get
             {
-                return this._json_ShipMap = this._json_ShipMap ?? this.GameData_ShipMap.ToDictionary(k => k.Key, v => Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(v.Value.Name, 0), new ShipMatrixJson
+                return this._json_ShipMap = this._json_ShipMap ?? this.GameData_ShipMap.ToDictionary(k => k.Key, v => HoloXPLOR_App.Scripts.ShipJsonMap.GetValue(HoloXPLOR_App.Scripts.ShipJsonLookup.GetValue(v.Value.Name, 0), new ShipMatrixJson
                 {
                      Name = v.Value.DisplayName,
                      Description = "[REDACTED]",
@@ -571,10 +571,10 @@ namespace HoloXPLOR.Models.HoloTable
                 return this._gameData_ShipMap = this._gameData_ShipMap ??
                     (from ship in this.Inventory_ShipMap.Values
                      let shipName = ship.Class.Split('.').Last()
-                     let vehicle = Scripts.Vehicles.GetValue(shipName, null)
+                     let vehicle = HoloXPLOR_App.Scripts.Vehicles.GetValue(shipName, null)
                      let parts = shipName.Split('_')
                      let shipBase = String.Join("_", parts.Take(Math.Min(parts.Length - 1, 1)))
-                     let vehicle2 = vehicle ?? Scripts.Vehicles.GetValue(shipBase, null)
+                     let vehicle2 = vehicle ?? HoloXPLOR_App.Scripts.Vehicles.GetValue(shipBase, null)
                      where vehicle2 != null
                      where vehicle2.Name != "GRIN_PTV"
                      orderby vehicle2.DisplayName
@@ -593,7 +593,7 @@ namespace HoloXPLOR.Models.HoloTable
             {
                 return this._gameData_ItemMap = this._gameData_ItemMap ??
                     (from item in this.Inventory_ItemMap.Values
-                     let part = Scripts.Items.GetValue(item.Class, null)
+                     let part = HoloXPLOR_App.Scripts.Items.GetValue(item.Class, null)
                      where part != null
                      orderby part.DisplayName.ToLocalized()
                      select new
@@ -615,7 +615,7 @@ namespace HoloXPLOR.Models.HoloTable
 
                     this._gameData_CategoryMap = this._gameData_CategoryMap ??
                         (from item in this.Inventory_ItemMap.Values
-                         let part = Scripts.Items.GetValue(item.Class, null)
+                         let part = HoloXPLOR_App.Scripts.Items.GetValue(item.Class, null)
                          where part != null
                          orderby part.DisplayName.ToLocalized()
                          let lookup = new

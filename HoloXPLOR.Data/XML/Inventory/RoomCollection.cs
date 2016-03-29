@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML.Inventory
+namespace HoloXPLOR.Data.Xml.Inventory
 {
     [XmlRoot(ElementName = "rooms")]
     public class RoomCollection : XmlCollection<Room>

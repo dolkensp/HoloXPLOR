@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML.Vehicles.Implementations
+namespace HoloXPLOR.Data.Xml.Vehicles.Implementations
 {
     [XmlRoot(ElementName = "Part")]
     public partial class Part

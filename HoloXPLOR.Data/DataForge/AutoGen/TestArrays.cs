@@ -7,174 +7,76 @@ namespace HoloXPLOR.Data.DataForge
     public partial class TestArrays
     {
         [XmlArray(ElementName = "myStringArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public String[] MyStringArray { get; set; }
+        [XmlArrayItem(ElementName = "String", Type=typeof(_String))]
+        public _String[] MyStringArray { get; set; }
 
         [XmlArray(ElementName = "myInt8Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public SByte[] MyInt8Array { get; set; }
+        [XmlArrayItem(ElementName = "Int8", Type=typeof(_SByte))]
+        public _SByte[] MyInt8Array { get; set; }
 
         [XmlArray(ElementName = "myInt16Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Int16[] MyInt16Array { get; set; }
+        [XmlArrayItem(ElementName = "Int16", Type=typeof(_Int16))]
+        public _Int16[] MyInt16Array { get; set; }
 
         [XmlArray(ElementName = "myInt32Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Int32[] MyInt32Array { get; set; }
+        [XmlArrayItem(ElementName = "Int32", Type=typeof(_Int32))]
+        public _Int32[] MyInt32Array { get; set; }
 
         [XmlArray(ElementName = "myInt64Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Int64[] MyInt64Array { get; set; }
+        [XmlArrayItem(ElementName = "Int64", Type=typeof(_Int64))]
+        public _Int64[] MyInt64Array { get; set; }
 
         [XmlArray(ElementName = "myUInt8Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Byte[] MyUInt8Array { get; set; }
+        [XmlArrayItem(ElementName = "UInt8", Type=typeof(_Byte))]
+        public _Byte[] MyUInt8Array { get; set; }
 
         [XmlArray(ElementName = "myUInt16Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public UInt16[] MyUInt16Array { get; set; }
+        [XmlArrayItem(ElementName = "UInt16", Type=typeof(_UInt16))]
+        public _UInt16[] MyUInt16Array { get; set; }
 
         [XmlArray(ElementName = "myUInt32Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public UInt32[] MyUInt32Array { get; set; }
+        [XmlArrayItem(ElementName = "UInt32", Type=typeof(_UInt32))]
+        public _UInt32[] MyUInt32Array { get; set; }
 
         [XmlArray(ElementName = "myUInt64Array")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public UInt64[] MyUInt64Array { get; set; }
+        [XmlArrayItem(ElementName = "UInt64", Type=typeof(_UInt64))]
+        public _UInt64[] MyUInt64Array { get; set; }
 
         [XmlArray(ElementName = "myBooleanArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Boolean[] MyBooleanArray { get; set; }
+        [XmlArrayItem(ElementName = "Boolean", Type=typeof(_Boolean))]
+        public _Boolean[] MyBooleanArray { get; set; }
 
         [XmlArray(ElementName = "myFloatArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Single[] MyFloatArray { get; set; }
+        [XmlArrayItem(ElementName = "Single", Type=typeof(_Single))]
+        public _Single[] MyFloatArray { get; set; }
 
         [XmlArray(ElementName = "myDoubleArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Double[] MyDoubleArray { get; set; }
+        [XmlArrayItem(ElementName = "Double", Type=typeof(_Double))]
+        public _Double[] MyDoubleArray { get; set; }
 
         [XmlArray(ElementName = "myEnumArray")]
-        [XmlArrayItem(Type = typeof(BTInputBlackboardArrayVar))]
-        public EMyEnum[] MyEnumArray { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_EMyEnum))]
+        public _EMyEnum[] MyEnumArray { get; set; }
 
         [XmlArray(ElementName = "myStructArray")]
         [XmlArrayItem(Type = typeof(TestAtomics))]
         public TestAtomics[] MyStructArray { get; set; }
 
         [XmlArray(ElementName = "myWeakPtrArray")]
-        [XmlArrayItem(Type = typeof(TestAtomics))]
-        public String[] MyWeakPtrArray { get; set; }
+        [XmlArrayItem(ElementName = "WeakPointer", Type=typeof(_WeakPointer))]
+        public _WeakPointer[] MyWeakPtrArray { get; set; }
 
         [XmlArray(ElementName = "myReferenceArray")]
-        [XmlArrayItem(Type = typeof(UnitTest))]
-        public Guid[] MyReferenceArray { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] MyReferenceArray { get; set; }
 
         [XmlArray(ElementName = "guidArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Guid[] GuidArray { get; set; }
+        [XmlArrayItem(ElementName = "Guid", Type=typeof(_Guid))]
+        public _Guid[] GuidArray { get; set; }
 
         [XmlArray(ElementName = "localeArray")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public String[] LocaleArray { get; set; }
+        [XmlArrayItem(ElementName = "Locale", Type=typeof(_Locale))]
+        public _Locale[] LocaleArray { get; set; }
 
     }
 }

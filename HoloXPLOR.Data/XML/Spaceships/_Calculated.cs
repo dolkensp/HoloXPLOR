@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML.Spaceships
+namespace HoloXPLOR.Data.Xml.Spaceships
 {
     public enum CategoryEnum
     {

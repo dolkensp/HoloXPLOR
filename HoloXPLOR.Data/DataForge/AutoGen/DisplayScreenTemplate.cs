@@ -13,8 +13,8 @@ namespace HoloXPLOR.Data.DataForge
         public String Description { get; set; }
 
         [XmlArray(ElementName = "default_views")]
-        [XmlArrayItem(Type = typeof(ScreenView))]
-        public Guid[] Default_views { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] Default_views { get; set; }
 
         [XmlAttribute(AttributeName = "background_view")]
         public Guid Background_view { get; set; }

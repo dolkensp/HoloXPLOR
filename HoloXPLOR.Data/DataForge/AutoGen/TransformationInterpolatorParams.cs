@@ -13,8 +13,8 @@ namespace HoloXPLOR.Data.DataForge
         public Vec3 EndOffsetValues { get; set; }
 
         [XmlArray(ElementName = "offsetInterpolationModes")]
-        [XmlArrayItem(Type = typeof(BTInputGenericIdBB))]
-        public InterpolationMode[] OffsetInterpolationModes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_InterpolationMode))]
+        public _InterpolationMode[] OffsetInterpolationModes { get; set; }
 
         [XmlElement(ElementName = "startRotationValues")]
         public Ang3 StartRotationValues { get; set; }
@@ -23,8 +23,8 @@ namespace HoloXPLOR.Data.DataForge
         public Ang3 EndRotationValues { get; set; }
 
         [XmlArray(ElementName = "rotationInterpolationModes")]
-        [XmlArrayItem(Type = typeof(BTInputGenericIdBB))]
-        public InterpolationMode[] RotationInterpolationModes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_InterpolationMode))]
+        public _InterpolationMode[] RotationInterpolationModes { get; set; }
 
         [XmlAttribute(AttributeName = "startScaleValue")]
         public Single StartScaleValue { get; set; }

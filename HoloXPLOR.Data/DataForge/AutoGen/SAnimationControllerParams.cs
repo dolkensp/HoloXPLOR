@@ -13,15 +13,8 @@ namespace HoloXPLOR.Data.DataForge
         public String AnimationController { get; set; }
 
         [XmlArray(ElementName = "ScopeContexts")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public String[] ScopeContexts { get; set; }
+        [XmlArrayItem(ElementName = "String", Type=typeof(_String))]
+        public _String[] ScopeContexts { get; set; }
 
     }
 }

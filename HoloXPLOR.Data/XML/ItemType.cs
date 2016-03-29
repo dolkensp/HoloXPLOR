@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML
+namespace HoloXPLOR.Data.Xml
 {
     [XmlRoot(ElementName = "Type")]
     public partial class ItemType

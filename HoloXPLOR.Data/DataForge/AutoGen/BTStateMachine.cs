@@ -7,8 +7,8 @@ namespace HoloXPLOR.Data.DataForge
     public partial class BTStateMachine : BTNode
     {
         [XmlArray(ElementName = "states")]
-        [XmlArrayItem(Type = typeof(BTStateMachineState))]
-        public String[] States { get; set; }
+        [XmlArrayItem(ElementName = "WeakPointer", Type=typeof(_WeakPointer))]
+        public _WeakPointer[] States { get; set; }
 
     }
 }

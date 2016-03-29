@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace HoloXPLOR.Data.XML
+namespace HoloXPLOR.Data.Xml
 {
     public abstract class XmlCollection<T>
     {

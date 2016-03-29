@@ -7,8 +7,8 @@ namespace HoloXPLOR.Data.DataForge
     public partial class TPSQueryCollection
     {
         [XmlArray(ElementName = "Queries")]
-        [XmlArrayItem(Type = typeof(TPSQuery))]
-        public Guid[] Queries { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] Queries { get; set; }
 
     }
 }

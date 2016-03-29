@@ -22,8 +22,8 @@ namespace HoloXPLOR.Data.DataForge
         public String LocalizationIdentifier { get; set; }
 
         [XmlArray(ElementName = "unlockingBadges")]
-        [XmlArrayItem(Type = typeof(BTInputVec3BB))]
-        public StarMarineLoadoutBadges[] UnlockingBadges { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_StarMarineLoadoutBadges))]
+        public _StarMarineLoadoutBadges[] UnlockingBadges { get; set; }
 
         [XmlAttribute(AttributeName = "numSmallSlots")]
         public Int32 NumSmallSlots { get; set; }

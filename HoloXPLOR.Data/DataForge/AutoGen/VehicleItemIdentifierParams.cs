@@ -7,41 +7,20 @@ namespace HoloXPLOR.Data.DataForge
     public partial class VehicleItemIdentifierParams
     {
         [XmlArray(ElementName = "PassiveScanningItems")]
-        [XmlArrayItem(Type = typeof(BTInputTagBB))]
-        public ScanningItemType[] PassiveScanningItems { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_ScanningItemType))]
+        public _ScanningItemType[] PassiveScanningItems { get; set; }
 
         [XmlArray(ElementName = "LevelsTimeToScan")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Single[] LevelsTimeToScan { get; set; }
+        [XmlArrayItem(ElementName = "Single", Type=typeof(_Single))]
+        public _Single[] LevelsTimeToScan { get; set; }
 
         [XmlArray(ElementName = "ChannelScanRatios")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Single[] ChannelScanRatios { get; set; }
+        [XmlArrayItem(ElementName = "Single", Type=typeof(_Single))]
+        public _Single[] ChannelScanRatios { get; set; }
 
         [XmlArray(ElementName = "ChannelMaxScanLevels")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public Int32[] ChannelMaxScanLevels { get; set; }
+        [XmlArrayItem(ElementName = "Int32", Type=typeof(_Int32))]
+        public _Int32[] ChannelMaxScanLevels { get; set; }
 
         [XmlAttribute(AttributeName = "OptimalScanDistance")]
         public Single OptimalScanDistance { get; set; }

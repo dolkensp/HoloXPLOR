@@ -7,26 +7,12 @@ namespace HoloXPLOR.Data.DataForge
     public partial class DFMScoreMessage_Config
     {
         [XmlArray(ElementName = "PrimaryMessage")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public String[] PrimaryMessage { get; set; }
+        [XmlArrayItem(ElementName = "Locale", Type=typeof(_Locale))]
+        public _Locale[] PrimaryMessage { get; set; }
 
         [XmlArray(ElementName = "SecondaryMessage")]
-        [XmlArrayItem(Type = typeof(ProjectileParams))]
-        [XmlArrayItem(Type = typeof(RocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(CounterMeasureProjectileParams))]
-        [XmlArrayItem(Type = typeof(ShatterRocketProjectileParams))]
-        [XmlArrayItem(Type = typeof(GrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(SmokeGrenadeProjectileParams))]
-        [XmlArrayItem(Type = typeof(C4ProjectileParams))]
-        [XmlArrayItem(Type = typeof(BulletProjectileParams))]
-        public String[] SecondaryMessage { get; set; }
+        [XmlArrayItem(ElementName = "Locale", Type=typeof(_Locale))]
+        public _Locale[] SecondaryMessage { get; set; }
 
     }
 }

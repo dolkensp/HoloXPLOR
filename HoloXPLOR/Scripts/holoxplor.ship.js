@@ -350,20 +350,23 @@ $(document).ready(function () {
                                                  ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
                             availableData.Ammo = ammoMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] ||
                                                  ammoMap[(inventoryMap[availableData.FireMode.Fire.AmmoType || availableData.AmmoType[0]] || { AmmoBox: {} }).AmmoBox.AmmoType] ||
-                                                 ammoMap[(equippedData.AmmoType[0] || '').replace('Ammo_Rail_', '') + '_Rail_AMMO'] ||
+                                                 ammoMap[(availableData.AmmoType[0] || '').replace('Ammo_Rail_', '') + '_Rail_AMMO'] ||
                                                  ammoMap[(availableData.AmmoType[0] || '').replace('Ammo_', '') + '_AMMO'] || {};
 
                             equippedData.Ammo.Explosion = equippedData.Ammo.Explosion || {};
                             availableData.Ammo.Explosion = availableData.Ammo.Explosion || {};
 
-                            equippedData.Ammo.Physics = equippedData.Ammo.Physics || {};
-                            availableData.Ammo.Physics = availableData.Ammo.Physics || {};
-
                             $markup.append(tableRow(
                                 'Projectile Speed',
-                                equippedData.Ammo.Physics.Speed,
-                                availableData.Ammo.Physics.Speed,
+                                equippedData.Ammo.Speed,
+                                availableData.Ammo.Speed,
                                 0, ' mps'));
+
+                            $markup.append(tableRow(
+                                'Range',
+                                equippedData.Ammo.Range,
+                                availableData.Ammo.Range,
+                                0, ' m'));
 
                             $markup.append(tableRow(
                                 'Fire Rate',
@@ -409,6 +412,11 @@ $(document).ready(function () {
                         'Type',
                         cleanValue(equippedData.Missile.GuidanceType),
                         cleanValue(availableData.Missile.GuidanceType)));
+                    $markup.append(tableRow(
+                        'Range',
+                        cleanValue(equippedData.Missile.TrackingDistanceMax),
+                        cleanValue(availableData.Missile.TrackingDistanceMax),
+                        0, ' m'));
                     $markup.append(tableRow(
                         'Proximity',
                         equippedData.Missile.ExplodeProximity || ezero,

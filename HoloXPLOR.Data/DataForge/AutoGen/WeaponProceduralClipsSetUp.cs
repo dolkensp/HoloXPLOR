@@ -19,8 +19,8 @@ namespace HoloXPLOR.Data.DataForge
         public WeaponCoverStance CoverStance { get; set; }
 
         [XmlArray(ElementName = "weaponProceduralClips")]
-        [XmlArrayItem(Type = typeof(WeaponProceduralClip))]
-        public Guid[] WeaponProceduralClips { get; set; }
+        [XmlArrayItem(ElementName = "Reference", Type=typeof(_Reference))]
+        public _Reference[] WeaponProceduralClips { get; set; }
 
     }
 }

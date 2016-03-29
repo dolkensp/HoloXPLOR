@@ -9,44 +9,52 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics;
-using Inventory = HoloXPLOR.Data.XML.Inventory;
-using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
-using Items = HoloXPLOR.Data.XML.Spaceships;
-using Xml = HoloXPLOR.Data.XML;
+using Inventory = HoloXPLOR.Data.Xml.Inventory;
+using Ships = HoloXPLOR.Data.Xml.Vehicles.Implementations;
+using Items = HoloXPLOR.Data.Xml.Spaceships;
+using Xml = HoloXPLOR.Data.Xml;
 using HoloXPLOR.Models;
 using HoloXPLOR.DataForge;
 using System.Net;
 using System.Configuration;
+using System.Web.Hosting;
 
 namespace System
 {
     public static class __Proxy
     {
-        public static String ToLocalized(this String input) { return HoloXPLOR.Data.Scripts.Localization.GetValue(input ?? String.Empty, input); }
+        public static String ToLocalized(this String input) { return HoloXPLOR.HoloXPLOR_App.Scripts.Localization.GetValue(input ?? String.Empty, input); }
     }
 }
 
 namespace HoloXPLOR.Data
 {
-    public static class Scripts
+    public class Scripts
     {
+        private String _scriptRoot;
+
+        public Scripts(String scriptRoot)
+        {
+            this._scriptRoot = scriptRoot;
+        }
+
         #region Item XML
 
-        private static Object _itemsLock = new Object();
-        private static Dictionary<String, XML.Spaceships.Item> _items;
-        public static Dictionary<String, XML.Spaceships.Item> Items
+        private Object _itemsLock = new Object();
+        private Dictionary<String, Xml.Spaceships.Item> _items;
+        public Dictionary<String, Xml.Spaceships.Item> Items
         {
             get
             {
-                if (Scripts._items == null)
+                if (this._items == null)
                 {
-                    lock (Scripts._itemsLock)
+                    lock (this._itemsLock)
                     {
-                        if (Scripts._items == null)
+                        if (this._items == null)
                         {
-                            var buffer = new Dictionary<String, XML.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, Xml.Spaceships.Item>(StringComparer.InvariantCultureIgnoreCase);
 
-                            DirectoryInfo weaponsDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships"));
+                            DirectoryInfo weaponsDir = new DirectoryInfo(Path.Combine(this._scriptRoot, "Entities/Items/XML/Spaceships"));
 
                             foreach (FileInfo file in weaponsDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
@@ -61,15 +69,15 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var item = CryXmlSerializer.Deserialize<XML.Spaceships.Item>(file.FullName);
-                                    // var item = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Item>();
+                                    // var item = CryXmlSerializer.Deserialize<Xml.Spaceships.Item>(file.FullName);
+                                    var item = File.ReadAllText(file.FullName).FromXML<Xml.Spaceships.Item>();
 
                                     if (item == null)
                                         continue;
 
-                                    item = Scripts._CleanEdgeCases(item);
+                                    item = this._CleanEdgeCases(item);
 
-                                    buffer[item.Name] = Scripts._CleanEdgeCases(item);
+                                    buffer[item.Name] = this._CleanEdgeCases(item);
 #if !DEBUG || DEBUG
                                 }
                                 catch (Exception ex)
@@ -79,16 +87,16 @@ namespace HoloXPLOR.Data
 #endif
                             }
 
-                            Scripts._items = buffer;
+                            this._items = buffer;
                         }
                     }
                 }
 
-                return Scripts._items;
+                return this._items;
             }
         }
 
-        private static Items.Item _CleanEdgeCases(Items.Item item)
+        private Items.Item _CleanEdgeCases(Items.Item item)
         {
             #region Edge Case Support
 
@@ -210,40 +218,35 @@ namespace HoloXPLOR.Data
 
         #region Ammo XML
 
-        private static Object _ammoLock = new Object();
-        private static Dictionary<String, XML.Spaceships.Ammo> _ammo;
-        public static Dictionary<String, XML.Spaceships.Ammo> Ammo
+        private Object _ammoLock = new Object();
+        private Dictionary<String, DataForge.AmmoParams> _ammo;
+        public Dictionary<String, DataForge.AmmoParams> Ammo
         {
             get
             {
-                if (Scripts._ammo == null)
+                if (this._ammo == null)
                 {
-                    lock (Scripts._ammoLock)
+                    lock (this._ammoLock)
                     {
-                        if (Scripts._ammo == null)
+                        if (this._ammo == null)
                         {
-                            var buffer = new Dictionary<String, XML.Spaceships.Ammo>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, DataForge.AmmoParams>(StringComparer.InvariantCultureIgnoreCase);
 
-                            DirectoryInfo ammoDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Items/XML/Spaceships/Ammo"));
+                            DirectoryInfo ammoDir = new DirectoryInfo(Path.Combine(this._scriptRoot, "Libs/Foundry/Records/AmmoParams/Vehicle"));
 
                             foreach (FileInfo file in ammoDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
-                                if (file.FullName.Contains(@"AmmoBoxes") ||
-                                    file.FullName.Contains(@"TEMP") ||
-                                    file.FullName.Contains(@"Interface"))
-                                    continue;
-
 #if !DEBUG || DEBUG
                                 try
                                 {
 #endif
-                                    var ammo = CryXmlSerializer.Deserialize<XML.Spaceships.Ammo>(file.FullName);
-                                    // var ammo = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Ammo>();
+                                    // var ammo = CryXmlSerializer.Deserialize<Xml.Spaceships.Ammo>(file.FullName);
+                                    var ammo = File.ReadAllText(file.FullName).FromXML<DataForge.AmmoParams>();
 
                                     if (ammo == null)
                                         continue;
 
-                                    buffer[ammo.Name] = Scripts._CleanEdgeCases(ammo);
+                                    buffer[Path.GetFileNameWithoutExtension(file.Name).Replace("AmmoParams.", "")] = this._CleanEdgeCases(ammo);
 #if !DEBUG || DEBUG
                                 }
                                 catch (Exception ex)
@@ -253,16 +256,16 @@ namespace HoloXPLOR.Data
 #endif
                             }
 
-                            Scripts._ammo = buffer;
+                            this._ammo = buffer;
                         }
                     }
                 }
 
-                return Scripts._ammo;
+                return this._ammo;
             }
         }
 
-        private static Items.Ammo _CleanEdgeCases(Items.Ammo ammo)
+        private DataForge.AmmoParams _CleanEdgeCases(DataForge.AmmoParams ammo)
         {
             #region Edge Case Support
 
@@ -275,21 +278,21 @@ namespace HoloXPLOR.Data
 
         #region Loadout XML
 
-        private static Object _loadoutLock = new Object();
-        private static Dictionary<String, XML.Spaceships.Loadout> _loadout;
-        public static Dictionary<String, XML.Spaceships.Loadout> Loadout
+        private Object _loadoutLock = new Object();
+        private Dictionary<String, Xml.Spaceships.Loadout> _loadout;
+        public Dictionary<String, Xml.Spaceships.Loadout> Loadout
         {
             get
             {
-                if (Scripts._loadout == null)
+                if (this._loadout == null)
                 {
-                    lock (Scripts._loadoutLock)
+                    lock (this._loadoutLock)
                     {
-                        if (Scripts._loadout == null)
+                        if (this._loadout == null)
                         {
-                            var buffer = new Dictionary<String, XML.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
+                            var buffer = new Dictionary<String, Xml.Spaceships.Loadout>(StringComparer.InvariantCultureIgnoreCase);
 
-                            DirectoryInfo loadoutDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Loadouts/Vehicles"));
+                            DirectoryInfo loadoutDir = new DirectoryInfo(Path.Combine(this._scriptRoot, "Loadouts/Vehicles"));
 
                             foreach (FileInfo file in loadoutDir.GetFiles("*.xml", SearchOption.AllDirectories))
                             {
@@ -299,8 +302,8 @@ namespace HoloXPLOR.Data
                                 try
                                 {
 #endif
-                                    var loadout = CryXmlSerializer.Deserialize<XML.Spaceships.Loadout>(file.FullName);
-                                    // var loadout = File.ReadAllText(file.FullName).FromXML<XML.Spaceships.Loadout>();
+                                    // var loadout = CryXmlSerializer.Deserialize<Xml.Spaceships.Loadout>(file.FullName);
+                                    var loadout = File.ReadAllText(file.FullName).FromXML<Xml.Spaceships.Loadout>();
 
                                     if (loadout == null)
                                         continue;
@@ -317,12 +320,12 @@ namespace HoloXPLOR.Data
 #endif
                             }
 
-                            Scripts._loadout = buffer;
+                            this._loadout = buffer;
                         }
                     }
                 }
 
-                return Scripts._loadout;
+                return this._loadout;
             }
         }
 
@@ -330,21 +333,21 @@ namespace HoloXPLOR.Data
 
         #region Vehicle XML
 
-        private static Object _vehicleLock = new Object();
-        private static Dictionary<String, Ships.Vehicle> _vehicles;
-        public static Dictionary<String, Ships.Vehicle> Vehicles
+        private Object _vehicleLock = new Object();
+        private Dictionary<String, Ships.Vehicle> _vehicles;
+        public Dictionary<String, Ships.Vehicle> Vehicles
         {
             get
             {
-                if (Scripts._vehicles == null)
+                if (this._vehicles == null)
                 {
-                    lock (Scripts._vehicleLock)
+                    lock (this._vehicleLock)
                     {
-                        if (Scripts._vehicles == null)
+                        if (this._vehicles == null)
                         {
                             var buffer = new Dictionary<String, Ships.Vehicle>(StringComparer.InvariantCultureIgnoreCase);
 
-                            DirectoryInfo vehicleDir = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml"));
+                            DirectoryInfo vehicleDir = new DirectoryInfo(Path.Combine(this._scriptRoot, "Entities/Vehicles/Implementations/Xml"));
 
                             #region Load all vehicle files
 
@@ -354,13 +357,13 @@ namespace HoloXPLOR.Data
                         try
                         {
 #endif
-                                var vehicle = CryXmlSerializer.Deserialize<Ships.Vehicle>(file.FullName);
-                                // var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
+                                // var vehicle = CryXmlSerializer.Deserialize<Ships.Vehicle>(file.FullName);
+                                var vehicle = File.ReadAllText(file.FullName).FromXML<Ships.Vehicle>();
 
                                 if (vehicle == null)
                                     continue;
 
-                                vehicle = Scripts._CleanEdgeCases(vehicle);
+                                vehicle = this._CleanEdgeCases(vehicle);
 
                                 buffer[vehicle.Name] = vehicle;
 
@@ -393,8 +396,8 @@ namespace HoloXPLOR.Data
 
                                         if (!String.IsNullOrWhiteSpace(modification.PatchFile))
                                         {
-                                            var patch = CryXmlSerializer.Deserialize<Ships.Modification>(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile)));
-                                            // var patch = File.ReadAllText(HttpContext.Current.Server.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
+                                            // var patch = CryXmlSerializer.Deserialize<Ships.Modification>(HostingEnvironment.MapPath(String.Format(@"~/App_Data/Scripts/Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile)));
+                                            var patch = File.ReadAllText(Path.Combine(this._scriptRoot, String.Format("Entities/Vehicles/Implementations/Xml/{0}.xml", modification.PatchFile))).FromXML<Ships.Modification>();
 
                                             if (patch.Parts != null && patch.Parts.Length > 0)
                                             {
@@ -440,7 +443,7 @@ namespace HoloXPLOR.Data
                                             }
                                         }
 
-                                        var variant = variantXML.InnerXml.FromXML<XML.Vehicles.Implementations.Vehicle>();
+                                        var variant = variantXML.InnerXml.FromXML<Xml.Vehicles.Implementations.Vehicle>();
 
                                         if (replacementParts != null && replacementParts.Length > 0)
                                             variant.Parts = replacementParts;
@@ -450,7 +453,7 @@ namespace HoloXPLOR.Data
                                         else
                                             variant.Name = String.Format("{0}_{1}", variant.Name, modification.Name);
 
-                                        variant = Scripts._CleanEdgeCases(variant);
+                                        variant = this._CleanEdgeCases(variant);
 
                                         variant.Modifications = null;
 
@@ -470,17 +473,17 @@ namespace HoloXPLOR.Data
 
                             #endregion
 
-                            Scripts._vehicles = buffer;
+                            this._vehicles = buffer;
                         }
                     }
                 }
 
-                return Scripts._vehicles;
+                return this._vehicles;
             }
         }
 
 
-        private static Ships.Vehicle _CleanEdgeCases(XML.Vehicles.Implementations.Vehicle vehicle)
+        private Ships.Vehicle _CleanEdgeCases(Xml.Vehicles.Implementations.Vehicle vehicle)
         {
             #region Edge Case Support
 
@@ -544,7 +547,7 @@ namespace HoloXPLOR.Data
             return vehicle;
         }
 
-        private static Ships.Part _GetPartByID(XML.Vehicles.Implementations.Part[] parts, String id)
+        private Ships.Part _GetPartByID(Xml.Vehicles.Implementations.Part[] parts, String id)
         {
             if (parts != null && parts.Length > 0)
             {
@@ -553,7 +556,7 @@ namespace HoloXPLOR.Data
                     if (part.ID == id)
                         return part;
 
-                    var buffer = Scripts._GetPartByID(part.Parts, id);
+                    var buffer = this._GetPartByID(part.Parts, id);
 
                     if (buffer != null)
                         return buffer;
@@ -565,14 +568,14 @@ namespace HoloXPLOR.Data
 
         #endregion
 
-        private static Dictionary<String, String> _localization;
-        public static Dictionary<String, String> Localization
+        private Dictionary<String, String> _localization;
+        public Dictionary<String, String> Localization
         {
             get
             {
-                if (Scripts._localization == null)
+                if (this._localization == null)
                 {
-                    Scripts._localization = new Dictionary<String, String>(StringComparer.InvariantCultureIgnoreCase)
+                    this._localization = new Dictionary<String, String>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         #region Turret Port Names
 
@@ -718,17 +721,17 @@ namespace HoloXPLOR.Data
                     };
                 }
 
-                return Scripts._localization;
+                return this._localization;
             }
         }
 
-        private static Dictionary<Int32, ShipMatrixJson> _shipJsonMap;
-        public static Dictionary<Int32, ShipMatrixJson> ShipJsonMap
+        private Dictionary<Int32, ShipMatrixJson> _shipJsonMap;
+        public Dictionary<Int32, ShipMatrixJson> ShipJsonMap
         {
-            get { return _shipJsonMap = _shipJsonMap ?? File.ReadAllText(HttpContext.Current.Server.MapPath(@"~/App_Data/shipmatrix.json")).FromJSON<ShipMatrixJson[]>().ToDictionary(k => k.ID, v => v); }
+            get { return _shipJsonMap = _shipJsonMap ?? File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/shipmatrix.json")).FromJSON<ShipMatrixJson[]>().ToDictionary(k => k.ID, v => v); }
         }
 
-        public static Dictionary<String, Int32> ShipJsonLookup = new Dictionary<String, Int32>(StringComparer.InvariantCultureIgnoreCase)
+        public Dictionary<String, Int32> ShipJsonLookup = new Dictionary<String, Int32>(StringComparer.InvariantCultureIgnoreCase)
         {
             { "ANVL_Hornet_F7CR", 14 },
             { "ANVL_Hornet_F7CS", 13 },

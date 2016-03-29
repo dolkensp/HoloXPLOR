@@ -13,22 +13,20 @@ namespace HoloXPLOR.Data.DataForge
         public String ImageName { get; set; }
 
         [XmlArray(ElementName = "validArmorTypes")]
-        [XmlArrayItem(Type = typeof(BTInputVec3))]
-        [XmlArrayItem(Type = typeof(BTInputVec3Var))]
-        [XmlArrayItem(Type = typeof(BTInputVec3BB))]
-        public ArmorType[] ValidArmorTypes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_ArmorType))]
+        public _ArmorType[] ValidArmorTypes { get; set; }
 
         [XmlArray(ElementName = "validSlotTypes")]
-        [XmlArrayItem(Type = typeof(BTInputVec3Var))]
-        public SlotType[] ValidSlotTypes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_SlotType))]
+        public _SlotType[] ValidSlotTypes { get; set; }
 
         [XmlArray(ElementName = "requiredSlotTypes")]
-        [XmlArrayItem(Type = typeof(BTInputVec3Var))]
-        public SlotType[] RequiredSlotTypes { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_SlotType))]
+        public _SlotType[] RequiredSlotTypes { get; set; }
 
         [XmlArray(ElementName = "unlockingBadges")]
-        [XmlArrayItem(Type = typeof(BTInputVec3BB))]
-        public StarMarineLoadoutBadges[] UnlockingBadges { get; set; }
+        [XmlArrayItem(ElementName = "Enum", Type=typeof(_StarMarineLoadoutBadges))]
+        public _StarMarineLoadoutBadges[] UnlockingBadges { get; set; }
 
         [XmlAttribute(AttributeName = "magazineName")]
         public String MagazineName { get; set; }

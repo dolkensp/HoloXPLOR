@@ -1,5 +1,5 @@
 ﻿using HoloXPLOR.Data;
-using HoloXPLOR.Data.XML.Inventory;
+using HoloXPLOR.Data.Xml.Inventory;
 using HoloXPLOR.Models.HoloTable;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Inventory = HoloXPLOR.Data.XML.Inventory;
-using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
-using Items = HoloXPLOR.Data.XML.Spaceships;
-using Xml = HoloXPLOR.Data.XML;
+using Inventory = HoloXPLOR.Data.Xml.Inventory;
+using Ships = HoloXPLOR.Data.Xml.Vehicles.Implementations;
+using Items = HoloXPLOR.Data.Xml.Spaceships;
+using Xml = HoloXPLOR.Data.Xml;
+using GameData = HoloXPLOR.Data.DataForge;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
@@ -89,9 +90,28 @@ namespace HoloXPLOR.Controllers
 
                     Content = new
                     {
-                        Inventory = Scripts.Items.Values.Where(i => currentItems.Contains(i.Name)).ToDictionary(k => k.Name, v => v),
-                        Ammo = Scripts.Ammo.Values.Where(i => i.Class != "Countermeasure").ToDictionary(k => k.Name, v => v),
-                        Loadouts = Scripts.Loadout.Where(l => Scripts.Vehicles.GetValue(l.Key, null) != null).ToDictionary(k => k.Key, v => Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
+                        Inventory = (from kvp in HoloXPLOR_App.Scripts.Items
+                                     let name = kvp.Key
+                                     let item = kvp.Value
+                                     where currentItems.Contains(item.Name)
+                                     select new
+                                     {
+                                         Name = name,
+                                         Json = item,
+                                     }).ToDictionary(k => k.Name, v => v.Json),
+                        Ammo = (from kvp in HoloXPLOR_App.Scripts.Ammo
+                                let name = kvp.Key
+                                let ammo = kvp.Value
+                                where ammo.ProjectileParams != null
+                                where ammo.ProjectileParams.Length > 0
+                                where (ammo.ProjectileParams[0] is GameData.BulletProjectileParams) ||
+                                      (ammo.ProjectileParams[0] is GameData.RocketProjectileParams)
+                                select new
+                                {
+                                    Name = name,
+                                    Json = ammo.Json,
+                                }).ToDictionary(k => k.Name, v => v.Json),
+                        // Loadouts = HoloXPLOR_App.Scripts.Loadout.Where(l => HoloXPLOR_App.Scripts.Vehicles.GetValue(l.Key, null) != null).ToDictionary(k => k.Key, v => HoloXPLOR_App.Scripts.Vehicles.GetValue(v.Key, new Ships.Vehicle { }).DisplayName)
                         // Ship = Scripts.Vehicles.Values.GroupBy(g => g.Name).ToDictionary(k => k.Key, v => v.FirstOrDefault().DisplayName)
                     }.ToJSON(),
                     ContentType = "application/json"

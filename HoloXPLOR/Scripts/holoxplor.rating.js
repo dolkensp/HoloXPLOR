@@ -9,6 +9,7 @@ $(document).ready(function () {
         var baseUrl = '/Rating/';
         var trackRating = false;
         var trackLoad = true;
+        var maxTime = 1800;
 
         var shieldWeapon = function (shield, aggregate) {
             if (shield.HitPoints > 0) {
@@ -127,7 +128,7 @@ $(document).ready(function () {
                 }
             }
 
-            if (target.Shield == 0 && target.TTDS == null) {
+            if (target.Shield == 0 && target.TTDS > time) {
                 target.TTDS = time;
             }
 
@@ -142,7 +143,7 @@ $(document).ready(function () {
                 target.Health -= aggregate.Energy;
                 target.Health -= aggregate.Distortion;
 
-                if (target.Health <= 0 && target.TTK == null) {
+                if (target.Health <= 0 && target.TTK > time) {
                     target.TTK = time;
                     target.Health = 0;
                 }
@@ -164,15 +165,27 @@ $(document).ready(function () {
                     }
                     trackRating = true;
 
-                    var maxSelf = $.extend(true, { Health: HoloXPLOR.Rating.Self.MaxHealth }, HoloXPLOR.Rating.Self);
-                    var minSelf = $.extend(true, { Health: HoloXPLOR.Rating.Self.MinHealth }, HoloXPLOR.Rating.Self);
-                    var maxEnemy = $.extend(true, { Health: HoloXPLOR.Rating.Enemy.MaxHealth }, HoloXPLOR.Rating.Enemy);
-                    var minEnemy = $.extend(true, { Health: HoloXPLOR.Rating.Enemy.MinHealth }, HoloXPLOR.Rating.Enemy);
+                    var maxSelf = $.extend(true, { TTDS: 2500, TTK: 5000, Health: HoloXPLOR.Rating.Self.MaxHealth }, HoloXPLOR.Rating.Self);
+                    var minSelf = $.extend(true, { TTDS: maxTime / 2, TTK: maxTime, Health: HoloXPLOR.Rating.Self.MinHealth }, HoloXPLOR.Rating.Self);
+                    var maxEnemy = $.extend(true, { TTDS: 2500, TTK: 5000, Health: HoloXPLOR.Rating.Enemy.MaxHealth }, HoloXPLOR.Rating.Enemy);
+                    var minEnemy = $.extend(true, { TTDS: maxTime / 2, TTK: maxTime, Health: HoloXPLOR.Rating.Enemy.MinHealth }, HoloXPLOR.Rating.Enemy);
 
                     var time = 0;
                     var raw = []; // { self: self.Health, enemy: enemy.Health, time: time }];
 
-                    while ((maxSelf.Health > 0 || maxEnemy.Health > 0) && (time < 1800)) {
+                    var selfDPS = 0;
+                    var enemyDPS = 0;
+                    for (var i = 0, j = maxSelf.Damage.length; i < j; i++) {
+                        selfDPS += maxSelf.Damage[i].Physical;
+                        selfDPS += maxSelf.Damage[i].Energy;
+                        selfDPS += maxSelf.Damage[i].Distortion;
+                    }
+                    for (var i = 0, j = maxEnemy.Damage.length; i < j; i++) {
+                        enemyDPS += maxEnemy.Damage[i].Physical;
+                        enemyDPS += maxEnemy.Damage[i].Energy;
+                        enemyDPS += maxEnemy.Damage[i].Distortion;
+                    }
+                    while (((maxSelf.Health > 0 && enemyDPS > 0) || (maxEnemy.Health > 0 && selfDPS > 0)) && (time < maxTime)) {
                         attack(maxSelf, maxEnemy, time);
                         attack(maxEnemy, maxSelf, time);
 

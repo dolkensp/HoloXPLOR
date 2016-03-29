@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Inventory = HoloXPLOR.Data.XML.Inventory;
-using Ships = HoloXPLOR.Data.XML.Vehicles.Implementations;
-using Items = HoloXPLOR.Data.XML.Spaceships;
-using Xml = HoloXPLOR.Data.XML;
+using Inventory = HoloXPLOR.Data.Xml.Inventory;
+using Ships = HoloXPLOR.Data.Xml.Vehicles.Implementations;
+using Items = HoloXPLOR.Data.Xml.Spaceships;
+using Xml = HoloXPLOR.Data.Xml;
 using HoloXPLOR.Data;
+using HoloXPLOR.Data.DataForge;
 
 namespace HoloXPLOR.Models.HoloTable
 {
@@ -61,12 +62,12 @@ namespace HoloXPLOR.Models.HoloTable
 
         public ShipLoadout(String targetShip)
         {
-            var ship = Scripts.Vehicles[targetShip];
-            var loadout = this._Flatten(Scripts.Loadout[targetShip].Ports).Select(p => Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null).ToArray();
+            var ship = HoloXPLOR_App.Scripts.Vehicles[targetShip];
+            var loadout = this._Flatten(HoloXPLOR_App.Scripts.Loadout[targetShip].Ports).Select(p => HoloXPLOR_App.Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null).ToArray();
 
             loadout = this._Flatten(loadout).ToArray();
 
-            this.DisplayName = Scripts.ShipJsonMap.GetValue(Scripts.ShipJsonLookup.GetValue(ship.Name, 0), new ShipMatrixJson { Name = ship.DisplayName }).Name;
+            this.DisplayName = HoloXPLOR_App.Scripts.ShipJsonMap.GetValue(HoloXPLOR_App.Scripts.ShipJsonLookup.GetValue(ship.Name, 0), new ShipMatrixJson { Name = ship.DisplayName }).Name;
 
             this._weapons = loadout
                 .Where(i => i.ItemCategory == Items.CategoryEnum.Weapon)
@@ -94,14 +95,14 @@ namespace HoloXPLOR.Models.HoloTable
 
                     if (item.DefaultLoadout != null && item.DefaultLoadout.Ports != null)
                     {
-                        foreach (var childItem in this._Flatten(item.DefaultLoadout.Ports.Select(p => Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null)))
+                        foreach (var childItem in this._Flatten(item.DefaultLoadout.Ports.Select(p => HoloXPLOR_App.Scripts.Items.GetValue(p.ItemName, null)).Where(i => i != null)))
                         {
                             yield return childItem;
                         }
 
                         foreach (var port in item.DefaultLoadout.Ports.Where(p => p.Items != null))
                         {
-                            foreach (var childItem in this._Flatten(port.Items).Select(i => Scripts.Items.GetValue(i.ItemName, null)).Where(i => i != null))
+                            foreach (var childItem in this._Flatten(port.Items).Select(i => HoloXPLOR_App.Scripts.Items.GetValue(i.ItemName, null)).Where(i => i != null))
                             {
                                 yield return childItem;
                             }
@@ -140,31 +141,39 @@ namespace HoloXPLOR.Models.HoloTable
                                                        let ammoTypes1 = weapon.AmmoType ?? new String[] { firemode.Fire.AmmoType }
                                                        where ammoTypes1 != null
                                                        from ammoType1 in ammoTypes1
-                                                       join item in Scripts.Items.Values
+                                                       join item in HoloXPLOR_App.Scripts.Items.Values
                                                        on ammoType1.ToLowerInvariant() equals item.ItemSubType.ToLowerInvariant()
                                                        into ammoBoxes
                                                        from ammoBox in ammoBoxes.DefaultIfEmpty()
                                                        let ammoType2 = ammoBox == null || ammoBox.AmmoBox == null ? ammoType1 : ammoBox.AmmoBox.AmmoName
-                                                       let ammo = Scripts.Ammo.GetValue(ammoType2, null) ?? Scripts.Ammo.GetValue(ammoType1, null)
+                                                       let ammo1 = HoloXPLOR_App.Scripts.Ammo.GetValue(ammoType1, null)
+                                                       let ammo2 = HoloXPLOR_App.Scripts.Ammo.GetValue(ammoType2, null)
+                                                       let ammo = ammo2 ?? ammo1
                                                        where ammo != null
                                                        let heatPipe = weapon.Pipes.Where(p => p.Class == "Heat").FirstOrDefault()
                                                        let heatPool = firemode.Pools == null ? null : firemode.Pools.Where(p => p.Class == "Heat").FirstOrDefault()
+                                                       where ammo.ProjectileParams != null
+                                                       where ammo.ProjectileParams.Length > 0
+                                                       let bulletParams = ammo.ProjectileParams[0] as BulletProjectileParams
+                                                       let rocketParams = ammo.ProjectileParams[0] as RocketProjectileParams
+                                                       let damage = bulletParams != null ? bulletParams.Damage :
+                                                                    rocketParams != null ? rocketParams.DetonationParams[0].ExplosionParams.Damage :
+                                                                    null
                                                        group new WeaponSpec
                                                        {
                                                            Weapon = weapon.DisplayName,
                                                            WeaponName = weapon.Name,
                                                            FireMode = firemode.Name,
-                                                           Ammo = ammo.Name,
-                                                           Speed = ammo.Physics.Speed ?? 0,
+                                                           Ammo = ammo2 == null ? ammoType1 : ammoType2,
+                                                           Speed = ammo.Speed,
+                                                           Range = ammo.Lifetime * ammo.Speed,
                                                            Rate = ((firemode.Burst == null) ? firemode.Fire.Rate : (firemode.Burst.BurstSize * firemode.Burst.Rate)) ?? 0,
                                                            MaxHeat = heatPipe.Pool.Capacity,
                                                            CoolingRate = heatPipe.Pool.Rate,
                                                            HeatingRate = heatPool == null ? heatPipe.Pool.Rate : heatPool.Value,
-                                                           Physical = (ammo.Damage_Physical ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Physical ?? 0),
-                                                           Energy = (ammo.Damage_Energy ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Energy ?? 0),
-                                                           Distortion = (ammo.Damage_Distortion ?? 0) + (ammo.Explosion == null ? 0 : ammo.Explosion.Damage_Distortion ?? 0),
-                                                           MaxRadius = ammo.Explosion == null ? 0 : ammo.Explosion.MaxRadius ?? 0,
-                                                           Pressure = ammo.Explosion == null ? 0 : ammo.Explosion.Pressure ?? 0,
+                                                           Physical = damage != null ? damage.DamagePhysical : 0,
+                                                           Energy = damage != null ? damage.DamageEnergy : 0,
+                                                           Distortion = damage != null ? damage.DamageDistortion : 0,
                                                            MinSpread = (firemode.Spread == null) ? 0 : (firemode.Spread.Min ?? 0),
                                                            MaxSpread = (firemode.Spread == null) ? 0 : (firemode.Spread.Max ?? 0),
                                                        } by index into weapons
@@ -207,5 +216,7 @@ namespace HoloXPLOR.Models.HoloTable
         public Double MaxSpread { get; set; }
 
         public String WeaponName { get; set; }
+
+        public Double Range { get; set; }
     }
 }
