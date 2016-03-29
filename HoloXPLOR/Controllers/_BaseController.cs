@@ -54,7 +54,7 @@ namespace HoloXPLOR.Controllers
                 filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "ptu.holoxplor.space", path));
 
             if (HoloXPLOR_App.IsPTU && !HoloXPLOR_App.HasPTU)
-                filterContext.Result = this.RedirectPermanent(String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
+                filterContext.Result = this.RedirectTemporary(filterContext, String.Format("{0}://{1}{2}", Uri.UriSchemeHttps, "holoxplor.space", path));
 
             #endregion
         }
@@ -88,6 +88,15 @@ namespace HoloXPLOR.Controllers
             filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Now);
             filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+        }
+
+        private RedirectResult RedirectTemporary(AuthorizationContext filterContext, String url)
+        {
+            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Now);
+            filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
+            return this.Redirect(url);
         }
     }
 }

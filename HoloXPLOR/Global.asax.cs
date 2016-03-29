@@ -31,10 +31,18 @@ namespace HoloXPLOR
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            HoloXPLOR_App.CheckForNewBuild();
 
+            String lastBuildFile = HostingEnvironment.MapPath("~/App_Data/lastbuild.txt");
+            if (File.Exists(lastBuildFile))
+            {
+                HoloXPLOR_App._scriptsPath = File.ReadAllText(lastBuildFile);
+            }
             ThreadStart ts = new ThreadStart(HoloXPLOR_App.CheckForNewBuild);
             new Thread(ts).Start();
+            while (HoloXPLOR_App.Scripts == null)
+            {
+                Thread.Sleep(500);
+            }
         }
 
         private static Boolean _stopping = false;
@@ -70,13 +78,13 @@ namespace HoloXPLOR
 
             var manifests = new Dictionary<String, String>(StringComparer.InvariantCultureIgnoreCase) { };
 
-            while (!_stopping)
+            while (!HoloXPLOR_App._stopping)
             {
-                if ((DateTime.Now - _lastRun).TotalMinutes > 10)
+                if ((DateTime.Now - HoloXPLOR_App._lastRun).TotalMinutes > 10)
                 {
                     try
                     {
-                        _lastRun = DateTime.Now;
+                        HoloXPLOR_App._lastRun = DateTime.Now;
 
                         using (WebClient client = new WebClient())
                         {
@@ -121,7 +129,7 @@ namespace HoloXPLOR
                             }
                         }
 
-                        CheckScripts(currentBuild, manifests[currentUniverse]);
+                        HoloXPLOR_App.CheckScripts(currentBuild, manifests[currentUniverse]);
 
                         HoloXPLOR_App.HasPTU = publicBuild < latestBuild;
                     }
@@ -240,6 +248,8 @@ namespace HoloXPLOR
                 scripts.Localization.Count > 0 &&
                 scripts.Vehicles.Count > 0)
             {
+                String lastBuildFile = HostingEnvironment.MapPath("~/App_Data/lastbuild.txt");
+                File.WriteAllText(lastBuildFile, HoloXPLOR_App._scriptsPath);
                 HoloXPLOR_App.Scripts = scripts;
             }
         }
