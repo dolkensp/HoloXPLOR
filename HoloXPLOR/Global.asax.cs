@@ -31,6 +31,7 @@ namespace HoloXPLOR
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            HoloXPLOR_App.CheckForNewBuild();
 
             ThreadStart ts = new ThreadStart(HoloXPLOR_App.CheckForNewBuild);
             new Thread(ts).Start();
@@ -136,6 +137,8 @@ namespace HoloXPLOR
 
         public static void CheckScripts(Int64 build, String manifestFile)
         {
+            var scripts = HoloXPLOR_App.Scripts;
+
             HoloXPLOR_App._scriptsPath = HostingEnvironment.MapPath(String.Format("~/App_Data/Scripts-{0}", build));
 
             if (!Directory.Exists(HoloXPLOR_App._scriptsPath))
@@ -225,9 +228,20 @@ namespace HoloXPLOR
 
                     #endregion
                 }
+
+                scripts = new Scripts(HoloXPLOR_App._scriptsPath);
             }
 
-            HoloXPLOR_App.Scripts = new Scripts(HoloXPLOR_App._scriptsPath);
+            scripts = scripts ?? new Scripts(HoloXPLOR_App._scriptsPath);
+
+            if (scripts.Ammo.Count > 0 &
+                scripts.Items.Count > 0 &&
+                scripts.Loadout.Count > 0 &&
+                scripts.Localization.Count > 0 &&
+                scripts.Vehicles.Count > 0)
+            {
+                HoloXPLOR_App.Scripts = scripts;
+            }
         }
 
         private static String _scriptsPath { get; set; }
