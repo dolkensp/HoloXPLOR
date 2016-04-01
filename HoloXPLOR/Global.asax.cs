@@ -32,10 +32,10 @@ namespace HoloXPLOR
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            String lastBuildFile = HostingEnvironment.MapPath("~/App_Data/lastbuild.txt");
-            if (File.Exists(lastBuildFile))
+            String latestBuildFile = HostingEnvironment.MapPath("~/App_Data/latestBuild.txt");
+            if (File.Exists(latestBuildFile))
             {
-                HoloXPLOR_App._scriptsPath = File.ReadAllText(lastBuildFile);
+                HoloXPLOR_App._scriptsPath = File.ReadAllText(latestBuildFile);
             }
             ThreadStart ts = new ThreadStart(HoloXPLOR_App.CheckForNewBuild);
             new Thread(ts).Start();
@@ -48,8 +48,10 @@ namespace HoloXPLOR
         private static Boolean _stopping = false;
         private static String _launcherInfo = @"http://manifest.robertsspaceindustries.com/Launcher/_LauncherInfo";
         private static DateTime _lastRun;
-        public static Random _random = new Random();
+        private static Random _random = new Random();
 
+        public static String CurrentVersion { get; private set; }
+        public static Int64 CurrentBuild { get; private set; }
         public static Scripts Scripts { get; private set; }
 
         protected void Application_End()
@@ -69,8 +71,6 @@ namespace HoloXPLOR
             Int64 publicBuild = 0;
 
             String currentUniverse = String.Empty;
-            String currentVersion = String.Empty;
-            Int64 currentBuild = 0;
 
             String latestUniverse = String.Empty;
             String latestVersion = String.Empty;
@@ -109,8 +109,8 @@ namespace HoloXPLOR
                                 if (String.Equals(match.Groups[1].Value, universe, StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     currentUniverse = match.Groups[1].Value;
-                                    currentVersion = match.Groups[2].Value;
-                                    currentBuild = match.Groups[3].Value.ToInt64(0);
+                                    HoloXPLOR_App.CurrentVersion = match.Groups[2].Value;
+                                    HoloXPLOR_App.CurrentBuild = match.Groups[3].Value.ToInt64(0);
                                 }
 
                                 if (match.Groups[3].Value.ToInt64() > latestBuild)
@@ -129,7 +129,7 @@ namespace HoloXPLOR
                             }
                         }
 
-                        HoloXPLOR_App.CheckScripts(currentBuild, manifests[currentUniverse]);
+                        HoloXPLOR_App.CheckScripts(HoloXPLOR_App.CurrentBuild, manifests[currentUniverse]);
 
                         HoloXPLOR_App.HasPTU = publicBuild < latestBuild;
                     }
@@ -248,8 +248,8 @@ namespace HoloXPLOR
                 scripts.Localization.Count > 0 &&
                 scripts.Vehicles.Count > 0)
             {
-                String lastBuildFile = HostingEnvironment.MapPath("~/App_Data/lastbuild.txt");
-                File.WriteAllText(lastBuildFile, HoloXPLOR_App._scriptsPath);
+                String latestBuildFile = HostingEnvironment.MapPath("~/App_Data/latestBuild.txt");
+                File.WriteAllText(latestBuildFile, HoloXPLOR_App._scriptsPath);
                 HoloXPLOR_App.Scripts = scripts;
             }
         }

@@ -77,8 +77,8 @@ namespace HoloXPLOR.Controllers
                 if (rule.IsMatch(filterContext.HttpContext.Request.Url.PathAndQuery))
                 {
                     filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
-                    filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Today.AddDays(7));
-                    filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromHours(168));
+                    filterContext.HttpContext.Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(10));
+                    filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromDays(7));
                     filterContext.HttpContext.Response.DisableKernelCache();
 
                     return;
@@ -86,14 +86,14 @@ namespace HoloXPLOR.Controllers
             }
 
             filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Now);
+            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.UtcNow);
             filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
         }
 
         private RedirectResult RedirectTemporary(AuthorizationContext filterContext, String url)
         {
             filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.Now);
+            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.UtcNow);
             filterContext.HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
 
             return this.Redirect(url);
