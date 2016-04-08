@@ -12,15 +12,115 @@ using System.Xml.Serialization;
 
 namespace HoloXPLOR.DataForge
 {
+    public enum ByteOrderEnum
+    {
+        AutoDetect,
+        BigEndian,
+        LittleEndian,
+    }
+
     public static class CryXmlSerializer
     {
-
-        public static XmlDocument ReadFile(String inFile, Boolean writeLog = false)
+        public static Int64 ReadInt64(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
         {
-            return CryXmlSerializer.ReadStream(File.OpenRead(inFile), writeLog);
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToInt64(bytes, 0);
         }
 
-        public static XmlDocument ReadStream(Stream inStream, Boolean writeLog = false)
+        public static Int32 ReadInt32(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
+        {
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToInt32(bytes, 0);
+        }
+
+        public static Int16 ReadInt16(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
+        {
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToInt16(bytes, 0);
+        }
+
+        public static UInt64 ReadUInt64(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
+        {
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToUInt64(bytes, 0);
+        }
+
+        public static UInt32 ReadUInt32(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
+        {
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToUInt32(bytes, 0);
+        }
+
+        public static UInt16 ReadUInt16(this BinaryReader br, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian)
+        {
+            var bytes = new Byte[] {
+                br.ReadByte(),
+                br.ReadByte(),
+            };
+
+            if (byteOrder == ByteOrderEnum.LittleEndian)
+                bytes = bytes.Reverse().ToArray();
+
+            return BitConverter.ToUInt16(bytes, 0);
+        }
+
+        public static XmlDocument ReadFile(String inFile, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian, Boolean writeLog = false)
+        {
+            return CryXmlSerializer.ReadStream(File.OpenRead(inFile), byteOrder, writeLog);
+        }
+
+        public static XmlDocument ReadStream(Stream inStream, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian, Boolean writeLog = false)
         {
             using (BinaryReader br = new BinaryReader(inStream))
             {
@@ -43,22 +143,32 @@ namespace HoloXPLOR.DataForge
                 }
 
                 var headerLength = br.BaseStream.Position;
-                var fileLength = br.ReadInt32();
 
-                var nodeTableOffset = br.ReadInt32();
-                var nodeTableCount = br.ReadInt32();
+                byteOrder = ByteOrderEnum.BigEndian;
+
+                var fileLength = br.ReadInt32(byteOrder);
+
+                if (fileLength != br.BaseStream.Length)
+                {
+                    br.BaseStream.Seek(headerLength, SeekOrigin.Begin);
+                    byteOrder = ByteOrderEnum.LittleEndian;
+                    fileLength = br.ReadInt32(byteOrder);
+                }
+
+                var nodeTableOffset = br.ReadInt32(byteOrder);
+                var nodeTableCount = br.ReadInt32(byteOrder);
                 var nodeTableSize = 28;
 
-                var referenceTableOffset = br.ReadInt32();
-                var referenceTableCount = br.ReadInt32();
+                var referenceTableOffset = br.ReadInt32(byteOrder);
+                var referenceTableCount = br.ReadInt32(byteOrder);
                 var referenceTableSize = 8;
 
-                var offset3 = br.ReadInt32();
-                var count3 = br.ReadInt32();
+                var offset3 = br.ReadInt32(byteOrder);
+                var count3 = br.ReadInt32(byteOrder);
                 var length3 = 4;
 
-                var contentOffset = br.ReadInt32();
-                var contentLength = br.ReadInt32();
+                var contentOffset = br.ReadInt32(byteOrder);
+                var contentLength = br.ReadInt32(byteOrder);
 
                 if (writeLog)
                 {
@@ -87,14 +197,14 @@ namespace HoloXPLOR.DataForge
                     var value = new CryXmlNode
                     {
                         NodeID = nodeID++,
-                        NodeNameOffset = br.ReadInt32(),
-                        ItemType = br.ReadInt32(),
-                        AttributeCount = br.ReadInt16(),
-                        ChildCount = br.ReadInt16(),
-                        ParentNodeID = br.ReadInt32(),
-                        FirstAttributeIndex = br.ReadInt32(),
-                        FirstChildIndex = br.ReadInt32(),
-                        Reserved = br.ReadInt32(),
+                        NodeNameOffset = br.ReadInt32(byteOrder),
+                        ItemType = br.ReadInt32(byteOrder),
+                        AttributeCount = br.ReadInt16(byteOrder),
+                        ChildCount = br.ReadInt16(byteOrder),
+                        ParentNodeID = br.ReadInt32(byteOrder),
+                        FirstAttributeIndex = br.ReadInt32(byteOrder),
+                        FirstChildIndex = br.ReadInt32(byteOrder),
+                        Reserved = br.ReadInt32(byteOrder),
                     };
 
                     nodeTable.Add(value);
@@ -127,8 +237,8 @@ namespace HoloXPLOR.DataForge
                     var position = br.BaseStream.Position;
                     var value = new CryXmlReference
                     {
-                        NameOffset = br.ReadInt32(),
-                        ValueOffset = br.ReadInt32()
+                        NameOffset = br.ReadInt32(byteOrder),
+                        ValueOffset = br.ReadInt32(byteOrder)
                     };
 
                     attributeTable.Add(value);
@@ -148,7 +258,7 @@ namespace HoloXPLOR.DataForge
                 while (br.BaseStream.Position < offset3 + count3 * length3)
                 {
                     var position = br.BaseStream.Position;
-                    var value = br.ReadInt32();
+                    var value = br.ReadInt32(byteOrder);
 
                     table3.Add(value);
                     if (writeLog)
@@ -218,11 +328,11 @@ namespace HoloXPLOR.DataForge
             }
         }
 
-        public static TObject Deserialize<TObject>(String inFile) where TObject : class
+        public static TObject Deserialize<TObject>(String inFile, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian, Boolean writeLog = false) where TObject : class
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                var xmlDoc = CryXmlSerializer.ReadFile(inFile);
+                var xmlDoc = CryXmlSerializer.ReadFile(inFile, byteOrder, writeLog);
 
                 xmlDoc.Save(ms);
 

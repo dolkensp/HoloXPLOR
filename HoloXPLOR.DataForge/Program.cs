@@ -13,7 +13,8 @@ namespace HoloXPLOR.DataForge
 
         public static void Main(params String[] args)
         {
-            args = new String[] { "Game.dcb" };
+            // args = new String[] { "LevelNames.xml" };
+            // args = new String[] { "ptv_low_background.mtl" };
             // args = new String[] { @"O:\Mods\BuildXPLOR\_manifest\333246" };
 
             if ((args.Length > 0) && Directory.Exists(args[0]))
@@ -70,7 +71,7 @@ namespace HoloXPLOR.DataForge
                     }
                     else
                     {
-                        var xml = CryXmlSerializer.ReadFile(args[0]);
+                        var xml = CryXmlSerializer.ReadFile(args[0], ByteOrderEnum.AutoDetect);
 
                         if (xml != null)
                         {
