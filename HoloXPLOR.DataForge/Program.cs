@@ -71,7 +71,7 @@ namespace HoloXPLOR.DataForge
                     }
                     else
                     {
-                        var xml = CryXmlSerializer.ReadFile(args[0], ByteOrderEnum.AutoDetect);
+                        var xml = CryXmlSerializer.ReadFile(args[0]);
 
                         if (xml != null)
                         {

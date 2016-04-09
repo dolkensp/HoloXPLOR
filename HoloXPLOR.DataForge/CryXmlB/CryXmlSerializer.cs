@@ -115,12 +115,12 @@ namespace HoloXPLOR.DataForge
             return BitConverter.ToUInt16(bytes, 0);
         }
 
-        public static XmlDocument ReadFile(String inFile, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian, Boolean writeLog = false)
+        public static XmlDocument ReadFile(String inFile, ByteOrderEnum byteOrder = ByteOrderEnum.AutoDetect, Boolean writeLog = false)
         {
             return CryXmlSerializer.ReadStream(File.OpenRead(inFile), byteOrder, writeLog);
         }
 
-        public static XmlDocument ReadStream(Stream inStream, ByteOrderEnum byteOrder = ByteOrderEnum.BigEndian, Boolean writeLog = false)
+        public static XmlDocument ReadStream(Stream inStream, ByteOrderEnum byteOrder = ByteOrderEnum.AutoDetect, Boolean writeLog = false)
         {
             using (BinaryReader br = new BinaryReader(inStream))
             {
