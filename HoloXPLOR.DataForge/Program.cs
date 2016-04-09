@@ -49,6 +49,11 @@ namespace HoloXPLOR.DataForge
                 Console.WriteLine("Converts any Star Citizen binary file into an actual XML file.");
                 Console.WriteLine("CryXml files (.xml) are saved as .raw in the original location.");
                 Console.WriteLine("DataForge files (.dcb) are saved as .xml in the original location.");
+                Console.WriteLine();
+                Console.WriteLine("Can also convert all compatible files in a directory, and it's");
+                Console.WriteLine("sub-directories. In that case, all CryXml files are saved in-place,");
+                Console.WriteLine("and any DataForge files are saved to both .xml and extracted to");
+                Console.WriteLine("the original component locations.");
                 return;
             }
 
