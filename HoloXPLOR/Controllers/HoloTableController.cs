@@ -261,7 +261,25 @@ namespace HoloXPLOR.Controllers
                         newPort.ItemID = newID;
                     }
 
-                    // TODO: Validate parts
+                    foreach (var item in newItems)
+                    {
+                        var gameItem = model.GameData_ItemMap[newID];
+                        var itemPorts = item.Ports.Items.ToList();
+                        var missingPorts = gameItem.Ports.Items.Where(p => !item.Ports.Items.Select(i => i.PortName).Distinct().Contains(p.Name));
+
+                        foreach (var port in missingPorts)
+                        {
+                            itemPorts.Add(new Port
+                            {
+                                ItemID = Guid.Empty,
+                                PortName = port.Name,
+                            });
+                        }
+
+                        item.Ports.Items = itemPorts.ToArray();
+                    }
+
+                    // TODO: Validate parts - can't because CIG breaks the rules
 
                     // Set current ship (Optional)
                     model.Player.VehicleID = shipID;
