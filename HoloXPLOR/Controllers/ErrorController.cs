@@ -50,6 +50,10 @@ namespace HoloXPLOR.Controllers
             this.Response.StatusCode = (Int32)HttpStatusCode.Gone;
             this.Response.TrySkipIisCustomErrors = true;
 
+            HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            HttpContext.Response.Cache.SetExpires(DateTime.UtcNow);
+            HttpContext.Response.Cache.SetMaxAge(TimeSpan.FromMilliseconds(0));
+
             return View();
         }
 
