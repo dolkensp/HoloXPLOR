@@ -263,7 +263,9 @@ namespace HoloXPLOR.Controllers
 
                     foreach (var item in newItems)
                     {
+                        if (item.Ports.Items == null) continue;
                         var gameItem = model.GameData_ItemMap[newID];
+                        if (gameItem.Ports.Items == null) continue;
                         var itemPorts = item.Ports.Items.ToList();
                         var missingPorts = gameItem.Ports.Items.Where(p => !item.Ports.Items.Select(i => i.PortName).Distinct().Contains(p.Name));
 
