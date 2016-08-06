@@ -266,9 +266,22 @@ namespace HoloXPLOR.DataForge
                 }
             }
 
+            var i = 0;
             foreach (var record in this.RecordDefinitionTable)
             {
-                var newPath = Path.Combine(Path.GetDirectoryName(filename), record.FileName);
+                var fileReference = record.FileName;
+
+                if (!record.FileName.Contains(record.Name))
+                {
+                    Console.WriteLine("Warning {0} doesn't match {1}", record.Name, record.FileName);
+                }
+
+                if (String.IsNullOrWhiteSpace(fileReference))
+                {
+                    fileReference = String.Format(@"Dump\{0}_{1}.xml", record.Name, i++);
+                }
+
+                var newPath = Path.Combine(Path.GetDirectoryName(filename), fileReference);
                 if (!Directory.Exists(Path.GetDirectoryName(newPath)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(newPath));

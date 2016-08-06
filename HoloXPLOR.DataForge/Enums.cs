@@ -31,9 +31,9 @@ namespace HoloXPLOR.DataForge
 
     public enum EConversionType : ushort
     {
-        varAttribute = 0x6900,
-        varComplexArray = 0x6901,
-        varSimpleArray = 0x6902,
+        varAttribute = 0x00,
+        varComplexArray = 0x01,
+        varSimpleArray = 0x02,
     }
 
     public enum StringSizeEnum

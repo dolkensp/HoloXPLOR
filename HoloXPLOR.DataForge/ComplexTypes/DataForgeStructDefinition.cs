@@ -64,7 +64,7 @@ namespace HoloXPLOR.DataForge
 
             foreach (var node in properties)
             {
-                node.ConversionType = (EConversionType)((Int32)node.ConversionType | 0x6900);
+                node.ConversionType = (EConversionType)((Int32)node.ConversionType & 0xFF);
 
                 if (node.ConversionType == EConversionType.varAttribute)
                 {
