@@ -135,9 +135,17 @@ namespace HoloXPLOR.DataForge
                     throw new Exception("Unknown File Format"); // Unknown file format
                 }
 
-                String header = br.ReadCString();
+                String header = br.ReadFString(7);
 
-                if (header != "CryXmlB")
+                if (header == "CryXml" || header == "CryXmlB")
+                {
+                    br.ReadCString();
+                }
+                else if (header == "CRY3SDK")
+                {
+                    var bytes = br.ReadBytes(2);
+                }
+                else
                 {
                     throw new Exception("Unknown File Format");
                 }

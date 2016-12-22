@@ -271,6 +271,11 @@ namespace HoloXPLOR.DataForge
             {
                 var fileReference = record.FileName;
 
+                if (fileReference.Split('/').Length == 2)
+                {
+                    fileReference = fileReference.Split('/')[1];
+                }
+
                 if (!record.FileName.Contains(record.Name))
                 {
                     Console.WriteLine("Warning {0} doesn't match {1}", record.Name, record.FileName);
